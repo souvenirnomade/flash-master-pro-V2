@@ -1,0 +1,12 @@
+{
+  "appId": "com.souvenirsnomade.flashmasterpro",
+  "appName": "Flash Master Pro",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#060606"
+  }
+}
