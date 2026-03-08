@@ -475,7 +475,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
   </a>
   <div class="don-note">Montant libre · Paiement sécurisé SumUp</div>
 </div>
-<div class="pied">Flash Master Pro · <span>Souvenir Nomade</span> · Hage Pierre-Alexandre<br>Méthode Nath Sakura · v2.0.1</div>
+<div class="pied">Flash Master Pro · <span>Souvenir Nomade</span> · Hage Pierre-Alexandre<br>Méthode Nath Sakura · v2.1.0</div>
 </div>
 
 <script>
@@ -617,29 +617,65 @@ function calcND(){
   const nfEl=document.getElementById('nd-flash-result'),finEl=document.getElementById('nd-final'),vrdEl=document.getElementById('nd-verdict'),rowV=document.getElementById('nd-row-apn-v');
 
   if(restIL<=0){
-    // ND trop fort : on peut monter le flash au-delà de 1/512 — calculer la puissance max utilisable
-    const margeIL=Math.abs(restIL); // IL de marge disponible
-    const rawDenomAvecMarge=512/Math.pow(2,margeIL); // puissance qu'on peut utiliser (plus haute = dénominateur plus petit)
-    const dispMarge=powerToDisplay(Math.max(rawDenomAvecMarge,1));
-    const puissanceMax=dispMarge.ok?dispMarge.txt:'1/1 (pleine puissance)';
-    nfEl.innerHTML='<span style="color:#4caf75">✓ ND OK — marge '+margeIL.toFixed(1)+' IL</span>';nfEl.className='nd-result-val';
-    finEl.textContent='1/512 min → '+puissanceMax+' max';
-    vrdEl.innerHTML='ND surdimensionné de <b>'+margeIL.toFixed(1)+' IL</b>. Flash entre <b>1/512</b> et <b>'+puissanceMax+'</b>.';
+    // ND surdimensionné — calculer la puissance max utilisable
+    const margeIL=Math.abs(restIL);
+    const rawDenomAvecMarge=512/Math.pow(2,margeIL); // <1 = dépasse 1/1
+
+    if(rawDenomAvecMarge<1){
+      // ⚠ Même à 1/1 le flash est trop puissant — ND beaucoup trop fort
+      // IL encore en excès même à pleine puissance
+      const excessApres11=Math.log2(1/rawDenomAvecMarge);
+      const maxWsFlash=window._lastCorr&&window._lastCorr.maxWs>0?window._lastCorr.maxWs:0;
+      // Calculer le ND optimal (juste assez pour excès = 0 à 1/512 min)
+      const ndOptimalIL=Math.ceil(_tropLuzExcesIL);
+      const ndOptimal='ND'+Math.round(Math.pow(2,ndOptimalIL));
+      let wsMsg='';
+      if(maxWsFlash>0){
+        // Si on retire ce ND et garde le bon, à quelle puissance faut-il régler ?
+        wsMsg='<br>💡 Retirez ce ND et utilisez un <b>'+ndOptimal+' (−'+ndOptimalIL+' IL)</b> à la place.';
+      } else {
+        wsMsg='<br>💡 Utilisez un ND moins fort : <b>'+ndOptimal+' (−'+ndOptimalIL+' IL)</b> suffit.';
+      }
+      nfEl.innerHTML='<span style="color:#f0a04a">⚠ ND trop fort — même 1/1 max est trop puissant (+'+excessApres11.toFixed(1)+' IL de trop en plus)</span>';
+      nfEl.className='nd-result-val';
+      finEl.textContent='1/1 MAX — encore trop';
+      vrdEl.innerHTML='Avec ce ND (−'+totalND+' IL), même à pleine puissance (1/1) il reste <b>'+excessApres11.toFixed(1)+' IL en excès</b>.'+wsMsg;
+      const rfM=document.getElementById('res_flash');rfM.innerText='1/1 MAX — encore '+excessApres11.toFixed(1)+' IL trop';rfM.classList.remove('expo-ok-txt','surexpo-txt');
+      _majTxtTypeND(true);
+      _majDetailND('1/1 MAX insuffisant — excès '+excessApres11.toFixed(1)+' IL',totalND);
+    } else {
+      // Marge normale 1/512 → X
+      const dispMarge=powerToDisplay(rawDenomAvecMarge);
+      const puissanceMax=dispMarge.ok?dispMarge.txt:'1/1';
+      nfEl.innerHTML='<span style="color:#4caf75">✓ ND OK — marge '+margeIL.toFixed(1)+' IL</span>';nfEl.className='nd-result-val';
+      finEl.textContent='Flash : entre 1/512 et '+puissanceMax;
+      vrdEl.innerHTML='Réglez flash entre <b>1/512</b> et <b>'+puissanceMax+'</b>. Idéal : autour de <b>'+puissanceMax+'</b>.';
+      rowV.style.display='none';
+      const rfMin=document.getElementById('res_flash');rfMin.innerText='1/512 → '+puissanceMax;rfMin.classList.remove('expo-ok-txt','surexpo-txt');
+      _majTxtTypeND(true);
+      _majDetailND('1/512 → '+puissanceMax+' (marge '+margeIL.toFixed(1)+' IL)',totalND);
+    }
     rowV.style.display='none';
-    // Mettre à jour résultat principal avec plage
-    const rfMin=document.getElementById('res_flash');rfMin.innerText='1/512 → '+puissanceMax;rfMin.classList.remove('expo-ok-txt','surexpo-txt');
-    _majTxtTypeND(true);
-    _majDetailND('1/512 → '+puissanceMax+' (marge '+margeIL.toFixed(1)+' IL)', totalND);
   } else if(rawDenomAfterND<=0.7){
-    const manqueEncore=Math.log2(rawDenomAfterND/0.7);// IL manquants
-    const ndSugg=Math.pow(2,Math.ceil(restIL));
-    nfEl.innerHTML='<span style="color:#c05545">⚠ encore '+restIL.toFixed(1)+' IL de trop</span>';nfEl.className='nd-result-val';
+    // ND trop faible ET flash insuffisant — double problème
+    const manqueIL=Math.log2(1/Math.max(rawDenomAfterND,0.0001));
+    const ndSugg='ND'+Math.round(Math.pow(2,Math.ceil(_tropLuzExcesIL)));
+    const maxWsFlash=window._lastCorr&&window._lastCorr.maxWs>0?window._lastCorr.maxWs:0;
+    let flashMsg='';
+    if(maxWsFlash>0){
+      // Ws nécessaires = maxWs * 2^manqueIL
+      const wsBesoin=Math.round(maxWsFlash*Math.pow(2,manqueIL));
+      const wsFlash2=Math.round(maxWsFlash*Math.pow(2,manqueIL)-maxWsFlash);
+      flashMsg='<br>⚡ Flash actuel : <b>'+maxWsFlash+' Ws</b> — besoin total : <b>'+wsBesoin+' Ws</b>.'
+        +'<br>💡 Ajoute un 2ème flash de <b>≥ '+wsFlash2+' Ws</b> à pleine puissance (1/1), ou un flash de <b>'+wsBesoin+' Ws</b>.';
+    }
+    nfEl.innerHTML='<span style="color:#c05545">⚠ ND insuffisant ET flash manque '+manqueIL.toFixed(1)+' IL</span>';nfEl.className='nd-result-val';
     finEl.textContent='ND insuffisant';
-    vrdEl.innerHTML='Ajoutez encore <b>'+Math.ceil(restIL)+' IL</b> de ND (ex: ND'+ndSugg+').';
+    vrdEl.innerHTML='Ajoutez encore <b>'+Math.ceil(restIL)+' IL</b> de ND (ex: <b>'+ndSugg+'</b>) OU augmentez la puissance.'+flashMsg;
     rowV.style.display='none';
     const rfI=document.getElementById('res_flash');rfI.innerText='1/512 MIN';rfI.classList.remove('expo-ok-txt','surexpo-txt');
     _majTxtTypeND(false);
-    _majDetailND('ND insuffisant (+'+restIL.toFixed(1)+' IL restants)', totalND);
+    _majDetailND('ND insuffisant (+'+restIL.toFixed(1)+' IL restants)',totalND);
   } else {
     const disp=powerToDisplay(rawDenomAfterND);
     nfEl.textContent=disp.txt;nfEl.className='nd-result-val ok';finEl.textContent=disp.txt;
@@ -728,7 +764,13 @@ function calculate(optiValue){
     card.classList.add('alerte');flashTxt.classList.add('alerte-txt');alerteBox.classList.add('visible');
     const manqueIL=Math.log2(1/Math.max(rawDenom,0.0001));
     let wsMsg='';
-    if(mainSource.maxWs>0){const wsCible=mainSource.maxWs*Math.pow(2,manqueIL);wsMsg='<br>Il manque environ <b>'+Math.round(wsCible-mainSource.maxWs)+' Ws</b> (flash : '+mainSource.maxWs+' Ws → besoin : '+Math.round(wsCible)+' Ws).';}
+    if(mainSource.maxWs>0){
+      const wsCible=mainSource.maxWs*Math.pow(2,manqueIL);
+      const wsManque=Math.round(wsCible-mainSource.maxWs);
+      wsMsg='<br>Flash actuel : <b>'+mainSource.maxWs+' Ws</b> — besoin total : <b>'+Math.round(wsCible)+' Ws</b>.'
+        +'<br>💡 Ajoute un 2ème flash de <b>≥ '+wsManque+' Ws</b> à 1/1 (pleine puissance)'
+        +' ou remplace par un flash de <b>'+Math.round(wsCible)+' Ws minimum</b>.';
+    }
     document.getElementById('alerte-msg').innerHTML='⚡ La puissance nécessaire dépasse le maximum 1/1.'+wsMsg;
     let conseil='';
     if(manqueIL<=1.1)conseil='<b>Solution :</b> Ajoutez un second flash identique (+1 IL) ou rapprochez-le.';
@@ -864,7 +906,7 @@ function calculate(optiValue){
   document.getElementById('dc_total').innerHTML=(totalCorr+optiValue>0?'+':'')+(totalCorr+optiValue).toFixed(2)+' IL';
   document.getElementById('result-box').style.display='block';
   // Stocker les valeurs de correction pour mise à jour par calcND
-  window._lastCorr={fstopCorr,ilCorr,stopsISO,stopsV,roleMod,skinMod,matiereMod,distMod,optiValue,gainIL,nbSources,totalCorr,rawDenom};
+  window._lastCorr={fstopCorr,ilCorr,stopsISO,stopsV,roleMod,skinMod,matiereMod,distMod,optiValue,gainIL,nbSources,totalCorr,rawDenom,maxWs:mainSource&&mainSource.maxWs?mainSource.maxWs:0};
 }
 
 function buildGuide(params){
