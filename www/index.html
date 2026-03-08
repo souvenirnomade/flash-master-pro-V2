@@ -99,7 +99,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .rc::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 0%,rgba(200,164,90,.07) 0%,transparent 70%);pointer-events:none}
 .scan-ln{position:absolute;top:0;left:0;right:0;height:35px;background:linear-gradient(to bottom,transparent,rgba(200,164,90,.035),transparent);animation:scan 5s linear infinite;pointer-events:none}
 #txt_type{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tm);margin-bottom:13px;position:relative;z-index:1}
-#res_flash{font-family:var(--font-serif);font-size:clamp(3.8rem,15vw,7rem);font-weight:600;color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:16px;text-shadow:0 0 50px rgba(200,164,90,.22);position:relative;z-index:1}
+#res_flash{font-family:var(--font-serif);font-size:clamp(2.4rem,10vw,4.5rem);font-weight:600;color:#fff;line-height:1;letter-spacing:-1px;margin-bottom:16px;text-shadow:0 0 50px rgba(200,164,90,.22);position:relative;z-index:1}
 #res_flash.alerte-txt{color:var(--rouge)!important;text-shadow:0 0 50px rgba(192,85,69,.3)!important}
 #res_flash.expo-ok-txt{color:#4caf75!important;font-size:clamp(1.8rem,7vw,3rem)!important;letter-spacing:1px!important;text-shadow:0 0 40px rgba(76,175,117,.25)!important}
 #res_flash.surexpo-txt{color:#c05545!important;font-size:clamp(1.4rem,5vw,2.2rem)!important;letter-spacing:0px!important}
@@ -285,7 +285,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <div class="source-fields">
           <div class="ch"><label>Puissance Test</label>
             <div class="prow">
-              <select id="p_test_base_0" onchange="recalcAuto()"><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512" selected>1/512</option></select>
+              <select id="p_test_base_0" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint (0 Ws)</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select>
               <select id="p_test_tenths_0" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select>
             </div>
           </div>
@@ -415,6 +415,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <div id="res_flash">--</div>
     <div id="res_correction"></div>
     <div id="res_precise"></div>
+    <div id="conseil-nd" style="display:none;margin:10px 0 0;padding:10px 14px;background:rgba(192,85,69,.15);border:1px solid rgba(192,85,69,.5);border-radius:3px;font-size:11px;color:#e07060;line-height:1.6;text-align:left;position:relative;z-index:1"></div>
     <div id="per-flash-box" style="display:none;margin:14px 0 0;position:relative;z-index:1"></div>
     <div class="trop-luz" id="trop-luz">
       <div class="trop-luz-titre">⬇ Trop de lumière — flash au minimum 1/512</div>
@@ -497,7 +498,7 @@ function addSource(){
   const idx=sourceCount++;
   const row=document.createElement('div');
   row.className='source-row';row.id='source-'+idx;
-  row.innerHTML=`<span class="source-label">Flash ${idx+1}</span><div class="source-fields"><div class="ch"><label>Puissance Test</label><div class="prow"><select id="p_test_base_${idx}" onchange="recalcAuto()"><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512" selected>1/512</option></select><select id="p_test_tenths_${idx}" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select></div></div><div class="ch"><label>Puissance Max (Ws)</label><select id="p_max_${idx}" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select></div></div><button class="source-remove" onclick="removeSource(${idx})" title="Supprimer">×</button>`;
+  row.innerHTML=`<span class="source-label">Flash ${idx+1}</span><div class="source-fields"><div class="ch"><label>Puissance Test</label><div class="prow"><select id="p_test_base_${idx}" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint (0 Ws)</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select><select id="p_test_tenths_${idx}" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select></div></div><div class="ch"><label>Puissance Max (Ws)</label><select id="p_max_${idx}" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select></div></div><button class="source-remove" onclick="removeSource(${idx})" title="Supprimer">×</button>`;
   document.getElementById('sources-container').appendChild(row);
   if(sourceCount>=6)document.getElementById('add-source-btn').style.display='none';
   majSourcesTotal();recalcAuto();
@@ -516,20 +517,43 @@ function getActiveSources(){
     const t=document.getElementById('p_test_tenths_'+id);
     const m=document.getElementById('p_max_'+id);
     if(!b)return null;
-    return{base:parseInt(b.value),tenths:parseFloat(t.value),maxWs:m?parseFloat(m.value):0};
+    const base=parseInt(b.value);
+    if(base===0)return null; // Flash éteint → ignoré dans les calculs
+    return{base,tenths:parseFloat(t.value),maxWs:m?parseFloat(m.value):0};
   }).filter(Boolean);
 }
 function majSourcesTotal(){
-  const s=getActiveSources();const tw=s.reduce((a,x)=>a+x.maxWs,0);
+  const s=getActiveSources();
+  // Total puissance maximale brute (pour info)
+  const twMax=s.reduce((a,x)=>a+x.maxWs,0);
+  // Total puissance réelle au réglage test
+  const twReel=s.reduce((a,x)=>x.maxWs>0?a+x.maxWs*Math.pow(2,-(Math.log2(x.base)+x.tenths)):a,0);
   const el=document.getElementById('sources-total');
-  if(tw>0){el.style.display='flex';document.getElementById('sources-total-val').textContent=tw.toLocaleString('fr-FR')+' Ws';}
-  else el.style.display='none';
+  // Affichage avec décimales si < 1 Ws
+  const fmtWs=v=>v<1?v.toFixed(3)+' Ws':v<10?v.toFixed(2)+' Ws':Math.round(v).toLocaleString('fr-FR')+' Ws';
+  if(s.length>0&&twMax>0){
+    el.style.display='flex';
+    const txt=twReel<twMax
+      ?fmtWs(twReel)+' réels (max '+twMax.toLocaleString('fr-FR')+' Ws)'
+      :twMax.toLocaleString('fr-FR')+' Ws';
+    document.getElementById('sources-total-val').textContent=txt;
+  } else el.style.display='none';
 }
 function getCumulatedPowerStops(sources){
   if(!sources.length)return{gainIL:0};
-  const powers=sources.map(s=>Math.pow(2,-(Math.log2(s.base)+s.tenths)));
-  const total=powers.reduce((a,b)=>a+b,0);
-  return{gainIL:Math.log2(total/powers[0])};
+  const hasWs=sources.every(s=>s.maxWs>0);
+  if(hasWs){
+    // Puissance réelle de chaque flash à son réglage test = maxWs / base (fraction de puissance)
+    const wsReels=sources.map(s=>s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)));
+    const totalWs=wsReels.reduce((a,b)=>a+b,0);
+    const ws0=wsReels[0]; // Ws réels du flash principal à son réglage test
+    return{gainIL:ws0>0?Math.log2(totalWs/ws0):0};
+  } else {
+    // Pas de Ws : suppose flashs identiques, cumule les ratios de réglage
+    const powers=sources.map(s=>Math.pow(2,-(Math.log2(s.base)+s.tenths)));
+    const total=powers.reduce((a,b)=>a+b,0);
+    return{gainIL:Math.log2(total/powers[0])};
+  }
 }
 function setMode(mode){
   modeMesure=mode;
@@ -583,7 +607,14 @@ function fmtIL(v){
 }
 function recalcAuto(){
   majSourcesTotal();
-  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
+  if(document.getElementById('result-box').style.display==='block'){
+    calculate(lastOptiValue);
+    // Si des ND sont actifs, recalculer aussi l'affichage ND
+    const nd1=parseFloat(document.getElementById('nd1').value)||0;
+    const nd2=parseFloat(document.getElementById('nd2').value)||0;
+    const nd3=parseFloat(document.getElementById('nd3').value)||0;
+    if(nd1+nd2+nd3>0)calcND();
+  }
 }
 function tlTab(tab){
   document.querySelectorAll('.tl-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='nd')||(i===1&&tab==='apn')));
@@ -610,6 +641,7 @@ function calcND(){
   // Mettre à jour l'affichage ND interne
   if(!totalND){
     document.getElementById('nd-result').style.display='none';
+    const _cnd0=document.getElementById('conseil-nd');if(_cnd0)_cnd0.style.display='none';
     // Remettre le résultat principal en "1/512 MIN" si pas de ND
     const rf0=document.getElementById('res_flash');rf0.innerText='1/512 MIN';rf0.classList.remove('expo-ok-txt','surexpo-txt');
     document.getElementById('txt_type').innerText=document.getElementById('txt_type').innerText.replace(' [ND]','');
@@ -623,7 +655,7 @@ function calcND(){
   // rawDenom après ND : on part de rawDenom original = 512 * 2^excesIL, on lui enlève totalND IL
   const rawDenomAfterND=Math.pow(2,Math.log2(512)+_tropLuzExcesIL-totalND);
   const flashDenom=Math.pow(2,Math.log2(512)-restIL); // identique
-  document.getElementById('nd-total-stops').textContent='−'+totalND.toFixed(0)+' IL (ND'+Math.round(Math.pow(2,totalND))+')';
+  document.getElementById('nd-total-stops').textContent='−'+totalND.toFixed(0)+' IL';
   const nfEl=document.getElementById('nd-flash-result'),finEl=document.getElementById('nd-final'),vrdEl=document.getElementById('nd-verdict'),rowV=document.getElementById('nd-row-apn-v');
 
   if(restIL<=0){
@@ -632,27 +664,111 @@ function calcND(){
     const rawDenomAvecMarge=512/Math.pow(2,margeIL); // <1 = dépasse 1/1
 
     if(rawDenomAvecMarge<1){
-      // ⚠ Même à 1/1 le flash est trop puissant — ND beaucoup trop fort
+      document.getElementById('nd-result').style.display='block';
       // IL encore en excès même à pleine puissance
-      const excessApres11=Math.log2(1/rawDenomAvecMarge);
+      // Recalculer depuis les Ws cumulés actuels (pas _lastCorr qui peut être périmé)
+      const srcNow=getActiveSources();
+      const hasWsNow=srcNow.length>0&&srcNow.every(s=>s.maxWs>0);
+      let excessApres11=Math.log2(1/rawDenomAvecMarge); // manque depuis 1 flash à 1/1
+      if(hasWsNow&&window._lastCorr&&window._lastCorr.maxWs>0){
+        // Ws RÉELS cumulés de tous les flashs actifs (maxWs × fraction du réglage test)
+        const wsReelsCumules=srcNow.reduce((a,s)=>a+s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)),0);
+        const wsReelsFlashPrincipal=window._lastCorr.maxWs*Math.pow(2,-(Math.log2(window._lastCorr.testBase||1)+( window._lastCorr.testTenths||0)));
+        // Gain IL des Ws réels cumulés vs flash principal seul
+        const gainILCumul=wsReelsFlashPrincipal>0?Math.log2(wsReelsCumules/wsReelsFlashPrincipal):0;
+        // Manque réel = manque brut - gain des flashs supplémentaires
+        excessApres11=Math.max(Math.log2(1/rawDenomAvecMarge)-gainILCumul, 0);
+      }
+      if(window._lastCorr)window._lastCorr.excessApres11=excessApres11;
       const maxWsFlash=window._lastCorr&&window._lastCorr.maxWs>0?window._lastCorr.maxWs:0;
-      // Calculer le ND optimal (juste assez pour excès = 0 à 1/512 min)
+      // Ws réels du flash au réglage test (testBase/testTenths stockés)
+      const testBase=window._lastCorr&&window._lastCorr.testBase>0?window._lastCorr.testBase:1;
+      const testTenths=window._lastCorr?window._lastCorr.testTenths:0;
+      const wsReelsTest=maxWsFlash>0?maxWsFlash*Math.pow(2,-(Math.log2(testBase)+testTenths)):0;
+      // Calculer le ND optimal
       const ndOptimalIL=Math.ceil(_tropLuzExcesIL);
       const ndOptimal='ND'+Math.round(Math.pow(2,ndOptimalIL));
-      let wsMsg='';
-      if(maxWsFlash>0){
-        // Si on retire ce ND et garde le bon, à quelle puissance faut-il régler ?
-        wsMsg='<br>💡 Retirez ce ND et utilisez un <b>'+ndOptimal+' (−'+ndOptimalIL+' IL)</b> à la place.';
-      } else {
-        wsMsg='<br>💡 Utilisez un ND moins fort : <b>'+ndOptimal+' (−'+ndOptimalIL+' IL)</b> suffit.';
-      }
+      let wsMsg='<br>💡 Utilisez un ND moins fort : <b>'+ndOptimal+' (−'+ndOptimalIL+' IL)</b> suffit.';
       nfEl.innerHTML='<span style="color:#f0a04a">⚠ ND trop fort — même 1/1 max est trop puissant (+'+excessApres11.toFixed(1)+' IL de trop en plus)</span>';
       nfEl.className='nd-result-val';
       finEl.textContent='1/1 MAX — encore trop';
       vrdEl.innerHTML='Avec ce ND (−'+totalND+' IL), même à pleine puissance (1/1) il reste <b>'+excessApres11.toFixed(1)+' IL en excès</b>.'+wsMsg;
-      const rfM=document.getElementById('res_flash');rfM.innerText='1/1 MAX — encore '+excessApres11.toFixed(1)+' IL trop';rfM.classList.remove('expo-ok-txt','surexpo-txt');
+      const rfM=document.getElementById('res_flash');
+      if(excessApres11<=0.05){
+        rfM.innerText='✓ EXPO CORRECTE';rfM.classList.add('expo-ok-txt');rfM.classList.remove('surexpo-txt');
+      } else if(testBase===1){
+        // Flash déjà à 1/1 — ne pas répéter 1/1, juste montrer le manque
+        rfM.innerText='manque '+excessApres11.toFixed(1)+' IL';rfM.classList.remove('expo-ok-txt','surexpo-txt');
+      } else {
+        rfM.innerText='1/1 MAX\nmanque '+excessApres11.toFixed(1)+' IL';rfM.classList.remove('expo-ok-txt','surexpo-txt');
+      }
+      // Conseil
+      const cNd=document.getElementById('conseil-nd');
+      cNd.style.display='block';
+      const srcActives=getActiveSources();
+      const lastRawDenom=window._lastCorr&&window._lastCorr.rawDenom>0?window._lastCorr.rawDenom:null;
+      if(srcActives.length>=2&&srcActives.every(s=>s.maxWs>0)&&lastRawDenom){
+        cNd.style.background='rgba(76,175,117,.12)';
+        cNd.style.borderColor='rgba(76,175,117,.4)';
+        cNd.style.color='#4caf75';
+        if(excessApres11<=0.05){
+          cNd.innerHTML='✅ <b>Flash OK — exposition correcte avec ce réglage</b>';
+        } else {
+          // Ws nécessaires totaux = maxWs flash principal × 2^manque
+          const wsTotalNec=maxWsFlash*Math.pow(2,excessApres11);
+          // Ws déjà fournis réellement par chaque flash (au réglage test)
+          const wsReelParFlash=srcActives.map(s=>s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)));
+          const wsDejaTotaux=wsReelParFlash.reduce((a,v)=>a+v,0);
+          // Ws manquants à répartir entre les flashs qui ne sont pas déjà à 1/1
+          const wsManquants=Math.max(wsTotalNec-wsDejaTotaux,0);
+          const flashsAMonter=srcActives.filter((s,i)=>wsReelParFlash[i]<s.maxWs*0.98);
+          const wsParFlashAMonter=flashsAMonter.length>0?wsManquants/flashsAMonter.length:0;
+          let lignes='⚠️ <b>Puissance insuffisante — à ajuster :</b><br>';
+          srcActives.forEach((s,i)=>{
+            const wsReelActuel=wsReelParFlash[i];
+            const dejaMax=wsReelActuel>=s.maxWs*0.98;
+            if(dejaMax){
+              // Ce flash est déjà à 1/1, rien à changer
+              lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>1/1</b> ✓<br>';
+            } else {
+              const wsNec=wsReelActuel+wsParFlashAMonter;
+              const denomF=s.maxWs/Math.max(wsNec,0.0001);
+              const dispF=powerToDisplay(denomF);
+              const reg=dispF.ok?dispF.txt:(denomF<=0.7?'<span style="color:#e07060">1/1 MAX — insuffisant</span>':'⬛ ÉTEINDRE');
+              lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>'+reg+'</b><br>';
+            }
+          });
+          cNd.style.background='rgba(192,85,69,.15)';
+          cNd.style.borderColor='rgba(192,85,69,.5)';
+          cNd.style.color='#e07060';
+          cNd.innerHTML=lignes;
+        }
+      } else if(wsReelsTest>0&&maxWsFlash>0){
+        // 1 seul flash → conseil rouge
+        cNd.style.background='rgba(192,85,69,.15)';
+        cNd.style.borderColor='rgba(192,85,69,.5)';
+        cNd.style.color='#e07060';
+        const wsNecessaires=maxWsFlash*Math.pow(2,excessApres11);
+        const wsFlashSupp=Math.round(Math.max(wsNecessaires-maxWsFlash,0));
+        let conseil='⚠️ <b>Conseil Nath Sakura :</b><br>';
+        // ① seulement si le flash n'est pas déjà à 1/1
+        if(testBase>1){
+          conseil+='① Monte d\'abord ton flash à <b>1/1 ('+maxWsFlash+' Ws max)</b><br>';
+          if(wsFlashSupp>0)
+            conseil+='② Puis ajoute un flash d\'au moins <b>'+wsFlashSupp+' Ws</b> pour couvrir le manque restant.';
+        } else {
+          conseil+='Ajoute un flash d\'au moins <b>'+wsFlashSupp+' Ws</b> pour couvrir le manque.';
+        }
+        cNd.innerHTML=conseil;
+      } else {
+        cNd.style.background='rgba(192,85,69,.15)';
+        cNd.style.borderColor='rgba(192,85,69,.5)';
+        cNd.style.color='#e07060';
+        cNd.innerHTML='⚠️ <b>Conseil Nath Sakura :</b> renseignez la puissance Ws du flash pour le calcul précis.';
+      }
+      vrdEl.innerHTML='ND (−'+totalND+' IL) : il manque <b>'+excessApres11.toFixed(1)+' IL</b> même à 1/1.'+wsMsg;
       _majTxtTypeND(true);
-      _majDetailND('1/1 MAX insuffisant — excès '+excessApres11.toFixed(1)+' IL',totalND);
+      _majDetailND('1/1 MAX — manque '+excessApres11.toFixed(1)+' IL',totalND);
     } else {
       // Marge normale 1/512 → X
       const dispMarge=powerToDisplay(rawDenomAvecMarge);
@@ -710,9 +826,9 @@ function _majDetailND(ndInfo, totalND){
   const ndEl=document.getElementById('dc_nd');
   if(ndInfo && totalND>0){
     ndRow.style.display='flex';
-    ndEl.innerHTML='<span class="v-neg">−'+totalND.toFixed(0)+' IL (ND'+Math.round(Math.pow(2,totalND))+')</span>';
+    ndEl.innerHTML='<span class="v-neg">−'+totalND.toFixed(0)+' IL</span>';
     // Nouvelle correction totale avec ND
-    const corrAvecND=c.totalCorr+c.optiValue+totalND; // ND réduit la puissance nécessaire
+    const corrAvecND=c.totalCorr+c.optiValue-totalND; // ND réduit la lumière → moins de puissance flash
     document.getElementById('dc_total').innerHTML=(corrAvecND>0?'+':'')+corrAvecND.toFixed(2)+' IL <span style="font-size:9px;color:rgba(200,164,90,.5)">[avec ND]</span>';
     // Info flash résultant
     const ndNote=' <span style="font-size:10px;color:rgba(200,164,90,.6)">['+ndInfo+']</span>';
@@ -781,11 +897,44 @@ function calculate(optiValue){
         +'<br>💡 Ajoute un 2ème flash de <b>≥ '+wsManque+' Ws</b> à 1/1 (pleine puissance)'
         +' ou remplace par un flash de <b>'+Math.round(wsCible)+' Ws minimum</b>.';
     }
-    document.getElementById('alerte-msg').innerHTML='⚡ La puissance nécessaire dépasse le maximum 1/1.'+wsMsg;
+    document.getElementById('alerte-msg').innerHTML='⚡ Il manque <b>'+manqueIL.toFixed(1)+' IL</b> de puissance — le flash est à fond (1/1) et ce n\'est pas suffisant.'+wsMsg;
+    // Calcul précis des solutions flash
     let conseil='';
-    if(manqueIL<=1.1)conseil='<b>Solution :</b> Ajoutez un second flash identique (+1 IL) ou rapprochez-le.';
-    else if(manqueIL<=2.1)conseil='<b>Solution :</b> Ajoutez 3 flashs identiques ou un flash plus puissant.';
-    else conseil='<b>Manque important ('+manqueIL.toFixed(2)+' IL).</b> Réduisez f/, augmentez ISO, ou flash pro.';
+    const mWs=mainSource.maxWs||0;
+    if(mWs>0){
+      // Nb de flashs identiques nécessaires : chaque doublement = +1 IL
+      const nbFlashTotal=Math.pow(2,manqueIL); // nb de flashs identiques pour combler
+      const nbFlashAjouter=Math.ceil(nbFlashTotal)-1; // flashs à AJOUTER en plus du flash actuel
+      const wsCible=Math.round(mWs*Math.pow(2,manqueIL));
+      const wsAjouter=Math.round(wsCible-mWs);
+      // Réglage de chaque flash ajouté si on en met plusieurs identiques
+      const nbTotal=nbFlashAjouter+1;
+      // Chaque flash à puissance égale = 1/nbTotal de la puissance totale
+      // En IL : chaque flash = totalPower - log2(nbTotal)
+      // Mais on veut le réglage de chaque flash : tous à 1/1 suffit si nbFlashAjouter>=nbFlashTotal-1
+      conseil+='<b>Solutions pour gagner '+manqueIL.toFixed(1)+' IL :</b><br>';
+      // Option A : un seul flash plus puissant
+      conseil+='<b>Option A —</b> Remplacer par un flash de <b>'+wsCible+' Ws minimum</b> à 1/1.<br>';
+      // Option B : ajouter des flashs identiques
+      if(nbFlashAjouter===1){
+        const reglageSup=powerToDisplay(Math.pow(2,manqueIL-1>0?1:0.5));
+        conseil+='<b>Option B —</b> Ajouter <b>1 flash identique ('+mWs+' Ws)</b> à 1/1. Gain : +1 IL.';
+        if(manqueIL>1)conseil+=' <span style="color:#f0a04a">Il restera encore <b>'+(manqueIL-1).toFixed(1)+' IL</b> de manque.</span>';
+      } else {
+        conseil+='<b>Option B —</b> Ajouter <b>'+nbFlashAjouter+' flashs identiques ('+mWs+' Ws chacun)</b> tous à 1/1.';
+        const ilGagne=Math.log2(nbTotal);
+        if(ilGagne>=manqueIL-0.15)conseil+=' <span style="color:#4caf75">✓ Suffit (gain +'+ilGagne.toFixed(1)+' IL).</span>';
+        else conseil+=' <span style="color:#f0a04a">Gain +'+ilGagne.toFixed(1)+' IL — il restera <b>'+(manqueIL-ilGagne).toFixed(1)+' IL</b>.</span>';
+      }
+      conseil+='<br><b>Option C —</b> Ajouter un flash de <b>'+wsAjouter+' Ws</b> à 1/1.';
+    } else {
+      // Pas de Ws renseigné
+      const nbFlashAjouter=Math.ceil(Math.pow(2,manqueIL))-1;
+      conseil='<b>Solutions :</b><br>';
+      conseil+='<b>Option A —</b> Ajouter <b>'+nbFlashAjouter+' flash(s) identique(s)</b> tous à 1/1.<br>';
+      conseil+='<b>Option B —</b> Remplacer par un flash '+Math.pow(2,Math.ceil(manqueIL))+'× plus puissant.<br>';
+      conseil+='<i>Renseignez la puissance max (Ws) du flash pour un calcul précis.</i>';
+    }
     document.getElementById('alerte-conseil').innerHTML=conseil;
     buildGuide({manqueIL,isHSS:vApn<0.005,vApn,isoApn,fTarget,nbSources,distMes,maxWs:mainSource.maxWs||0});
   }else{
@@ -835,7 +984,7 @@ function calculate(optiValue){
     document.getElementById('nd-result').style.display='none';
     // S'assurer que le label [ND] est retiré
     const _ttel=document.getElementById('txt_type');if(_ttel)_ttel.innerText=_ttel.innerText.replace(' [ND]','');
-  }else tropLuzBox.classList.remove('visible');
+  }else{tropLuzBox.classList.remove('visible');_tropLuzExcesIL=0;}
 
   if(nbSources>1)multiWarn.classList.add('visible');else multiWarn.classList.remove('visible');
 
@@ -896,10 +1045,68 @@ function calculate(optiValue){
 
   const pfBox=document.getElementById('per-flash-box');
   if(nbSources>1){
-    const rows2=document.querySelectorAll('.source-row');const ac=rawDenom<=0.7?'#c05545':'#C8A45A';
+    const rows2=document.querySelectorAll('.source-row');
+    const ac=rawDenom<=0.7?'#c05545':'#C8A45A';
     let pfHtml='<div style="background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.25);border-radius:3px;padding:12px 14px;text-align:left"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C8A45A;margin-bottom:10px">Réglage à appliquer sur chaque flash</div>';
-    rows2.forEach((row,i)=>{const rid=row.id.replace('source-','');const mx=document.getElementById('p_max_'+rid);const mxWs=mx?parseFloat(mx.value):0;const ws=mxWs>0?' — '+mxWs+' Ws':'';pfHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(200,164,90,.1)"><span style="font-size:11px;color:rgba(255,255,255,.55)">Flash '+(i+1)+ws+'</span><span style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:'+ac+'">'+displayPower+'</span></div>';});
-    pfHtml+='<div style="margin-top:8px;font-size:9.5px;color:rgba(255,255,255,.35);font-style:italic">Tous les flashs au même réglage — Remesurer au posemètre après mise en place</div></div>';
+
+    const hasAllWs=sources.every(s=>s.maxWs>0);
+    // Utiliser excessApres11 stocké par calcND (manque réel tenant compte des Ws cumulés)
+    const _lastEx=window._lastCorr&&window._lastCorr.excessApres11!=null?window._lastCorr.excessApres11:null;
+    // Si expo correcte (excessApres11=0) → masquer le bloc réglage
+    if(_lastEx!==null&&_lastEx<=0.05){pfBox.style.display='none';pfBox.innerHTML='';return;}
+    // Ws nécessaires par flash = maxWs du flash principal × 2^manqueIL, réparti entre tous les flashs
+    const exNow=_lastEx!=null?_lastEx:(window._lastCorr&&window._lastCorr.rawDenom>0?Math.log2(1/Math.max(window._lastCorr.rawDenom,0.001)):0);
+    const wsTotalNecessaire=mainSource.maxWs>0?mainSource.maxWs*Math.pow(2,exNow):0;
+    const wsParFlash=wsTotalNecessaire/Math.max(sources.length,1);
+
+    // Pré-calcul : quels flashs sont actifs (denom ≤ 512) ?
+    const flashInfos=[];
+    rows2.forEach((row,i)=>{
+      const rid=row.id.replace('source-','');
+      const mx=document.getElementById('p_max_'+rid);
+      const mxWs=mx?parseFloat(mx.value):0;
+      let denomFlash=hasAllWs&&mxWs>0&&wsParFlash>0?mxWs/wsParFlash:null;
+      const actif=denomFlash!==null&&denomFlash<=512;
+      flashInfos.push({rid,mxWs,denomFlash,actif,idx:i});
+    });
+
+    // Rééquilibrage pour recyclage rapide :
+    // On répartit wsParFlash×nbFlashsActifs entre tous les flashs actifs équitablement
+    // → chaque flash actif fournit totalWsNeeded / nbActifs
+    const flashsActifs=flashInfos.filter(f=>f.actif&&f.mxWs>0);
+    const totalWsNecessaire=wsParFlash*(hasAllWs?rows2.length:1);
+    if(flashsActifs.length>1&&hasAllWs&&wsParFlash>0){
+      const wsEgal=totalWsNecessaire/flashsActifs.length;
+      flashsActifs.forEach(f=>{f.denomOptim=f.mxWs/wsEgal;});
+    }
+
+    rows2.forEach((row,i)=>{
+      const info=flashInfos[i];
+      const ws=info.mxWs>0?' — '+info.mxWs+' Ws':'';
+      let flashDisp=displayPower;
+
+      if(hasAllWs && info.mxWs>0 && wsParFlash>0){
+        if(!info.actif){
+          flashDisp='⬛ ÉTEINDRE';
+        } else if(info.denomOptim!==undefined){
+          // Réglage rééquilibré pour recyclage rapide
+          const dispF=powerToDisplay(info.denomOptim);
+          if(dispF.ok)flashDisp=dispF.txt;
+          else if(info.denomOptim<=0.7)flashDisp='✓ 1/1 suffit';
+          else flashDisp='⬛ ÉTEINDRE';
+        } else {
+          const dispF=powerToDisplay(info.denomFlash);
+          if(dispF.ok)flashDisp=dispF.txt;
+          else if(info.denomFlash<=0.7)flashDisp='✓ 1/1 suffit';
+          else flashDisp='⬛ ÉTEINDRE';
+        }
+      }
+
+      pfHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(200,164,90,.1)"><span style="font-size:11px;color:rgba(255,255,255,.55)">Flash '+(i+1)+ws+'</span><span style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:'+ac+'">'+flashDisp+'</span></div>';
+    });
+
+    const memeReglage=!hasAllWs;
+    pfHtml+='<div style="margin-top:8px;font-size:9.5px;color:rgba(255,255,255,.35);font-style:italic">'+(memeReglage?'Tous les flashs au même réglage — ':'Réglages individuels selon puissance Ws — ')+'Remesurer au posemètre après mise en place</div></div>';
     pfBox.innerHTML=pfHtml;pfBox.style.display='block';
   }else{pfBox.style.display='none';pfBox.innerHTML='';}
 
@@ -916,7 +1123,7 @@ function calculate(optiValue){
   document.getElementById('dc_total').innerHTML=(totalCorr+optiValue>0?'+':'')+(totalCorr+optiValue).toFixed(2)+' IL';
   document.getElementById('result-box').style.display='block';
   // Stocker les valeurs de correction pour mise à jour par calcND
-  window._lastCorr={fstopCorr,ilCorr,stopsISO,stopsV,roleMod,skinMod,matiereMod,distMod,optiValue,gainIL,nbSources,totalCorr,rawDenom,maxWs:mainSource&&mainSource.maxWs?mainSource.maxWs:0};
+  window._lastCorr={fstopCorr,ilCorr,stopsISO,stopsV,roleMod,skinMod,matiereMod,distMod,optiValue,gainIL,nbSources,totalCorr,rawDenom,maxWs:mainSource&&mainSource.maxWs?mainSource.maxWs:0,testBase:mainSource?mainSource.base:1,testTenths:mainSource?mainSource.tenths:0};
 }
 
 function buildGuide(params){
