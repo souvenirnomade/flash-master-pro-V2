@@ -388,6 +388,19 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
   </div>
 </div>
 
+<!-- ND SECTION -->
+<div class="bloc">
+  <div class="btit"><div class="bnum" style="font-size:9px;letter-spacing:0">6</div><div class="blab">Filtres ND</div><div class="bligne"></div></div>
+  <div class="carte">
+    <p class="hint" style="margin-bottom:12px">Filtres ND <b>posés sur l'objectif</b>. Le résultat est recalculé automatiquement.</p>
+    <div class="g3">
+      <div class="ch"><label>ND 1</label><select id="nd1" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
+      <div class="ch"><label>ND 2</label><select id="nd2" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
+      <div class="ch"><label>ND 3</label><select id="nd3" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
+    </div>
+  </div>
+</div>
+
 <!-- BOUTONS -->
 <div class="rbtn">
   <button class="cbtn bn" onclick="calculate(0)">▷ Mesure Normale</button>
@@ -409,9 +422,6 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <div class="trop-luz-exces" id="tl-exces">—</div>
         <div class="tl-tabs"><button class="tl-tab active" onclick="tlTab('nd')">🔲 Filtre ND</button><button class="tl-tab" onclick="tlTab('apn')">📷 Réglage APN</button></div>
         <div class="tl-panel active" id="tl-panel-nd">
-          <div class="nd-row"><span class="nd-lbl">ND 1</span><select class="nd-select" id="nd1" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
-          <div class="nd-row"><span class="nd-lbl">ND 2</span><select class="nd-select" id="nd2" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
-          <div class="nd-row"><span class="nd-lbl">ND 3</span><select class="nd-select" id="nd3" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
           <div class="nd-result" id="nd-result" style="display:none">
             <div class="nd-result-line"><span class="nd-result-lbl">Total ND</span><span class="nd-result-val" id="nd-total-stops">—</span></div>
             <div class="nd-result-line"><span class="nd-result-lbl">Flash après ND</span><span class="nd-result-val" id="nd-flash-result">—</span></div>
