@@ -713,7 +713,7 @@ function calculate(optiValue){
       if(iBest>=50&&iBest<isoApn)apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Baisser ISO</span><span class="apn-sol-val">ISO '+iBest+'</span></div>';
     }
     document.getElementById('apn-solutions').innerHTML=apnSol;
-    document.getElementById('apn-note').textContent='Filtre ND recommandé pour préserver la qualité d'image.';
+    document.getElementById('apn-note').textContent='Filtre ND recommandé pour préserver la qualité d\'image.';
     ['nd1','nd2','nd3'].forEach(id=>{document.getElementById(id).value='0';});
     document.getElementById('nd-result').style.display='none';
     // S'assurer que le label [ND] est retiré
@@ -751,7 +751,7 @@ function calculate(optiValue){
     }
     if(isoApn>100){
       const iR=Math.round(isoApn/Math.pow(2,excesAff));
-      if(iR>=50)conseils+='• <b>Baisser l'ISO</b> : passer à <b>ISO '+iR+'</b><br>';
+      if(iR>=50)conseils+='• <b>Baisser l\'ISO</b> : passer à <b>ISO '+iR+'</b><br>';
     }
     conseils+='• <b>Éteindre le flash</b> ou utiliser un <b>filtre ND</b> devant la source<br>';
     conseils+='• Reculer le flash : doubler la distance = <b>−2 IL</b>';
