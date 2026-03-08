@@ -101,6 +101,14 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 #txt_type{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tm);margin-bottom:13px;position:relative;z-index:1}
 #res_flash{font-family:var(--font-serif);font-size:clamp(3.8rem,15vw,7rem);font-weight:600;color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:16px;text-shadow:0 0 50px rgba(200,164,90,.22);position:relative;z-index:1}
 #res_flash.alerte-txt{color:var(--rouge)!important;text-shadow:0 0 50px rgba(192,85,69,.3)!important}
+#res_flash.expo-ok-txt{color:#4caf75!important;font-size:clamp(1.8rem,7vw,3rem)!important;letter-spacing:1px!important;text-shadow:0 0 40px rgba(76,175,117,.25)!important}
+#res_flash.surexpo-txt{color:#c05545!important;font-size:clamp(1.4rem,5vw,2.2rem)!important;letter-spacing:0px!important}
+.surexpo-box{display:none;margin-top:14px;padding:14px 16px;border-radius:3px;border:1px solid rgba(192,85,69,.4);background:rgba(192,85,69,.07);text-align:left;animation:fade-up .3s ease both}
+.surexpo-box.visible{display:block}
+.surexpo-titre{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#c05545;margin-bottom:8px}
+.surexpo-msg{font-size:11.5px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:10px}
+.surexpo-guide{padding:10px 12px;border-radius:2px;background:rgba(200,164,90,.05);border-left:2px solid var(--or);font-size:10.5px;color:var(--tm);line-height:1.75}
+.surexpo-guide b{color:var(--or)}
 #res_correction{font-size:12px;font-weight:600;letter-spacing:1px;color:var(--or);margin-bottom:4px;position:relative;z-index:1}
 #res_precise{font-size:10px;color:var(--tp);position:relative;z-index:1}
 .alerte-puissance{display:none;margin-top:14px;padding:14px 16px;border-radius:3px;border:1px solid var(--rouge-b);background:var(--rouge-pale);position:relative;z-index:1;text-align:left}
@@ -365,8 +373,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <label>Correction IL</label>
         <select id="f_mes_il_corr" style="border:2px solid var(--or);font-weight:700;color:var(--or-c)" onchange="recalcAuto()">
           <option value="0">0.0 IL</option>
-          <optgroup label="Ajouter IL"><option value="0.1">+0.1 IL</option><option value="0.2">+0.2 IL</option><option value="0.3">+0.3 IL</option><option value="0.4">+0.4 IL</option><option value="0.5">+0.5 IL</option><option value="0.6">+0.6 IL</option><option value="0.7">+0.7 IL</option><option value="0.8">+0.8 IL</option><option value="0.9">+0.9 IL</option></optgroup>
-          <optgroup label="Retirer IL"><option value="-0.1">−0.1 IL</option><option value="-0.2">−0.2 IL</option><option value="-0.3">−0.3 IL</option><option value="-0.4">−0.4 IL</option><option value="-0.5">−0.5 IL</option></optgroup>
+          <option value="0.1">+0.1 IL</option><option value="0.2">+0.2 IL</option><option value="0.3">+0.3 IL</option><option value="0.4">+0.4 IL</option><option value="0.5">+0.5 IL</option><option value="0.6">+0.6 IL</option><option value="0.7">+0.7 IL</option><option value="0.8">+0.8 IL</option><option value="0.9">+0.9 IL</option>
         </select>
       </div>
     </div>
@@ -413,6 +420,11 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <div class="alerte-puissance-titre">⚠ Puissance insuffisante</div>
       <div class="alerte-puissance-msg" id="alerte-msg">—</div>
       <div class="alerte-conseil" id="alerte-conseil">—</div>
+    </div>
+    <div class="surexpo-box" id="surexpo-box">
+      <div class="surexpo-titre">🚫 Éteindre le flash — Surexposition source</div>
+      <div class="surexpo-msg" id="surexpo-msg">—</div>
+      <div class="surexpo-guide" id="surexpo-guide">—</div>
     </div>
     <div class="guide-nath" id="guide-nath">
       <div class="guide-nath-titre">📖 Guide Nath Sakura — que faire ?</div>
@@ -546,29 +558,74 @@ function tlTab(tab){
   document.getElementById('tl-panel-nd').classList.toggle('active',tab==='nd');
   document.getElementById('tl-panel-apn').classList.toggle('active',tab==='apn');
 }
+function powerToDisplay(rawDenom){
+  // Convertit un dénominateur brut en texte "1/64 +0.3" avec dixièmes
+  if(rawDenom<=0.7)return{txt:'! MAX DÉPASSÉ',ok:false};
+  const stds=[1,2,4,8,16,32,64,128,256,512];
+  let bd=stds.find(s=>s>=rawDenom)||512;
+  let tenths=Math.round(Math.log2(bd/rawDenom)*10)/10;
+  if(tenths>=0.95){const i2=stds.indexOf(bd);if(i2<stds.length-1){bd=stds[i2+1];tenths=0;}}
+  const txt='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1):'');
+  return{txt,ok:true,bd,tenths};
+}
+
 function calcND(){
   const nd1=parseFloat(document.getElementById('nd1').value)||0;
   const nd2=parseFloat(document.getElementById('nd2').value)||0;
   const nd3=parseFloat(document.getElementById('nd3').value)||0;
   const totalND=nd1+nd2+nd3;
-  if(!totalND){document.getElementById('nd-result').style.display='none';return;}
+
+  // Mettre à jour l'affichage ND interne
+  if(!totalND){
+    document.getElementById('nd-result').style.display='none';
+    // Remettre le résultat principal en "1/512 MIN" si pas de ND
+    const rf0=document.getElementById('res_flash');rf0.innerText='1/512 MIN';rf0.classList.remove('expo-ok-txt','surexpo-txt');
+    document.getElementById('txt_type').innerText=document.getElementById('txt_type').innerText.replace(' [ND]','');
+    return;
+  }
+
   document.getElementById('nd-result').style.display='block';
+  document.getElementById('surexpo-box').classList.remove('visible');
   const restIL=_tropLuzExcesIL-totalND;
-  const flashDenom=Math.pow(2,Math.log2(512)-restIL);
+  // rawDenom après ND : on part de rawDenom original = 512 * 2^excesIL, on lui enlève totalND IL
+  const rawDenomAfterND=Math.pow(2,Math.log2(512)+_tropLuzExcesIL-totalND);
+  const flashDenom=Math.pow(2,Math.log2(512)-restIL); // identique
   document.getElementById('nd-total-stops').textContent='−'+totalND.toFixed(0)+' IL (ND'+Math.round(Math.pow(2,totalND))+')';
   const nfEl=document.getElementById('nd-flash-result'),finEl=document.getElementById('nd-final'),vrdEl=document.getElementById('nd-verdict'),rowV=document.getElementById('nd-row-apn-v');
-  if(restIL<=0){nfEl.textContent='MIN 1/512 — ND trop fort';nfEl.className='nd-result-val warn';finEl.textContent='1/512 min';vrdEl.textContent='ND légèrement surdimensionné.';rowV.style.display='none';}
-  else if(flashDenom<=0.7){nfEl.textContent='! encore '+restIL.toFixed(1)+' IL de trop';nfEl.className='nd-result-val bad';finEl.textContent='ND insuffisant';vrdEl.textContent='Ajoutez un ND plus fort.';rowV.style.display='none';}
-  else{
-    const stds=[1,2,4,8,16,32,64,128,256,512];
-    let bd=stds.find(s=>s>=flashDenom)||512;let tenths=Math.round(Math.log2(bd/flashDenom)*10)/10;
-    if(tenths>=0.95){const i2=stds.indexOf(bd);if(i2<stds.length-1){bd=stds[i2+1];tenths=0;}}
-    const fs='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1):'');
-    nfEl.textContent=fs;nfEl.className='nd-result-val ok';finEl.textContent=fs;
-    vrdEl.textContent='Réglez flash sur '+fs+'. Remesurer après filtre.';
-    if(_tropLuzVApn>0&&_tropLuzVApn<0.005){const vN=_tropLuzVApn*Math.pow(2,totalND);if(vN>=0.005){document.getElementById('nd-apn-v').textContent='1/'+Math.round(1/vN)+'s (sync ✔)';document.getElementById('nd-apn-v').className='nd-result-val ok';rowV.style.display='flex';}else rowV.style.display='none';}
-    else rowV.style.display='none';
+
+  if(restIL<=0){
+    // ND trop fort : flash au minimum 1/512
+    const disp=powerToDisplay(512);
+    nfEl.textContent='1/512 (ND trop fort, marge '+Math.abs(restIL).toFixed(1)+' IL)';nfEl.className='nd-result-val warn';
+    finEl.textContent='1/512';vrdEl.textContent='ND légèrement surdimensionné, vous avez de la marge.';rowV.style.display='none';
+    // Mettre à jour résultat principal
+    const rfMin=document.getElementById('res_flash');rfMin.innerText='1/512';rfMin.classList.remove('expo-ok-txt','surexpo-txt');
+    _majTxtTypeND(true);
+  } else if(rawDenomAfterND<=0.7){
+    nfEl.textContent='! encore '+restIL.toFixed(1)+' IL de trop';nfEl.className='nd-result-val bad';
+    finEl.textContent='ND insuffisant';vrdEl.textContent='Ajoutez un ND plus fort.';rowV.style.display='none';
+    const rfI=document.getElementById('res_flash');rfI.innerText='1/512 MIN';rfI.classList.remove('expo-ok-txt','surexpo-txt');
+    _majTxtTypeND(false);
+  } else {
+    const disp=powerToDisplay(rawDenomAfterND);
+    nfEl.textContent=disp.txt;nfEl.className='nd-result-val ok';finEl.textContent=disp.txt;
+    vrdEl.textContent='Réglez flash sur '+disp.txt+'. Remesurer au posemètre après pose du filtre.';
+    // Mettre à jour le résultat principal avec la vraie valeur après ND
+    const rfND=document.getElementById('res_flash');rfND.innerText=disp.txt;rfND.classList.remove('expo-ok-txt','surexpo-txt');
+    _majTxtTypeND(true);
+    if(_tropLuzVApn>0&&_tropLuzVApn<0.005){
+      const vN=_tropLuzVApn*Math.pow(2,totalND);
+      if(vN>=0.005){document.getElementById('nd-apn-v').textContent='1/'+Math.round(1/vN)+'s (sync ✔)';document.getElementById('nd-apn-v').className='nd-result-val ok';rowV.style.display='flex';}
+      else rowV.style.display='none';
+    } else rowV.style.display='none';
   }
+}
+
+function _majTxtTypeND(active){
+  const el=document.getElementById('txt_type');
+  let t=el.innerText.replace(' [ND]','');
+  if(active)t+=' [ND]';
+  el.innerText=t;
 }
 
 // ══ CALCUL PRINCIPAL ══
@@ -630,33 +687,91 @@ function calculate(optiValue){
     const excesIL=Math.log2(rawDenom/512);
     _tropLuzExcesIL=excesIL;_tropLuzVApn=vApn;_tropLuzIso=isoApn;_tropLuzFTarget=fTarget;
     document.getElementById('tl-exces').innerHTML='Flash à <b>1/512 (min)</b> donne encore <b>'+excesIL.toFixed(1)+' IL de trop</b> pour f/'+fTarget+' ISO'+isoApn+'.';
+    // APN solutions : proposer le réglage minimal le plus proche des réglages de base
     let apnSol='';
-    const vCible=vApn*Math.pow(2,excesIL);const vFrac=Math.round(1/vCible);
-    const syncNote=vCible<0.005?' <span style="color:#c05545">(HSS requis)</span>':' <span style="color:#7ab3ff">(✔ sync normale)</span>';
-    apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Vitesse APN</span><span class="apn-sol-val">1/'+vFrac+'s'+syncNote+'</span></div>';
-    apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Ouvrir à f/</span><span class="apn-sol-val">f/'+(fTarget/Math.pow(2,excesIL/2)).toFixed(1)+'</span></div>';
-    if(isoApn>100){const iC=Math.round(isoApn/Math.pow(2,excesIL));if(iC>=50)apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Baisser ISO</span><span class="apn-sol-val">ISO '+iC+'</span></div>';}
+    // Option 1 : Vitesse (si possible sans trop s'éloigner)
+    const vCible=vApn*Math.pow(2,excesIL);
+    const vStds=[1/8000,1/4000,1/2000,1/1000,1/500,1/400,1/320,1/250,1/200,1/160,1/125,1/100,1/80,1/60,1/50,1/40,1/30,1/25,1/20,1/15,1/10,1/8,1/6,1/5,1/4,1/3,1/2.5,1/2,1/1.5,1];
+    // Trouver la vitesse standard la plus proche de vCible (sans HSS si possible)
+    let vBest=null;
+    for(let i=0;i<vStds.length;i++){if(vStds[i]<=vCible+0.0001){vBest=vStds[i];break;}}
+    if(!vBest)vBest=vCible;
+    const vFrac=vBest>=1?Math.round(vBest):Math.round(1/vBest);
+    const vLabel=vBest>=1?vFrac+'s':'1/'+vFrac+'s';
+    const syncNote=vBest<0.005?' <span style="color:#c05545">(HSS requis)</span>':' <span style="color:#7ab3ff">(✔ sync normale)</span>';
+    apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Vitesse APN</span><span class="apn-sol-val">'+vLabel+syncNote+'</span></div>';
+    // Option 2 : Ouvrir le diaph (uniquement si excès ≤ 2 IL sinon trop grande ouverture)
+    if(excesIL<=2){
+      const fOuverte=fTarget/Math.pow(2,excesIL/2);
+      if(fOuverte>=1.0)apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Ouvrir à f/</span><span class="apn-sol-val">f/'+fOuverte.toFixed(1)+'</span></div>';
+    }
+    // Option 3 : Baisser ISO (uniquement si on peut enlever exactement l'excès)
+    if(isoApn>100){
+      const isoStds=[100,125,160,200,250,320,400,500,640,800,1000,1250,1600,3200,6400,12800,25600];
+      const iCible=isoApn/Math.pow(2,excesIL);
+      const iBest=isoStds.reduce((prev,curr)=>Math.abs(curr-iCible)<Math.abs(prev-iCible)?curr:prev);
+      if(iBest>=50&&iBest<isoApn)apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Baisser ISO</span><span class="apn-sol-val">ISO '+iBest+'</span></div>';
+    }
     document.getElementById('apn-solutions').innerHTML=apnSol;
-    document.getElementById('apn-note').textContent='Filtre ND recommandé pour préserver la qualité.';
+    document.getElementById('apn-note').textContent='Filtre ND recommandé pour préserver la qualité d'image.';
     ['nd1','nd2','nd3'].forEach(id=>{document.getElementById(id).value='0';});
     document.getElementById('nd-result').style.display='none';
+    // S'assurer que le label [ND] est retiré
+    const _ttel=document.getElementById('txt_type');if(_ttel)_ttel.innerText=_ttel.innerText.replace(' [ND]','');
   }else tropLuzBox.classList.remove('visible');
 
   if(nbSources>1)multiWarn.classList.add('visible');else multiWarn.classList.remove('visible');
 
   let displayPower;
-  if(rawDenom<=0.7)displayPower='! MAX DÉPASSÉ';
-  else if(rawDenom>1024)displayPower='1/512 MIN';
-  else{
+  const surexpoBox=document.getElementById('surexpo-box');
+  const surexpoMsg=document.getElementById('surexpo-msg');
+  const surexpoGuide=document.getElementById('surexpo-guide');
+  // Réinitialiser classes spéciales
+  flashTxt.classList.remove('expo-ok-txt','surexpo-txt','alerte-txt');
+  surexpoBox.classList.remove('visible');
+
+  if(rawDenom<=0.7){
+    displayPower='! MAX DÉPASSÉ';
+  } else if(rawDenom>1024){
+    displayPower='1/512 MIN';
+    // Cas surexposition : flash déjà au minimum, encore trop de lumière
+    const excesAff=_tropLuzExcesIL;
+    flashTxt.classList.add('surexpo-txt');
+    surexpoBox.classList.add('visible');
+    surexpoMsg.innerHTML='Flash au minimum <b>1/512</b> — encore <b>'+excesAff.toFixed(1)+' IL de trop</b>. Éteignez le flash ou réduisez sa contribution.';
+    // Conseil Nath Sakura pour surexposition
+    let conseils='<b>📖 Conseils Nath Sakura :</b><br>';
+    if(vApn>=0.005){
+      const vAcc=vApn*Math.pow(2,excesAff);const vFr=Math.round(1/vAcc);
+      conseils+='• <b>Accélérer la vitesse</b> : passer à <b>1/'+vFr+'s</b>'+(vAcc<0.005?' (HSS requis)':' (sync OK)')+'<br>';
+    }
+    if(excesAff<=2){
+      const fFerm=fTarget*Math.pow(2,excesAff/2);
+      conseils+='• <b>Fermer le diaphragme</b> : passer à <b>f/'+fFerm.toFixed(1)+'</b><br>';
+    }
+    if(isoApn>100){
+      const iR=Math.round(isoApn/Math.pow(2,excesAff));
+      if(iR>=50)conseils+='• <b>Baisser l'ISO</b> : passer à <b>ISO '+iR+'</b><br>';
+    }
+    conseils+='• <b>Éteindre le flash</b> ou utiliser un <b>filtre ND</b> devant la source<br>';
+    conseils+='• Reculer le flash : doubler la distance = <b>−2 IL</b>';
+    surexpoGuide.innerHTML=conseils;
+  } else {
     const stds=[1,2,4,8,16,32,64,128,256,512];
     let bd=stds.find(s=>s>=rawDenom)||512;
     let tenths=Math.round(Math.log2(bd/rawDenom)*10)/10;
     if(tenths>=0.95){const i2=stds.indexOf(bd);if(i2<stds.length-1){bd=stds[i2+1];tenths=0;}}
     displayPower='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1):'');
+    // Expo correcte : correction totale ≈ 0 (le flash de test est déjà bon)
+    const corrTotale=Math.abs(totalCorr+optiValue);
+    if(corrTotale<0.15){
+      flashTxt.classList.add('expo-ok-txt');
+      displayPower='✓ EXPO CORRECTE';
+    }
   }
 
   document.getElementById('txt_type').innerText=(optiValue>0?'RÉSULTAT OPTI (+1.33 IL)':'RÉSULTAT STANDARD')+(vApn<0.005?' [HSS]':'')+(nbSources>1?' · '+nbSources+' SOURCES':'');
-  document.getElementById('res_flash').innerText=nbSources>1?displayPower+' / flash':displayPower;
+  document.getElementById('res_flash').innerText=nbSources>1&&displayPower!=='✓ EXPO CORRECTE'?displayPower+' / flash':displayPower;
   document.getElementById('res_correction').innerText='Correction totale : '+(totalCorr+optiValue).toFixed(2)+' IL';
   document.getElementById('res_precise').innerText=nbSources>1?'Valeur théorique : 1/'+rawDenom.toFixed(1)+' — même réglage chaque flash':'Valeur théorique : 1/'+rawDenom.toFixed(1);
 
