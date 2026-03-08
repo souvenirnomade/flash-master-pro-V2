@@ -7,14 +7,13 @@
 <meta name="mobile-web-app-capable" content="yes">
 <title>Flash Master Pro — Souvenir Nomade</title>
 <style>
-/* ── FONTS SYSTÈME (100% offline) ── */
 :root{
   --or:#C8A45A;--or-pale:rgba(200,164,90,.12);--or-b:rgba(200,164,90,.26);
-  --or-c:#E4CE94;--s2:#131313;--s3:#1a1a1a;--s4:#101010;
+  --or-c:#E4CE94;--s2:#131313;--s3:#1a1a1a;
   --t:#ddd5c4;--tm:#5e5749;--tp:#2e2b27;
   --rouge:#c05545;--rouge-pale:rgba(192,85,69,.12);--rouge-b:rgba(192,85,69,.35);
-  --font-serif: Georgia, 'Times New Roman', serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif:Georgia,'Times New Roman',serif;
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
 }
 @keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pop{0%{opacity:0;transform:scale(.95)}60%{transform:scale(1.015)}100%{opacity:1;transform:scale(1)}}
@@ -22,13 +21,11 @@
 @keyframes pulse-alert{0%,100%{box-shadow:0 0 0 0 rgba(192,85,69,0)}50%{box-shadow:0 0 28px 4px rgba(192,85,69,.28)}}
 @keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(300%)}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#060606;background-image:radial-gradient(ellipse 100% 45% at 50% -5%,rgba(200,164,90,.055) 0%,transparent 65%);min-height:100vh;font-family:var(--font-sans);color:var(--t);}
-
-/* ── HEADER ── */
+body{background:#060606;background-image:radial-gradient(ellipse 100% 45% at 50% -5%,rgba(200,164,90,.055) 0%,transparent 65%);min-height:100vh;font-family:var(--font-sans);color:var(--t)}
 .hd{position:relative;text-align:center;padding:52px 20px 36px;border-bottom:1px solid var(--or-b);overflow:hidden;z-index:1}
 .hd::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 90% at 50% 0%,rgba(200,164,90,.065) 0%,transparent 70%);pointer-events:none}
 .hd::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:220px;height:1px;background:linear-gradient(to right,transparent,var(--or),transparent)}
-.logo-txt{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--or);opacity:.8;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px}
+.logo-txt{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--or);opacity:.8;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px}
 .logo-txt::before,.logo-txt::after{content:'';display:block;width:30px;height:1px;background:var(--or);opacity:.4}
 .ey{font-size:9px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--or);opacity:.7;margin-bottom:11px}
 .ti{font-family:var(--font-serif);font-size:clamp(2.6rem,9vw,4.4rem);font-weight:400;font-style:italic;color:#fff;line-height:1;margin-bottom:5px}
@@ -39,71 +36,47 @@ body{background:#060606;background-image:radial-gradient(ellipse 100% 45% at 50%
 .bv{background:rgba(52,168,83,.1);color:#4caf75;border:1px solid rgba(52,168,83,.22)}
 .bo{background:var(--or-pale);color:var(--or);border:1px solid var(--or-b)}
 .br{background:rgba(168,50,50,.1);color:#c05545;border:1px solid rgba(168,50,50,.22)}
-
-/* ── LAYOUT ── */
 .corps{max-width:700px;margin:0 auto;padding:0 15px 70px;position:relative;z-index:1}
 .bloc{margin-top:22px;animation:fade-up .38s ease both}
 .btit{display:flex;align-items:center;gap:10px;margin-bottom:11px}
-.bnum{font-family:var(--font-serif);font-size:11px;font-style:italic;font-weight:600;color:var(--or);
-  width:22px;height:22px;border:1px solid var(--or-b);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bnum{font-family:var(--font-serif);font-size:11px;font-style:italic;font-weight:600;color:var(--or);width:22px;height:22px;border:1px solid var(--or-b);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .blab{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--or);opacity:.82}
 .bligne{flex:1;height:1px;background:linear-gradient(to right,var(--or-b),transparent)}
-
 .carte{background:var(--s2);border:1px solid rgba(200,164,90,.11);border-radius:3px;padding:17px 15px;position:relative}
 .carte::before,.carte::after{content:'';position:absolute;width:13px;height:13px;opacity:.38}
 .carte::before{top:8px;left:8px;border-top:1px solid var(--or);border-left:1px solid var(--or)}
 .carte::after{bottom:8px;right:8px;border-bottom:1px solid var(--or);border-right:1px solid var(--or)}
-
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 @media(max-width:560px){.g3{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
-
 .ch{display:flex;flex-direction:column;gap:5px}
 .ch label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--tm)}
 .hint{font-size:9.5px;color:var(--tp);font-style:italic;line-height:1.55;margin-top:2px}
-
-/* ── MODE MESURE ── */
-.mode-mesure-box{padding:14px 16px;border-radius:3px;margin-bottom:0;border:2px solid var(--or);background:linear-gradient(135deg,rgba(200,164,90,.08) 0%,rgba(200,164,90,.03) 100%);position:relative;overflow:hidden;}
-.mode-mesure-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--or),transparent);}
-.mode-mesure-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:10px;}
+.mode-mesure-box{padding:14px 16px;border-radius:3px;border:2px solid var(--or);background:linear-gradient(135deg,rgba(200,164,90,.08) 0%,rgba(200,164,90,.03) 100%);position:relative;overflow:hidden}
+.mode-mesure-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--or),transparent)}
+.mode-mesure-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:10px}
 .mode-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mode-btn{padding:11px 8px;border-radius:2px;cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:all .2s;border:1px solid rgba(200,164,90,.3);background:var(--s3);color:var(--tm);text-align:center;line-height:1.4;}
-.mode-btn.actif{background:var(--or);color:#000;border-color:var(--or);font-weight:700;}
-.mode-btn:hover:not(.actif){border-color:var(--or);color:var(--t);background:var(--or-pale)}
-.mode-info{margin-top:10px;padding:8px 11px;border-radius:2px;background:rgba(200,164,90,.06);border-left:2px solid var(--or);font-size:10px;color:var(--tm);line-height:1.6;}
+.mode-btn{padding:11px 8px;border-radius:2px;cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:all .2s;border:1px solid rgba(200,164,90,.3);background:var(--s3);color:var(--tm);text-align:center;line-height:1.4}
+.mode-btn.actif{background:var(--or);color:#000;border-color:var(--or);font-weight:700}
+.mode-info{margin-top:10px;padding:8px 11px;border-radius:2px;background:rgba(200,164,90,.06);border-left:2px solid var(--or);font-size:10px;color:var(--tm);line-height:1.6}
 .mode-info b{color:var(--or)}
-.refl-badge{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:1px;margin-left:6px;vertical-align:middle;transition:all .3s;}
+.refl-badge{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:1px;margin-left:6px;vertical-align:middle;transition:all .3s}
 .rb-actif{background:rgba(52,168,83,.12);color:#4caf75;border:1px solid rgba(52,168,83,.25)}
 .rb-inactif{background:rgba(120,120,120,.1);color:var(--tp);border:1px solid rgba(120,120,120,.15);text-decoration:line-through}
-
-/* ── SELECTS ── */
-select{width:100%;background:var(--s3);border:1px solid var(--or-b);color:var(--t);
-  padding:10px 28px 10px 11px;border-radius:2px;
-  font-family:var(--font-sans);font-size:13.5px;font-weight:500;
-  outline:none;-webkit-appearance:none;appearance:none;cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C8A45A' opacity='.65'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 10px center;
-  transition:border-color .16s,background-color .16s,opacity .3s}
-select:hover{border-color:rgba(200,164,90,.55);background-color:var(--s2)}
-select:focus{border-color:var(--or);background-color:var(--s2);box-shadow:0 0 0 1px rgba(200,164,90,.13)}
-select:disabled,select.desactive{opacity:.35;pointer-events:none}
+select{width:100%;background:var(--s3);border:1px solid var(--or-b);color:var(--t);padding:10px 28px 10px 11px;border-radius:2px;font-family:var(--font-sans);font-size:13.5px;font-weight:500;outline:none;-webkit-appearance:none;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C8A45A' opacity='.65'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .16s,background-color .16s}
+select:focus{border-color:var(--or);background-color:var(--s2)}
+select:disabled{opacity:.35;pointer-events:none}
 optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
-
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .prow{display:flex;gap:8px}
 .prow select:first-child{flex:1}
 .prow select:last-child{width:70px;flex-shrink:0}
-
 .section-inactive{opacity:.45;pointer-events:none}
-.section-inactive .carte{border-color:rgba(200,164,90,.05)}
-
-/* ── CARNATION ── */
 .carn-ap{display:flex;align-items:center;gap:11px;margin-top:9px;padding:10px 13px;background:var(--s3);border:1px solid var(--or-b);border-radius:2px}
 .carn-rd{width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(200,164,90,.32);flex-shrink:0;transition:background .3s}
 .carn-txt{font-size:11px;color:var(--tm);line-height:1.4}
 .carn-il{font-family:var(--font-serif);font-size:17px;font-weight:600;color:var(--or);line-height:1}
-
-/* ── RÉFLECTANCE ── */
 .refl-wrap{margin-top:9px;padding:10px 13px;background:var(--s3);border:1px solid rgba(200,164,90,.13);border-radius:2px}
 .refl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .refl-lbl{font-size:9px;color:var(--tm);letter-spacing:1px;text-transform:uppercase}
@@ -111,68 +84,45 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
 .refl-bg{height:6px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
 .refl-bar{height:100%;background:linear-gradient(to right,#1a1510,var(--or),#fff);border-radius:3px;transition:width .4s ease}
 .refl-echelle{display:flex;justify-content:space-between;margin-top:3px;font-size:8px;color:var(--tp)}
-
-/* ── DISTANCE ── */
 .dist-result{margin-top:9px;padding:9px 12px;background:var(--s3);border:1px solid rgba(200,164,90,.13);border-radius:2px;font-size:11px;color:var(--tm);line-height:1.7}
 .dist-result b{color:var(--or);font-family:var(--font-serif);font-size:14px}
-
-.sep{height:1px;margin:24px 0;background:linear-gradient(to right,transparent,var(--or-b),transparent)}
-
-/* ── BOUTONS CALC ── */
 .rbtn{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
 .cbtn{padding:16px 10px;border-radius:2px;cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .18s;border:1px solid var(--or);position:relative;overflow:hidden}
 .cbtn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);transition:left .35s}
 .cbtn:hover::after{left:100%}
-.bn{background:transparent;color:var(--or)}.bn:hover{background:var(--or-pale)}
-.bo2{background:var(--or);color:#000;font-weight:800}.bo2:hover{background:var(--or-c)}
-
-/* ── RÉSULTAT ── */
+.bn{background:transparent;color:var(--or)}.bo2{background:var(--or);color:#000;font-weight:800}
 #result-box{display:none;margin-top:16px;animation:pop .38s cubic-bezier(.34,1.56,.64,1) both}
 .rc{background:var(--s2);border:1px solid var(--or);border-radius:3px;padding:28px 20px 22px;text-align:center;position:relative;overflow:hidden;animation:pulse 4s ease-in-out infinite}
-.rc.alerte{border-color:var(--rouge)!important;background:linear-gradient(135deg,rgba(192,85,69,.07) 0%,var(--s2) 60%)!important;animation:pulse-alert 3s ease-in-out infinite!important;}
-.rc.alerte::before{background:linear-gradient(to right,transparent,var(--rouge),transparent)!important;}
+.rc.alerte{border-color:var(--rouge)!important;background:linear-gradient(135deg,rgba(192,85,69,.07) 0%,var(--s2) 60%)!important;animation:pulse-alert 3s ease-in-out infinite!important}
 .rc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--or),transparent)}
+.rc.alerte::before{background:linear-gradient(to right,transparent,var(--rouge),transparent)!important}
 .rc::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 0%,rgba(200,164,90,.07) 0%,transparent 70%);pointer-events:none}
 .scan-ln{position:absolute;top:0;left:0;right:0;height:35px;background:linear-gradient(to bottom,transparent,rgba(200,164,90,.035),transparent);animation:scan 5s linear infinite;pointer-events:none}
 #txt_type{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tm);margin-bottom:13px;position:relative;z-index:1}
 #res_flash{font-family:var(--font-serif);font-size:clamp(3.8rem,15vw,7rem);font-weight:600;color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:16px;text-shadow:0 0 50px rgba(200,164,90,.22);position:relative;z-index:1}
-#res_flash.alerte-txt{color:var(--rouge)!important;text-shadow:0 0 50px rgba(192,85,69,.3)!important;}
+#res_flash.alerte-txt{color:var(--rouge)!important;text-shadow:0 0 50px rgba(192,85,69,.3)!important}
 #res_correction{font-size:12px;font-weight:600;letter-spacing:1px;color:var(--or);margin-bottom:4px;position:relative;z-index:1}
 #res_precise{font-size:10px;color:var(--tp);position:relative;z-index:1}
-
-/* ── ALERTE PUISSANCE ── */
-.alerte-puissance{display:none;margin-top:14px;padding:14px 16px;border-radius:3px;border:1px solid var(--rouge-b);background:var(--rouge-pale);position:relative;z-index:1;text-align:left;}
+.alerte-puissance{display:none;margin-top:14px;padding:14px 16px;border-radius:3px;border:1px solid var(--rouge-b);background:var(--rouge-pale);position:relative;z-index:1;text-align:left}
 .alerte-puissance.visible{display:block;animation:fade-up .3s ease both}
-.alerte-puissance-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rouge);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.alerte-puissance-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rouge);margin-bottom:8px}
 .alerte-puissance-msg{font-size:11px;color:var(--t);line-height:1.7}
-.alerte-puissance-msg b{color:var(--rouge)}
-.alerte-conseil{margin-top:9px;padding:9px 11px;border-radius:2px;background:rgba(200,164,90,.06);border-left:2px solid var(--or);font-size:10.5px;color:var(--tm);line-height:1.65;}
+.alerte-conseil{margin-top:9px;padding:9px 11px;border-radius:2px;background:rgba(200,164,90,.06);border-left:2px solid var(--or);font-size:10.5px;color:var(--tm);line-height:1.65}
 .alerte-conseil b{color:var(--or)}
-
-/* ── SOURCES MULTIPLES ── */
 .sources-container{display:flex;flex-direction:column;gap:9px;margin-top:11px}
-.source-row{display:flex;gap:8px;align-items:flex-end;background:rgba(200,164,90,.04);border:1px solid rgba(200,164,90,.12);border-radius:2px;padding:10px 12px;position:relative;}
+.source-row{display:flex;gap:8px;align-items:flex-end;background:rgba(200,164,90,.04);border:1px solid rgba(200,164,90,.12);border-radius:2px;padding:10px 12px}
 .source-row:first-child{background:rgba(200,164,90,.07);border-color:rgba(200,164,90,.22)}
-.source-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);min-width:68px;padding-top:2px;flex-shrink:0;align-self:flex-start;margin-top:18px;}
+.source-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);min-width:68px;flex-shrink:0;align-self:flex-start;margin-top:18px}
 .source-fields{flex:1;display:flex;gap:8px;flex-wrap:wrap}
 .source-fields .ch{flex:1;min-width:120px}
-.source-remove{background:none;border:1px solid rgba(192,85,69,.35);color:var(--rouge);border-radius:2px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;transition:all .15s;flex-shrink:0;align-self:flex-end;margin-bottom:1px;}
-.source-remove:hover{background:var(--rouge-pale);border-color:var(--rouge)}
-
-.add-source-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:9px;padding:12px;background:none;border:1px dashed rgba(200,164,90,.32);border-radius:2px;color:var(--or);font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .18s;}
-.add-source-btn:hover{background:var(--or-pale);border-color:var(--or);border-style:solid}
-
-.sources-total{margin-top:8px;padding:8px 12px;border-radius:2px;background:rgba(200,164,90,.06);border:1px solid rgba(200,164,90,.15);font-size:10px;color:var(--tm);display:flex;justify-content:space-between;align-items:center;}
+.source-remove{background:none;border:1px solid rgba(192,85,69,.35);color:var(--rouge);border-radius:2px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;align-self:flex-end;margin-bottom:1px}
+.add-source-btn{display:flex;align-items:center;justify-content:center;width:100%;margin-top:9px;padding:12px;background:none;border:1px dashed rgba(200,164,90,.32);border-radius:2px;color:var(--or);font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .18s}
+.sources-total{margin-top:8px;padding:8px 12px;border-radius:2px;background:rgba(200,164,90,.06);border:1px solid rgba(200,164,90,.15);font-size:10px;color:var(--tm);display:flex;justify-content:space-between;align-items:center}
 .sources-total b{color:var(--or);font-family:var(--font-serif);font-size:14px}
-
-/* ── MULTI-FLASH WARNING ── */
-.multi-flash-warning{display:none;margin-top:14px;padding:12px 15px;border-radius:3px;border:1px solid rgba(200,164,90,.3);background:rgba(200,164,90,.06);position:relative;z-index:1;text-align:left;}
+.multi-flash-warning{display:none;margin-top:14px;padding:12px 15px;border-radius:3px;border:1px solid rgba(200,164,90,.3);background:rgba(200,164,90,.06);z-index:1;text-align:left}
 .multi-flash-warning.visible{display:block;animation:fade-up .28s ease both}
 .mfw-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:6px}
 .mfw-txt{font-size:10.5px;color:var(--tm);line-height:1.7}
-.mfw-txt b{color:var(--t)}
-
-/* ── TABLEAU DÉTAIL ── */
 .detail-corr{margin-top:14px;padding:12px 14px;background:var(--s3);border:1px solid rgba(200,164,90,.12);border-radius:2px;text-align:left;position:relative;z-index:1}
 .dc-titre{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tm);margin-bottom:10px}
 .dc-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:3.5px 0;border-bottom:1px solid rgba(200,164,90,.06)}
@@ -184,70 +134,59 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
 .dc-val{font-family:var(--font-serif);font-size:14px;font-weight:600;min-width:64px;text-align:right}
 .v-pos{color:#7ec8f0}.v-neg{color:#e8906a}.v-neu{color:var(--tp);font-size:12px!important}
 .v-or{color:var(--or)}.v-total{color:var(--or);font-size:17px!important}
-
-/* ── TROP DE LUMIÈRE ── */
-.trop-luz{display:none;margin-top:14px;border-radius:3px;border:1px solid rgba(100,160,255,.3);background:rgba(60,100,200,.07);text-align:left;overflow:hidden;position:relative;z-index:1;}
+.trop-luz{display:none;margin-top:14px;border-radius:3px;border:1px solid rgba(100,160,255,.3);background:rgba(60,100,200,.07);text-align:left;overflow:hidden;position:relative;z-index:1}
 .trop-luz.visible{display:block;animation:fade-up .3s ease both}
-.trop-luz-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7ab3ff;padding:12px 15px 8px;border-bottom:1px solid rgba(100,160,255,.15);display:flex;align-items:center;gap:6px;}
-.trop-luz-body{padding:12px 15px;}
-.trop-luz-exces{font-size:11px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:10px;}
+.trop-luz-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7ab3ff;padding:12px 15px 8px;border-bottom:1px solid rgba(100,160,255,.15)}
+.trop-luz-body{padding:12px 15px}
+.trop-luz-exces{font-size:11px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:10px}
 .trop-luz-exces b{color:#7ab3ff}
-.tl-tabs{display:flex;gap:0;margin-bottom:12px;border-radius:2px;overflow:hidden;border:1px solid rgba(100,160,255,.25)}
-.tl-tab{flex:1;padding:7px 4px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;cursor:pointer;background:transparent;color:rgba(255,255,255,.35);border:none;transition:.2s;}
+.tl-tabs{display:flex;margin-bottom:12px;border-radius:2px;overflow:hidden;border:1px solid rgba(100,160,255,.25)}
+.tl-tab{flex:1;padding:7px 4px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;cursor:pointer;background:transparent;color:rgba(255,255,255,.35);border:none;transition:.2s}
 .tl-tab.active{background:rgba(100,160,255,.18);color:#7ab3ff}
 .tl-panel{display:none}.tl-panel.active{display:block}
 .nd-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .nd-lbl{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;min-width:50px}
-.nd-select{background:rgba(255,255,255,.05);border:1px solid rgba(100,160,255,.2);color:var(--t);font-size:11px;padding:5px 8px;border-radius:2px;flex:1;min-width:100px;}
-.nd-result{margin-top:10px;padding:10px 12px;border-radius:2px;background:rgba(100,160,255,.06);border:1px solid rgba(100,160,255,.15);}
+.nd-select{background:rgba(255,255,255,.05);border:1px solid rgba(100,160,255,.2);color:var(--t);font-size:11px;padding:5px 8px;border-radius:2px;flex:1;min-width:100px}
+.nd-result{margin-top:10px;padding:10px 12px;border-radius:2px;background:rgba(100,160,255,.06);border:1px solid rgba(100,160,255,.15)}
 .nd-result-line{display:flex;justify-content:space-between;align-items:center;padding:3px 0}
 .nd-result-lbl{font-size:10px;color:rgba(255,255,255,.45)}
 .nd-result-val{font-family:var(--font-serif);font-size:18px;font-weight:600;color:#7ab3ff}
 .nd-result-val.ok{color:#7ab3ff}.nd-result-val.warn{color:#C8A45A}.nd-result-val.bad{color:#c05545}
-.nd-total-bar{margin-top:8px;padding:8px 10px;background:rgba(100,160,255,.1);border-radius:2px;display:flex;justify-content:space-between;align-items:center;}
+.nd-total-bar{margin-top:8px;padding:8px 10px;background:rgba(100,160,255,.1);border-radius:2px;display:flex;justify-content:space-between;align-items:center}
 .nd-total-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.4)}
 .nd-total-val{font-family:var(--font-serif);font-size:22px;font-weight:700;color:#7ab3ff}
 .apn-sol-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .apn-sol-lbl{font-size:10px;color:rgba(255,255,255,.45)}
 .apn-sol-val{font-family:var(--font-serif);font-size:18px;color:#C8A45A;font-weight:600}
 .apn-note{margin-top:8px;font-size:9.5px;color:rgba(255,255,255,.3);font-style:italic;line-height:1.6}
-
-/* ── GUIDE NATH SAKURA ── */
-.guide-nath{display:none;margin-top:14px;border-radius:3px;border:1px solid rgba(200,164,90,.3);background:rgba(200,164,90,.05);text-align:left;overflow:hidden;position:relative;z-index:1;}
+.guide-nath{display:none;margin-top:14px;border-radius:3px;border:1px solid rgba(200,164,90,.3);background:rgba(200,164,90,.05);text-align:left;overflow:hidden;position:relative;z-index:1}
 .guide-nath.visible{display:block;animation:fade-up .3s ease both}
-.guide-nath-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);padding:11px 15px 9px;border-bottom:1px solid rgba(200,164,90,.15);display:flex;align-items:center;gap:7px;}
-.guide-nath-context{font-size:10.5px;color:rgba(255,255,255,.6);padding:10px 15px 6px;line-height:1.6;border-bottom:1px solid rgba(255,255,255,.05);}
+.guide-nath-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);padding:11px 15px 9px;border-bottom:1px solid rgba(200,164,90,.15)}
+.guide-nath-context{font-size:10.5px;color:rgba(255,255,255,.6);padding:10px 15px 6px;line-height:1.6;border-bottom:1px solid rgba(255,255,255,.05)}
 .guide-nath-context b{color:var(--or)}.guide-nath-context .warn{color:#f0a04a}
-.guide-etapes{padding:10px 15px 13px;}
-.guide-etape{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.guide-etapes{padding:10px 15px 13px}
+.guide-etape{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
 .guide-etape:last-child{border-bottom:none;padding-bottom:0}
-.guide-etape-num{min-width:22px;height:22px;border-radius:50%;background:rgba(200,164,90,.15);border:1px solid rgba(200,164,90,.3);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--or);flex-shrink:0;margin-top:1px;}
+.guide-etape-num{min-width:22px;height:22px;border-radius:50%;background:rgba(200,164,90,.15);border:1px solid rgba(200,164,90,.3);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--or);flex-shrink:0;margin-top:1px}
 .guide-etape-num.prioritaire{background:rgba(200,164,90,.25);border-color:var(--or)}
 .guide-etape-num.iso{background:rgba(200,100,100,.1);border-color:rgba(200,100,100,.3);color:#e08888}
 .guide-etape-body{flex:1}
-.guide-etape-titre{font-size:10px;font-weight:700;color:var(--t);margin-bottom:3px;display:flex;align-items:center;gap:6px;}
-.guide-etape-titre .tag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:1px 5px;border-radius:2px;}
+.guide-etape-titre{font-size:10px;font-weight:700;color:var(--t);margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.tag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:1px 5px;border-radius:2px}
 .tag-ideal{background:rgba(100,200,100,.15);color:#88e088;border:1px solid rgba(100,200,100,.2)}
 .tag-alt{background:rgba(200,164,90,.12);color:var(--or);border:1px solid rgba(200,164,90,.2)}
 .tag-last{background:rgba(200,80,80,.1);color:#e08888;border:1px solid rgba(200,80,80,.2)}
-.guide-etape-detail{font-size:10px;color:rgba(255,255,255,.45);line-height:1.6;}
+.guide-etape-detail{font-size:10px;color:rgba(255,255,255,.45);line-height:1.6}
 .guide-etape-detail b{color:rgba(255,255,255,.75)}
-.guide-etape-detail .val{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--or);}
-.guide-etape-detail .val-warn{font-family:var(--font-serif);font-size:15px;font-weight:600;color:#f0a04a;}
-.guide-hss-warn{margin:0 15px 10px;padding:8px 10px;border-radius:2px;background:rgba(240,160,74,.08);border:1px solid rgba(240,160,74,.2);font-size:10px;color:#f0a04a;line-height:1.6;}
-
-/* ── PIED ── */
+.guide-etape-detail .val{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--or)}
+.guide-etape-detail .val-warn{font-family:var(--font-serif);font-size:15px;font-weight:600;color:#f0a04a}
+.guide-hss-warn{margin:0 15px 10px;padding:8px 10px;border-radius:2px;background:rgba(240,160,74,.08);border:1px solid rgba(240,160,74,.2);font-size:10px;color:#f0a04a;line-height:1.6}
 .pied{text-align:center;margin-top:32px;padding:18px 20px;font-size:9.5px;color:var(--tp);letter-spacing:1px;border-top:1px solid var(--or-b)}
 .pied span{color:var(--or)}
-
-/* ── ANDROID SAFE AREA ── */
-@supports(padding:max(0px)){
-  body{padding-bottom:env(safe-area-inset-bottom)}
-}
+@supports(padding:max(0px)){body{padding-bottom:env(safe-area-inset-bottom)}}
 </style>
 </head>
 <body>
-
 <header class="hd">
   <div class="logo-txt">Souvenir Nomade</div>
   <div class="ey">Souvenir Nomade · Hage Pierre-Alexandre</div>
@@ -261,24 +200,17 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
     <span class="b bv">◈ Multi-sources</span>
   </div>
 </header>
-
 <div class="corps">
 
-<!-- 0. MODE DE MESURE -->
+<!-- 0. MODE MESURE -->
 <div class="bloc" style="margin-top:18px">
   <div class="mode-mesure-box">
     <div class="mode-mesure-label">⚙ Mode de mesure posemètre</div>
     <div class="mode-btns">
-      <div class="mode-btn actif" id="btn_incident" onclick="setMode('incident')">
-        ◉ Incident<br><span style="font-size:9px;font-weight:400;letter-spacing:0;text-transform:none">Sphère → vers le flash</span>
-      </div>
-      <div class="mode-btn" id="btn_reflechi" onclick="setMode('reflechi')">
-        ◎ Réfléchi / TTL<br><span style="font-size:9px;font-weight:400;letter-spacing:0;text-transform:none">Spotmètre → sur le sujet</span>
-      </div>
+      <div class="mode-btn actif" id="btn_incident" onclick="setMode('incident')">◉ Incident<br><span style="font-size:9px;font-weight:400;letter-spacing:0;text-transform:none">Sphère → vers le flash</span></div>
+      <div class="mode-btn" id="btn_reflechi" onclick="setMode('reflechi')">◎ Réfléchi / TTL<br><span style="font-size:9px;font-weight:400;letter-spacing:0;text-transform:none">Spotmètre → sur le sujet</span></div>
     </div>
-    <div class="mode-info" id="mode_info">
-      <b>Mode incident :</b> le posemètre mesure la lumière arrivant sur le sujet — les corrections <b>carnation</b> et <b>matière</b> sont <b>actives</b>.
-    </div>
+    <div class="mode-info" id="mode_info"><b>Mode incident :</b> corrections <b>carnation</b> et <b>matière</b> sont <b>actives</b>.</div>
   </div>
 </div>
 
@@ -294,208 +226,97 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
       </div>
       <div class="ch"><label>Vitesse</label>
         <select id="v_apn">
-          <option value="30">30s</option><option value="25">25s</option><option value="20">20s</option><option value="15">15s</option><option value="10">10s</option><option value="8">8s</option><option value="6">6s</option><option value="5">5s</option><option value="4">4s</option><option value="3.2">3.2s</option><option value="2.5">2.5s</option><option value="2">2s</option><option value="1.6">1.6s</option><option value="1.3">1.3s</option><option value="1">1s</option><option value="0.5">1/2</option><option value="0.25">1/4</option><option value="0.125">1/8</option><option value="0.1">1/10</option><option value="0.0666">1/15</option><option value="0.05">1/20</option><option value="0.04">1/25</option><option value="0.0333">1/30</option><option value="0.025">1/40</option><option value="0.02">1/50</option><option value="0.0166">1/60</option><option value="0.0125">1/80</option><option value="0.01">1/100</option><option value="0.008">1/125</option><option value="0.00625">1/160</option><option value="0.005">1/200</option><option value="0.004">1/250 (HSS)</option><option value="0.003125">1/320 (HSS)</option><option value="0.0025">1/400 (HSS)</option><option value="0.002">1/500 (HSS)</option><option value="0.00160">1/640 (HSS)</option><option value="0.00125">1/800 (HSS)</option><option value="0.001">1/1000 (HSS)</option><option value="0.000625">1/1600 (HSS)</option><option value="0.0005">1/2000 (HSS)</option><option value="0.00025">1/4000 (HSS)</option><option value="0.0002">1/5000 (HSS)</option><option value="0.000125">1/8000 (HSS)</option>
+          <optgroup label="Poses Longues"><option value="30">30s</option><option value="25">25s</option><option value="20">20s</option><option value="15">15s</option><option value="13">13s</option><option value="10">10s</option><option value="8">8s</option><option value="6">6s</option><option value="5">5s</option><option value="4">4s</option><option value="3.2">3.2s</option><option value="2.5">2.5s</option><option value="2">2s</option><option value="1.6">1.6s</option><option value="1.3">1.3s</option><option value="1">1s</option></optgroup>
+          <optgroup label="Vitesses Standard"><option value="0.8">0.8"</option><option value="0.6">0.6"</option><option value="0.5">1/2</option><option value="0.4">1/2.5</option><option value="0.3">1/3</option><option value="0.25">1/4</option><option value="0.2">1/5</option><option value="0.166">1/6</option><option value="0.125">1/8</option><option value="0.1">1/10</option><option value="0.076">1/13</option><option value="0.066">1/15</option><option value="0.05">1/20</option><option value="0.04">1/25</option><option value="0.033">1/30</option><option value="0.025">1/40</option><option value="0.02">1/50</option><option value="0.0166">1/60</option><option value="0.0125">1/80</option><option value="0.01">1/100</option><option value="0.008" selected>1/125</option><option value="0.00625">1/160</option><option value="0.005">1/200</option></optgroup>
+          <optgroup label="Mode HSS (Haute Vitesse)"><option value="0.004">1/250</option><option value="0.003125">1/320</option><option value="0.0025">1/400</option><option value="0.002">1/500</option><option value="0.00156">1/640</option><option value="0.00125">1/800</option><option value="0.001">1/1000</option><option value="0.0008">1/1250</option><option value="0.000625">1/1600</option><option value="0.0005">1/2000</option><option value="0.0004">1/2500</option><option value="0.0003125">1/3200</option><option value="0.00025">1/4000</option><option value="0.0002">1/5000</option><option value="0.000156">1/6400</option><option value="0.000125">1/8000</option></optgroup>
         </select>
       </div>
       <div class="ch"><label>ISO</label>
         <select id="iso_apn">
-          <option value="50">ISO 50</option><option value="100" selected>ISO 100</option><option value="200">ISO 200</option><option value="400">ISO 400</option><option value="800">ISO 800</option><option value="1600">ISO 1600</option><option value="3200">ISO 3200</option><option value="6400">ISO 6400</option><option value="12800">ISO 12800</option><option value="25600">ISO 25600</option>
+          <optgroup label="Basse Sensibilité"><option value="50">ISO 50</option><option value="64">ISO 64</option><option value="80">ISO 80</option><option value="100" selected>ISO 100</option></optgroup>
+          <optgroup label="Standard"><option value="125">ISO 125</option><option value="160">ISO 160</option><option value="200">ISO 200</option><option value="250">ISO 250</option><option value="320">ISO 320</option><option value="400">ISO 400</option><option value="500">ISO 500</option><option value="640">ISO 640</option><option value="800">ISO 800</option><option value="1000">ISO 1000</option><option value="1250">ISO 1250</option><option value="1600">ISO 1600</option></optgroup>
+          <optgroup label="Haute Sensibilité"><option value="2000">ISO 2000</option><option value="2500">ISO 2500</option><option value="3200">ISO 3200</option><option value="4000">ISO 4000</option><option value="5000">ISO 5000</option><option value="6400">ISO 6400</option><option value="8000">ISO 8000</option><option value="10000">ISO 10000</option><option value="12800">ISO 12800</option><option value="25600">ISO 25600</option><option value="51200">ISO 51200</option><option value="102400">ISO 102400</option></optgroup>
         </select>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 2. FLASH + MULTI-SOURCES -->
+<!-- 2. FLASH -->
 <div class="bloc">
   <div class="btit"><div class="bnum">2</div><div class="blab">Configuration Flash</div><div class="bligne"></div></div>
   <div class="carte">
     <div class="ch" style="margin-bottom:12px"><label>Rôle du Flash</label>
       <select id="flash_role">
-        <option value="0">Key Light — Principal (0 IL)</option>
-        <option value="-0.5">Fill Light (−0.5 IL)</option><option value="-1">Fill Light (−1 IL)</option><option value="-1.3">Fill Light (−1.3 IL)</option><option value="-1.5">Fill Light (−1.5 IL)</option><option value="-2">Fill Light (−2 IL)</option><option value="-2.5">Fill Light (−2.5 IL)</option><option value="-3">Fill Light (−3 IL)</option><option value="-4">Fill Light (−4 IL)</option>
-        <option value="1">Rim Light (+1 IL)</option><option value="1.5">Rim Light (+1.5 IL)</option><option value="2">Rim Light (+2 IL)</option>
-        <option value="1">Hair Light (+1 IL)</option><option value="1.5">Hair Light (+1.5 IL)</option><option value="2">Hair Light (+2 IL)</option>
-        <option value="1">Kicker (+1 IL)</option><option value="2">Background (+2 IL)</option><option value="3">Background (+3 IL)</option>
-        <option value="-1">Contre-Jour (−1 IL)</option><option value="0">Contre-Jour (0 IL)</option><option value="1">Contre-Jour (+1 IL)</option><option value="2">Contre-Jour (+2 IL)</option>
+        <optgroup label="Lumière Principale"><option value="0" selected>💡 Key Light — Principal (0 IL)</option></optgroup>
+        <optgroup label="Débouchage (Fill Light)">
+          <option value="-0.33">🌒 Fill (−0.33 IL) — Ratio 1:1.2</option><option value="-0.5">🌒 Fill (−0.50 IL) — Ratio 1:1.4</option><option value="-0.66">🌒 Fill (−0.66 IL) — Ratio 1:1.6</option><option value="-1">🌒 Fill (−1.00 IL) — Ratio 1:2</option><option value="-1.33">🌑 Fill (−1.33 IL) — Ratio 1:2.5</option><option value="-1.5">🌑 Fill (−1.50 IL) — Ratio 1:2.8</option><option value="-1.66">🌑 Fill (−1.66 IL) — Ratio 1:3.2</option><option value="-2">🌑 Fill (−2.00 IL) — Ratio 1:4</option><option value="-2.5">📉 Fill (−2.50 IL) — Ratio 1:5.6</option><option value="-3">📉 Fill (−3.00 IL) — Ratio 1:8</option><option value="-4">📉 Fill (−4.00 IL) — Ratio 1:16</option>
+        </optgroup>
+        <optgroup label="Accents &amp; Séparation">
+          <option value="0.33">✨ Hair Light (+0.33 IL)</option><option value="0.66">✨ Hair Light (+0.66 IL)</option><option value="1">✨ Hair Light (+1.0 IL)</option><option value="0.5">🌟 Rim Light (+0.5 IL)</option><option value="1.5">🌟 Rim Light (+1.5 IL)</option><option value="2">🔥 Rim / Kicker (+2.0 IL)</option><option value="2.5">🔥 Rim / Kicker (+2.5 IL)</option>
+        </optgroup>
+        <optgroup label="Arrière-plan">
+          <option value="-1">🖼️ Fond Sombre (−1.0 IL)</option><option value="0">🖼️ Fond Neutre (0 IL)</option><option value="1">🖼️ Fond Clair (+1.0 IL)</option><option value="2">🖼️ Fond Très Clair (+2.0 IL)</option><option value="3">🚀 High Key Fond (+3.0 IL)</option>
+        </optgroup>
+        <optgroup label="Contre-Jour">
+          <option value="-1">☀️ Contre-Jour (−1.0 IL)</option><option value="0">☀️ Contre-Jour (0 IL)</option><option value="1">☀️ Contre-Jour (+1.0 IL)</option><option value="2">☀️ Contre-Jour (+2.0 IL)</option>
+        </optgroup>
       </select>
     </div>
-    <p class="ch" style="margin-bottom:8px"><label>Sources de lumière (Puissance test + Puissance max)</label></p>
+    <p class="ch" style="margin-bottom:8px"><label>Sources de lumière</label></p>
     <div class="sources-container" id="sources-container">
       <div class="source-row" id="source-0">
         <span class="source-label">Flash 1</span>
         <div class="source-fields">
-          <div class="ch">
-            <label>Puissance Test</label>
+          <div class="ch"><label>Puissance Test</label>
             <div class="prow">
-              <select id="p_test_base_0" onchange="recalcAuto()">
-                <option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512" selected>1/512</option>
-              </select>
-              <select id="p_test_tenths_0" onchange="recalcAuto()">
-                <option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option>
-              </select>
+              <select id="p_test_base_0" onchange="recalcAuto()"><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512" selected>1/512</option></select>
+              <select id="p_test_tenths_0" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select>
             </div>
           </div>
-          <div class="ch">
-            <label>Puissance Max (Ws)</label>
-            <select id="p_max_0" onchange="recalcAuto()">
-              <option value="0">— Non renseignée</option>
-              <option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option>
-            </select>
+          <div class="ch"><label>Puissance Max (Ws)</label>
+            <select id="p_max_0" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select>
           </div>
         </div>
       </div>
     </div>
     <button class="add-source-btn" id="add-source-btn" onclick="addSource()">＋ Ajouter une source</button>
-    <div class="sources-total" id="sources-total" style="display:none">
-      <span>Total puissance maximale cumulée</span>
-      <b id="sources-total-val">—</b>
-    </div>
+    <div class="sources-total" id="sources-total" style="display:none"><span>Total puissance maximale cumulée</span><b id="sources-total-val">—</b></div>
   </div>
 </div>
 
 <!-- 3. CARNATION -->
 <div class="bloc" id="section_carnation">
-  <div class="btit">
-    <div class="bnum" style="font-size:8px;letter-spacing:0">2b</div>
-    <div class="blab">Carnation de Peau</div>
-    <span class="refl-badge rb-actif" id="badge_carn">✓ actif — incident</span>
-    <div class="bligne"></div>
-  </div>
+  <div class="btit"><div class="bnum" style="font-size:8px;letter-spacing:0">2b</div><div class="blab">Carnation de Peau</div><span class="refl-badge rb-actif" id="badge_carn">✓ actif — incident</span><div class="bligne"></div></div>
   <div class="carte">
-    <div class="ch">
-      <label>Carnation du sujet</label>
+    <div class="ch"><label>Carnation du sujet</label>
       <select id="skin_tone" onchange="majCarn()">
-        <option value="-2.33">🏻 Albinos / Très très claire (−2.33 IL)</option>
-        <option value="-2">🏻 Très claire / Porcelaine (−2 IL)</option>
-        <option value="-1.67">🏼 Claire / Ivoire (−1.67 IL)</option>
-        <option value="-1.5">🏼 Claire Rosée (−1.5 IL)</option>
-        <option value="-1.33">🏼 Claire / Beige clair (−1.33 IL)</option>
-        <option value="-1.17">🏼 Claire Naturelle (−1.17 IL)</option>
-        <option value="-1">🏼 Médium Claire (−1 IL)</option>
-        <option value="-0.83">🏼 Médium Claire Dorée (−0.83 IL)</option>
-        <option value="0" selected>🏽 Médium — Référence (0 IL)</option>
-        <option value="0.17">🏽 Médium / Beige naturel (+0.17 IL)</option>
-        <option value="0.33">🏽 Médium Dorée / Sable (+0.33 IL)</option>
-        <option value="0.5">🏽 Médium Olive / Miel (+0.5 IL)</option>
-        <option value="0.67">🏽 Médium Foncée / Caramel (+0.67 IL)</option>
-        <option value="0.83">🏾 Foncée / Bronze (+0.83 IL)</option>
-        <option value="1">🏾 Foncée / Brun chaud (+1 IL)</option>
-        <option value="1.17">🏾 Foncée Profonde / Acajou (+1.17 IL)</option>
-        <option value="1.33">🏾 Très Foncée / Chocolat (+1.33 IL)</option>
-        <option value="1.5">🏿 Très Foncée / Espresso (+1.5 IL)</option>
-        <option value="1.67">🏿 Ébène Clair (+1.67 IL)</option>
-        <option value="2">🏿 Ébène / Très Sombre (+2 IL)</option>
-        <option value="2.33">🏿 Ébène Profond / Nuit (+2.33 IL)</option>
+        <option value="-2.33">🏻 Albinos / Très très claire (−2.33 IL)</option><option value="-2">🏻 Très claire / Porcelaine (−2 IL)</option><option value="-1.67">🏼 Claire / Ivoire (−1.67 IL)</option><option value="-1.5">🏼 Claire Rosée (−1.5 IL)</option><option value="-1.33">🏼 Claire / Beige clair (−1.33 IL)</option><option value="-1.17">🏼 Claire Naturelle (−1.17 IL)</option><option value="-1">🏼 Médium Claire (−1 IL)</option><option value="-0.83">🏼 Médium Claire Dorée (−0.83 IL)</option><option value="0" selected>🏽 Médium — Référence (0 IL)</option><option value="0.17">🏽 Médium / Beige naturel (+0.17 IL)</option><option value="0.33">🏽 Médium Dorée / Sable (+0.33 IL)</option><option value="0.5">🏽 Médium Olive / Miel (+0.5 IL)</option><option value="0.67">🏽 Médium Foncée / Caramel (+0.67 IL)</option><option value="0.83">🏾 Foncée / Bronze (+0.83 IL)</option><option value="1">🏾 Foncée / Brun chaud (+1 IL)</option><option value="1.17">🏾 Foncée Profonde / Acajou (+1.17 IL)</option><option value="1.33">🏾 Très Foncée / Chocolat (+1.33 IL)</option><option value="1.5">🏿 Très Foncée / Espresso (+1.5 IL)</option><option value="1.67">🏿 Ébène Clair (+1.67 IL)</option><option value="2">🏿 Ébène / Très Sombre (+2 IL)</option><option value="2.33">🏿 Ébène Profond / Nuit (+2.33 IL)</option>
       </select>
     </div>
-    <div class="carn-ap">
-      <div class="carn-rd" id="carn_rd" style="background:#C68642;"></div>
-      <div><div class="carn-txt" id="carn_nm">Médium — Référence</div><div class="carn-il" id="carn_il">0 IL</div></div>
-    </div>
+    <div class="carn-ap"><div class="carn-rd" id="carn_rd" style="background:#C68642"></div><div><div class="carn-txt" id="carn_nm">Médium — Référence</div><div class="carn-il" id="carn_il">0 IL</div></div></div>
   </div>
 </div>
 
 <!-- 4. MATIÈRE -->
 <div class="bloc" id="section_matiere">
-  <div class="btit">
-    <div class="bnum">3</div>
-    <div class="blab">Matière / Réflectance Sujet</div>
-    <span class="refl-badge rb-actif" id="badge_mat">✓ actif — incident</span>
-    <div class="bligne"></div>
-  </div>
+  <div class="btit"><div class="bnum">3</div><div class="blab">Matière / Réflectance Sujet</div><span class="refl-badge rb-actif" id="badge_mat">✓ actif — incident</span><div class="bligne"></div></div>
   <div class="carte">
-    <p class="hint" style="margin-bottom:10px" id="hint_mat">Posemètre <b>incident</b> : mesure la lumière incidente. Le capteur APN lit la réflectance réelle du sujet.</p>
-    <div class="ch">
-      <label>Matière / Texture principale du sujet</label>
+    <p class="hint" style="margin-bottom:10px" id="hint_mat">Posemètre <b>incident</b> : correction réflectance <b>active</b>.</p>
+    <div class="ch"><label>Matière / Texture principale du sujet</label>
       <select id="matiere" onchange="majRefl()">
         <option value="0">— Neutre / Peau référence 18% (0 IL)</option>
-        <optgroup label="── TEXTILES CLAIRS ──">
-          <option value="-1">Blanc pur / Coton blanc (−1 IL)</option>
-          <option value="-0.67">Blanc cassé / Lin écru (−0.67 IL)</option>
-          <option value="-0.5">Satin blanc (−0.5 IL)</option>
-          <option value="-0.67">Soie blanche brillante (−0.67 IL)</option>
-          <option value="-0.33">Dentelle blanche / Voile (−0.33 IL)</option>
-          <option value="-0.33">Coton clair coloré (−0.33 IL)</option>
-          <option value="-0.5">Mousseline blanche (−0.5 IL)</option>
-        </optgroup>
-        <optgroup label="── TEXTILES FONCÉS ──">
-          <option value="1.33">Velours noir (absorbe — +1.33 IL)</option>
-          <option value="1">Velours foncé (+1 IL)</option>
-          <option value="0.67">Denim noir / Marine foncé (+0.67 IL)</option>
-          <option value="0.5">Denim bleu foncé (+0.5 IL)</option>
-          <option value="0.33">Denim bleu moyen (+0.33 IL)</option>
-          <option value="-0.5">Satin noir (réflexion rasante — −0.5 IL)</option>
-          <option value="-0.67">Cuir verni noir (réflexion spéculaire — −0.67 IL)</option>
-          <option value="0.33">Cuir mat noir (+0.33 IL)</option>
-          <option value="0.5">Fourrure noire / foncée (+0.5 IL)</option>
-          <option value="-0.33">Fourrure blanche / claire (−0.33 IL)</option>
-          <option value="0.17">Laine foncée (+0.17 IL)</option>
-        </optgroup>
-        <optgroup label="── PEAU NUE / CORPS ──">
-          <option value="-0.17">Peau luisante / huilée (−0.17 IL)</option>
-          <option value="0.33">Peau sèche / très mate (+0.33 IL)</option>
-          <option value="-0.17">Peau mouillée / humide (−0.17 IL)</option>
-          <option value="0.17">Peau avec maquillage mat (+0.17 IL)</option>
-          <option value="-0.17">Peau avec fond de teint lumineux (−0.17 IL)</option>
-        </optgroup>
-        <optgroup label="── MATÉRIAUX RÉFLÉCHISSANTS ──">
-          <option value="-2">Métal poli miroir (−2 IL)</option>
-          <option value="-1.33">Métal brossé argent (−1.33 IL)</option>
-          <option value="-1">Métal brossé doré (−1 IL)</option>
-          <option value="-0.5">Métal anodisé mat (−0.5 IL)</option>
-          <option value="-1.5">Miroir verre (−1.5 IL)</option>
-          <option value="-1.67">Verre / Plexiglas transparent (−1.67 IL)</option>
-          <option value="-1">Verre dépoli (−1 IL)</option>
-          <option value="-0.5">Plastique blanc brillant (−0.5 IL)</option>
-          <option value="-0.33">Peinture blanche brillante (−0.33 IL)</option>
-          <option value="-0.33">Marbre blanc poli (−0.33 IL)</option>
-        </optgroup>
-        <optgroup label="── MATÉRIAUX ABSORBANTS ──">
-          <option value="0.67">Métal noir mat (+0.67 IL)</option>
-          <option value="1">Ardoise / Pierre noire (+1 IL)</option>
-          <option value="1">Peinture noire mate (+1 IL)</option>
-          <option value="1.33">Caoutchouc / Mousse noire (+1.33 IL)</option>
-          <option value="0.5">Bois sombre mat (+0.5 IL)</option>
-          <option value="0.33">Bois moyen naturel (+0.33 IL)</option>
-          <option value="-0.17">Bois clair verni (−0.17 IL)</option>
-          <option value="0.17">Béton brut (+0.17 IL)</option>
-          <option value="0.33">Pierre calcaire foncée (+0.33 IL)</option>
-          <option value="-0.17">Pierre calcaire claire (−0.17 IL)</option>
-        </optgroup>
-        <optgroup label="── OBJETS / PRODUITS ──">
-          <option value="-0.5">Papier blanc brillant (−0.5 IL)</option>
-          <option value="0">Papier blanc mat (0 IL)</option>
-          <option value="0.5">Papier kraft / carton brun (+0.5 IL)</option>
-          <option value="1.33">Carton / tissu noir (+1.33 IL)</option>
-          <option value="-0.5">Emballage blanc brillant (−0.5 IL)</option>
-          <option value="-0.33">Plastique coloré clair (−0.33 IL)</option>
-          <option value="0.67">Plastique noir mat (+0.67 IL)</option>
-          <option value="0.17">Tissu coloré moyen (+0.17 IL)</option>
-          <option value="-0.17">Céramique blanche (−0.17 IL)</option>
-          <option value="0.33">Céramique foncée (+0.33 IL)</option>
-        </optgroup>
-        <optgroup label="── NATURE / VÉGÉTAL ──">
-          <option value="0.17">Feuillage vert moyen (+0.17 IL)</option>
-          <option value="-0.17">Fleurs blanches (−0.17 IL)</option>
-          <option value="0.33">Terre sèche / Sol foncé (+0.33 IL)</option>
-          <option value="0.5">Sable fin doré (+0.5 IL)</option>
-          <option value="-0.5">Surface eau calme (réflexion — −0.5 IL)</option>
-          <option value="0.17">Herbe verte (+0.17 IL)</option>
-        </optgroup>
-        <optgroup label="── ALIMENTAIRE / STUDIO ──">
-          <option value="0.5">Chocolat / aliment foncé (+0.5 IL)</option>
-          <option value="-0.5">Glaçage blanc / meringue (−0.5 IL)</option>
-          <option value="-0.33">Assiette blanche (−0.33 IL)</option>
-          <option value="0.17">Plat coloré moyen (+0.17 IL)</option>
-          <option value="-0.17">Nappe blanche (−0.17 IL)</option>
-        </optgroup>
+        <optgroup label="── TEXTILES CLAIRS ──"><option value="-1">Blanc pur / Coton blanc (−1 IL)</option><option value="-0.67">Blanc cassé / Lin écru (−0.67 IL)</option><option value="-0.5">Satin blanc (−0.5 IL)</option><option value="-0.67">Soie blanche brillante (−0.67 IL)</option><option value="-0.33">Dentelle blanche / Voile (−0.33 IL)</option><option value="-0.33">Coton clair coloré (−0.33 IL)</option><option value="-0.5">Mousseline blanche (−0.5 IL)</option></optgroup>
+        <optgroup label="── TEXTILES FONCÉS ──"><option value="1.33">Velours noir (absorbe — +1.33 IL)</option><option value="1">Velours foncé (+1 IL)</option><option value="0.67">Denim noir / Marine foncé (+0.67 IL)</option><option value="0.5">Denim bleu foncé (+0.5 IL)</option><option value="0.33">Denim bleu moyen (+0.33 IL)</option><option value="-0.5">Satin noir (réflexion rasante — −0.5 IL)</option><option value="-0.67">Cuir verni noir (−0.67 IL)</option><option value="0.33">Cuir mat noir (+0.33 IL)</option><option value="0.5">Fourrure noire / foncée (+0.5 IL)</option><option value="-0.33">Fourrure blanche / claire (−0.33 IL)</option><option value="0.17">Laine foncée (+0.17 IL)</option></optgroup>
+        <optgroup label="── PEAU NUE / CORPS ──"><option value="-0.17">Peau luisante / huilée (−0.17 IL)</option><option value="0.33">Peau sèche / très mate (+0.33 IL)</option><option value="-0.17">Peau mouillée / humide (−0.17 IL)</option><option value="0.17">Peau avec maquillage mat (+0.17 IL)</option><option value="-0.17">Peau avec fond de teint lumineux (−0.17 IL)</option></optgroup>
+        <optgroup label="── MATÉRIAUX RÉFLÉCHISSANTS ──"><option value="-2">Métal poli miroir (−2 IL)</option><option value="-1.33">Métal brossé argent (−1.33 IL)</option><option value="-1">Métal brossé doré (−1 IL)</option><option value="-0.5">Métal anodisé mat (−0.5 IL)</option><option value="-1.5">Miroir verre (−1.5 IL)</option><option value="-1.67">Verre / Plexiglas transparent (−1.67 IL)</option><option value="-1">Verre dépoli (−1 IL)</option><option value="-0.5">Plastique blanc brillant (−0.5 IL)</option><option value="-0.33">Peinture blanche brillante (−0.33 IL)</option><option value="-0.33">Marbre blanc poli (−0.33 IL)</option></optgroup>
+        <optgroup label="── MATÉRIAUX ABSORBANTS ──"><option value="0.67">Métal noir mat (+0.67 IL)</option><option value="1">Ardoise / Pierre noire (+1 IL)</option><option value="1">Peinture noire mate (+1 IL)</option><option value="1.33">Caoutchouc / Mousse noire (+1.33 IL)</option><option value="0.5">Bois sombre mat (+0.5 IL)</option><option value="0.33">Bois moyen naturel (+0.33 IL)</option><option value="-0.17">Bois clair verni (−0.17 IL)</option><option value="0.17">Béton brut (+0.17 IL)</option><option value="0.33">Pierre calcaire foncée (+0.33 IL)</option><option value="-0.17">Pierre calcaire claire (−0.17 IL)</option></optgroup>
+        <optgroup label="── OBJETS / PRODUITS ──"><option value="-0.5">Papier blanc brillant (−0.5 IL)</option><option value="0">Papier blanc mat (0 IL)</option><option value="0.5">Papier kraft / carton brun (+0.5 IL)</option><option value="1.33">Carton / tissu noir (+1.33 IL)</option><option value="-0.5">Emballage blanc brillant (−0.5 IL)</option><option value="-0.33">Plastique coloré clair (−0.33 IL)</option><option value="0.67">Plastique noir mat (+0.67 IL)</option><option value="0.17">Tissu coloré moyen (+0.17 IL)</option><option value="-0.17">Céramique blanche (−0.17 IL)</option><option value="0.33">Céramique foncée (+0.33 IL)</option></optgroup>
+        <optgroup label="── NATURE / VÉGÉTAL ──"><option value="0.17">Feuillage vert moyen (+0.17 IL)</option><option value="-0.17">Fleurs blanches (−0.17 IL)</option><option value="0.33">Terre sèche / Sol foncé (+0.33 IL)</option><option value="0.5">Sable fin doré (+0.5 IL)</option><option value="-0.5">Surface eau calme (−0.5 IL)</option><option value="0.17">Herbe verte (+0.17 IL)</option></optgroup>
+        <optgroup label="── ALIMENTAIRE / STUDIO ──"><option value="0.5">Chocolat / aliment foncé (+0.5 IL)</option><option value="-0.5">Glaçage blanc / meringue (−0.5 IL)</option><option value="-0.33">Assiette blanche (−0.33 IL)</option><option value="0.17">Plat coloré moyen (+0.17 IL)</option><option value="-0.17">Nappe blanche (−0.17 IL)</option></optgroup>
       </select>
       <div class="refl-wrap">
-        <div class="refl-top">
-          <span class="refl-lbl">Réflectance estimée du sujet</span>
-          <span class="refl-val" id="refl_pct">18%</span>
-        </div>
+        <div class="refl-top"><span class="refl-lbl">Réflectance estimée du sujet</span><span class="refl-val" id="refl_pct">18%</span></div>
         <div class="refl-bg"><div class="refl-bar" id="refl_bar" style="width:18%"></div></div>
         <div class="refl-echelle"><span>0% Noir abs.</span><span>▲ 18% Référence</span><span>100% Blanc</span></div>
       </div>
@@ -507,20 +328,16 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
 <div class="bloc">
   <div class="btit"><div class="bnum">4</div><div class="blab">Distance Flash → Sujet</div><div class="bligne"></div></div>
   <div class="carte">
-    <p class="hint" style="margin-bottom:10px">Utilise uniquement si tu déplaces le flash <b>après</b> la mesure posemètre. Doubler la distance = −2 IL.</p>
+    <p class="hint" style="margin-bottom:10px">Utilise uniquement si tu déplaces le flash <b>après</b> la mesure. Doubler la distance = −2 IL.</p>
     <div class="g2">
       <div class="ch"><label>Distance lors de la mesure</label>
-        <select id="dist_mes" onchange="majDist()">
-          <option value="0.5">0.5 m</option><option value="0.75">0.75 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="2.5">2.5 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option><option value="6">6 m</option><option value="8">8 m</option><option value="10">10 m</option>
-        </select>
+        <select id="dist_mes" onchange="majDist()"><option value="0.5">0.5 m</option><option value="0.75">0.75 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="2.5">2.5 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option><option value="6">6 m</option><option value="8">8 m</option><option value="10">10 m</option></select>
       </div>
       <div class="ch"><label>Distance cible au tournage</label>
-        <select id="dist_cible" onchange="majDist()">
-          <option value="0.5">0.5 m</option><option value="0.75">0.75 m</option><option value="1" selected>1 m (idem)</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="2.5">2.5 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option><option value="6">6 m</option><option value="8">8 m</option><option value="10">10 m</option>
-        </select>
+        <select id="dist_cible" onchange="majDist()"><option value="0.5">0.5 m</option><option value="0.75">0.75 m</option><option value="1" selected>1 m (idem)</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="2.5">2.5 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option><option value="6">6 m</option><option value="8">8 m</option><option value="10">10 m</option></select>
       </div>
     </div>
-    <div class="dist-result" id="dist_result">Flash à la <b>même distance</b> — pas de correction (0 IL)</div>
+    <div class="dist-result" id="dist_result">Flash à la <b>même distance</b> — 0 IL</div>
   </div>
 </div>
 
@@ -528,18 +345,32 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
 <div class="bloc">
   <div class="btit"><div class="bnum">5</div><div class="blab">Mesure Posemètre</div><div class="bligne"></div></div>
   <div class="carte">
-    <div class="g2">
-      <div class="ch"><label>f/ mesuré (Entier)</label>
-        <select id="f_mes_base">
-          <option value="1.0">1.0</option><option value="1.4">1.4</option><option value="2.0">2.0</option><option value="2.8">2.8</option><option value="4.0">4.0</option><option value="5.6" selected>5.6</option><option value="8.0">8.0</option><option value="11.0">11.0</option><option value="16.0">16.0</option><option value="22.0">22.0</option><option value="32.0">32.0</option><option value="45.0">45.0</option><option value="64.0">64.0</option><option value="90.0">90.0</option><option value="128.0">128.0</option><option value="180.0">180.0</option><option value="256.0">256.0</option><option value="360.0">360.0</option><option value="512.0">512.0</option>
-        </select>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:flex-end">
+      <div class="ch">
+        <label>f/ mesuré</label>
+        <div style="position:relative">
+          <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--or);font-weight:bold;font-size:13px;pointer-events:none">f/</span>
+          <input type="number" id="f_mes_base" value="5.6" min="0.7" max="512" step="0.1"
+            style="width:100%;background:var(--s3);color:#fff;border:2px solid var(--or);padding:10px 5px 10px 25px;border-radius:2px;font-family:var(--font-sans);font-size:14px;font-weight:700;outline:none"
+            onchange="recalcAuto()">
+        </div>
       </div>
-      <div class="ch"><label>Dixième de diaphragme</label>
-        <select id="f_mes_tenths">
+      <div class="ch">
+        <label>Dixième diaph</label>
+        <select id="f_mes_tenths" style="border:2px solid var(--or);font-weight:700" onchange="recalcAuto()">
           <option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option>
         </select>
       </div>
+      <div class="ch">
+        <label>Correction IL</label>
+        <select id="f_mes_il_corr" style="border:2px solid var(--or);font-weight:700;color:var(--or-c)" onchange="recalcAuto()">
+          <option value="0">0.0 IL</option>
+          <optgroup label="Ajouter IL"><option value="0.1">+0.1 IL</option><option value="0.2">+0.2 IL</option><option value="0.3">+0.3 IL</option><option value="0.4">+0.4 IL</option><option value="0.5">+0.5 IL</option><option value="0.6">+0.6 IL</option><option value="0.7">+0.7 IL</option><option value="0.8">+0.8 IL</option><option value="0.9">+0.9 IL</option></optgroup>
+          <optgroup label="Retirer IL"><option value="-0.1">−0.1 IL</option><option value="-0.2">−0.2 IL</option><option value="-0.3">−0.3 IL</option><option value="-0.4">−0.4 IL</option><option value="-0.5">−0.5 IL</option></optgroup>
+        </select>
+      </div>
     </div>
+    <p style="font-size:8.5px;color:var(--tm);margin-top:12px;font-style:italic;line-height:1.4">Ex : posemètre affiche <b>f/6.4</b> → saisir <b>6.4</b> + <b>.2</b> dixièmes + correction artistique éventuelle.</p>
   </div>
 </div>
 
@@ -558,29 +389,15 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
     <div id="res_correction"></div>
     <div id="res_precise"></div>
     <div id="per-flash-box" style="display:none;margin:14px 0 0;position:relative;z-index:1"></div>
-
-    <!-- TROP DE LUMIÈRE -->
     <div class="trop-luz" id="trop-luz">
       <div class="trop-luz-titre">⬇ Trop de lumière — flash au minimum 1/512</div>
       <div class="trop-luz-body">
         <div class="trop-luz-exces" id="tl-exces">—</div>
-        <div class="tl-tabs">
-          <button class="tl-tab active" onclick="tlTab('nd')">🔲 Filtre ND</button>
-          <button class="tl-tab" onclick="tlTab('apn')">📷 Réglage APN</button>
-        </div>
+        <div class="tl-tabs"><button class="tl-tab active" onclick="tlTab('nd')">🔲 Filtre ND</button><button class="tl-tab" onclick="tlTab('apn')">📷 Réglage APN</button></div>
         <div class="tl-panel active" id="tl-panel-nd">
-          <div class="nd-row"><span class="nd-lbl">ND 1</span>
-            <select class="nd-select" id="nd1" onchange="calcND()">
-              <option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option>
-            </select></div>
-          <div class="nd-row"><span class="nd-lbl">ND 2</span>
-            <select class="nd-select" id="nd2" onchange="calcND()">
-              <option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option>
-            </select></div>
-          <div class="nd-row"><span class="nd-lbl">ND 3</span>
-            <select class="nd-select" id="nd3" onchange="calcND()">
-              <option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option>
-            </select></div>
+          <div class="nd-row"><span class="nd-lbl">ND 1</span><select class="nd-select" id="nd1" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
+          <div class="nd-row"><span class="nd-lbl">ND 2</span><select class="nd-select" id="nd2" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
+          <div class="nd-row"><span class="nd-lbl">ND 3</span><select class="nd-select" id="nd3" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
           <div class="nd-result" id="nd-result" style="display:none">
             <div class="nd-result-line"><span class="nd-result-lbl">Total ND</span><span class="nd-result-val" id="nd-total-stops">—</span></div>
             <div class="nd-result-line"><span class="nd-result-lbl">Flash après ND</span><span class="nd-result-val" id="nd-flash-result">—</span></div>
@@ -589,42 +406,33 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
             <div style="font-size:9.5px;color:rgba(255,255,255,.3);margin-top:6px;font-style:italic" id="nd-verdict">—</div>
           </div>
         </div>
-        <div class="tl-panel" id="tl-panel-apn">
-          <div id="apn-solutions"></div>
-          <div class="apn-note" id="apn-note">—</div>
-        </div>
+        <div class="tl-panel" id="tl-panel-apn"><div id="apn-solutions"></div><div class="apn-note" id="apn-note">—</div></div>
       </div>
     </div>
-
-    <!-- ALERTE PUISSANCE -->
     <div class="alerte-puissance" id="alerte-puissance">
       <div class="alerte-puissance-titre">⚠ Puissance insuffisante</div>
       <div class="alerte-puissance-msg" id="alerte-msg">—</div>
       <div class="alerte-conseil" id="alerte-conseil">—</div>
     </div>
-
-    <!-- GUIDE NATH SAKURA -->
     <div class="guide-nath" id="guide-nath">
       <div class="guide-nath-titre">📖 Guide Nath Sakura — que faire ?</div>
       <div class="guide-nath-context" id="guide-context">—</div>
       <div class="guide-hss-warn" id="guide-hss-warn" style="display:none"></div>
       <div class="guide-etapes" id="guide-etapes">—</div>
     </div>
-
-    <!-- AVERTISSEMENT MULTI-FLASH -->
     <div class="multi-flash-warning" id="multi-flash-warning">
       <div class="mfw-titre">📐 Mesure posemètre obligatoire</div>
-      <div class="mfw-txt">⚠️ <b>Attention :</b> En cas de cumul de sources, refaites impérativement une mesure au posemètre avec <b>tous les flashs allumés simultanément</b> avant de shooter.</div>
+      <div class="mfw-txt">⚠️ <b>Attention :</b> En cas de cumul de sources, refaites une mesure au posemètre avec <b>tous les flashs simultanément</b> avant de shooter.</div>
     </div>
-
     <div class="detail-corr">
       <div class="dc-titre">Détail des corrections — Nath Sakura</div>
       <div class="dc-row"><span class="dc-lbl">Écart f/ mesuré → f/ cible</span><span class="dc-val" id="dc_fstop"></span></div>
+      <div class="dc-row"><span class="dc-lbl">Correction IL manuelle</span><span class="dc-val" id="dc_il_corr"></span></div>
       <div class="dc-row"><span class="dc-lbl">Compensation ISO</span><span class="dc-val" id="dc_iso"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Perte HSS (vitesse &gt; 1/250)</span><span class="dc-val" id="dc_hss"></span></div>
+      <div class="dc-row"><span class="dc-lbl">Perte HSS (vitesse &gt; 1/200)</span><span class="dc-val" id="dc_hss"></span></div>
       <div class="dc-row"><span class="dc-lbl">Rôle du flash</span><span class="dc-val" id="dc_role"></span></div>
-      <div class="dc-row" id="row_skin"><span class="dc-lbl">Carnation peau <span class="dc-mode" id="dm_skin">incident</span></span><span class="dc-val" id="dc_skin"></span></div>
-      <div class="dc-row" id="row_mat"><span class="dc-lbl">Réflectance matière <span class="dc-mode" id="dm_mat">incident</span></span><span class="dc-val" id="dc_mat"></span></div>
+      <div class="dc-row"><span class="dc-lbl">Carnation peau <span class="dc-mode" id="dm_skin">incident</span></span><span class="dc-val" id="dc_skin"></span></div>
+      <div class="dc-row"><span class="dc-lbl">Réflectance matière <span class="dc-mode" id="dm_mat">incident</span></span><span class="dc-val" id="dc_mat"></span></div>
       <div class="dc-row"><span class="dc-lbl">Distance (loi inv. carré)</span><span class="dc-val" id="dc_dist"></span></div>
       <div class="dc-row"><span class="dc-lbl">Opti Nath Sakura</span><span class="dc-val" id="dc_opti"></span></div>
       <div class="dc-row"><span class="dc-lbl">Sources cumulées</span><span class="dc-val" id="dc_sources"></span></div>
@@ -633,286 +441,213 @@ optgroup{color:var(--tm);font-size:11px;font-style:normal;font-weight:700}
   </div>
 </div>
 
-<div class="pied">Flash Master Pro · <span>Souvenir Nomade</span> · Hage Pierre-Alexandre<br>Méthode Nath Sakura · v1.0.0</div>
+<div class="pied">Flash Master Pro · <span>Souvenir Nomade</span> · Hage Pierre-Alexandre<br>Méthode Nath Sakura · v2.0.1</div>
 </div>
 
 <script>
-// ══ ÉTAT GLOBAL ══
-let modeMesure = 'incident';
-let lastOptiValue = 0;
-let sourceCount = 1;
-var _tropLuzExcesIL = 0;
-var _tropLuzVApn    = 0;
-var _tropLuzIso     = 100;
-var _tropLuzFTarget = 8;
+let modeMesure='incident',lastOptiValue=0,sourceCount=1;
+var _tropLuzExcesIL=0,_tropLuzVApn=0,_tropLuzIso=100,_tropLuzFTarget=8;
 
-// ══ MULTI-SOURCES ══
-function addSource() {
-  if (sourceCount >= 6) return;
-  const idx = sourceCount++;
-  const container = document.getElementById('sources-container');
-  const row = document.createElement('div');
-  row.className = 'source-row';
-  row.id = 'source-' + idx;
-  row.innerHTML = `
-    <span class="source-label">Flash ${idx + 1}</span>
-    <div class="source-fields">
-      <div class="ch"><label>Puissance Test</label>
-        <div class="prow">
-          <select id="p_test_base_${idx}" onchange="recalcAuto()">
-            <option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512" selected>1/512</option>
-          </select>
-          <select id="p_test_tenths_${idx}" onchange="recalcAuto()">
-            <option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option>
-          </select>
-        </div>
-      </div>
-      <div class="ch"><label>Puissance Max (Ws)</label>
-        <select id="p_max_${idx}" onchange="recalcAuto()">
-          <option value="0">— Non renseignée</option>
-          <option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option>
-        </select>
-      </div>
-    </div>
-    <button class="source-remove" onclick="removeSource(${idx})" title="Supprimer">×</button>
-  `;
-  container.appendChild(row);
-  if (sourceCount >= 6) document.getElementById('add-source-btn').style.display = 'none';
-  majSourcesTotal();
-  recalcAuto();
+function addSource(){
+  if(sourceCount>=6)return;
+  const idx=sourceCount++;
+  const row=document.createElement('div');
+  row.className='source-row';row.id='source-'+idx;
+  row.innerHTML=`<span class="source-label">Flash ${idx+1}</span><div class="source-fields"><div class="ch"><label>Puissance Test</label><div class="prow"><select id="p_test_base_${idx}" onchange="recalcAuto()"><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512" selected>1/512</option></select><select id="p_test_tenths_${idx}" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select></div></div><div class="ch"><label>Puissance Max (Ws)</label><select id="p_max_${idx}" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select></div></div><button class="source-remove" onclick="removeSource(${idx})" title="Supprimer">×</button>`;
+  document.getElementById('sources-container').appendChild(row);
+  if(sourceCount>=6)document.getElementById('add-source-btn').style.display='none';
+  majSourcesTotal();recalcAuto();
 }
-
-function removeSource(idx) {
-  const el = document.getElementById('source-' + idx);
-  if (el) el.remove();
-  sourceCount = document.querySelectorAll('.source-row').length;
-  document.querySelectorAll('.source-row').forEach((row, i) => {
-    const lbl = row.querySelector('.source-label');
-    if (lbl) lbl.textContent = 'Flash ' + (i + 1);
-  });
-  document.getElementById('add-source-btn').style.display = '';
-  majSourcesTotal();
-  recalcAuto();
+function removeSource(idx){
+  const el=document.getElementById('source-'+idx);if(el)el.remove();
+  sourceCount=document.querySelectorAll('.source-row').length;
+  document.querySelectorAll('.source-row').forEach((r,i)=>{const l=r.querySelector('.source-label');if(l)l.textContent='Flash '+(i+1);});
+  document.getElementById('add-source-btn').style.display='';
+  majSourcesTotal();recalcAuto();
 }
-
-function getActiveSources() {
-  return Array.from(document.querySelectorAll('.source-row')).map(row => {
-    const id = row.id.replace('source-', '');
-    const baseEl = document.getElementById('p_test_base_' + id);
-    const tenthsEl = document.getElementById('p_test_tenths_' + id);
-    const maxEl = document.getElementById('p_max_' + id);
-    if (!baseEl) return null;
-    return { base: parseInt(baseEl.value), tenths: parseFloat(tenthsEl.value), maxWs: maxEl ? parseFloat(maxEl.value) : 0 };
+function getActiveSources(){
+  return Array.from(document.querySelectorAll('.source-row')).map(row=>{
+    const id=row.id.replace('source-','');
+    const b=document.getElementById('p_test_base_'+id);
+    const t=document.getElementById('p_test_tenths_'+id);
+    const m=document.getElementById('p_max_'+id);
+    if(!b)return null;
+    return{base:parseInt(b.value),tenths:parseFloat(t.value),maxWs:m?parseFloat(m.value):0};
   }).filter(Boolean);
 }
-
-function majSourcesTotal() {
-  const sources = getActiveSources();
-  const totalWs = sources.reduce((acc, s) => acc + s.maxWs, 0);
-  const el = document.getElementById('sources-total');
-  if (totalWs > 0) {
-    el.style.display = 'flex';
-    document.getElementById('sources-total-val').textContent = totalWs.toLocaleString('fr-FR') + ' Ws';
-  } else { el.style.display = 'none'; }
+function majSourcesTotal(){
+  const s=getActiveSources();const tw=s.reduce((a,x)=>a+x.maxWs,0);
+  const el=document.getElementById('sources-total');
+  if(tw>0){el.style.display='flex';document.getElementById('sources-total-val').textContent=tw.toLocaleString('fr-FR')+' Ws';}
+  else el.style.display='none';
 }
-
-function getCumulatedPowerStops(sources) {
-  if (sources.length === 0) return { totalStops: 0, gainIL: 0 };
-  const powers = sources.map(s => Math.pow(2, -(Math.log2(s.base) + s.tenths)));
-  const totalLinear = powers.reduce((a, b) => a + b, 0);
-  const gainIL = Math.log2(totalLinear / powers[0]);
-  const totalStops = Math.log2(1 / totalLinear);
-  return { totalStops, gainIL, totalLinear };
+function getCumulatedPowerStops(sources){
+  if(!sources.length)return{gainIL:0};
+  const powers=sources.map(s=>Math.pow(2,-(Math.log2(s.base)+s.tenths)));
+  const total=powers.reduce((a,b)=>a+b,0);
+  return{gainIL:Math.log2(total/powers[0])};
 }
-
-// ══ MODE MESURE ══
-function setMode(mode) {
-  modeMesure = mode;
-  document.getElementById('btn_incident').classList.toggle('actif', mode === 'incident');
-  document.getElementById('btn_reflechi').classList.toggle('actif', mode === 'reflechi');
-  const inc = mode === 'incident';
-  document.getElementById('section_carnation').classList.toggle('section-inactive', !inc);
-  document.getElementById('section_matiere').classList.toggle('section-inactive', !inc);
-  document.getElementById('skin_tone').disabled = !inc;
-  document.getElementById('matiere').disabled = !inc;
-  const bc = document.getElementById('badge_carn'), bm = document.getElementById('badge_mat');
-  if (inc) { bc.className='refl-badge rb-actif'; bc.textContent='✓ actif — incident'; bm.className='refl-badge rb-actif'; bm.textContent='✓ actif — incident'; }
-  else { bc.className='refl-badge rb-inactif'; bc.textContent='neutralisé — réfléchi'; bm.className='refl-badge rb-inactif'; bm.textContent='neutralisé — réfléchi'; }
-  document.getElementById('mode_info').innerHTML = inc
-    ? '<b>Mode incident :</b> corrections <b>carnation</b> et <b>matière</b> sont <b>actives</b>.'
-    : '<b>Mode réfléchi / TTL :</b> corrections carnation et matière <b>neutralisées à 0 IL</b>.';
-  document.getElementById('hint_mat').innerHTML = inc
-    ? 'Posemètre <b>incident</b> : correction réflectance <b>active</b>.'
-    : 'Posemètre <b>réfléchi</b> : correction <b>neutralisée à 0 IL</b>.';
-  const ds = document.getElementById('dm_skin'), dm2 = document.getElementById('dm_mat');
-  if (inc) { ds.className='dc-mode dm-actif'; ds.textContent='incident'; dm2.className='dc-mode dm-actif'; dm2.textContent='incident'; }
-  else { ds.className='dc-mode dm-zero'; ds.textContent='réfléchi'; dm2.className='dc-mode dm-zero'; dm2.textContent='réfléchi'; }
-  if (document.getElementById('result-box').style.display === 'block') calculate(lastOptiValue);
+function setMode(mode){
+  modeMesure=mode;
+  document.getElementById('btn_incident').classList.toggle('actif',mode==='incident');
+  document.getElementById('btn_reflechi').classList.toggle('actif',mode==='reflechi');
+  const inc=mode==='incident';
+  document.getElementById('section_carnation').classList.toggle('section-inactive',!inc);
+  document.getElementById('section_matiere').classList.toggle('section-inactive',!inc);
+  document.getElementById('skin_tone').disabled=!inc;
+  document.getElementById('matiere').disabled=!inc;
+  const bc=document.getElementById('badge_carn'),bm=document.getElementById('badge_mat');
+  if(inc){bc.className='refl-badge rb-actif';bc.textContent='✓ actif — incident';bm.className='refl-badge rb-actif';bm.textContent='✓ actif — incident';}
+  else{bc.className='refl-badge rb-inactif';bc.textContent='neutralisé — réfléchi';bm.className='refl-badge rb-inactif';bm.textContent='neutralisé — réfléchi';}
+  document.getElementById('mode_info').innerHTML=inc?'<b>Mode incident :</b> corrections <b>carnation</b> et <b>matière</b> sont <b>actives</b>.':'<b>Mode réfléchi / TTL :</b> corrections carnation et matière <b>neutralisées à 0 IL</b>.';
+  document.getElementById('hint_mat').innerHTML=inc?'Posemètre <b>incident</b> : correction réflectance <b>active</b>.':'Posemètre <b>réfléchi</b> : correction <b>neutralisée à 0 IL</b>.';
+  const ds=document.getElementById('dm_skin'),dm2=document.getElementById('dm_mat');
+  if(inc){ds.className='dc-mode dm-actif';ds.textContent='incident';dm2.className='dc-mode dm-actif';dm2.textContent='incident';}
+  else{ds.className='dc-mode dm-zero';ds.textContent='réfléchi';dm2.className='dc-mode dm-zero';dm2.textContent='réfléchi';}
+  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
 }
-
-// ══ CARNATION ══
-const CARN_COL = {'-2.33':'#F5E6D8','-2':'#F0DDD0','-1.67':'#EDD5C0','-1.5':'#E8CDB8','-1.33':'#E0C4AC','-1.17':'#D8BAA0','-1':'#D0AF94','-0.83':'#C8A484','0':'#C68642','0.17':'#C07840','0.33':'#BA6E3A','0.5':'#B46434','0.67':'#AA5A2E','0.83':'#9A4E28','1':'#8A4422','1.17':'#7A3A1C','1.33':'#6A3018','1.5':'#5A2814','1.67':'#4A2010','2':'#3A1A0C','2.33':'#2A1208'};
-function majCarn() {
-  const sel = document.getElementById('skin_tone');
-  const txt = sel.options[sel.selectedIndex].text;
-  const nom = txt.replace(/^\S+\s/, '').replace(/\s*\(.*\)/, '').trim();
-  const ilM = txt.match(/([+-][\d.]+)\s*IL/);
-  document.getElementById('carn_rd').style.background = CARN_COL[sel.value] || '#C68642';
-  document.getElementById('carn_nm').textContent = nom;
-  document.getElementById('carn_il').textContent = ilM ? ilM[0] : '0 IL';
+const CARN_COL={'-2.33':'#F5E6D8','-2':'#F0DDD0','-1.67':'#EDD5C0','-1.5':'#E8CDB8','-1.33':'#E0C4AC','-1.17':'#D8BAA0','-1':'#D0AF94','-0.83':'#C8A484','0':'#C68642','0.17':'#C07840','0.33':'#BA6E3A','0.5':'#B46434','0.67':'#AA5A2E','0.83':'#9A4E28','1':'#8A4422','1.17':'#7A3A1C','1.33':'#6A3018','1.5':'#5A2814','1.67':'#4A2010','2':'#3A1A0C','2.33':'#2A1208'};
+function majCarn(){
+  const sel=document.getElementById('skin_tone');
+  const txt=sel.options[sel.selectedIndex].text;
+  const nom=txt.replace(/^\S+\s/,'').replace(/\s*\(.*\)/,'').trim();
+  const ilM=txt.match(/([+-][\d.]+)\s*IL/);
+  document.getElementById('carn_rd').style.background=CARN_COL[sel.value]||'#C68642';
+  document.getElementById('carn_nm').textContent=nom;
+  document.getElementById('carn_il').textContent=ilM?ilM[0]:'0 IL';
 }
-
-function majRefl() {
-  const il = parseFloat(document.getElementById('matiere').value);
-  const pct = Math.min(99, Math.max(1, Math.round(18 * Math.pow(2, -il))));
-  document.getElementById('refl_pct').textContent = pct + '%';
-  document.getElementById('refl_bar').style.width = pct + '%';
-  if (document.getElementById('result-box').style.display === 'block') calculate(lastOptiValue);
+function majRefl(){
+  const il=parseFloat(document.getElementById('matiere').value);
+  const pct=Math.min(99,Math.max(1,Math.round(18*Math.pow(2,-il))));
+  document.getElementById('refl_pct').textContent=pct+'%';
+  document.getElementById('refl_bar').style.width=pct+'%';
+  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
 }
-
-function majDist() {
-  const dm = parseFloat(document.getElementById('dist_mes').value);
-  const dc = parseFloat(document.getElementById('dist_cible').value);
-  const il = 2 * Math.log2(dc / dm);
-  const el = document.getElementById('dist_result');
-  if (Math.abs(il) < 0.01) el.innerHTML = 'Flash à la <b>même distance</b> — 0 IL';
-  else if (il > 0) el.innerHTML = 'Flash plus loin (<b>'+dm+'m → '+dc+'m</b>) — <b>+'+il.toFixed(2)+' IL</b> de puissance';
-  else el.innerHTML = 'Flash plus proche (<b>'+dm+'m → '+dc+'m</b>) — réduire de <b>'+Math.abs(il).toFixed(2)+' IL</b>';
-  if (document.getElementById('result-box').style.display === 'block') calculate(lastOptiValue);
+function majDist(){
+  const dm=parseFloat(document.getElementById('dist_mes').value);
+  const dc=parseFloat(document.getElementById('dist_cible').value);
+  const il=2*Math.log2(dc/dm);
+  const el=document.getElementById('dist_result');
+  if(Math.abs(il)<0.01)el.innerHTML='Flash à la <b>même distance</b> — 0 IL';
+  else if(il>0)el.innerHTML='Flash plus loin (<b>'+dm+'m → '+dc+'m</b>) — <b>+'+il.toFixed(2)+' IL</b>';
+  else el.innerHTML='Flash plus proche (<b>'+dm+'m → '+dc+'m</b>) — réduire de <b>'+Math.abs(il).toFixed(2)+' IL</b>';
+  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
 }
-
-function fmtIL(v) {
-  if (Math.abs(v) < 0.005) return '<span class="v-neu">0 IL</span>';
-  return '<span class="'+(v>0?'v-pos':'v-neg')+'">'+(v>0?'+':'')+v.toFixed(2)+' IL</span>';
+function fmtIL(v){
+  if(Math.abs(v)<0.005)return'<span class="v-neu">0 IL</span>';
+  return'<span class="'+(v>0?'v-pos':'v-neg')+'">'+(v>0?'+':'')+v.toFixed(2)+' IL</span>';
 }
-
-function recalcAuto() {
+function recalcAuto(){
   majSourcesTotal();
-  if (document.getElementById('result-box').style.display === 'block') calculate(lastOptiValue);
+  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
 }
-
-function tlTab(tab) {
-  document.querySelectorAll('.tl-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='nd')||(i===1&&tab==='apn')));
-  document.getElementById('tl-panel-nd').classList.toggle('active', tab==='nd');
-  document.getElementById('tl-panel-apn').classList.toggle('active', tab==='apn');
+function tlTab(tab){
+  document.querySelectorAll('.tl-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='nd')||(i===1&&tab==='apn')));
+  document.getElementById('tl-panel-nd').classList.toggle('active',tab==='nd');
+  document.getElementById('tl-panel-apn').classList.toggle('active',tab==='apn');
 }
-
-function calcND() {
-  const nd1 = parseFloat(document.getElementById('nd1').value)||0;
-  const nd2 = parseFloat(document.getElementById('nd2').value)||0;
-  const nd3 = parseFloat(document.getElementById('nd3').value)||0;
-  const totalND = nd1+nd2+nd3;
-  if (totalND===0) { document.getElementById('nd-result').style.display='none'; return; }
+function calcND(){
+  const nd1=parseFloat(document.getElementById('nd1').value)||0;
+  const nd2=parseFloat(document.getElementById('nd2').value)||0;
+  const nd3=parseFloat(document.getElementById('nd3').value)||0;
+  const totalND=nd1+nd2+nd3;
+  if(!totalND){document.getElementById('nd-result').style.display='none';return;}
   document.getElementById('nd-result').style.display='block';
-  const restIL = _tropLuzExcesIL - totalND;
-  const flashStops = Math.log2(512) - restIL;
-  const flashDenom = Math.pow(2, flashStops);
-  document.getElementById('nd-total-stops').textContent = '−'+totalND.toFixed(0)+' IL (ND'+Math.round(Math.pow(2,totalND))+')';
-  const nfEl = document.getElementById('nd-flash-result');
-  const finEl = document.getElementById('nd-final');
-  const vrdEl = document.getElementById('nd-verdict');
-  const rowV = document.getElementById('nd-row-apn-v');
-  if (restIL<=0) {
-    nfEl.textContent='MIN 1/512 — ND trop fort ('+Math.abs(restIL).toFixed(1)+' IL de marge)';
-    nfEl.className='nd-result-val warn'; finEl.textContent='1/512 min'; finEl.className='nd-total-val';
-    vrdEl.textContent='ND légèrement surdimensionné. Vous pouvez choisir un ND plus faible.'; rowV.style.display='none';
-  } else if (flashDenom<=0.7) {
-    nfEl.textContent='! encore '+restIL.toFixed(1)+' IL de trop'; nfEl.className='nd-result-val bad';
-    finEl.textContent='ND insuffisant'; finEl.className='nd-total-val';
-    vrdEl.textContent='Ajoutez un ND plus fort.'; rowV.style.display='none';
-  } else {
+  const restIL=_tropLuzExcesIL-totalND;
+  const flashDenom=Math.pow(2,Math.log2(512)-restIL);
+  document.getElementById('nd-total-stops').textContent='−'+totalND.toFixed(0)+' IL (ND'+Math.round(Math.pow(2,totalND))+')';
+  const nfEl=document.getElementById('nd-flash-result'),finEl=document.getElementById('nd-final'),vrdEl=document.getElementById('nd-verdict'),rowV=document.getElementById('nd-row-apn-v');
+  if(restIL<=0){nfEl.textContent='MIN 1/512 — ND trop fort';nfEl.className='nd-result-val warn';finEl.textContent='1/512 min';vrdEl.textContent='ND légèrement surdimensionné.';rowV.style.display='none';}
+  else if(flashDenom<=0.7){nfEl.textContent='! encore '+restIL.toFixed(1)+' IL de trop';nfEl.className='nd-result-val bad';finEl.textContent='ND insuffisant';vrdEl.textContent='Ajoutez un ND plus fort.';rowV.style.display='none';}
+  else{
     const stds=[1,2,4,8,16,32,64,128,256,512];
-    let bd=stds.find(s=>s>=flashDenom)||512;
-    let tenths=Math.round(Math.log2(bd/flashDenom)*10)/10;
+    let bd=stds.find(s=>s>=flashDenom)||512;let tenths=Math.round(Math.log2(bd/flashDenom)*10)/10;
     if(tenths>=0.95){const i2=stds.indexOf(bd);if(i2<stds.length-1){bd=stds[i2+1];tenths=0;}}
     const fs='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1):'');
-    nfEl.textContent=fs; nfEl.className='nd-result-val ok';
-    finEl.textContent=fs; finEl.className='nd-total-val';
-    vrdEl.textContent='Réglez votre flash sur '+fs+'. Remesurer au posemètre après pose du filtre.';
-    if (_tropLuzVApn>0&&_tropLuzVApn<0.004) {
-      const vN=_tropLuzVApn*Math.pow(2,totalND);
-      if(vN>=0.004){document.getElementById('nd-apn-v').textContent='1/'+Math.round(1/vN)+'s (sync normale ✔)';document.getElementById('nd-apn-v').className='nd-result-val ok';rowV.style.display='flex';}
-      else rowV.style.display='none';
-    } else rowV.style.display='none';
+    nfEl.textContent=fs;nfEl.className='nd-result-val ok';finEl.textContent=fs;
+    vrdEl.textContent='Réglez flash sur '+fs+'. Remesurer après filtre.';
+    if(_tropLuzVApn>0&&_tropLuzVApn<0.005){const vN=_tropLuzVApn*Math.pow(2,totalND);if(vN>=0.005){document.getElementById('nd-apn-v').textContent='1/'+Math.round(1/vN)+'s (sync ✔)';document.getElementById('nd-apn-v').className='nd-result-val ok';rowV.style.display='flex';}else rowV.style.display='none';}
+    else rowV.style.display='none';
   }
 }
 
 // ══ CALCUL PRINCIPAL ══
-function calculate(optiValue) {
-  lastOptiValue = optiValue;
+function calculate(optiValue){
+  lastOptiValue=optiValue;
   const fTarget    = parseFloat(document.getElementById('f_target').value);
   const vApn       = parseFloat(document.getElementById('v_apn').value);
   const isoApn     = parseFloat(document.getElementById('iso_apn').value);
-  const fMesBase   = parseFloat(document.getElementById('f_mes_base').value);
+  const fMesBase   = parseFloat(document.getElementById('f_mes_base').value)||5.6;
   const fMesTenths = parseFloat(document.getElementById('f_mes_tenths').value);
+  const ilCorr     = parseFloat(document.getElementById('f_mes_il_corr').value);
   const roleMod    = parseFloat(document.getElementById('flash_role').value);
-  const skinMod    = modeMesure==='incident' ? parseFloat(document.getElementById('skin_tone').value) : 0;
-  const matiereMod = modeMesure==='incident' ? parseFloat(document.getElementById('matiere').value) : 0;
+  const skinMod    = modeMesure==='incident'?parseFloat(document.getElementById('skin_tone').value):0;
+  const matiereMod = modeMesure==='incident'?parseFloat(document.getElementById('matiere').value):0;
   const distMes    = parseFloat(document.getElementById('dist_mes').value);
   const distCible  = parseFloat(document.getElementById('dist_cible').value);
   const distMod    = 2*Math.log2(distCible/distMes);
   const sources    = getActiveSources();
-  const { gainIL } = getCumulatedPowerStops(sources);
+  const{gainIL}    = getCumulatedPowerStops(sources);
   const mainSource = sources[0];
-  const currentPowerStops = Math.log2(mainSource.base) + mainSource.tenths;
+  const currentPowerStops = Math.log2(mainSource.base)+mainSource.tenths;
   const nbSources  = sources.length;
   const stopsISO   = Math.log2(isoApn/100);
-  const stopsV     = (vApn<=0.004) ? Math.log2(0.004/vApn) : 0;
-  const stopsMeasured = 2*Math.log2(fMesBase)+fMesTenths;
+  // HSS : perte uniquement au-delà de 1/200s (0.005s). La vitesse n'affecte PAS la puissance flash en sync normale.
+  const stopsV     = (vApn<0.005)?Math.log2(0.005/vApn):0;
+  // Mesure posemètre : f/ brut + dixièmes + correction IL manuelle
+  const stopsMeasured = 2*Math.log2(fMesBase)+fMesTenths+ilCorr;
   const stopsTarget   = 2*Math.log2(fTarget);
   const fstopCorr     = stopsTarget-stopsMeasured;
   const totalCorr = fstopCorr+stopsISO+stopsV-roleMod-skinMod-matiereMod-distMod-gainIL;
   const targetPowerStops = currentPowerStops-totalCorr-optiValue;
-  const rawDenom = Math.pow(2, targetPowerStops);
+  const rawDenom = Math.pow(2,targetPowerStops);
 
-  const card      = document.getElementById('result-card');
-  const alerteBox = document.getElementById('alerte-puissance');
-  const flashTxt  = document.getElementById('res_flash');
-  const multiWarn = document.getElementById('multi-flash-warning');
-  const isInsuffisant = rawDenom<=0.7;
+  const card=document.getElementById('result-card');
+  const alerteBox=document.getElementById('alerte-puissance');
+  const flashTxt=document.getElementById('res_flash');
+  const multiWarn=document.getElementById('multi-flash-warning');
 
-  if (isInsuffisant) {
-    card.classList.add('alerte'); flashTxt.classList.add('alerte-txt'); alerteBox.classList.add('visible');
-    const manqueIL = Math.log2(1/Math.max(rawDenom,0.0001));
+  if(rawDenom<=0.7){
+    card.classList.add('alerte');flashTxt.classList.add('alerte-txt');alerteBox.classList.add('visible');
+    const manqueIL=Math.log2(1/Math.max(rawDenom,0.0001));
     let wsMsg='';
-    if(mainSource.maxWs>0){const wsCible=mainSource.maxWs*Math.pow(2,manqueIL);wsMsg='<br>Il manque environ <b>'+Math.round(wsCible-mainSource.maxWs)+' Ws</b> (flash : '+mainSource.maxWs+' Ws, besoin : '+Math.round(wsCible)+' Ws).';}
-    let conseil='';
-    if(manqueIL<=1.1) conseil='<b>Solution :</b> Ajoutez un second flash identique (+1 IL). Ou rapprochez-le de votre sujet.';
-    else if(manqueIL<=2.1) conseil='<b>Solution :</b> Ajoutez 3 flashs identiques ou un flash plus puissant.';
-    else conseil='<b>Manque important ('+manqueIL.toFixed(2)+' IL).</b> Réduisez f/, augmentez ISO, ou flash professionnel.';
+    if(mainSource.maxWs>0){const wsCible=mainSource.maxWs*Math.pow(2,manqueIL);wsMsg='<br>Il manque environ <b>'+Math.round(wsCible-mainSource.maxWs)+' Ws</b> (flash : '+mainSource.maxWs+' Ws → besoin : '+Math.round(wsCible)+' Ws).';}
     document.getElementById('alerte-msg').innerHTML='⚡ La puissance nécessaire dépasse le maximum 1/1.'+wsMsg;
+    let conseil='';
+    if(manqueIL<=1.1)conseil='<b>Solution :</b> Ajoutez un second flash identique (+1 IL) ou rapprochez-le.';
+    else if(manqueIL<=2.1)conseil='<b>Solution :</b> Ajoutez 3 flashs identiques ou un flash plus puissant.';
+    else conseil='<b>Manque important ('+manqueIL.toFixed(2)+' IL).</b> Réduisez f/, augmentez ISO, ou flash pro.';
     document.getElementById('alerte-conseil').innerHTML=conseil;
-    buildGuide({manqueIL,isHSS:vApn<=0.004,vApn,isoApn,fTarget,nbSources,distMes,distCible,maxWs:mainSource.maxWs||0});
-  } else {
-    card.classList.remove('alerte'); flashTxt.classList.remove('alerte-txt'); alerteBox.classList.remove('visible');
-    const gn=document.getElementById('guide-nath'); if(gn) gn.classList.remove('visible');
+    buildGuide({manqueIL,isHSS:vApn<0.005,vApn,isoApn,fTarget,nbSources,distMes,maxWs:mainSource.maxWs||0});
+  }else{
+    card.classList.remove('alerte');flashTxt.classList.remove('alerte-txt');alerteBox.classList.remove('visible');
+    const gn=document.getElementById('guide-nath');if(gn)gn.classList.remove('visible');
   }
 
   const tropLuzBox=document.getElementById('trop-luz');
-  const isTropLuz=(rawDenom>1024);
-  if(isTropLuz){
+  if(rawDenom>1024){
     tropLuzBox.classList.add('visible');
     const excesIL=Math.log2(rawDenom/512);
-    _tropLuzExcesIL=excesIL; _tropLuzVApn=vApn; _tropLuzIso=isoApn; _tropLuzFTarget=fTarget;
+    _tropLuzExcesIL=excesIL;_tropLuzVApn=vApn;_tropLuzIso=isoApn;_tropLuzFTarget=fTarget;
     document.getElementById('tl-exces').innerHTML='Flash à <b>1/512 (min)</b> donne encore <b>'+excesIL.toFixed(1)+' IL de trop</b> pour f/'+fTarget+' ISO'+isoApn+'.';
     let apnSol='';
-    const vCible=vApn*Math.pow(2,excesIL); const vFrac=Math.round(1/vCible);
-    const syncNote=vCible<0.004?' <span style="color:#c05545">(HSS requis)</span>':' <span style="color:#7ab3ff">(✔ sync normale)</span>';
+    const vCible=vApn*Math.pow(2,excesIL);const vFrac=Math.round(1/vCible);
+    const syncNote=vCible<0.005?' <span style="color:#c05545">(HSS requis)</span>':' <span style="color:#7ab3ff">(✔ sync normale)</span>';
     apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Vitesse APN</span><span class="apn-sol-val">1/'+vFrac+'s'+syncNote+'</span></div>';
     apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Ouvrir à f/</span><span class="apn-sol-val">f/'+(fTarget/Math.pow(2,excesIL/2)).toFixed(1)+'</span></div>';
     if(isoApn>100){const iC=Math.round(isoApn/Math.pow(2,excesIL));if(iC>=50)apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Baisser ISO</span><span class="apn-sol-val">ISO '+iC+'</span></div>';}
     document.getElementById('apn-solutions').innerHTML=apnSol;
-    document.getElementById('apn-note').textContent='Ces réglages conservent ISO 100. Le filtre ND est recommandé.';
+    document.getElementById('apn-note').textContent='Filtre ND recommandé pour préserver la qualité.';
     ['nd1','nd2','nd3'].forEach(id=>{document.getElementById(id).value='0';});
     document.getElementById('nd-result').style.display='none';
-  } else { tropLuzBox.classList.remove('visible'); }
+  }else tropLuzBox.classList.remove('visible');
 
-  if(nbSources>1) multiWarn.classList.add('visible'); else multiWarn.classList.remove('visible');
+  if(nbSources>1)multiWarn.classList.add('visible');else multiWarn.classList.remove('visible');
 
   let displayPower;
-  if(rawDenom<=0.7) displayPower='! MAX DÉPASSÉ';
-  else if(rawDenom>1024) displayPower='1/512 MIN';
-  else {
+  if(rawDenom<=0.7)displayPower='! MAX DÉPASSÉ';
+  else if(rawDenom>1024)displayPower='1/512 MIN';
+  else{
     const stds=[1,2,4,8,16,32,64,128,256,512];
     let bd=stds.find(s=>s>=rawDenom)||512;
     let tenths=Math.round(Math.log2(bd/rawDenom)*10)/10;
@@ -920,22 +655,22 @@ function calculate(optiValue) {
     displayPower='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1):'');
   }
 
-  document.getElementById('txt_type').innerText=(optiValue>0?'RÉSULTAT OPTI (+1.33 IL)':'RÉSULTAT STANDARD')+(vApn<=0.004?' [HSS]':'')+(nbSources>1?' · '+nbSources+' SOURCES':'');
+  document.getElementById('txt_type').innerText=(optiValue>0?'RÉSULTAT OPTI (+1.33 IL)':'RÉSULTAT STANDARD')+(vApn<0.005?' [HSS]':'')+(nbSources>1?' · '+nbSources+' SOURCES':'');
   document.getElementById('res_flash').innerText=nbSources>1?displayPower+' / flash':displayPower;
   document.getElementById('res_correction').innerText='Correction totale : '+(totalCorr+optiValue).toFixed(2)+' IL';
-  document.getElementById('res_precise').innerText=nbSources>1?'Valeur théorique : 1/'+rawDenom.toFixed(1)+' — même réglage sur chaque flash':'Valeur théorique : 1/'+rawDenom.toFixed(1);
+  document.getElementById('res_precise').innerText=nbSources>1?'Valeur théorique : 1/'+rawDenom.toFixed(1)+' — même réglage chaque flash':'Valeur théorique : 1/'+rawDenom.toFixed(1);
 
   const pfBox=document.getElementById('per-flash-box');
   if(nbSources>1){
-    const rows2=document.querySelectorAll('.source-row');
-    const alertColor=rawDenom<=0.7?'#c05545':'#C8A45A';
+    const rows2=document.querySelectorAll('.source-row');const ac=rawDenom<=0.7?'#c05545':'#C8A45A';
     let pfHtml='<div style="background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.25);border-radius:3px;padding:12px 14px;text-align:left"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C8A45A;margin-bottom:10px">Réglage à appliquer sur chaque flash</div>';
-    rows2.forEach((row,i)=>{const rid=row.id.replace('source-','');const mx=document.getElementById('p_max_'+rid);const mxWs=mx?parseFloat(mx.value):0;const ws=mxWs>0?' — '+mxWs+' Ws':'';pfHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(200,164,90,.1)"><span style="font-size:11px;color:rgba(255,255,255,.55)">Flash '+(i+1)+ws+'</span><span style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:'+alertColor+'">'+displayPower+'</span></div>';});
+    rows2.forEach((row,i)=>{const rid=row.id.replace('source-','');const mx=document.getElementById('p_max_'+rid);const mxWs=mx?parseFloat(mx.value):0;const ws=mxWs>0?' — '+mxWs+' Ws':'';pfHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(200,164,90,.1)"><span style="font-size:11px;color:rgba(255,255,255,.55)">Flash '+(i+1)+ws+'</span><span style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:'+ac+'">'+displayPower+'</span></div>';});
     pfHtml+='<div style="margin-top:8px;font-size:9.5px;color:rgba(255,255,255,.35);font-style:italic">Tous les flashs au même réglage — Remesurer au posemètre après mise en place</div></div>';
-    pfBox.innerHTML=pfHtml; pfBox.style.display='block';
-  } else { pfBox.style.display='none'; pfBox.innerHTML=''; }
+    pfBox.innerHTML=pfHtml;pfBox.style.display='block';
+  }else{pfBox.style.display='none';pfBox.innerHTML='';}
 
   document.getElementById('dc_fstop').innerHTML=fmtIL(fstopCorr);
+  document.getElementById('dc_il_corr').innerHTML=fmtIL(-ilCorr);
   document.getElementById('dc_iso').innerHTML=fmtIL(stopsISO);
   document.getElementById('dc_hss').innerHTML=stopsV>0.005?fmtIL(stopsV):'<span class="v-neu">— pas HSS</span>';
   document.getElementById('dc_role').innerHTML=fmtIL(-roleMod);
@@ -948,63 +683,44 @@ function calculate(optiValue) {
   document.getElementById('result-box').style.display='block';
 }
 
-// ══ GUIDE NATH SAKURA ══
-function buildGuide(params) {
-  const box=document.getElementById('guide-nath'), ctx=document.getElementById('guide-context');
-  const hssWarn=document.getElementById('guide-hss-warn'), etapes=document.getElementById('guide-etapes');
+function buildGuide(params){
+  const box=document.getElementById('guide-nath'),ctx=document.getElementById('guide-context');
+  const hssWarn=document.getElementById('guide-hss-warn'),etapes=document.getElementById('guide-etapes');
   if(params.manqueIL<=0){box.classList.remove('visible');return;}
   box.classList.add('visible');
-  let mil=params.manqueIL; const isHSS=params.isHSS; const vApn=params.vApn; const iso=params.isoApn; const fT=params.fTarget; const nb=params.nbSources; const dm=params.distMes; const mws=params.maxWs;
-  let ctxHtml='Il manque <b>'+mil.toFixed(2)+' IL</b> — flash au maximum 1/1'+(mws>0?' ('+mws+' Ws)':'')+'.'+(isHSS?' <span class="warn">⚠ Mode HSS actif.</span>':'');
-  ctx.innerHTML=ctxHtml;
-  if(isHSS){const ilHSS=Math.log2(0.004/vApn);hssWarn.innerHTML='⚡ <b>HSS coûte '+ilHSS.toFixed(1)+' IL</b>. Passer en sync ≤1/200 les récupère immédiatement.';hssWarn.style.display='block';}
+  let mil=params.manqueIL;const{isHSS,vApn,isoApn:iso,fTarget:fT,nbSources:nb,distMes:dm,maxWs:mws}=params;
+  ctx.innerHTML='Il manque <b>'+mil.toFixed(2)+' IL</b> — flash au maximum 1/1'+(mws>0?' ('+mws+' Ws)':'')+'.'+(isHSS?' <span class="warn">⚠ Mode HSS actif.</span>':'');
+  if(isHSS){const ilHSS=Math.log2(0.005/vApn);hssWarn.innerHTML='⚡ <b>HSS coûte '+ilHSS.toFixed(1)+' IL</b>. Passer en sync ≤1/200 les récupère immédiatement.';hssWarn.style.display='block';}
   else hssWarn.style.display='none';
-  const steps=[]; let stepNum=1;
+  const steps=[];let stepNum=1;
   if(isHSS){
-    const ilRecup=Math.log2(0.004/vApn); const rest=mil-ilRecup;
+    const ilRecup=Math.log2(0.005/vApn);const rest=mil-ilRecup;
     const label=ilRecup>=mil?'<span class="tag tag-ideal">✓ Suffit seul</span>':'<span class="tag tag-alt">Gain +'+ilRecup.toFixed(1)+' IL</span>';
     let detail='Réglez sur <b class="val">1/200s</b> max. Récupère <b>'+ilRecup.toFixed(1)+' IL</b>.';
-    if(ilRecup>=mil) detail+=' <b>Cela suffit.</b>'; else detail+=' Il restera <b>'+rest.toFixed(1)+' IL</b>.';
+    if(ilRecup>=mil)detail+=' <b>Cela suffit.</b>';else detail+=' Il restera <b>'+rest.toFixed(1)+' IL</b>.';
     steps.push({num:stepNum++,prioritaire:true,titre:'Sortir du HSS',label,detail});
     if(ilRecup>=mil){renderGuide(steps,etapes);return;}
     mil=rest;
   }
-  if(dm>0){
-    const dN=dm/Math.pow(2,mil/2);
-    const label=dN>=0.3?'<span class="tag tag-ideal">✓ Faisable</span>':'<span class="tag tag-alt">Distance courte</span>';
-    const detail='Rapprochez à <b class="val">'+dN.toFixed(2).replace('.',',')+' m</b> (depuis '+dm.toFixed(1)+' m). Gain : <b>+'+mil.toFixed(1)+' IL</b>.'+(dN<0.3?' <span style="color:#f0a04a">⚠ Très court.</span>':'');
-    steps.push({num:stepNum++,prioritaire:false,titre:'Rapprocher le flash',label,detail});
-  }
-  if(nb===1){
-    const rest=mil-1;
-    const label=rest<=0?'<span class="tag tag-ideal">✓ Suffit</span>':'<span class="tag tag-alt">Gain +1 IL</span>';
-    const detail='Ajoutez un <b>second flash identique</b>. Gain : <b>+1 IL</b>.'+(rest<=0?' <b>Suffisant.</b>':' Il restera <b>'+rest.toFixed(1)+' IL</b>.');
-    steps.push({num:stepNum++,prioritaire:false,titre:'Ajouter une 2ème source',label,detail});
-  }
+  if(dm>0){const dN=dm/Math.pow(2,mil/2);steps.push({num:stepNum++,prioritaire:false,titre:'Rapprocher le flash',label:dN>=0.3?'<span class="tag tag-ideal">✓ Faisable</span>':'<span class="tag tag-alt">Distance courte</span>',detail:'Rapprochez à <b class="val">'+dN.toFixed(2).replace('.',',')+' m</b>.'+(dN<0.3?' <span style="color:#f0a04a">⚠ Très court.</span>':'')});}
+  if(nb===1){const rest=mil-1;steps.push({num:stepNum++,prioritaire:false,titre:'Ajouter une 2ème source',label:rest<=0?'<span class="tag tag-ideal">✓ Suffit</span>':'<span class="tag tag-alt">Gain +1 IL</span>',detail:'Ajoutez un <b>second flash identique</b>. Gain : <b>+1 IL</b>.'+(rest<=0?' <b>Suffisant.</b>':' Il restera <b>'+rest.toFixed(1)+' IL</b>.')});}
   const fOuverte=fT/Math.pow(2,mil/2);
-  if(fOuverte>=1.0){
-    const label='<span class="tag tag-alt">'+(mil<=1?'Alternative':'Combinaison')+'</span>';
-    const detail='Ouvrez à <b class="val">f/'+fOuverte.toFixed(1)+'</b>. Gain : <b>+'+mil.toFixed(1)+' IL</b>.'+(mil>2?' <span style="color:#f0a04a">⚠ Combinez avec autre solution.</span>':'');
-    steps.push({num:stepNum++,prioritaire:false,titre:'Ouvrir le diaphragme',label,detail});
-  }
+  if(fOuverte>=1.0)steps.push({num:stepNum++,prioritaire:false,titre:'Ouvrir le diaphragme',label:'<span class="tag tag-alt">'+(mil<=1?'Alternative':'Combinaison')+'</span>',detail:'Ouvrez à <b class="val">f/'+fOuverte.toFixed(1)+'</b>.'+(mil>2?' <span style="color:#f0a04a">⚠ Combinez.</span>':'')});
   const isosStd=[100,125,160,200,250,320,400,500,640,800,1000,1250,1600,2000,2500,3200,6400,12800,25600];
-  const isoNouv=Math.round(iso*Math.pow(2,mil));
-  const isoCible=isosStd.find(v=>v>=isoNouv)||isosStd[isosStd.length-1];
-  const noiseWarn=isoCible>=800?' <span style="color:#e08888">⚠ Bruit élevé.</span>':'';
-  steps.push({num:stepNum,iso:true,titre:'Augmenter l\'ISO (dernier recours)','label':'<span class="tag tag-last">En dernier recours</span>',detail:'Montez à <b class="val-warn">ISO '+isoCible+'</b>.'+noiseWarn+' Préférez les autres solutions.'});
+  const isoCible=isosStd.find(v=>v>=Math.round(iso*Math.pow(2,mil)))||isosStd[isosStd.length-1];
+  steps.push({num:stepNum,iso:true,titre:'Augmenter l\'ISO (dernier recours)',label:'<span class="tag tag-last">En dernier recours</span>',detail:'Montez à <b class="val-warn">ISO '+isoCible+'</b>.'+(isoCible>=800?' <span style="color:#e08888">⚠ Bruit élevé.</span>':'')});
   renderGuide(steps,etapes);
 }
-
 function renderGuide(steps,container){
   container.innerHTML=steps.map(s=>'<div class="guide-etape"><div class="'+(s.prioritaire?'guide-etape-num prioritaire':s.iso?'guide-etape-num iso':'guide-etape-num')+'">'+s.num+'</div><div class="guide-etape-body"><div class="guide-etape-titre">'+s.titre+' '+(s.label||'')+'</div><div class="guide-etape-detail">'+s.detail+'</div></div></div>').join('');
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  ['f_target','v_apn','iso_apn','flash_role','skin_tone','matiere','dist_mes','dist_cible','f_mes_base','f_mes_tenths'].forEach(id=>{
+  ['f_target','v_apn','iso_apn','flash_role','skin_tone','matiere','dist_mes','dist_cible','f_mes_tenths','f_mes_il_corr'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el) el.addEventListener('change',()=>{if(document.getElementById('result-box').style.display==='block') calculate(lastOptiValue);});
+    if(el)el.addEventListener('change',()=>{if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);});
   });
-  majCarn(); majRefl(); majDist();
+  majCarn();majRefl();majDist();
 });
 </script>
 </body>
