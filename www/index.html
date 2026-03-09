@@ -290,7 +290,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
             </div>
           </div>
           <div class="ch"><label>Puissance Max (Ws)</label>
-            <select id="p_max_0" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select>
+            <select id="p_max_0" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="76">76 Ws (V1)</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select>
           </div>
         </div>
       </div>
@@ -498,7 +498,7 @@ function addSource(){
   const idx=sourceCount++;
   const row=document.createElement('div');
   row.className='source-row';row.id='source-'+idx;
-  row.innerHTML=`<span class="source-label">Flash ${idx+1}</span><div class="source-fields"><div class="ch"><label>Puissance Test</label><div class="prow"><select id="p_test_base_${idx}" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint (0 Ws)</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select><select id="p_test_tenths_${idx}" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select></div></div><div class="ch"><label>Puissance Max (Ws)</label><select id="p_max_${idx}" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select></div></div><button class="source-remove" onclick="removeSource(${idx})" title="Supprimer">×</button>`;
+  row.innerHTML=`<span class="source-label">Flash ${idx+1}</span><div class="source-fields"><div class="ch"><label>Puissance Test</label><div class="prow"><select id="p_test_base_${idx}" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint (0 Ws)</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select><select id="p_test_tenths_${idx}" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select></div></div><div class="ch"><label>Puissance Max (Ws)</label><select id="p_max_${idx}" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="76">76 Ws (V1)</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select></div></div><button class="source-remove" onclick="removeSource(${idx})" title="Supprimer">×</button>`;
   document.getElementById('sources-container').appendChild(row);
   if(sourceCount>=6)document.getElementById('add-source-btn').style.display='none';
   majSourcesTotal();recalcAuto();
@@ -632,6 +632,46 @@ function powerToDisplay(rawDenom){
   return{txt,ok:true,bd,tenths};
 }
 
+// Retourne le conseil adapté selon le niveau d'irréalisme du manque IL
+function conseilNathND(excessIL, wsManquants, maxWsFlash, totalND){
+  const wsNec=Math.round(wsManquants);
+  const ndOptimal='ND'+Math.round(Math.pow(2,Math.max(totalND-Math.ceil(excessIL),0)));
+  if(excessIL<=3){
+    // Faisable avec du matériel pro
+    return {
+      txt:'📐 <b>Conseil Nath Sakura :</b><br>'
+        +'① Monte ton flash à <b>1/1</b> si ce n\'est pas fait<br>'
+        +(wsNec>0?'② Ajoute un flash d\'au moins <b>'+wsNec+' Ws</b> supplémentaires<br>':'')
+        +'③ Ou réduis le ND : essaie <b>'+ndOptimal+'</b> (−'+Math.max(totalND-Math.ceil(excessIL),0)+' IL)',
+      color:'rgba(192,85,69,.15)', border:'rgba(192,85,69,.5)', text:'#e07060'
+    };
+  } else if(excessIL<=5){
+    // Très difficile — matériel pro uniquement
+    return {
+      txt:'⚠️ <b>Très difficile avec ce ND (manque '+excessIL.toFixed(1)+' IL)</b><br>'
+        +'Il faudrait ≈ <b>'+wsNec+' Ws</b> supplémentaires — matériel de studio uniquement.<br><br>'
+        +'📐 <b>Conseil Nath Sakura :</b><br>'
+        +'① Utilise un <b>filtre ND moins fort</b> : essaie <b>'+ndOptimal+'</b><br>'
+        +'② Ou <b>ferme le diaphragme</b> d\'1–2 stops pour réduire la lumière ambiante<br>'
+        +'③ Le flash peut servir en <b>fill-in léger</b> pour déboucher les ombres<br>'
+        +'④ Monte les ISO en dernier recours',
+      color:'rgba(140,80,0,.2)', border:'rgba(220,140,0,.5)', text:'#e8a030'
+    };
+  } else {
+    // Irréaliste — ND trop fort pour du flash en exposition principale
+    return {
+      txt:'⛔ <b>Irréalisable avec ce ND (manque '+excessIL.toFixed(1)+' IL)</b><br>'
+        +'Compenser un <b>ND'+Math.round(Math.pow(2,totalND))+'</b> au flash nécessiterait ≈ <b>'+wsNec+' Ws</b> — physiquement impossible sur le terrain.<br><br>'
+        +'📐 <b>Conseil Nath Sakura :</b><br>'
+        +'① <b>Change de filtre ND</b> : essaie <b>'+ndOptimal+'</b> pour ce contexte flash<br>'
+        +'② Le flash en <b>fill-in subtil</b> (déboucher ombres) reste possible à pleine puissance<br>'
+        +'③ Pour shooter en plein soleil avec ce ND : travaille <b>sans flash</b>, en lumière naturelle seule<br>'
+        +'④ <b>Ferme le diaphragme</b> pour réduire la lumière ambiante et retirer le ND',
+      color:'rgba(140,40,40,.25)', border:'rgba(220,60,60,.6)', text:'#ff8080'
+    };
+  }
+}
+
 function calcND(){
   const nd1=parseFloat(document.getElementById('nd1').value)||0;
   const nd2=parseFloat(document.getElementById('nd2').value)||0;
@@ -669,15 +709,15 @@ function calcND(){
       // Recalculer depuis les Ws cumulés actuels (pas _lastCorr qui peut être périmé)
       const srcNow=getActiveSources();
       const hasWsNow=srcNow.length>0&&srcNow.every(s=>s.maxWs>0);
-      let excessApres11=Math.log2(1/rawDenomAvecMarge); // manque depuis 1 flash à 1/1
+      let excessApres11=-Math.log2(rawDenomAvecMarge); // manque en IL (positif car rawDenomAvecMarge<1)
       if(hasWsNow&&window._lastCorr&&window._lastCorr.maxWs>0){
         // Ws RÉELS cumulés de tous les flashs actifs (maxWs × fraction du réglage test)
         const wsReelsCumules=srcNow.reduce((a,s)=>a+s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)),0);
-        const wsReelsFlashPrincipal=window._lastCorr.maxWs*Math.pow(2,-(Math.log2(window._lastCorr.testBase||1)+( window._lastCorr.testTenths||0)));
+        const wsReelsFlashPrincipal=window._lastCorr.maxWs*Math.pow(2,-(Math.log2(window._lastCorr.testBase||1)+(window._lastCorr.testTenths||0)));
         // Gain IL des Ws réels cumulés vs flash principal seul
         const gainILCumul=wsReelsFlashPrincipal>0?Math.log2(wsReelsCumules/wsReelsFlashPrincipal):0;
         // Manque réel = manque brut - gain des flashs supplémentaires
-        excessApres11=Math.max(Math.log2(1/rawDenomAvecMarge)-gainILCumul, 0);
+        excessApres11=Math.max(-Math.log2(rawDenomAvecMarge)-gainILCumul, 0);
       }
       if(window._lastCorr)window._lastCorr.excessApres11=excessApres11;
       const maxWsFlash=window._lastCorr&&window._lastCorr.maxWs>0?window._lastCorr.maxWs:0;
@@ -714,52 +754,90 @@ function calcND(){
         if(excessApres11<=0.05){
           cNd.innerHTML='✅ <b>Flash OK — exposition correcte avec ce réglage</b>';
         } else {
-          // Ws nécessaires totaux = maxWs flash principal × 2^manque
-          const wsTotalNec=maxWsFlash*Math.pow(2,excessApres11);
-          // Ws déjà fournis réellement par chaque flash (au réglage test)
+          // Ws nécessaires totaux basés sur les Ws MAX cumulés de tous les flashs actifs
+          const wsMaxCumules=srcActives.reduce((a,s)=>a+s.maxWs,0);
+          // Ws réels actuels par flash (au réglage test)
           const wsReelParFlash=srcActives.map(s=>s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)));
           const wsDejaTotaux=wsReelParFlash.reduce((a,v)=>a+v,0);
-          // Ws manquants à répartir entre les flashs qui ne sont pas déjà à 1/1
+          // Ws totaux nécessaires = Ws cumulés actuels × 2^manque restant
+          const wsTotalNec=wsDejaTotaux*Math.pow(2,excessApres11);
+          // Ws manquants = ce qu'il faut en plus
           const wsManquants=Math.max(wsTotalNec-wsDejaTotaux,0);
+          // Flashs qui ne sont pas encore à 1/1
           const flashsAMonter=srcActives.filter((s,i)=>wsReelParFlash[i]<s.maxWs*0.98);
+          // Répartition équitable du manque entre les flashs à monter
           const wsParFlashAMonter=flashsAMonter.length>0?wsManquants/flashsAMonter.length:0;
-          let lignes='⚠️ <b>Puissance insuffisante — à ajuster :</b><br>';
-          srcActives.forEach((s,i)=>{
-            const wsReelActuel=wsReelParFlash[i];
-            const dejaMax=wsReelActuel>=s.maxWs*0.98;
-            if(dejaMax){
-              // Ce flash est déjà à 1/1, rien à changer
-              lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>1/1</b> ✓<br>';
-            } else {
-              const wsNec=wsReelActuel+wsParFlashAMonter;
-              const denomF=s.maxWs/Math.max(wsNec,0.0001);
-              const dispF=powerToDisplay(denomF);
-              const reg=dispF.ok?dispF.txt:(denomF<=0.7?'<span style="color:#e07060">1/1 MAX — insuffisant</span>':'⬛ ÉTEINDRE');
-              lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>'+reg+'</b><br>';
-            }
-          });
+          let tousAMax=true;
+          srcActives.forEach((s,i)=>{if(wsReelParFlash[i]<s.maxWs*0.98) tousAMax=false;});
+
+          if(tousAMax){
+            // Tous à 1/1 et encore insuffisant — conseil adapté au niveau d'irréalisme
+            const c=conseilNathND(excessApres11, wsManquants, maxWsFlash, totalND);
+            let lignes='⛔ <b>LIMITE PHYSIQUE — tous les flashs au max</b><br>';
+            srcActives.forEach((s,i)=>{ lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>1/1 MAX</b><br>'; });
+            lignes+='<br>'+c.txt;
+            cNd.style.background=c.color;
+            cNd.style.borderColor=c.border;
+            cNd.style.color=c.text;
+            cNd.innerHTML=lignes;
+          } else {
+            // Des flashs peuvent encore monter — montrer les réglages cibles
+            let lignes='⚠️ <b>Puissance insuffisante — à ajuster :</b><br>';
+            srcActives.forEach((s,i)=>{
+              const wsReelActuel=wsReelParFlash[i];
+              const dejaMax=wsReelActuel>=s.maxWs*0.98;
+              if(dejaMax){
+                lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>1/1</b> ✓<br>';
+              } else {
+                const wsNec=wsReelActuel+wsParFlashAMonter;
+                const denomF=s.maxWs/Math.max(wsNec,0.0001);
+                const dispF=powerToDisplay(denomF);
+                const reg=dispF.ok?dispF.txt:(denomF<=0.7?'<span style="color:#e07060">1/1 MAX — insuffisant</span>':'⬛ ÉTEINDRE');
+                lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>'+reg+'</b><br>';
+              }
+            });
+            cNd.style.background='rgba(192,85,69,.15)';
+            cNd.style.borderColor='rgba(192,85,69,.5)';
+            cNd.style.color='#e07060';
+            cNd.innerHTML=lignes;
+          }
+        }
+      } else if(wsReelsTest>0&&maxWsFlash>0){
+        if(excessApres11<=0.05){
+          // Expo correcte — conseil vert
+          cNd.style.background='rgba(76,175,117,.12)';
+          cNd.style.borderColor='rgba(76,175,117,.4)';
+          cNd.style.color='#4caf75';
+          cNd.innerHTML='✅ <b>Flash OK — exposition correcte avec ce réglage</b>';
+        } else {
+          // 1 seul flash insuffisant → conseil rouge
           cNd.style.background='rgba(192,85,69,.15)';
           cNd.style.borderColor='rgba(192,85,69,.5)';
           cNd.style.color='#e07060';
-          cNd.innerHTML=lignes;
+          const wsNecessaires=maxWsFlash*Math.pow(2,excessApres11);
+          const wsFlashSupp=Math.round(Math.max(wsNecessaires-maxWsFlash,0));
+          if(testBase===1){
+            // Flash déjà à 1/1 — conseil adapté au niveau d'irréalisme
+            const c=conseilNathND(excessApres11, wsFlashSupp, maxWsFlash, totalND);
+            let conseil='⛔ <b>Flash à pleine puissance ('+maxWsFlash+' Ws) — insuffisant</b><br><br>'+c.txt;
+            cNd.style.background=c.color; cNd.style.borderColor=c.border; cNd.style.color=c.text;
+            cNd.innerHTML=conseil;
+          } else if(excessApres11>5){
+            // Pas encore à 1/1 mais même 1/1 sera irréaliste — dire la vérité directement
+            const c=conseilNathND(excessApres11, wsFlashSupp, maxWsFlash, totalND);
+            let conseil='⛔ <b>ND trop fort — même à 1/1 ('+maxWsFlash+' Ws) ce sera insuffisant</b><br><br>'+c.txt;
+            cNd.style.background=c.color; cNd.style.borderColor=c.border; cNd.style.color=c.text;
+            cNd.innerHTML=conseil;
+          } else {
+            // Flash pas encore à 1/1 et manque atteignable — conseil normal
+            let conseil='⚠️ <b>Conseil Nath Sakura :</b><br>';
+            conseil+='① Monte d\'abord ton flash à <b>1/1 ('+maxWsFlash+' Ws max)</b><br>';
+            if(wsFlashSupp>0)
+              conseil+='② Puis ajoute un flash d\'au moins <b>'+wsFlashSupp+' Ws</b> pour couvrir le manque restant.';
+            cNd.style.background='rgba(192,85,69,.15)'; cNd.style.borderColor='rgba(192,85,69,.5)'; cNd.style.color='#e07060';
+            cNd.innerHTML=conseil;
+          }
         }
-      } else if(wsReelsTest>0&&maxWsFlash>0){
-        // 1 seul flash → conseil rouge
-        cNd.style.background='rgba(192,85,69,.15)';
-        cNd.style.borderColor='rgba(192,85,69,.5)';
-        cNd.style.color='#e07060';
-        const wsNecessaires=maxWsFlash*Math.pow(2,excessApres11);
-        const wsFlashSupp=Math.round(Math.max(wsNecessaires-maxWsFlash,0));
-        let conseil='⚠️ <b>Conseil Nath Sakura :</b><br>';
-        // ① seulement si le flash n'est pas déjà à 1/1
-        if(testBase>1){
-          conseil+='① Monte d\'abord ton flash à <b>1/1 ('+maxWsFlash+' Ws max)</b><br>';
-          if(wsFlashSupp>0)
-            conseil+='② Puis ajoute un flash d\'au moins <b>'+wsFlashSupp+' Ws</b> pour couvrir le manque restant.';
-        } else {
-          conseil+='Ajoute un flash d\'au moins <b>'+wsFlashSupp+' Ws</b> pour couvrir le manque.';
-        }
-        cNd.innerHTML=conseil;
       } else {
         cNd.style.background='rgba(192,85,69,.15)';
         cNd.style.borderColor='rgba(192,85,69,.5)';
