@@ -91,7 +91,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .cbtn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);transition:left .35s}
 .cbtn:hover::after{left:100%}
 .bn{background:transparent;color:var(--or)}.bo2{background:var(--or);color:#000;font-weight:800}
-#result-box{display:none;margin-top:16px;animation:pop .38s cubic-bezier(.34,1.56,.64,1) both}
+#result-box{display:block;margin-top:14px}
 .rc{background:var(--s2);border:1px solid var(--or);border-radius:3px;padding:28px 20px 22px;text-align:center;position:relative;overflow:hidden;animation:pulse 4s ease-in-out infinite}
 .rc.alerte{border-color:var(--rouge)!important;background:linear-gradient(135deg,rgba(192,85,69,.07) 0%,var(--s2) 60%)!important;animation:pulse-alert 3s ease-in-out infinite!important}
 .rc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--or),transparent)}
@@ -99,10 +99,6 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .rc::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 0%,rgba(200,164,90,.07) 0%,transparent 70%);pointer-events:none}
 .scan-ln{position:absolute;top:0;left:0;right:0;height:35px;background:linear-gradient(to bottom,transparent,rgba(200,164,90,.035),transparent);animation:scan 5s linear infinite;pointer-events:none}
 #txt_type{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tm);margin-bottom:13px;position:relative;z-index:1}
-#res_flash{font-family:var(--font-serif);font-size:clamp(2.4rem,10vw,4.5rem);font-weight:600;color:#fff;line-height:1;letter-spacing:-1px;margin-bottom:16px;text-shadow:0 0 50px rgba(200,164,90,.22);position:relative;z-index:1}
-#res_flash.alerte-txt{color:var(--rouge)!important;text-shadow:0 0 50px rgba(192,85,69,.3)!important}
-#res_flash.expo-ok-txt{color:#4caf75!important;font-size:clamp(1.8rem,7vw,3rem)!important;letter-spacing:1px!important;text-shadow:0 0 40px rgba(76,175,117,.25)!important}
-#res_flash.surexpo-txt{color:#c05545!important;font-size:clamp(1.4rem,5vw,2.2rem)!important;letter-spacing:0px!important}
 .surexpo-box{display:none;margin-top:14px;padding:14px 16px;border-radius:3px;border:1px solid rgba(192,85,69,.4);background:rgba(192,85,69,.07);text-align:left;animation:fade-up .3s ease both}
 .surexpo-box.visible{display:block}
 .surexpo-titre{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#c05545;margin-bottom:8px}
@@ -124,9 +120,47 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .source-fields{flex:1;display:flex;gap:8px;flex-wrap:wrap}
 .source-fields .ch{flex:1;min-width:120px}
 .source-remove{background:none;border:1px solid rgba(192,85,69,.35);color:var(--rouge);border-radius:2px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;align-self:flex-end;margin-bottom:1px}
-.add-source-btn{display:flex;align-items:center;justify-content:center;width:100%;margin-top:9px;padding:12px;background:none;border:1px dashed rgba(200,164,90,.32);border-radius:2px;color:var(--or);font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .18s}
+.add-source-btn{display:flex;align-items:center;justify-content:center;width:100%;margin-top:0;padding:12px;background:none;border:1px dashed rgba(200,164,90,.32);border-radius:2px;color:var(--or);font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .18s}
 .sources-total{margin-top:8px;padding:8px 12px;border-radius:2px;background:rgba(200,164,90,.06);border:1px solid rgba(200,164,90,.15);font-size:10px;color:var(--tm);display:flex;justify-content:space-between;align-items:center}
 .sources-total b{color:var(--or);font-family:var(--font-serif);font-size:14px}
+/* Flash source cards — style Mixte */
+.flash-src-card{background:rgba(200,164,90,.04);border:1px solid rgba(200,164,90,.22);border-radius:4px;overflow:hidden;transition:border-color .2s}
+.flash-src-card:focus-within{border-color:rgba(200,164,90,.5)}
+.flash-src-header{display:flex;align-items:center;gap:8px;padding:9px 13px;background:rgba(200,164,90,.09);border-bottom:1px solid rgba(200,164,90,.15)}
+.flash-src-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);flex-shrink:0;min-width:46px}
+.flash-src-role-sel{flex:1;font-size:10px;background:rgba(0,0,0,.4);color:var(--t);border:1px solid rgba(200,164,90,.28);border-radius:2px;padding:6px 7px}
+.flash-src-del{background:none;border:none;color:rgba(192,85,69,.55);font-size:18px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0;transition:color .15s}
+.flash-src-del:hover{color:rgba(192,85,69,.9)}
+.flash-src-body{padding:11px 13px;display:flex;flex-direction:column;gap:9px}
+.flash-src-row{display:flex;gap:8px;align-items:flex-end}
+.flash-src-mes{padding:9px 11px;background:rgba(100,160,255,.06);border:1px solid rgba(100,160,255,.2);border-radius:3px}
+.flash-src-mes-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#7ab3ff;margin-bottom:7px}
+.flash-mes-input{width:100%;background:var(--s3);color:#fff;border:1.5px solid rgba(100,160,255,.4);padding:8px 7px;border-radius:2px;font-family:var(--font-sans);font-size:14px;font-weight:700;outline:none;transition:border-color .15s}
+.flash-mes-input:focus{border-color:rgba(100,160,255,.8)}
+.flash-mes-tenths{border:1.5px solid rgba(100,160,255,.4);font-weight:700;color:#7ab3ff}
+.flash-src-result{min-height:4px}
+/* Badges résultat par source */
+.src-badge-cible{padding:8px 11px;background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.22);border-radius:3px;font-size:11px;color:var(--tm);line-height:1.6}
+.src-badge-ok{padding:9px 11px;background:rgba(76,175,117,.1);border:1px solid rgba(76,175,117,.35);border-radius:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.src-badge-err{padding:9px 11px;background:rgba(192,85,69,.1);border:1px solid rgba(192,85,69,.4);border-radius:3px;font-size:11px;color:#e07060;line-height:1.6}
+.src-badge-err-title{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#e07060;margin-bottom:5px}
+.src-badge-reglage{padding:10px 13px;background:rgba(200,164,90,.08);border:1px solid rgba(200,164,90,.32);border-radius:3px}
+.src-badge-reglage-label{font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);margin-bottom:3px;opacity:.8}
+.src-badge-reglage-val{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--or);line-height:1.15}
+.src-badge-reglage-sub{font-size:10px;color:var(--tp);margin-top:2px}
+/* Récap réglages */
+.recap-list{border:1px solid rgba(255,255,255,.1);border-radius:3px;overflow:hidden;background:rgba(255,255,255,.02)}
+.recap-row{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;border-bottom:1px solid rgba(255,255,255,.06)}
+.recap-row:last-child{border-bottom:none}
+.recap-name{font-size:11px;color:var(--tm);font-weight:600}
+.recap-role{font-size:9.5px;font-weight:400;color:var(--tp);margin-left:5px}
+.recap-sub{font-size:9.5px;color:var(--tp);margin-top:1px}
+.recap-power{font-family:var(--font-serif);font-size:20px;font-weight:700;flex-shrink:0;margin-left:10px}
+/* Alertes flash */
+.flash-alert-hss{padding:8px 12px;background:rgba(240,160,74,.1);border:1px solid rgba(240,160,74,.3);border-radius:3px;font-size:10px;color:#f0a04a;margin-bottom:6px;line-height:1.5}
+.flash-alert-keys{padding:8px 12px;background:rgba(100,160,255,.08);border:1px solid rgba(100,160,255,.22);border-radius:3px;font-size:10px;color:#7ab3ff;line-height:1.5}
+#result-box{margin-top:14px}
+#result-box .rc{padding:14px 15px}
 .multi-flash-warning{display:none;margin-top:14px;padding:12px 15px;border-radius:3px;border:1px solid rgba(200,164,90,.3);background:rgba(200,164,90,.06);z-index:1;text-align:left}
 .multi-flash-warning.visible{display:block;animation:fade-up .28s ease both}
 .mfw-titre{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:6px}
@@ -229,6 +263,23 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .mx-row:last-child{border-bottom:none}
 .mx-lbl{color:var(--tp)}.mx-val{font-family:var(--font-serif);font-size:16px;color:#fff}
 .mx-conseil{margin-top:10px;font-size:10.5px;line-height:1.8;color:var(--tm)}
+/* Modal "Comment mesurer" */
+.mesure-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.mesure-modal-overlay.open{display:flex;animation:fade-in .2s ease}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+.mesure-modal{background:#1a1a1a;border:1px solid rgba(200,164,90,.4);border-radius:6px;max-width:420px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.7)}
+.mesure-modal-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px 14px;border-bottom:1px solid rgba(200,164,90,.18);background:rgba(200,164,90,.08)}
+.mesure-modal-titre{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--or)}
+.mesure-modal-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;line-height:1;padding:0 4px;transition:color .15s}
+.mesure-modal-close:hover{color:#fff}
+.mesure-modal-body{padding:18px 18px 20px}
+.mesure-step{display:flex;gap:12px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.06);align-items:flex-start}
+.mesure-step:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.mesure-step-num{min-width:28px;height:28px;border-radius:50%;background:rgba(200,164,90,.18);border:1.5px solid rgba(200,164,90,.5);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--or);flex-shrink:0}
+.mesure-step-titre{font-size:11px;font-weight:700;color:var(--t);margin-bottom:5px}
+.mesure-step-txt{font-size:11px;color:var(--tm);line-height:1.7}
+.mesure-step-txt b{color:var(--or)}
+.mesure-step-txt .secret{display:inline-block;margin-top:6px;padding:5px 10px;background:rgba(200,164,90,.12);border-left:3px solid var(--or);border-radius:0 2px 2px 0;font-size:10.5px;color:var(--t);line-height:1.6;width:100%}
 </style>
 </head>
 <body>
@@ -256,37 +307,51 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 <!-- PANNEAU FLASH -->
 <div class="main-tab-panel actif" id="panel_flash">
 
-<!-- 0. MODE MESURE -->
-<div class="bloc" style="margin-top:18px">
-  <div class="mode-mesure-box">
-    <div class="mode-mesure-label">⚙ Mode de mesure posemètre</div>
-    <div class="mode-btns">
-      <div class="mode-btn actif" id="btn_incident" onclick="setMode('incident')" style="grid-column:1/-1">◉ Incident<br><span style="font-size:9px;font-weight:400;letter-spacing:0;text-transform:none">Sphère → vers le flash</span></div>
-      <div class="mode-btn" id="btn_reflechi" onclick="setMode('reflechi')" style="display:none">◎ Réfléchi / TTL<br><span style="font-size:9px;font-weight:400;letter-spacing:0;text-transform:none">Spotmètre → sur le sujet</span></div>
-    </div>
-    <div class="mode-info" id="mode_info"><b>Mode incident :</b> corrections <b>carnation</b> et <b>matière</b> sont <b>actives</b>.</div>
+<!-- ① INTENTION — TOUT EN HAUT -->
+<div style="margin-top:18px;margin-bottom:6px;border-radius:4px;overflow:hidden;border:1.5px solid rgba(200,164,90,.3)">
+  <!-- Titre -->
+  <div style="padding:10px 15px 8px;background:rgba(200,164,90,.1)">
+    <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or)">⚡ Intention de prise de vue</div>
+  </div>
+  <!-- Boutons Standard / Nath Sakura -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid rgba(200,164,90,.2)">
+    <button id="btn_intent_std" onclick="setIntent(0)"
+      style="padding:13px 8px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;background:var(--or);color:#000;border:none;border-right:1px solid rgba(0,0,0,.2)">
+      ▶ Standard
+    </button>
+    <button id="btn_intent_nath" onclick="setIntent(1.33)"
+      style="padding:13px 8px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;background:rgba(200,164,90,.1);color:var(--or);border:none">
+      ⭐ Nath Sakura +1.33 IL
+    </button>
+  </div>
+  <!-- Bandeau cible live — toujours visible -->
+  <div style="display:flex;align-items:center;gap:12px;padding:10px 15px;background:rgba(0,0,0,.2);flex-wrap:wrap">
+    <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tp)">🎯 Cible flash</span>
+    <span id="intent-cible-val" style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:var(--or)">f/5.6</span>
+    <span id="intent-cible-hss" style="display:none;font-size:9.5px;font-weight:700;padding:3px 7px;background:rgba(240,160,74,.15);border:1px solid rgba(240,160,74,.4);border-radius:2px;color:#f0a04a">⚡ HSS actif</span>
+    <span id="intent-cible-sub" style="font-size:10px;color:var(--tm);margin-left:auto;text-align:right;line-height:1.5"></span>
   </div>
 </div>
 
-<!-- 1. BOÎTIER -->
+<!-- ② BOÎTIER -->
 <div class="bloc">
   <div class="btit"><div class="bnum">1</div><div class="blab">Réglages Boîtier</div><div class="bligne"></div></div>
   <div class="carte">
     <div class="g3">
       <div class="ch"><label>f/ Cible</label>
-        <select id="f_target">
+        <select id="f_target" onchange="recalcAuto()">
           <option value="1.0">f/ 1.0</option><option value="1.1">f/ 1.1</option><option value="1.2">f/ 1.2</option><option value="1.4">f/ 1.4</option><option value="1.6">f/ 1.6</option><option value="1.8">f/ 1.8</option><option value="2.0">f/ 2.0</option><option value="2.2">f/ 2.2</option><option value="2.5">f/ 2.5</option><option value="2.8">f/ 2.8</option><option value="3.2">f/ 3.2</option><option value="3.5">f/ 3.5</option><option value="4.0">f/ 4.0</option><option value="4.5">f/ 4.5</option><option value="5.0">f/ 5.0</option><option value="5.6" selected>f/ 5.6</option><option value="6.3">f/ 6.3</option><option value="7.1">f/ 7.1</option><option value="8.0">f/ 8.0</option><option value="9.0">f/ 9.0</option><option value="10">f/ 10</option><option value="11">f/ 11</option><option value="13">f/ 13</option><option value="14">f/ 14</option><option value="16">f/ 16</option><option value="18">f/ 18</option><option value="20">f/ 20</option><option value="22">f/ 22</option>
         </select>
       </div>
       <div class="ch"><label>Vitesse</label>
-        <select id="v_apn">
+        <select id="v_apn" onchange="recalcAuto()">
           <optgroup label="Poses Longues"><option value="30">30s</option><option value="25">25s</option><option value="20">20s</option><option value="15">15s</option><option value="13">13s</option><option value="10">10s</option><option value="8">8s</option><option value="6">6s</option><option value="5">5s</option><option value="4">4s</option><option value="3.2">3.2s</option><option value="2.5">2.5s</option><option value="2">2s</option><option value="1.6">1.6s</option><option value="1.3">1.3s</option><option value="1">1s</option></optgroup>
           <optgroup label="Vitesses Standard"><option value="0.8">0.8"</option><option value="0.6">0.6"</option><option value="0.5">1/2</option><option value="0.4">1/2.5</option><option value="0.3">1/3</option><option value="0.25">1/4</option><option value="0.2">1/5</option><option value="0.166">1/6</option><option value="0.125">1/8</option><option value="0.1">1/10</option><option value="0.076">1/13</option><option value="0.066">1/15</option><option value="0.05">1/20</option><option value="0.04">1/25</option><option value="0.033">1/30</option><option value="0.025">1/40</option><option value="0.02">1/50</option><option value="0.0166">1/60</option><option value="0.0125">1/80</option><option value="0.01">1/100</option><option value="0.008" selected>1/125</option><option value="0.00625">1/160</option><option value="0.005">1/200</option></optgroup>
           <optgroup label="Mode HSS (Haute Vitesse)"><option value="0.004">1/250</option><option value="0.003125">1/320</option><option value="0.0025">1/400</option><option value="0.002">1/500</option><option value="0.00156">1/640</option><option value="0.00125">1/800</option><option value="0.001">1/1000</option><option value="0.0008">1/1250</option><option value="0.000625">1/1600</option><option value="0.0005">1/2000</option><option value="0.0004">1/2500</option><option value="0.0003125">1/3200</option><option value="0.00025">1/4000</option><option value="0.0002">1/5000</option><option value="0.000156">1/6400</option><option value="0.000125">1/8000</option></optgroup>
         </select>
       </div>
       <div class="ch"><label>ISO</label>
-        <select id="iso_apn">
+        <select id="iso_apn" onchange="recalcAuto()">
           <optgroup label="Basse Sensibilité"><option value="50">ISO 50</option><option value="64">ISO 64</option><option value="80">ISO 80</option><option value="100" selected>ISO 100</option></optgroup>
           <optgroup label="Standard"><option value="125">ISO 125</option><option value="160">ISO 160</option><option value="200">ISO 200</option><option value="250">ISO 250</option><option value="320">ISO 320</option><option value="400">ISO 400</option><option value="500">ISO 500</option><option value="640">ISO 640</option><option value="800">ISO 800</option><option value="1000">ISO 1000</option><option value="1250">ISO 1250</option><option value="1600">ISO 1600</option></optgroup>
           <optgroup label="Haute Sensibilité"><option value="2000">ISO 2000</option><option value="2500">ISO 2500</option><option value="3200">ISO 3200</option><option value="4000">ISO 4000</option><option value="5000">ISO 5000</option><option value="6400">ISO 6400</option><option value="8000">ISO 8000</option><option value="10000">ISO 10000</option><option value="12800">ISO 12800</option><option value="25600">ISO 25600</option><option value="51200">ISO 51200</option><option value="102400">ISO 102400</option></optgroup>
@@ -296,218 +361,113 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
   </div>
 </div>
 
-<!-- 2. FLASH -->
+<!-- ③ MODE MESURE + CORRECTIONS -->
 <div class="bloc">
-  <div class="btit"><div class="bnum">2</div><div class="blab">Configuration Flash</div><div class="bligne"></div></div>
+  <div class="btit"><div class="bnum">2</div><div class="blab">Corrections Sujet</div><div class="bligne"></div></div>
   <div class="carte">
-    <div class="ch" style="margin-bottom:12px"><label>Rôle du Flash</label>
-      <select id="flash_role">
-        <optgroup label="Lumière Principale"><option value="0" selected>💡 Key Light — Principal (0 IL)</option></optgroup>
-        <optgroup label="Débouchage (Fill Light)">
-          <option value="-0.33">🌒 Fill (−0.33 IL) — Ratio 1:1.2</option><option value="-0.5">🌒 Fill (−0.50 IL) — Ratio 1:1.4</option><option value="-0.66">🌒 Fill (−0.66 IL) — Ratio 1:1.6</option><option value="-1">🌒 Fill (−1.00 IL) — Ratio 1:2</option><option value="-1.33">🌑 Fill (−1.33 IL) — Ratio 1:2.5</option><option value="-1.5">🌑 Fill (−1.50 IL) — Ratio 1:2.8</option><option value="-1.66">🌑 Fill (−1.66 IL) — Ratio 1:3.2</option><option value="-2">🌑 Fill (−2.00 IL) — Ratio 1:4</option><option value="-2.5">📉 Fill (−2.50 IL) — Ratio 1:5.6</option><option value="-3">📉 Fill (−3.00 IL) — Ratio 1:8</option><option value="-4">📉 Fill (−4.00 IL) — Ratio 1:16</option>
-        </optgroup>
-        <optgroup label="Accents &amp; Séparation">
-          <option value="0.33">✨ Hair Light (+0.33 IL)</option><option value="0.66">✨ Hair Light (+0.66 IL)</option><option value="1">✨ Hair Light (+1.0 IL)</option><option value="0.5">🌟 Rim Light (+0.5 IL)</option><option value="1.5">🌟 Rim Light (+1.5 IL)</option><option value="2">🔥 Rim / Kicker (+2.0 IL)</option><option value="2.5">🔥 Rim / Kicker (+2.5 IL)</option>
-        </optgroup>
-        <optgroup label="Arrière-plan">
-          <option value="-1">🖼️ Fond Sombre (−1.0 IL)</option><option value="0">🖼️ Fond Neutre (0 IL)</option><option value="1">🖼️ Fond Clair (+1.0 IL)</option><option value="2">🖼️ Fond Très Clair (+2.0 IL)</option><option value="3">🚀 High Key Fond (+3.0 IL)</option>
-        </optgroup>
-        <optgroup label="Contre-Jour">
-          <option value="-1">☀️ Contre-Jour (−1.0 IL)</option><option value="0">☀️ Contre-Jour (0 IL)</option><option value="1">☀️ Contre-Jour (+1.0 IL)</option><option value="2">☀️ Contre-Jour (+2.0 IL)</option>
-        </optgroup>
-      </select>
-    </div>
-    <p class="ch" style="margin-bottom:8px"><label>Sources de lumière</label></p>
-    <div class="sources-container" id="sources-container">
-      <div class="source-row" id="source-0">
-        <span class="source-label">Flash 1</span>
-        <div class="source-fields">
-          <div class="ch"><label>Puissance Test</label>
-            <div class="prow">
-              <select id="p_test_base_0" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint (0 Ws)</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select>
-              <select id="p_test_tenths_0" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select>
-            </div>
-          </div>
-          <div class="ch"><label>Puissance Max (Ws)</label>
-            <select id="p_max_0" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="76">76 Ws (V1)</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select>
-          </div>
-        </div>
+    <!-- Mode mesure — informatif uniquement -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:9px 13px;background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.2);border-radius:3px">
+      <div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--or)">📐 Posemètre incident</div>
+        <div id="mode_info" style="font-size:10px;color:var(--tm);margin-top:2px">Corrections <b>carnation</b> et <b>matière</b> actives</div>
       </div>
+      <button onclick="openMesureModal()" style="background:rgba(100,160,255,.12);border:1px solid rgba(100,160,255,.3);color:#7ab3ff;font-size:10px;font-weight:700;padding:7px 12px;border-radius:2px;cursor:pointer;letter-spacing:.5px;white-space:nowrap;flex-shrink:0;margin-left:12px">
+        ℹ Comment mesurer ?
+      </button>
     </div>
-    <button class="add-source-btn" id="add-source-btn" onclick="addSource()">＋ Ajouter une source</button>
-    <div class="sources-total" id="sources-total" style="display:none"><span>Total puissance maximale cumulée</span><b id="sources-total-val">—</b></div>
-  </div>
-</div>
-
-<!-- 3. CARNATION -->
-<div class="bloc" id="section_carnation">
-  <div class="btit"><div class="bnum" style="font-size:8px;letter-spacing:0">2b</div><div class="blab">Carnation de Peau</div><span class="refl-badge rb-actif" id="badge_carn">✓ actif — incident</span><div class="bligne"></div></div>
-  <div class="carte">
-    <div class="ch"><label>Carnation du sujet</label>
-      <select id="skin_tone" onchange="majCarn()">
+    <!-- Carnation -->
+    <div id="section_carnation">
+      <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--or);margin-bottom:6px">🎨 Carnation de peau <span class="refl-badge rb-actif" id="badge_carn" style="margin-left:6px">✓ actif</span></div>
+      <select id="skin_tone" onchange="majCarn()" style="width:100%;margin-bottom:8px">
         <option value="-2.33">🏻 Albinos / Très très claire (−2.33 IL)</option><option value="-2">🏻 Très claire / Porcelaine (−2 IL)</option><option value="-1.67">🏼 Claire / Ivoire (−1.67 IL)</option><option value="-1.5">🏼 Claire Rosée (−1.5 IL)</option><option value="-1.33">🏼 Claire / Beige clair (−1.33 IL)</option><option value="-1.17">🏼 Claire Naturelle (−1.17 IL)</option><option value="-1">🏼 Médium Claire (−1 IL)</option><option value="-0.83">🏼 Médium Claire Dorée (−0.83 IL)</option><option value="0" selected>🏽 Médium — Référence (0 IL)</option><option value="0.17">🏽 Médium / Beige naturel (+0.17 IL)</option><option value="0.33">🏽 Médium Dorée / Sable (+0.33 IL)</option><option value="0.5">🏽 Médium Olive / Miel (+0.5 IL)</option><option value="0.67">🏽 Médium Foncée / Caramel (+0.67 IL)</option><option value="0.83">🏾 Foncée / Bronze (+0.83 IL)</option><option value="1">🏾 Foncée / Brun chaud (+1 IL)</option><option value="1.17">🏾 Foncée Profonde / Acajou (+1.17 IL)</option><option value="1.33">🏾 Très Foncée / Chocolat (+1.33 IL)</option><option value="1.5">🏿 Très Foncée / Espresso (+1.5 IL)</option><option value="1.67">🏿 Ébène Clair (+1.67 IL)</option><option value="2">🏿 Ébène / Très Sombre (+2 IL)</option><option value="2.33">🏿 Ébène Profond / Nuit (+2.33 IL)</option>
       </select>
+      <div class="carn-ap"><div class="carn-rd" id="carn_rd" style="background:#C68642"></div><div><div class="carn-txt" id="carn_nm">Médium — Référence</div><div class="carn-il" id="carn_il">0 IL</div></div></div>
     </div>
-    <div class="carn-ap"><div class="carn-rd" id="carn_rd" style="background:#C68642"></div><div><div class="carn-txt" id="carn_nm">Médium — Référence</div><div class="carn-il" id="carn_il">0 IL</div></div></div>
-  </div>
-</div>
-
-<!-- 4. MATIÈRE -->
-<div class="bloc" id="section_matiere">
-  <div class="btit"><div class="bnum">3</div><div class="blab">Matière / Réflectance Sujet</div><span class="refl-badge rb-actif" id="badge_mat">✓ actif — incident</span><div class="bligne"></div></div>
-  <div class="carte">
-    <p class="hint" style="margin-bottom:10px" id="hint_mat">Posemètre <b>incident</b> : correction réflectance <b>active</b>.</p>
-    <div class="ch"><label>Matière / Texture principale du sujet</label>
-      <select id="matiere" onchange="majRefl()">
+    <!-- Matière -->
+    <div id="section_matiere" style="margin-top:12px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--or);margin-bottom:6px">🪨 Matière / Réflectance <span class="refl-badge rb-actif" id="badge_mat" style="margin-left:6px">✓ actif</span></div>
+      <p class="hint" style="margin-bottom:8px" id="hint_mat">Posemètre <b>incident</b> : correction réflectance <b>active</b>.</p>
+      <select id="matiere" onchange="majRefl()" style="width:100%">
         <option value="0">— Neutre / Peau référence 18% (0 IL)</option>
-        <optgroup label="── TEXTILES CLAIRS ──"><option value="-1">Blanc pur / Coton blanc (−1 IL)</option><option value="-0.67">Blanc cassé / Lin écru (−0.67 IL)</option><option value="-0.5">Satin blanc (−0.5 IL)</option><option value="-0.67">Soie blanche brillante (−0.67 IL)</option><option value="-0.33">Dentelle blanche / Voile (−0.33 IL)</option><option value="-0.33">Coton clair coloré (−0.33 IL)</option><option value="-0.5">Mousseline blanche (−0.5 IL)</option></optgroup>
-        <optgroup label="── TEXTILES FONCÉS ──"><option value="1.33">Velours noir (absorbe — +1.33 IL)</option><option value="1">Velours foncé (+1 IL)</option><option value="0.67">Denim noir / Marine foncé (+0.67 IL)</option><option value="0.5">Denim bleu foncé (+0.5 IL)</option><option value="0.33">Denim bleu moyen (+0.33 IL)</option><option value="-0.5">Satin noir (réflexion rasante — −0.5 IL)</option><option value="-0.67">Cuir verni noir (−0.67 IL)</option><option value="0.33">Cuir mat noir (+0.33 IL)</option><option value="0.5">Fourrure noire / foncée (+0.5 IL)</option><option value="-0.33">Fourrure blanche / claire (−0.33 IL)</option><option value="0.17">Laine foncée (+0.17 IL)</option></optgroup>
-        <optgroup label="── PEAU NUE / CORPS ──"><option value="-0.17">Peau luisante / huilée (−0.17 IL)</option><option value="0.33">Peau sèche / très mate (+0.33 IL)</option><option value="-0.17">Peau mouillée / humide (−0.17 IL)</option><option value="0.17">Peau avec maquillage mat (+0.17 IL)</option><option value="-0.17">Peau avec fond de teint lumineux (−0.17 IL)</option></optgroup>
-        <optgroup label="── MATÉRIAUX RÉFLÉCHISSANTS ──"><option value="-2">Métal poli miroir (−2 IL)</option><option value="-1.33">Métal brossé argent (−1.33 IL)</option><option value="-1">Métal brossé doré (−1 IL)</option><option value="-0.5">Métal anodisé mat (−0.5 IL)</option><option value="-1.5">Miroir verre (−1.5 IL)</option><option value="-1.67">Verre / Plexiglas transparent (−1.67 IL)</option><option value="-1">Verre dépoli (−1 IL)</option><option value="-0.5">Plastique blanc brillant (−0.5 IL)</option><option value="-0.33">Peinture blanche brillante (−0.33 IL)</option><option value="-0.33">Marbre blanc poli (−0.33 IL)</option></optgroup>
-        <optgroup label="── MATÉRIAUX ABSORBANTS ──"><option value="0.67">Métal noir mat (+0.67 IL)</option><option value="1">Ardoise / Pierre noire (+1 IL)</option><option value="1">Peinture noire mate (+1 IL)</option><option value="1.33">Caoutchouc / Mousse noire (+1.33 IL)</option><option value="0.5">Bois sombre mat (+0.5 IL)</option><option value="0.33">Bois moyen naturel (+0.33 IL)</option><option value="-0.17">Bois clair verni (−0.17 IL)</option><option value="0.17">Béton brut (+0.17 IL)</option><option value="0.33">Pierre calcaire foncée (+0.33 IL)</option><option value="-0.17">Pierre calcaire claire (−0.17 IL)</option></optgroup>
-        <optgroup label="── OBJETS / PRODUITS ──"><option value="-0.5">Papier blanc brillant (−0.5 IL)</option><option value="0">Papier blanc mat (0 IL)</option><option value="0.5">Papier kraft / carton brun (+0.5 IL)</option><option value="1.33">Carton / tissu noir (+1.33 IL)</option><option value="-0.5">Emballage blanc brillant (−0.5 IL)</option><option value="-0.33">Plastique coloré clair (−0.33 IL)</option><option value="0.67">Plastique noir mat (+0.67 IL)</option><option value="0.17">Tissu coloré moyen (+0.17 IL)</option><option value="-0.17">Céramique blanche (−0.17 IL)</option><option value="0.33">Céramique foncée (+0.33 IL)</option></optgroup>
-        <optgroup label="── NATURE / VÉGÉTAL ──"><option value="0.17">Feuillage vert moyen (+0.17 IL)</option><option value="-0.17">Fleurs blanches (−0.17 IL)</option><option value="0.33">Terre sèche / Sol foncé (+0.33 IL)</option><option value="0.5">Sable fin doré (+0.5 IL)</option><option value="-0.5">Surface eau calme (−0.5 IL)</option><option value="0.17">Herbe verte (+0.17 IL)</option></optgroup>
-        <optgroup label="── ALIMENTAIRE / STUDIO ──"><option value="0.5">Chocolat / aliment foncé (+0.5 IL)</option><option value="-0.5">Glaçage blanc / meringue (−0.5 IL)</option><option value="-0.33">Assiette blanche (−0.33 IL)</option><option value="0.17">Plat coloré moyen (+0.17 IL)</option><option value="-0.17">Nappe blanche (−0.17 IL)</option></optgroup>
+        <optgroup label="── TEXTILES CLAIRS ──"><option value="-1">Blanc pur / Coton blanc (−1 IL)</option><option value="-0.67">Blanc cassé / Lin écru (−0.67 IL)</option><option value="-0.5">Satin blanc (−0.5 IL)</option><option value="-0.33">Dentelle blanche / Voile (−0.33 IL)</option><option value="-0.5">Mousseline blanche (−0.5 IL)</option></optgroup>
+        <optgroup label="── TEXTILES FONCÉS ──"><option value="1.33">Velours noir (+1.33 IL)</option><option value="1">Velours foncé (+1 IL)</option><option value="0.67">Denim noir (+0.67 IL)</option><option value="0.5">Denim bleu foncé (+0.5 IL)</option><option value="-0.5">Satin noir (−0.5 IL)</option><option value="-0.67">Cuir verni noir (−0.67 IL)</option><option value="0.33">Cuir mat noir (+0.33 IL)</option></optgroup>
+        <optgroup label="── PEAU NUE / CORPS ──"><option value="-0.17">Peau luisante / huilée (−0.17 IL)</option><option value="0.33">Peau sèche / très mate (+0.33 IL)</option><option value="0.17">Peau avec maquillage mat (+0.17 IL)</option></optgroup>
+        <optgroup label="── MATÉRIAUX RÉFLÉCHISSANTS ──"><option value="-2">Métal poli miroir (−2 IL)</option><option value="-1.33">Métal brossé argent (−1.33 IL)</option><option value="-1">Métal brossé doré (−1 IL)</option><option value="-1.5">Miroir verre (−1.5 IL)</option><option value="-0.5">Plastique blanc brillant (−0.5 IL)</option></optgroup>
+        <optgroup label="── MATÉRIAUX ABSORBANTS ──"><option value="0.67">Métal noir mat (+0.67 IL)</option><option value="1">Ardoise / Pierre noire (+1 IL)</option><option value="1.33">Caoutchouc / Mousse noire (+1.33 IL)</option><option value="0.5">Bois sombre mat (+0.5 IL)</option><option value="0.33">Bois moyen naturel (+0.33 IL)</option></optgroup>
+        <optgroup label="── OBJETS / PRODUITS ──"><option value="-0.5">Papier blanc brillant (−0.5 IL)</option><option value="0">Papier blanc mat (0 IL)</option><option value="0.5">Papier kraft / carton brun (+0.5 IL)</option><option value="1.33">Carton / tissu noir (+1.33 IL)</option></optgroup>
+        <optgroup label="── ALIMENTAIRE / STUDIO ──"><option value="0.5">Chocolat / aliment foncé (+0.5 IL)</option><option value="-0.5">Glaçage blanc / meringue (−0.5 IL)</option><option value="-0.33">Assiette blanche (−0.33 IL)</option></optgroup>
       </select>
-      <div class="refl-wrap">
-        <div class="refl-top"><span class="refl-lbl">Réflectance estimée du sujet</span><span class="refl-val" id="refl_pct">18%</span></div>
+      <div class="refl-wrap" style="margin-top:8px">
+        <div class="refl-top"><span class="refl-lbl">Réflectance estimée</span><span class="refl-val" id="refl_pct">18%</span></div>
         <div class="refl-bg"><div class="refl-bar" id="refl_bar" style="width:18%"></div></div>
-        <div class="refl-echelle"><span>0% Noir abs.</span><span>▲ 18% Référence</span><span>100% Blanc</span></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 5. DISTANCE -->
+<!-- ④ SOURCES FLASH -->
 <div class="bloc">
-  <div class="btit"><div class="bnum">4</div><div class="blab">Distance Flash → Sujet</div><div class="bligne"></div></div>
-  <div class="carte">
-    <p class="hint" style="margin-bottom:10px">Utilise uniquement si tu déplaces le flash <b>après</b> la mesure. Doubler la distance = −2 IL.</p>
-    <div class="g2">
-      <div class="ch"><label>Distance lors de la mesure</label>
-        <select id="dist_mes" onchange="majDist()"><option value="0.5">0.5 m</option><option value="0.75">0.75 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="2.5">2.5 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option><option value="6">6 m</option><option value="8">8 m</option><option value="10">10 m</option></select>
-      </div>
-      <div class="ch"><label>Distance cible au tournage</label>
-        <select id="dist_cible" onchange="majDist()"><option value="0.5">0.5 m</option><option value="0.75">0.75 m</option><option value="1" selected>1 m (idem)</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="2.5">2.5 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option><option value="6">6 m</option><option value="8">8 m</option><option value="10">10 m</option></select>
-      </div>
-    </div>
-    <div class="dist-result" id="dist_result">Flash à la <b>même distance</b> — 0 IL</div>
-  </div>
-</div>
-
-<!-- 6. POSEMÈTRE -->
-<div class="bloc">
-  <div class="btit"><div class="bnum">5</div><div class="blab">Mesure Posemètre</div><div class="bligne"></div></div>
-  <div class="carte">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:flex-end">
-      <div class="ch">
-        <label>f/ mesuré</label>
-        <div style="position:relative">
-          <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--or);font-weight:bold;font-size:13px;pointer-events:none">f/</span>
-          <input type="number" id="f_mes_base" value="5.6" min="0.7" max="512" step="0.1"
-            style="width:100%;background:var(--s3);color:#fff;border:2px solid var(--or);padding:10px 5px 10px 25px;border-radius:2px;font-family:var(--font-sans);font-size:14px;font-weight:700;outline:none"
-            onchange="recalcAuto()">
+  <div class="btit"><div class="bnum">3</div><div class="blab">Sources Flash</div><div class="bligne"></div></div>
+  <div class="carte" style="padding:0">
+    <div id="sources-container" style="padding:12px 14px;display:flex;flex-direction:column;gap:12px">
+      <!-- Flash 1 — source initiale -->
+      <div class="flash-src-card" id="source-0">
+        <div class="flash-src-header">
+          <span class="flash-src-num">Flash 1</span>
+          <select id="src_role_0" onchange="recalcAuto()" class="flash-src-role-sel">
+            <optgroup label="Lumière Principale"><option value="0" selected>💡 Key Light (0 IL)</option></optgroup>
+            <optgroup label="Débouchage (Fill)"><option value="-0.5">🌒 Fill −0.5 IL</option><option value="-1">🌒 Fill −1 IL</option><option value="-1.5">🌑 Fill −1.5 IL</option><option value="-2">🌑 Fill −2 IL</option><option value="-2.5">📉 Fill −2.5 IL</option><option value="-3">📉 Fill −3 IL</option></optgroup>
+            <optgroup label="Accents &amp; Séparation"><option value="0.5">🌟 Rim +0.5 IL</option><option value="1">✨ Hair +1 IL</option><option value="1.5">🌟 Rim +1.5 IL</option><option value="2">🔥 Kicker +2 IL</option><option value="2.5">🔥 Kicker +2.5 IL</option></optgroup>
+            <optgroup label="Arrière-plan"><option value="-1">🖼️ Fond −1 IL</option><option value="0.1">🖼️ Fond Neutre</option><option value="1">🖼️ Fond +1 IL</option><option value="2">🖼️ Fond +2 IL</option><option value="3">🚀 High Key +3 IL</option></optgroup>
+          </select>
+        </div>
+        <div class="flash-src-body">
+          <div class="flash-src-row">
+            <div class="ch" style="flex:1"><label>Puissance Test</label>
+              <div class="prow">
+                <select id="p_test_base_0" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select>
+                <select id="p_test_tenths_0" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select>
+              </div>
+            </div>
+            <div class="ch" style="flex:1"><label>Puissance Max (Ws)</label>
+              <select id="p_max_0" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="76">76 Ws (V1)</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select>
+            </div>
+          </div>
+          <!-- Mesure posemètre par flash -->
+          <div class="flash-src-mes">
+            <div class="flash-src-mes-label">📊 f/ mesurée au flashmètre</div>
+            <div class="flash-src-row">
+              <div class="ch" style="flex:1"><label style="color:#7ab3ff">f/ lue</label>
+                <input type="number" id="f_mes_base_0" value="" min="0.5" max="512" step="0.1" placeholder="ex: 6.7" class="flash-mes-input" oninput="recalcAuto()">
+              </div>
+              <div class="ch" style="flex:0 0 80px"><label style="color:#7ab3ff">Dixième</label>
+                <select id="f_mes_tenths_0" class="flash-mes-tenths" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select>
+              </div>
+            </div>
+          </div>
+          <!-- Badge résultat -->
+          <div id="src_result_0" class="flash-src-result"></div>
         </div>
       </div>
-      <div class="ch">
-        <label>Dixième diaph</label>
-        <select id="f_mes_tenths" style="border:2px solid var(--or);font-weight:700" onchange="recalcAuto()">
-          <option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option>
-        </select>
-      </div>
-      <div class="ch">
-        <label>Correction IL</label>
-        <select id="f_mes_il_corr" style="border:2px solid var(--or);font-weight:700;color:var(--or-c)" onchange="recalcAuto()">
-          <option value="0">0.0 IL</option>
-          <option value="0.1">+0.1 IL</option><option value="0.2">+0.2 IL</option><option value="0.3">+0.3 IL</option><option value="0.4">+0.4 IL</option><option value="0.5">+0.5 IL</option><option value="0.6">+0.6 IL</option><option value="0.7">+0.7 IL</option><option value="0.8">+0.8 IL</option><option value="0.9">+0.9 IL</option>
-        </select>
-      </div>
     </div>
-    <p style="font-size:8.5px;color:var(--tm);margin-top:12px;font-style:italic;line-height:1.4">Ex : posemètre affiche <b>f/6.4</b> → saisir <b>6.4</b> + <b>.2</b> dixièmes + correction artistique éventuelle.</p>
-  </div>
-</div>
-
-<!-- ND SECTION -->
-<div class="bloc">
-  <div class="btit"><div class="bnum" style="font-size:9px;letter-spacing:0">6</div><div class="blab">Filtres ND</div><div class="bligne"></div></div>
-  <div class="carte">
-    <p class="hint" style="margin-bottom:12px">Filtres ND <b>posés sur l'objectif</b>. Le résultat est recalculé automatiquement.</p>
-    <div class="g3">
-      <div class="ch"><label>ND 1</label><select id="nd1" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
-      <div class="ch"><label>ND 2</label><select id="nd2" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
-      <div class="ch"><label>ND 3</label><select id="nd3" onchange="calcND()"><option value="0">— aucun —</option><option value="1">ND2 (−1 IL)</option><option value="2">ND4 (−2 IL)</option><option value="3">ND8 (−3 IL)</option><option value="4">ND16 (−4 IL)</option><option value="5">ND32 (−5 IL)</option><option value="6">ND64 (−6 IL)</option><option value="7">ND128 (−7 IL)</option><option value="8">ND256 (−8 IL)</option><option value="9">ND512 (−9 IL)</option><option value="10">ND1000 (−10 IL)</option></select></div>
+    <div style="padding:0 14px 14px">
+      <button class="add-source-btn" id="add-source-btn" onclick="addSource()">＋ Ajouter une source</button>
     </div>
   </div>
 </div>
 
-<!-- BOUTONS -->
-<div class="rbtn">
-  <button class="cbtn bn" onclick="calculate(0)">▷ Mesure Normale</button>
-  <button class="cbtn bo2" onclick="calculate(1.33)">⚡ Opti +1.33 IL</button>
-</div>
-
-<!-- RÉSULTAT -->
+<!-- ⑤ RÉCAP RÉGLAGES (toujours visible, mise à jour live) -->
 <div id="result-box">
   <div class="rc" id="result-card">
     <div class="scan-ln"></div>
-    <div id="txt_type">PUISSANCE À RÉGLER</div>
-    <div id="res_flash">--</div>
-    <div id="res_correction"></div>
-    <div id="res_precise"></div>
-    <div id="conseil-nd" style="display:none;margin:10px 0 0;padding:10px 14px;background:rgba(192,85,69,.15);border:1px solid rgba(192,85,69,.5);border-radius:3px;font-size:11px;color:#e07060;line-height:1.6;text-align:left;position:relative;z-index:1"></div>
-    <div id="per-flash-box" style="display:none;margin:14px 0 0;position:relative;z-index:1"></div>
-    <div class="trop-luz" id="trop-luz">
-      <div class="trop-luz-titre">⬇ Trop de lumière — flash au minimum 1/512</div>
-      <div class="trop-luz-body">
-        <div class="trop-luz-exces" id="tl-exces">—</div>
-        <div class="tl-tabs"><button class="tl-tab active" onclick="tlTab('nd')">🔲 Filtre ND</button><button class="tl-tab" onclick="tlTab('apn')">📷 Réglage APN</button></div>
-        <div class="tl-panel active" id="tl-panel-nd">
-          <div class="nd-result" id="nd-result" style="display:none">
-            <div class="nd-result-line"><span class="nd-result-lbl">Total ND</span><span class="nd-result-val" id="nd-total-stops">—</span></div>
-            <div class="nd-result-line"><span class="nd-result-lbl">Flash après ND</span><span class="nd-result-val" id="nd-flash-result">—</span></div>
-            <div class="nd-result-line" id="nd-row-apn-v" style="display:none"><span class="nd-result-lbl">Vitesse APN suggérée</span><span class="nd-result-val" id="nd-apn-v">—</span></div>
-            <div class="nd-total-bar"><span class="nd-total-lbl">Réglage flash</span><span class="nd-total-val" id="nd-final">—</span></div>
-            <div style="font-size:9.5px;color:rgba(255,255,255,.3);margin-top:6px;font-style:italic" id="nd-verdict">—</div>
-          </div>
-        </div>
-        <div class="tl-panel" id="tl-panel-apn"><div id="apn-solutions"></div><div class="apn-note" id="apn-note">—</div></div>
-      </div>
-    </div>
-    <div class="alerte-puissance" id="alerte-puissance">
-      <div class="alerte-puissance-titre">⚠ Puissance insuffisante</div>
-      <div class="alerte-puissance-msg" id="alerte-msg">—</div>
-      <div class="alerte-conseil" id="alerte-conseil">—</div>
-    </div>
-    <div class="surexpo-box" id="surexpo-box">
-      <div class="surexpo-titre">🚫 Éteindre le flash — Surexposition source</div>
-      <div class="surexpo-msg" id="surexpo-msg">—</div>
-      <div class="surexpo-guide" id="surexpo-guide">—</div>
-    </div>
-    <div class="guide-nath" id="guide-nath">
-      <div class="guide-nath-titre">📖 Guide Nath Sakura — que faire ?</div>
-      <div class="guide-nath-context" id="guide-context">—</div>
-      <div class="guide-hss-warn" id="guide-hss-warn" style="display:none"></div>
-      <div class="guide-etapes" id="guide-etapes">—</div>
-    </div>
-    <div class="multi-flash-warning" id="multi-flash-warning">
-      <div class="mfw-titre">📐 Mesure posemètre obligatoire</div>
-      <div class="mfw-txt">⚠️ <b>Attention :</b> En cas de cumul de sources, refaites une mesure au posemètre avec <b>tous les flashs simultanément</b> avant de shooter.</div>
-    </div>
-    <div class="detail-corr">
-      <div class="dc-titre">Détail des corrections — Nath Sakura</div>
-      <div class="dc-row"><span class="dc-lbl">Écart f/ mesuré → f/ cible</span><span class="dc-val" id="dc_fstop"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Correction IL manuelle</span><span class="dc-val" id="dc_il_corr"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Compensation ISO</span><span class="dc-val" id="dc_iso"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Perte HSS (vitesse &gt; 1/200)</span><span class="dc-val" id="dc_hss"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Rôle du flash</span><span class="dc-val" id="dc_role"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Carnation peau <span class="dc-mode" id="dm_skin">incident</span></span><span class="dc-val" id="dc_skin"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Réflectance matière <span class="dc-mode" id="dm_mat">incident</span></span><span class="dc-val" id="dc_mat"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Distance (loi inv. carré)</span><span class="dc-val" id="dc_dist"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Opti Nath Sakura</span><span class="dc-val" id="dc_opti"></span></div>
-      <div class="dc-row"><span class="dc-lbl">Sources cumulées</span><span class="dc-val" id="dc_sources"></span></div>
-      <div class="dc-row" id="dc_nd_row" style="display:none"><span class="dc-lbl" style="color:#4caf75;font-weight:600">Filtre ND actif</span><span class="dc-val" id="dc_nd"></span></div>
-      <div class="dc-row" id="dc_nd_row" style="display:none"><span class="dc-lbl" style="color:#4caf75;font-weight:600">Filtre ND actif</span><span class="dc-val" id="dc_nd"></span></div>
-      <div class="dc-row"><span class="dc-lbl" style="color:var(--t);font-weight:700">Correction totale</span><span class="dc-val v-total" id="dc_total"></span></div>
+    <div id="txt_type" style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:8px">📋 RÉGLAGES À APPLIQUER</div>
+    <div id="flash-alerts" style="margin-bottom:8px"></div>
+    <div id="flash-recap-list"></div>
+    <button id="flash-detail-toggle" onclick="toggleFlashDetail()" style="background:none;border:1px solid rgba(255,255,255,.12);color:var(--tp);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:2px;cursor:pointer;width:100%;margin-top:10px">▼ Détail des corrections (Flash 1)</button>
+    <div class="detail-corr" id="flash-detail-corr" style="display:none;margin-top:8px">
+      <div class="dc-titre" id="flash-detail-titre">Détail corrections — Flash 1</div>
+      <div id="flash-detail-rows"></div>
+      <div class="dc-row"><span class="dc-lbl" style="color:var(--t);font-weight:700">Correction totale</span><span class="dc-val v-total" id="dc_total">—</span></div>
     </div>
   </div>
 </div>
@@ -530,124 +490,90 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 <!-- PANNEAU LUMIÈRE CONTINUE -->
 <div class="main-tab-panel" id="panel_continue">
 
-<!-- BOÎTIER CONTINUE — réutilise les mêmes champs boîtier -->
+<!-- ① RÉGLAGES BOÎTIER CIBLE -->
 <div class="bloc" style="margin-top:18px">
-  <div class="btit"><div class="bnum">1</div><div class="blab">Réglages Boîtier</div><div class="bligne"></div></div>
+  <div class="btit"><div class="bnum">1</div><div class="blab">Réglages Boîtier Cible</div><div class="bligne"></div></div>
   <div class="carte">
     <div class="g3">
       <div class="ch"><label>f/ cible</label>
         <select id="c_f_target" onchange="calcContinue()">
-          <option value="1.4">f/1.4</option><option value="2">f/2</option><option value="2.8">f/2.8</option>
-          <option value="4">f/4</option><option value="5.6" selected>f/5.6</option><option value="8">f/8</option>
-          <option value="11">f/11</option><option value="16">f/16</option><option value="22">f/22</option>
+          <option value="1.0">f/1.0</option><option value="1.2">f/1.2</option><option value="1.4">f/1.4</option>
+          <option value="1.8">f/1.8</option><option value="2.0">f/2.0</option><option value="2.5">f/2.5</option>
+          <option value="2.8">f/2.8</option><option value="3.5">f/3.5</option><option value="4.0">f/4.0</option>
+          <option value="5.6" selected>f/5.6</option><option value="8.0">f/8.0</option><option value="11">f/11</option>
+          <option value="16">f/16</option><option value="22">f/22</option>
         </select>
       </div>
-      <div class="ch"><label>ISO</label>
-        <select id="c_iso" onchange="calcContinue()">
-          <option value="100" selected>100</option><option value="200">200</option><option value="400">400</option>
-          <option value="800">800</option><option value="1600">1600</option><option value="3200">3200</option><option value="6400">6400</option>
-        </select>
-      </div>
-      <div class="ch"><label>Vitesse</label>
+      <div class="ch"><label>Vitesse cible</label>
         <select id="c_vitesse" onchange="calcContinue()">
-          <option value="30">30s</option><option value="15">15s</option><option value="8">8s</option><option value="4">4s</option>
-          <option value="2">2s</option><option value="1">1s</option><option value="0.5">1/2</option><option value="0.25">1/4</option>
-          <option value="0.125">1/8</option><option value="0.05">1/20</option><option value="0.033">1/30</option>
-          <option value="0.025">1/40</option><option value="0.02">1/50</option><option value="0.0167" selected>1/60</option>
+          <option value="30">30s</option><option value="15">15s</option><option value="8">8s</option>
+          <option value="4">4s</option><option value="2">2s</option><option value="1">1s</option>
+          <option value="0.5">1/2</option><option value="0.25">1/4</option><option value="0.125">1/8</option>
+          <option value="0.05">1/20</option><option value="0.033">1/30</option><option value="0.025">1/40</option>
+          <option value="0.02">1/50</option><option value="0.0167" selected>1/60</option>
           <option value="0.0125">1/80</option><option value="0.01">1/100</option><option value="0.008">1/125</option>
-          <option value="0.005">1/200</option><option value="0.004">1/250</option><option value="0.002">1/500</option>
-          <option value="0.001">1/1000</option>
+          <option value="0.005">1/200</option><option value="0.004">1/250</option>
+          <option value="0.002">1/500</option><option value="0.001">1/1000</option>
+        </select>
+      </div>
+      <div class="ch"><label>ISO cible</label>
+        <select id="c_iso" onchange="calcContinue()">
+          <option value="50">ISO 50</option><option value="100" selected>ISO 100</option><option value="200">ISO 200</option>
+          <option value="400">ISO 400</option><option value="800">ISO 800</option><option value="1600">ISO 1600</option>
+          <option value="3200">ISO 3200</option><option value="6400">ISO 6400</option>
         </select>
       </div>
     </div>
+    <!-- Intention Standard / Nath Sakura -->
+    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button id="cbtn_std" onclick="setContIntent(0)"
+        style="padding:10px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:2px;cursor:pointer;border:1.5px solid rgba(200,164,90,.4);background:rgba(200,164,90,.15);color:var(--or);transition:.2s">
+        STANDARD
+      </button>
+      <button id="cbtn_nath" onclick="setContIntent(1.33)"
+        style="padding:10px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:2px;cursor:pointer;border:1.5px solid rgba(200,164,90,.4);background:rgba(200,164,90,.15);color:var(--or);transition:.2s">
+        ⭐ NATH SAKURA
+      </button>
+    </div>
+    <div id="cont-intent-banner" style="margin-top:8px;padding:8px 11px;border-radius:2px;font-size:10px;color:var(--tm);background:rgba(200,164,90,.05);border:1px solid rgba(200,164,90,.12);line-height:1.5"></div>
   </div>
 </div>
 
-<!-- SOURCES CONTINUES -->
+<!-- ② MESURE POSEMÈTRE de la LED -->
 <div class="bloc">
-  <div class="btit"><div class="bnum">2</div><div class="blab">Sources de Lumière Continue</div><div class="bligne"></div></div>
+  <div class="btit"><div class="bnum">2</div><div class="blab">Mesure Posemètre de la LED</div><div class="bligne"></div></div>
   <div class="carte">
+    <p style="font-size:10.5px;color:var(--tm);margin-bottom:12px;line-height:1.6">
+      Pointez le posemètre <b>face à la LED</b> (lumisphère rentrée).<br>
+      Saisissez la valeur lue <b>à la vitesse de mesure</b> que vous avez utilisée.
+    </p>
+    <!-- Sources de LED — liste -->
     <div id="cont-sources-list"></div>
-    <button style="width:100%;margin-top:8px;padding:11px;background:transparent;border:1px dashed rgba(200,164,90,.35);border-radius:3px;color:var(--or);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer" onclick="addContSource()">+ Ajouter une source</button>
-    <div id="cont-total-line" style="margin-top:10px;font-size:10px;color:var(--tp);text-align:right;display:none"></div>
+    <button style="width:100%;margin-top:8px;padding:11px;background:transparent;border:1px dashed rgba(200,164,90,.35);border-radius:3px;color:var(--or);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer" onclick="addContSource()">+ Ajouter une LED</button>
   </div>
 </div>
 
-<!-- MESURE POSEMETRE CONTINUE -->
-<div class="bloc">
-  <div class="btit"><div class="bnum">3</div><div class="blab">Mesure (Sekonic / Luxmètre)</div><div class="bligne"></div></div>
-  <div class="carte">
-    <!-- Bascule f/ mesuré ou Lux -->
-    <div class="cont-mesure-tabs">
-      <div class="cont-mesure-tab sel" id="cmtab_fstop" onclick="setContMesure('fstop')">◉ f/ mesuré (Sekonic)</div>
-      <div class="cont-mesure-tab" id="cmtab_lux" onclick="setContMesure('lux')">◎ Valeur Lux</div>
-    </div>
-    <!-- Panneau f/ mesuré -->
-    <div id="cmpanel_fstop">
-      <div class="g3">
-        <div class="ch"><label>f/ mesuré</label>
-          <select id="c_fmes_base" onchange="calcContinue()">
-            <option value="1">f/1</option><option value="1.4">f/1.4</option><option value="2">f/2</option>
-            <option value="2.8">f/2.8</option><option value="4">f/4</option><option value="5.6" selected>f/5.6</option>
-            <option value="8">f/8</option><option value="11">f/11</option><option value="16">f/16</option><option value="22">f/22</option>
-          </select>
-        </div>
-        <div class="ch"><label>+ dixièmes IL</label>
-          <select id="c_fmes_tenths" onchange="calcContinue()">
-            <option value="0" selected>.0</option><option value="0.1">.1</option><option value="0.2">.2</option>
-            <option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option>
-            <option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option>
-          </select>
-        </div>
-        <div class="ch"><label>Distance mesure</label>
-          <select id="c_dist_mes" onchange="calcContinue()">
-            <option value="0.5">0.5 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option>
-            <option value="2">2 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <!-- Panneau Lux -->
-    <div id="cmpanel_lux" style="display:none">
-      <div class="g2">
-        <div class="ch"><label>Valeur Lux mesurée</label>
-          <input type="number" id="c_lux_val" value="1000" min="1" max="100000" onchange="calcContinue()" style="width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--or-b);border-radius:2px;color:#fff;font-size:13px">
-        </div>
-        <div class="ch"><label>Distance mesure</label>
-          <select id="c_lux_dist" onchange="calcContinue()">
-            <option value="0.5">0.5 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option>
-            <option value="2">2 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <!-- Distance cible -->
-    <div class="g2" style="margin-top:10px">
-      <div class="ch"><label>Distance source → sujet</label>
-        <select id="c_dist_cible" onchange="calcContinue()">
-          <option value="0.5">0.5 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option>
-          <option value="2">2 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option>
-          <option value="6">6 m</option><option value="8">8 m</option><option value="10">10 m</option>
-        </select>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- RÉSULTAT CONTINUE -->
+<!-- ③ RÉSULTAT -->
 <div id="cont-result-box" style="display:none">
   <div class="cont-result-box">
-    <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tp);margin-bottom:8px" id="cont-res-type">RÉSULTAT LUMIÈRE CONTINUE</div>
+    <div id="cont-res-type" style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tp);margin-bottom:8px">RÉGLAGE LED CONTINUE</div>
     <div class="cont-res-main" id="cont-res-main">--</div>
     <div class="cont-res-sub" id="cont-res-sub"></div>
+
+    <!-- Bandeau écart IL -->
+    <div id="cont-ecart-bar" style="display:none;margin-top:12px;padding:10px 14px;border-radius:3px;font-size:11px;line-height:1.8"></div>
+
+    <!-- Conseils détaillés -->
     <div id="cont-conseil" style="display:none" class="cont-conseil"></div>
-    <div id="cont-reglage-box" style="display:none;margin-top:12px;padding:10px 12px;background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.25);border-radius:3px;font-size:11px;line-height:1.8;color:var(--tm)"></div>
+
+    <!-- Détail des vitesses équivalentes -->
+    <div id="cont-vitesses-box" style="display:none;margin-top:10px;padding:10px 13px;background:rgba(200,164,90,.05);border:1px solid rgba(200,164,90,.18);border-radius:3px;font-size:11px;color:var(--tm);line-height:2"></div>
   </div>
-  <!-- Bouton connexion Flash -->
   <div class="mixte-banner" onclick="importVersMixte()" id="cont-mixte-btn">
     ⚡ Utiliser en mode MIXTE avec Flash — importer ces valeurs
   </div>
 </div>
+
 </div><!-- fin panel_continue -->
 
 <!-- PANNEAU MIXTE -->
@@ -878,69 +804,122 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
 <script>
 let modeMesure='incident',lastOptiValue=0,sourceCount=1;
-var _tropLuzExcesIL=0,_tropLuzVApn=0,_tropLuzIso=100,_tropLuzFTarget=8;
+
+function setIntent(optiVal){
+  lastOptiValue=optiVal;
+  const isNath=optiVal>0;
+  const btnStd=document.getElementById('btn_intent_std');
+  const btnNath=document.getElementById('btn_intent_nath');
+  if(btnStd&&btnNath){
+    btnStd.style.background=isNath?'rgba(200,164,90,.15)':'var(--or)';
+    btnStd.style.color=isNath?'var(--or)':'#000';
+    btnStd.style.border=isNath?'1.5px solid rgba(200,164,90,.4)':'none';
+    btnNath.style.background=isNath?'var(--or)':'rgba(200,164,90,.15)';
+    btnNath.style.color=isNath?'#000':'var(--or)';
+    btnNath.style.border=isNath?'none':'1.5px solid rgba(200,164,90,.4)';
+  }
+  recalcAuto();
+}
+function _updateIntentBanner(){
+  const fTarget=parseFloat((document.getElementById('f_target')||{value:'5.6'}).value)||5.6;
+  const vApn=parseFloat((document.getElementById('v_apn')||{value:'0.008'}).value)||0.008;
+  const skin=modeMesure==='incident'?parseFloat((document.getElementById('skin_tone')||{value:'0'}).value)||0:0;
+  const mat=modeMesure==='incident'?parseFloat((document.getElementById('matiere')||{value:'0'}).value)||0:0;
+  const fCible=fTarget*Math.pow(Math.sqrt(2),skin+mat+lastOptiValue);
+  const isHSS=vApn<0.005;
+  const el=document.getElementById('intent-cible-val');
+  const hss=document.getElementById('intent-cible-hss');
+  const sub=document.getElementById('intent-cible-sub');
+  if(el) el.textContent='f/'+fCible.toFixed(1);
+  if(hss) hss.style.display=isHSS?'inline':'none';
+  if(sub){
+    const parts=[];
+    if(lastOptiValue>0) parts.push('⭐ +1.33 IL Nath Sakura');
+    if(skin!==0||mat!==0) parts.push('corrections actives');
+    sub.textContent=parts.join(' · ');
+  }
+}
 
 function addSource(){
   if(sourceCount>=6)return;
   const idx=sourceCount++;
-  const row=document.createElement('div');
-  row.className='source-row';row.id='source-'+idx;
-  row.innerHTML=`<span class="source-label">Flash ${idx+1}</span><div class="source-fields"><div class="ch"><label>Puissance Test</label><div class="prow"><select id="p_test_base_${idx}" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint (0 Ws)</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select><select id="p_test_tenths_${idx}" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select></div></div><div class="ch"><label>Puissance Max (Ws)</label><select id="p_max_${idx}" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="76">76 Ws (V1)</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select></div></div><button class="source-remove" onclick="removeSource(${idx})" title="Supprimer">×</button>`;
-  document.getElementById('sources-container').appendChild(row);
+  const card=document.createElement('div');
+  card.className='flash-src-card';card.id='source-'+idx;
+  card.innerHTML=`
+    <div class="flash-src-header">
+      <span class="flash-src-num">Flash ${idx+1}</span>
+      <select id="src_role_${idx}" onchange="recalcAuto()" class="flash-src-role-sel">
+        <optgroup label="Lumière Principale"><option value="0" selected>💡 Key Light (0 IL)</option></optgroup>
+        <optgroup label="Débouchage (Fill)"><option value="-0.5">🌒 Fill −0.5 IL</option><option value="-1">🌒 Fill −1 IL</option><option value="-1.5">🌑 Fill −1.5 IL</option><option value="-2">🌑 Fill −2 IL</option><option value="-2.5">📉 Fill −2.5 IL</option><option value="-3">📉 Fill −3 IL</option></optgroup>
+        <optgroup label="Accents &amp; Séparation"><option value="0.5">🌟 Rim +0.5 IL</option><option value="1">✨ Hair +1 IL</option><option value="1.5">🌟 Rim +1.5 IL</option><option value="2">🔥 Kicker +2 IL</option><option value="2.5">🔥 Kicker +2.5 IL</option></optgroup>
+        <optgroup label="Arrière-plan"><option value="-1">🖼️ Fond −1 IL</option><option value="0.1">🖼️ Fond Neutre</option><option value="1">🖼️ Fond +1 IL</option><option value="2">🖼️ Fond +2 IL</option><option value="3">🚀 High Key +3 IL</option></optgroup>
+      </select>
+      <button class="flash-src-del" onclick="removeSource(${idx})" title="Supprimer">×</button>
+    </div>
+    <div class="flash-src-body">
+      <div class="flash-src-row">
+        <div class="ch" style="flex:1"><label>Puissance Test</label>
+          <div class="prow">
+            <select id="p_test_base_${idx}" onchange="recalcAuto()"><option value="0" selected>⬛ Éteint</option><option value="1">1/1</option><option value="2">1/2</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option><option value="32">1/32</option><option value="64">1/64</option><option value="128">1/128</option><option value="256">1/256</option><option value="512">1/512</option></select>
+            <select id="p_test_tenths_${idx}" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select>
+          </div>
+        </div>
+        <div class="ch" style="flex:1"><label>Puissance Max (Ws)</label>
+          <select id="p_max_${idx}" onchange="recalcAuto()"><option value="0">— Non renseignée</option><option value="20">20 Ws</option><option value="30">30 Ws</option><option value="40">40 Ws</option><option value="50">50 Ws</option><option value="60">60 Ws</option><option value="75">75 Ws</option><option value="76">76 Ws (V1)</option><option value="80">80 Ws</option><option value="100">100 Ws</option><option value="150">150 Ws</option><option value="200">200 Ws</option><option value="250">250 Ws</option><option value="300">300 Ws</option><option value="400">400 Ws</option><option value="500">500 Ws</option><option value="600">600 Ws</option><option value="800">800 Ws</option><option value="1000">1 000 Ws</option><option value="1200">1 200 Ws</option><option value="1500">1 500 Ws</option><option value="2000">2 000 Ws</option><option value="2400">2 400 Ws</option><option value="3000">3 000 Ws</option></select>
+        </div>
+      </div>
+      <div class="flash-src-mes">
+        <div class="flash-src-mes-label">📊 f/ mesurée au flashmètre</div>
+        <div class="flash-src-row">
+          <div class="ch" style="flex:1"><label style="color:#7ab3ff">f/ lue</label>
+            <input type="number" id="f_mes_base_${idx}" value="" min="0.5" max="512" step="0.1" placeholder="ex: 6.7" class="flash-mes-input" oninput="recalcAuto()">
+          </div>
+          <div class="ch" style="flex:0 0 80px"><label style="color:#7ab3ff">Dixième</label>
+            <select id="f_mes_tenths_${idx}" class="flash-mes-tenths" onchange="recalcAuto()"><option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option><option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option><option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option><option value="0.9">.9</option></select>
+          </div>
+        </div>
+      </div>
+      <div id="src_result_${idx}" class="flash-src-result"></div>
+    </div>`;
+  document.getElementById('sources-container').appendChild(card);
   if(sourceCount>=6)document.getElementById('add-source-btn').style.display='none';
-  majSourcesTotal();recalcAuto();
+  recalcAuto();
 }
 function removeSource(idx){
   const el=document.getElementById('source-'+idx);if(el)el.remove();
-  sourceCount=document.querySelectorAll('.source-row').length;
-  document.querySelectorAll('.source-row').forEach((r,i)=>{const l=r.querySelector('.source-label');if(l)l.textContent='Flash '+(i+1);});
+  // Renuméroter
+  const cards=document.querySelectorAll('.flash-src-card');
+  sourceCount=cards.length;
+  cards.forEach((c,i)=>{const n=c.querySelector('.flash-src-num');if(n)n.textContent='Flash '+(i+1);});
   document.getElementById('add-source-btn').style.display='';
-  majSourcesTotal();recalcAuto();
+  recalcAuto();
 }
 function getActiveSources(){
-  return Array.from(document.querySelectorAll('.source-row')).map(row=>{
+  // Supporte à la fois .flash-src-card (nouvel onglet) et .source-row (héritage)
+  const rows=Array.from(document.querySelectorAll('.flash-src-card,.source-row'));
+  return rows.map(row=>{
     const id=row.id.replace('source-','');
     const b=document.getElementById('p_test_base_'+id);
     const t=document.getElementById('p_test_tenths_'+id);
     const m=document.getElementById('p_max_'+id);
+    const r=document.getElementById('src_role_'+id);
     if(!b)return null;
     const base=parseInt(b.value);
-    if(base===0)return null; // Flash éteint → ignoré dans les calculs
-    return{base,tenths:parseFloat(t.value),maxWs:m?parseFloat(m.value):0};
+    if(base===0)return null;
+    return{base,tenths:parseFloat(t.value),maxWs:m?parseFloat(m.value):0,role:r?parseFloat(r.value):0};
   }).filter(Boolean);
 }
-function majSourcesTotal(){
-  const s=getActiveSources();
-  // Total puissance maximale brute (pour info)
-  const twMax=s.reduce((a,x)=>a+x.maxWs,0);
-  // Total puissance réelle au réglage test
-  const twReel=s.reduce((a,x)=>x.maxWs>0?a+x.maxWs*Math.pow(2,-(Math.log2(x.base)+x.tenths)):a,0);
-  const el=document.getElementById('sources-total');
-  // Affichage avec décimales si < 1 Ws
-  const fmtWs=v=>v<1?v.toFixed(3)+' Ws':v<10?v.toFixed(2)+' Ws':Math.round(v).toLocaleString('fr-FR')+' Ws';
-  if(s.length>0&&twMax>0){
-    el.style.display='flex';
-    const txt=twReel<twMax
-      ?fmtWs(twReel)+' réels (max '+twMax.toLocaleString('fr-FR')+' Ws)'
-      :twMax.toLocaleString('fr-FR')+' Ws';
-    document.getElementById('sources-total-val').textContent=txt;
-  } else el.style.display='none';
-}
-function getCumulatedPowerStops(sources){
-  if(!sources.length)return{gainIL:0};
-  const hasWs=sources.every(s=>s.maxWs>0);
-  if(hasWs){
-    // Puissance réelle de chaque flash à son réglage test = maxWs / base (fraction de puissance)
-    const wsReels=sources.map(s=>s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)));
-    const totalWs=wsReels.reduce((a,b)=>a+b,0);
-    const ws0=wsReels[0]; // Ws réels du flash principal à son réglage test
-    return{gainIL:ws0>0?Math.log2(totalWs/ws0):0};
-  } else {
-    // Pas de Ws : suppose flashs identiques, cumule les ratios de réglage
-    const powers=sources.map(s=>Math.pow(2,-(Math.log2(s.base)+s.tenths)));
-    const total=powers.reduce((a,b)=>a+b,0);
-    return{gainIL:Math.log2(total/powers[0])};
-  }
+function majSourcesTotal(){ /* no-op — sources-total element removed */ }
+function getCumulatedPowerStops(sources, mainSourceRole){
+  if(!sources.length)return{gainIL:0,nKey:1};
+  // Règle Maître de l'Exposition (identique au mode Mixte) :
+  // Seules les Key Lights (role=0) se partagent l'effort → fCible / √nKey chacune.
+  // Fill, Rim, Fond sont INDÉPENDANTES → gainIL=0 pour elles (ratio créatif, pas cumulé).
+  const nKey = sources.filter(s=>Math.abs(s.role||0)<0.01).length;
+  const isMainKey = Math.abs(mainSourceRole||0) < 0.01;
+  if(!isMainKey || nKey<=1) return{gainIL:0, nKey:Math.max(1,nKey)};
+  // nKey Keys → chacune vise fCible/√nKey → gainIL = -log2(nKey)/2 stops f/
+  return{gainIL:-Math.log2(nKey)/2, nKey};
 }
 function setMode(mode){
   modeMesure=mode;
@@ -956,10 +935,7 @@ function setMode(mode){
   else{bc.className='refl-badge rb-inactif';bc.textContent='neutralisé — réfléchi';bm.className='refl-badge rb-inactif';bm.textContent='neutralisé — réfléchi';}
   document.getElementById('mode_info').innerHTML=inc?'<b>Mode incident :</b> corrections <b>carnation</b> et <b>matière</b> sont <b>actives</b>.':'<b>Mode réfléchi / TTL :</b> corrections carnation et matière <b>neutralisées à 0 IL</b>.';
   document.getElementById('hint_mat').innerHTML=inc?'Posemètre <b>incident</b> : correction réflectance <b>active</b>.':'Posemètre <b>réfléchi</b> : correction <b>neutralisée à 0 IL</b>.';
-  const ds=document.getElementById('dm_skin'),dm2=document.getElementById('dm_mat');
-  if(inc){ds.className='dc-mode dm-actif';ds.textContent='incident';dm2.className='dc-mode dm-actif';dm2.textContent='incident';}
-  else{ds.className='dc-mode dm-zero';ds.textContent='réfléchi';dm2.className='dc-mode dm-zero';dm2.textContent='réfléchi';}
-  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
+  recalcAuto();
 }
 const CARN_COL={'-2.33':'#F5E6D8','-2':'#F0DDD0','-1.67':'#EDD5C0','-1.5':'#E8CDB8','-1.33':'#E0C4AC','-1.17':'#D8BAA0','-1':'#D0AF94','-0.83':'#C8A484','0':'#C68642','0.17':'#C07840','0.33':'#BA6E3A','0.5':'#B46434','0.67':'#AA5A2E','0.83':'#9A4E28','1':'#8A4422','1.17':'#7A3A1C','1.33':'#6A3018','1.5':'#5A2814','1.67':'#4A2010','2':'#3A1A0C','2.33':'#2A1208'};
 function majCarn(){
@@ -976,17 +952,10 @@ function majRefl(){
   const pct=Math.min(99,Math.max(1,Math.round(18*Math.pow(2,-il))));
   document.getElementById('refl_pct').textContent=pct+'%';
   document.getElementById('refl_bar').style.width=pct+'%';
-  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
+  recalcAuto();
 }
 function majDist(){
-  const dm=parseFloat(document.getElementById('dist_mes').value);
-  const dc=parseFloat(document.getElementById('dist_cible').value);
-  const il=2*Math.log2(dc/dm);
-  const el=document.getElementById('dist_result');
-  if(Math.abs(il)<0.01)el.innerHTML='Flash à la <b>même distance</b> — 0 IL';
-  else if(il>0)el.innerHTML='Flash plus loin (<b>'+dm+'m → '+dc+'m</b>) — <b>+'+il.toFixed(2)+' IL</b>';
-  else el.innerHTML='Flash plus proche (<b>'+dm+'m → '+dc+'m</b>) — réduire de <b>'+Math.abs(il).toFixed(2)+' IL</b>';
-  if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);
+  recalcAuto();
 }
 function fmtIL(v){
   if(Math.abs(v)<0.005)return'<span class="v-neu">0 IL</span>';
@@ -994,14 +963,8 @@ function fmtIL(v){
 }
 function recalcAuto(){
   majSourcesTotal();
-  if(document.getElementById('result-box').style.display==='block'){
-    calculate(lastOptiValue);
-    // Si des ND sont actifs, recalculer aussi l'affichage ND
-    const nd1=parseFloat(document.getElementById('nd1').value)||0;
-    const nd2=parseFloat(document.getElementById('nd2').value)||0;
-    const nd3=parseFloat(document.getElementById('nd3').value)||0;
-    if(nd1+nd2+nd3>0)calcND();
-  }
+  _updateIntentBanner();
+  calcFlashPerSource(lastOptiValue);
 }
 function tlTab(tab){
   document.querySelectorAll('.tl-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='nd')||(i===1&&tab==='apn')));
@@ -1059,795 +1022,780 @@ function conseilNathND(excessIL, wsManquants, maxWsFlash, totalND){
   }
 }
 
-function calcND(){
-  const nd1=parseFloat(document.getElementById('nd1').value)||0;
-  const nd2=parseFloat(document.getElementById('nd2').value)||0;
-  const nd3=parseFloat(document.getElementById('nd3').value)||0;
-  const totalND=nd1+nd2+nd3;
+function calcND(){ /* ND removed from Flash tab */ }
+function tlTab(tab){}
 
-  // Mettre à jour l'affichage ND interne
-  if(!totalND){
-    document.getElementById('nd-result').style.display='none';
-    const _cnd0=document.getElementById('conseil-nd');if(_cnd0)_cnd0.style.display='none';
-    // Remettre le résultat principal en "1/512 MIN" si pas de ND
-    const rf0=document.getElementById('res_flash');rf0.innerText='1/512 MIN';rf0.classList.remove('expo-ok-txt','surexpo-txt');
-    document.getElementById('txt_type').innerText=document.getElementById('txt_type').innerText.replace(' [ND]','');
-    _majDetailND(null, 0);
-    return;
-  }
+function _majDetailND(){ /* removed */ }
 
-  document.getElementById('nd-result').style.display='block';
-  document.getElementById('surexpo-box').classList.remove('visible');
-  const restIL=_tropLuzExcesIL-totalND;
-  // rawDenom après ND : on part de rawDenom original = 512 * 2^excesIL, on lui enlève totalND IL
-  const rawDenomAfterND=Math.pow(2,Math.log2(512)+_tropLuzExcesIL-totalND);
-  const flashDenom=Math.pow(2,Math.log2(512)-restIL); // identique
-  document.getElementById('nd-total-stops').textContent='−'+totalND.toFixed(0)+' IL';
-  const nfEl=document.getElementById('nd-flash-result'),finEl=document.getElementById('nd-final'),vrdEl=document.getElementById('nd-verdict'),rowV=document.getElementById('nd-row-apn-v');
+// ══ CALCUL PAR SOURCE — LOGIQUE IDENTIQUE MIXTE ══
+function calcFlashPerSource(optiValue){
+  lastOptiValue = optiValue;
+  const fTarget    = parseFloat((document.getElementById('f_target')||{value:'5.6'}).value) || 5.6;
+  const vApn       = parseFloat((document.getElementById('v_apn')||{value:'0.008'}).value) || 0.008;
+  const isoApn     = parseFloat((document.getElementById('iso_apn')||{value:'100'}).value) || 100;
+  const skinMod    = modeMesure==='incident' ? parseFloat((document.getElementById('skin_tone')||{value:'0'}).value)||0 : 0;
+  const matiereMod = modeMesure==='incident' ? parseFloat((document.getElementById('matiere')||{value:'0'}).value)||0 : 0;
 
-  if(restIL<=0){
-    // ND surdimensionné — calculer la puissance max utilisable
-    const margeIL=Math.abs(restIL);
-    const rawDenomAvecMarge=512/Math.pow(2,margeIL); // <1 = dépasse 1/1
+  // Cible globale : fTarget × √2^(carn + mat + opti)  — même loi que Mixte
+  const fCibleGlobale = fTarget * Math.pow(Math.sqrt(2), skinMod + matiereMod + optiValue);
 
-    if(rawDenomAvecMarge<1){
-      document.getElementById('nd-result').style.display='block';
-      // IL encore en excès même à pleine puissance
-      // Recalculer depuis les Ws cumulés actuels (pas _lastCorr qui peut être périmé)
-      const srcNow=getActiveSources();
-      const hasWsNow=srcNow.length>0&&srcNow.every(s=>s.maxWs>0);
-      let excessApres11=-Math.log2(rawDenomAvecMarge); // manque en IL (positif car rawDenomAvecMarge<1)
-      if(hasWsNow&&window._lastCorr&&window._lastCorr.maxWs>0){
-        // Ws RÉELS cumulés de tous les flashs actifs (maxWs × fraction du réglage test)
-        const wsReelsCumules=srcNow.reduce((a,s)=>a+s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)),0);
-        const wsReelsFlashPrincipal=window._lastCorr.maxWs*Math.pow(2,-(Math.log2(window._lastCorr.testBase||1)+(window._lastCorr.testTenths||0)));
-        // Gain IL des Ws réels cumulés vs flash principal seul
-        const gainILCumul=wsReelsFlashPrincipal>0?Math.log2(wsReelsCumules/wsReelsFlashPrincipal):0;
-        // Manque réel = manque brut - gain des flashs supplémentaires
-        excessApres11=Math.max(-Math.log2(rawDenomAvecMarge)-gainILCumul, 0);
-      }
-      if(window._lastCorr)window._lastCorr.excessApres11=excessApres11;
-      const maxWsFlash=window._lastCorr&&window._lastCorr.maxWs>0?window._lastCorr.maxWs:0;
-      // Ws réels du flash au réglage test (testBase/testTenths stockés)
-      const testBase=window._lastCorr&&window._lastCorr.testBase>0?window._lastCorr.testBase:1;
-      const testTenths=window._lastCorr?window._lastCorr.testTenths:0;
-      const wsReelsTest=maxWsFlash>0?maxWsFlash*Math.pow(2,-(Math.log2(testBase)+testTenths)):0;
-      // Calculer le ND optimal
-      const ndOptimalIL=Math.ceil(_tropLuzExcesIL);
-      const ndOptimal='ND'+Math.round(Math.pow(2,ndOptimalIL));
-      let wsMsg='<br>💡 Utilisez un ND moins fort : <b>'+ndOptimal+' (−'+ndOptimalIL+' IL)</b> suffit.';
-      nfEl.innerHTML='<span style="color:#f0a04a">⚠ ND trop fort — même 1/1 max est trop puissant (+'+excessApres11.toFixed(1)+' IL de trop en plus)</span>';
-      nfEl.className='nd-result-val';
-      finEl.textContent='1/1 MAX — encore trop';
-      vrdEl.innerHTML='Avec ce ND (−'+totalND+' IL), même à pleine puissance (1/1) il reste <b>'+excessApres11.toFixed(1)+' IL en excès</b>.'+wsMsg;
-      const rfM=document.getElementById('res_flash');
-      if(excessApres11<=0.05){
-        rfM.innerText='✓ EXPO CORRECTE';rfM.classList.add('expo-ok-txt');rfM.classList.remove('surexpo-txt');
-      } else if(testBase===1){
-        // Flash déjà à 1/1 — ne pas répéter 1/1, juste montrer le manque
-        rfM.innerText='manque '+excessApres11.toFixed(1)+' IL';rfM.classList.remove('expo-ok-txt','surexpo-txt');
-      } else {
-        rfM.innerText='1/1 MAX\nmanque '+excessApres11.toFixed(1)+' IL';rfM.classList.remove('expo-ok-txt','surexpo-txt');
-      }
-      // Conseil
-      const cNd=document.getElementById('conseil-nd');
-      cNd.style.display='block';
-      const srcActives=getActiveSources();
-      const lastRawDenom=window._lastCorr&&window._lastCorr.rawDenom>0?window._lastCorr.rawDenom:null;
-      if(srcActives.length>=2&&srcActives.every(s=>s.maxWs>0)&&lastRawDenom){
-        cNd.style.background='rgba(76,175,117,.12)';
-        cNd.style.borderColor='rgba(76,175,117,.4)';
-        cNd.style.color='#4caf75';
-        if(excessApres11<=0.05){
-          cNd.innerHTML='✅ <b>Flash OK — exposition correcte avec ce réglage</b>';
-        } else {
-          // Ws nécessaires totaux basés sur les Ws MAX cumulés de tous les flashs actifs
-          const wsMaxCumules=srcActives.reduce((a,s)=>a+s.maxWs,0);
-          // Ws réels actuels par flash (au réglage test)
-          const wsReelParFlash=srcActives.map(s=>s.maxWs*Math.pow(2,-(Math.log2(s.base)+s.tenths)));
-          const wsDejaTotaux=wsReelParFlash.reduce((a,v)=>a+v,0);
-          // Ws totaux nécessaires = Ws cumulés actuels × 2^manque restant
-          const wsTotalNec=wsDejaTotaux*Math.pow(2,excessApres11);
-          // Ws manquants = ce qu'il faut en plus
-          const wsManquants=Math.max(wsTotalNec-wsDejaTotaux,0);
-          // Flashs qui ne sont pas encore à 1/1
-          const flashsAMonter=srcActives.filter((s,i)=>wsReelParFlash[i]<s.maxWs*0.98);
-          // Répartition équitable du manque entre les flashs à monter
-          const wsParFlashAMonter=flashsAMonter.length>0?wsManquants/flashsAMonter.length:0;
-          let tousAMax=true;
-          srcActives.forEach((s,i)=>{if(wsReelParFlash[i]<s.maxWs*0.98) tousAMax=false;});
+  // Boîtier
+  const stopsISO = Math.log2(isoApn/100);
+  const isHSS    = vApn < 0.005;
+  const stopsV   = isHSS ? Math.log2(0.005/vApn) : 0; // perte HSS
 
-          if(tousAMax){
-            // Tous à 1/1 et encore insuffisant — conseil adapté au niveau d'irréalisme
-            const c=conseilNathND(excessApres11, wsManquants, maxWsFlash, totalND);
-            let lignes='⛔ <b>LIMITE PHYSIQUE — tous les flashs au max</b><br>';
-            srcActives.forEach((s,i)=>{ lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>1/1 MAX</b><br>'; });
-            lignes+='<br>'+c.txt;
-            cNd.style.background=c.color;
-            cNd.style.borderColor=c.border;
-            cNd.style.color=c.text;
-            cNd.innerHTML=lignes;
-          } else {
-            // Des flashs peuvent encore monter — montrer les réglages cibles
-            let lignes='⚠️ <b>Puissance insuffisante — à ajuster :</b><br>';
-            srcActives.forEach((s,i)=>{
-              const wsReelActuel=wsReelParFlash[i];
-              const dejaMax=wsReelActuel>=s.maxWs*0.98;
-              if(dejaMax){
-                lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>1/1</b> ✓<br>';
-              } else {
-                const wsNec=wsReelActuel+wsParFlashAMonter;
-                const denomF=s.maxWs/Math.max(wsNec,0.0001);
-                const dispF=powerToDisplay(denomF);
-                const reg=dispF.ok?dispF.txt:(denomF<=0.7?'<span style="color:#e07060">1/1 MAX — insuffisant</span>':'⬛ ÉTEINDRE');
-                lignes+='Flash '+(i+1)+' ('+s.maxWs+' Ws) : <b>'+reg+'</b><br>';
-              }
-            });
-            cNd.style.background='rgba(192,85,69,.15)';
-            cNd.style.borderColor='rgba(192,85,69,.5)';
-            cNd.style.color='#e07060';
-            cNd.innerHTML=lignes;
-          }
-        }
-      } else if(wsReelsTest>0&&maxWsFlash>0){
-        if(excessApres11<=0.05){
-          // Expo correcte — conseil vert
-          cNd.style.background='rgba(76,175,117,.12)';
-          cNd.style.borderColor='rgba(76,175,117,.4)';
-          cNd.style.color='#4caf75';
-          cNd.innerHTML='✅ <b>Flash OK — exposition correcte avec ce réglage</b>';
-        } else {
-          // 1 seul flash insuffisant → conseil rouge
-          cNd.style.background='rgba(192,85,69,.15)';
-          cNd.style.borderColor='rgba(192,85,69,.5)';
-          cNd.style.color='#e07060';
-          const wsNecessaires=maxWsFlash*Math.pow(2,excessApres11);
-          const wsFlashSupp=Math.round(Math.max(wsNecessaires-maxWsFlash,0));
-          if(testBase===1){
-            // Flash déjà à 1/1 — conseil adapté au niveau d'irréalisme
-            const c=conseilNathND(excessApres11, wsFlashSupp, maxWsFlash, totalND);
-            let conseil='⛔ <b>Flash à pleine puissance ('+maxWsFlash+' Ws) — insuffisant</b><br><br>'+c.txt;
-            cNd.style.background=c.color; cNd.style.borderColor=c.border; cNd.style.color=c.text;
-            cNd.innerHTML=conseil;
-          } else if(excessApres11>5){
-            // Pas encore à 1/1 mais même 1/1 sera irréaliste — dire la vérité directement
-            const c=conseilNathND(excessApres11, wsFlashSupp, maxWsFlash, totalND);
-            let conseil='⛔ <b>ND trop fort — même à 1/1 ('+maxWsFlash+' Ws) ce sera insuffisant</b><br><br>'+c.txt;
-            cNd.style.background=c.color; cNd.style.borderColor=c.border; cNd.style.color=c.text;
-            cNd.innerHTML=conseil;
-          } else {
-            // Flash pas encore à 1/1 et manque atteignable — conseil normal
-            let conseil='⚠️ <b>Conseil Nath Sakura :</b><br>';
-            conseil+='① Monte d\'abord ton flash à <b>1/1 ('+maxWsFlash+' Ws max)</b><br>';
-            if(wsFlashSupp>0)
-              conseil+='② Puis ajoute un flash d\'au moins <b>'+wsFlashSupp+' Ws</b> pour couvrir le manque restant.';
-            cNd.style.background='rgba(192,85,69,.15)'; cNd.style.borderColor='rgba(192,85,69,.5)'; cNd.style.color='#e07060';
-            cNd.innerHTML=conseil;
-          }
-        }
-      } else {
-        cNd.style.background='rgba(192,85,69,.15)';
-        cNd.style.borderColor='rgba(192,85,69,.5)';
-        cNd.style.color='#e07060';
-        cNd.innerHTML='⚠️ <b>Conseil Nath Sakura :</b> renseignez la puissance Ws du flash pour le calcul précis.';
-      }
-      vrdEl.innerHTML='ND (−'+totalND+' IL) : il manque <b>'+excessApres11.toFixed(1)+' IL</b> même à 1/1.'+wsMsg;
-      _majTxtTypeND(true);
-      _majDetailND('1/1 MAX — manque '+excessApres11.toFixed(1)+' IL',totalND);
+  // Lire toutes les sources (flash-src-card)
+  const cards = Array.from(document.querySelectorAll('.flash-src-card'));
+  const sourcesData = cards.map(card=>{
+    const id = card.id.replace('source-','');
+    const base     = parseInt((document.getElementById('p_test_base_'+id)||{value:'0'}).value)||0;
+    const tenths   = parseFloat((document.getElementById('p_test_tenths_'+id)||{value:'0'}).value)||0;
+    const maxWs    = parseFloat((document.getElementById('p_max_'+id)||{value:'0'}).value)||0;
+    const role     = parseFloat((document.getElementById('src_role_'+id)||{value:'0'}).value)||0;
+    const fMesBase = parseFloat((document.getElementById('f_mes_base_'+id)||{value:''}).value)||0;
+    const fMesTenths= parseFloat((document.getElementById('f_mes_tenths_'+id)||{value:'0'}).value)||0;
+    return {id, base, tenths, maxWs, role, fMesBase, fMesTenths};
+  });
+
+  // Nombre de Keys pour partage d'effort
+  const nKey = Math.max(1, sourcesData.filter(s=>Math.abs(s.role)<0.01).length);
+
+  // ── Mise à jour bandeau intention ──
+  _updateIntentBanner();
+
+  // ── Calcul + rendu par source ──
+  let recapRows = '';
+  let firstDetails = null;
+
+  sourcesData.forEach((src, i)=>{
+    const resBox   = document.getElementById('src_result_'+src.id);
+    const flashNum = i+1;
+    const isKey    = Math.abs(src.role) < 0.01;
+    const roleSel  = document.getElementById('src_role_'+src.id);
+    const roleLabel= roleSel ? roleSel.options[roleSel.selectedIndex].text
+      .replace(/[\u{1F300}-\u{1FAFF}]/gu,'').trim() : 'Key Light';
+
+    // Cible individuelle
+    const fCible = isKey
+      ? fCibleGlobale / Math.sqrt(nKey)
+      : fCibleGlobale * Math.pow(Math.sqrt(2), src.role);
+
+    if(!resBox) return;
+
+    // ── Flash éteint ──
+    if(src.base===0){
+      resBox.innerHTML=`<div class="src-badge-cible">
+        🎯 Cible : <b style="color:var(--or)">f/${fCible.toFixed(1)}</b>
+        <span style="color:var(--tp)"> — sélectionne une puissance test</span>
+      </div>`;
+      recapRows += `<div class="recap-row">
+        <span class="recap-name">Flash ${flashNum} <span class="recap-role">${roleLabel}</span></span>
+        <span class="recap-power" style="color:var(--tp)">⬛ éteint</span>
+      </div>`;
+      return;
+    }
+
+    const currentPowerStops = Math.log2(src.base) + src.tenths;
+    const stopsTarget = 2 * Math.log2(fCible);
+
+    // ── Pas encore de mesure ──
+    if(src.fMesBase===0){
+      resBox.innerHTML=`<div class="src-badge-cible">
+        🎯 <b>Cible flashmètre :</b>
+        <span style="font-family:Georgia,serif;font-size:17px;color:var(--or);margin:0 4px">f/${fCible.toFixed(1)}</span>
+        ${isHSS?`<span style="color:#f0a04a;font-size:9px">⚡ HSS −${stopsV.toFixed(1)} IL</span>`:''}
+        <div style="font-size:9.5px;color:var(--tp);margin-top:5px;line-height:1.6">
+          1. Teste à <b>1/${Math.pow(2,Math.round(currentPowerStops)).toFixed(0)}${src.tenths>=0.05?' +'+src.tenths.toFixed(1):''}</b>
+          &nbsp;·&nbsp; 2. Mesure &nbsp;·&nbsp; 3. Saisis la f/ ci-dessus
+        </div>
+      </div>`;
+      recapRows += `<div class="recap-row">
+        <span class="recap-name">Flash ${flashNum} <span class="recap-role">${roleLabel}</span></span>
+        <span class="recap-power" style="color:var(--or)">→ f/${fCible.toFixed(1)}</span>
+      </div>`;
+      return;
+    }
+
+    // ── Calcul de la correction ──
+    const stopsMeasured    = 2*Math.log2(src.fMesBase) + src.fMesTenths;
+    const fstopCorr        = stopsTarget - stopsMeasured;
+    const totalCorr        = fstopCorr + stopsISO + stopsV;
+    const targetPowerStops = currentPowerStops - totalCorr;
+    const rawDenom         = Math.pow(2, targetPowerStops);
+    const fMes             = src.fMesBase * Math.pow(Math.sqrt(2), src.fMesTenths);
+
+    // fstopCorrPur = écart entre la mesure et la f/ boîtier cible (sans corrections)
+    const fstopCorrPur = 2*Math.log2(fTarget) - stopsMeasured;
+    if(i===0) firstDetails = {fstopCorr, fstopCorrPur, stopsISO, stopsV, skinMod, matiereMod, optiValue, totalCorr, rawDenom, roleLabel};
+
+    // ── Badge résultat dans la carte ──
+    let badgeHtml='', recapPower='', recapColor='var(--or)';
+
+    if(rawDenom <= 0.7){
+      // Puissance insuffisante
+      const manqueIL = Math.log2(1/Math.max(rawDenom,0.0001));
+      recapColor='#e07060'; recapPower='⚠ MAX insuffisant';
+      badgeHtml=`<div class="src-badge-err">
+        <div class="src-badge-err-title">⚠ PUISSANCE INSUFFISANTE — manque ${manqueIL.toFixed(2)} IL</div>
+        <div>Flash au max 1/1${src.maxWs>0?' ('+src.maxWs+' Ws)':''}
+          ${src.maxWs>0?` · besoin ≥ <b>${Math.round(src.maxWs*Math.pow(2,manqueIL))} Ws</b>`:''}</div>
+        <div style="margin-top:3px;color:var(--tp)">→ Rapprocher · ouvrir diaphragme · ajouter une source</div>
+      </div>`;
     } else {
-      // Marge normale 1/512 → X
-      const dispMarge=powerToDisplay(rawDenomAvecMarge);
-      const puissanceMax=dispMarge.ok?dispMarge.txt:'1/1';
-      nfEl.innerHTML='<span style="color:#4caf75">✓ ND OK — marge '+margeIL.toFixed(1)+' IL</span>';nfEl.className='nd-result-val';
-      finEl.textContent='Flash : entre 1/512 et '+puissanceMax;
-      vrdEl.innerHTML='Réglez flash entre <b>1/512</b> et <b>'+puissanceMax+'</b>. Idéal : autour de <b>'+puissanceMax+'</b>.';
-      rowV.style.display='none';
-      const rfMin=document.getElementById('res_flash');rfMin.innerText='1/512 → '+puissanceMax;rfMin.classList.remove('expo-ok-txt','surexpo-txt');
-      _majTxtTypeND(true);
-      _majDetailND('1/512 → '+puissanceMax+' (marge '+margeIL.toFixed(1)+' IL)',totalND);
-    }
-    rowV.style.display='none';
-  } else if(rawDenomAfterND<=0.7){
-    // ND trop faible ET flash insuffisant — double problème
-    const manqueIL=Math.log2(1/Math.max(rawDenomAfterND,0.0001));
-    const ndSugg='ND'+Math.round(Math.pow(2,Math.ceil(_tropLuzExcesIL)));
-    const maxWsFlash=window._lastCorr&&window._lastCorr.maxWs>0?window._lastCorr.maxWs:0;
-    let flashMsg='';
-    if(maxWsFlash>0){
-      // Ws nécessaires = maxWs * 2^manqueIL
-      const wsBesoin=Math.round(maxWsFlash*Math.pow(2,manqueIL));
-      const wsFlash2=Math.round(maxWsFlash*Math.pow(2,manqueIL)-maxWsFlash);
-      flashMsg='<br>⚡ Flash actuel : <b>'+maxWsFlash+' Ws</b> — besoin total : <b>'+wsBesoin+' Ws</b>.'
-        +'<br>💡 Ajoute un 2ème flash de <b>≥ '+wsFlash2+' Ws</b> à pleine puissance (1/1), ou un flash de <b>'+wsBesoin+' Ws</b>.';
-    }
-    nfEl.innerHTML='<span style="color:#c05545">⚠ ND insuffisant ET flash manque '+manqueIL.toFixed(1)+' IL</span>';nfEl.className='nd-result-val';
-    finEl.textContent='ND insuffisant';
-    vrdEl.innerHTML='Ajoutez encore <b>'+Math.ceil(restIL)+' IL</b> de ND (ex: <b>'+ndSugg+'</b>) OU augmentez la puissance.'+flashMsg;
-    rowV.style.display='none';
-    const rfI=document.getElementById('res_flash');rfI.innerText='1/512 MIN';rfI.classList.remove('expo-ok-txt','surexpo-txt');
-    _majTxtTypeND(false);
-    _majDetailND('ND insuffisant (+'+restIL.toFixed(1)+' IL restants)',totalND);
-  } else {
-    const disp=powerToDisplay(rawDenomAfterND);
-    nfEl.textContent=disp.txt;nfEl.className='nd-result-val ok';finEl.textContent=disp.txt;
-    vrdEl.textContent='Réglez flash sur '+disp.txt+'. Remesurer au posemètre après pose du filtre.';
-    // Mettre à jour le résultat principal avec la vraie valeur après ND
-    const rfND=document.getElementById('res_flash');rfND.innerText=disp.txt;rfND.classList.remove('expo-ok-txt','surexpo-txt');
-    _majTxtTypeND(true);
-    _majDetailND(disp.txt, totalND);
-    if(_tropLuzVApn>0&&_tropLuzVApn<0.005){
-      const vN=_tropLuzVApn*Math.pow(2,totalND);
-      if(vN>=0.005){document.getElementById('nd-apn-v').textContent='1/'+Math.round(1/vN)+'s (sync ✔)';document.getElementById('nd-apn-v').className='nd-result-val ok';rowV.style.display='flex';}
-      else rowV.style.display='none';
-    } else rowV.style.display='none';
-  }
-}
-
-function _majDetailND(ndInfo, totalND){
-  // Met à jour TOUTES les lignes du bloc détail en tenant compte du ND
-  const c=window._lastCorr;if(!c)return;
-  // Ligne ND
-  const ndRow=document.getElementById('dc_nd_row');
-  const ndEl=document.getElementById('dc_nd');
-  if(ndInfo && totalND>0){
-    ndRow.style.display='flex';
-    ndEl.innerHTML='<span class="v-neg">−'+totalND.toFixed(0)+' IL</span>';
-    // Nouvelle correction totale avec ND
-    const corrAvecND=c.totalCorr+c.optiValue-totalND; // ND réduit la lumière → moins de puissance flash
-    document.getElementById('dc_total').innerHTML=(corrAvecND>0?'+':'')+corrAvecND.toFixed(2)+' IL <span style="font-size:9px;color:rgba(200,164,90,.5)">[avec ND]</span>';
-    // Info flash résultant
-    const ndNote=' <span style="font-size:10px;color:rgba(200,164,90,.6)">['+ndInfo+']</span>';
-    document.getElementById('res_correction').innerHTML='Correction totale : '+corrAvecND.toFixed(2)+' IL'+ndNote;
-    document.getElementById('res_precise').innerText='Valeur base : 1/'+c.rawDenom.toFixed(1)+' — après ND: '+ndInfo;
-  } else {
-    ndRow.style.display='none';
-    // Remettre les valeurs originales
-    document.getElementById('dc_total').innerHTML=(c.totalCorr+c.optiValue>0?'+':'')+(c.totalCorr+c.optiValue).toFixed(2)+' IL';
-    document.getElementById('res_correction').innerText='Correction totale : '+(c.totalCorr+c.optiValue).toFixed(2)+' IL';
-    document.getElementById('res_precise').innerText='Valeur théorique : 1/'+c.rawDenom.toFixed(1);
-  }
-}
-
-function _majTxtTypeND(active){
-  const el=document.getElementById('txt_type');
-  let t=el.innerText.replace(' [ND]','');
-  if(active)t+=' [ND]';
-  el.innerText=t;
-}
-
-// ══ CALCUL PRINCIPAL ══
-function calculate(optiValue){
-  lastOptiValue=optiValue;
-  const fTarget    = parseFloat(document.getElementById('f_target').value);
-  const vApn       = parseFloat(document.getElementById('v_apn').value);
-  const isoApn     = parseFloat(document.getElementById('iso_apn').value);
-  const fMesBase   = parseFloat(document.getElementById('f_mes_base').value)||5.6;
-  const fMesTenths = parseFloat(document.getElementById('f_mes_tenths').value);
-  const ilCorr     = parseFloat(document.getElementById('f_mes_il_corr').value);
-  const roleMod    = parseFloat(document.getElementById('flash_role').value);
-  const skinMod    = modeMesure==='incident'?parseFloat(document.getElementById('skin_tone').value):0;
-  const matiereMod = modeMesure==='incident'?parseFloat(document.getElementById('matiere').value):0;
-  const distMes    = parseFloat(document.getElementById('dist_mes').value);
-  const distCible  = parseFloat(document.getElementById('dist_cible').value);
-  const distMod    = 2*Math.log2(distCible/distMes);
-  const sources    = getActiveSources();
-  const{gainIL}    = getCumulatedPowerStops(sources);
-  const mainSource = sources[0];
-  if(!mainSource){
-    // Aucun flash actif — effacer le résultat sans erreur
-    document.getElementById('res_flash').innerText='--';
-    document.getElementById('res_correction').innerText='';
-    document.getElementById('res_precise').innerText='';
-    document.getElementById('conseil-nd').style.display='none';
-    document.getElementById('per-flash-box').style.display='none';
-    document.getElementById('alerte-puissance').style.display='none';
-    document.getElementById('trop-luz').style.display='none';
-    return;
-  }
-  const currentPowerStops = Math.log2(mainSource.base)+mainSource.tenths;
-  const nbSources  = sources.length;
-  const stopsISO   = Math.log2(isoApn/100);
-  // HSS : perte uniquement au-delà de 1/200s (0.005s). La vitesse n'affecte PAS la puissance flash en sync normale.
-  const stopsV     = (vApn<0.005)?Math.log2(0.005/vApn):0;
-  // Mesure posemètre : f/ brut + dixièmes + correction IL manuelle
-  const stopsMeasured = 2*Math.log2(fMesBase)+fMesTenths+ilCorr;
-  const stopsTarget   = 2*Math.log2(fTarget);
-  const fstopCorr     = stopsTarget-stopsMeasured;
-  const totalCorr = fstopCorr+stopsISO+stopsV-roleMod-skinMod-matiereMod-distMod-gainIL;
-  const targetPowerStops = currentPowerStops-totalCorr-optiValue;
-  const rawDenom = Math.pow(2,targetPowerStops);
-
-  const card=document.getElementById('result-card');
-  const alerteBox=document.getElementById('alerte-puissance');
-  const flashTxt=document.getElementById('res_flash');
-  const multiWarn=document.getElementById('multi-flash-warning');
-
-  if(rawDenom<=0.7){
-    card.classList.add('alerte');flashTxt.classList.add('alerte-txt');alerteBox.classList.add('visible');
-    const manqueIL=Math.log2(1/Math.max(rawDenom,0.0001));
-    let wsMsg='';
-    if(mainSource.maxWs>0){
-      const wsCible=mainSource.maxWs*Math.pow(2,manqueIL);
-      const wsManque=Math.round(wsCible-mainSource.maxWs);
-      wsMsg='<br>Flash actuel : <b>'+mainSource.maxWs+' Ws</b> — besoin total : <b>'+Math.round(wsCible)+' Ws</b>.'
-        +'<br>💡 Ajoute un 2ème flash de <b>≥ '+wsManque+' Ws</b> à 1/1 (pleine puissance)'
-        +' ou remplace par un flash de <b>'+Math.round(wsCible)+' Ws minimum</b>.';
-    }
-    document.getElementById('alerte-msg').innerHTML='⚡ Il manque <b>'+manqueIL.toFixed(1)+' IL</b> de puissance — le flash est à fond (1/1) et ce n\'est pas suffisant.'+wsMsg;
-    // Calcul précis des solutions flash
-    let conseil='';
-    const mWs=mainSource.maxWs||0;
-    if(mWs>0){
-      // Nb de flashs identiques nécessaires : chaque doublement = +1 IL
-      const nbFlashTotal=Math.pow(2,manqueIL); // nb de flashs identiques pour combler
-      const nbFlashAjouter=Math.ceil(nbFlashTotal)-1; // flashs à AJOUTER en plus du flash actuel
-      const wsCible=Math.round(mWs*Math.pow(2,manqueIL));
-      const wsAjouter=Math.round(wsCible-mWs);
-      // Réglage de chaque flash ajouté si on en met plusieurs identiques
-      const nbTotal=nbFlashAjouter+1;
-      // Chaque flash à puissance égale = 1/nbTotal de la puissance totale
-      // En IL : chaque flash = totalPower - log2(nbTotal)
-      // Mais on veut le réglage de chaque flash : tous à 1/1 suffit si nbFlashAjouter>=nbFlashTotal-1
-      conseil+='<b>Solutions pour gagner '+manqueIL.toFixed(1)+' IL :</b><br>';
-      // Option A : un seul flash plus puissant
-      conseil+='<b>Option A —</b> Remplacer par un flash de <b>'+wsCible+' Ws minimum</b> à 1/1.<br>';
-      // Option B : ajouter des flashs identiques
-      if(nbFlashAjouter===1){
-        const reglageSup=powerToDisplay(Math.pow(2,manqueIL-1>0?1:0.5));
-        conseil+='<b>Option B —</b> Ajouter <b>1 flash identique ('+mWs+' Ws)</b> à 1/1. Gain : +1 IL.';
-        if(manqueIL>1)conseil+=' <span style="color:#f0a04a">Il restera encore <b>'+(manqueIL-1).toFixed(1)+' IL</b> de manque.</span>';
+      const disp = powerToDisplay(rawDenom);
+      const correct = Math.abs(totalCorr) < 0.15;
+      if(correct){
+        recapColor='#4caf75'; recapPower='✓ Correct';
+        badgeHtml=`<div class="src-badge-ok">
+          <span style="font-size:12px;font-weight:700">✓ Exposition correcte</span>
+          <span style="font-size:9px;color:var(--tp)"> · f/${fMes.toFixed(1)} = cible f/${fCible.toFixed(1)}</span>
+        </div>`;
       } else {
-        conseil+='<b>Option B —</b> Ajouter <b>'+nbFlashAjouter+' flashs identiques ('+mWs+' Ws chacun)</b> tous à 1/1.';
-        const ilGagne=Math.log2(nbTotal);
-        if(ilGagne>=manqueIL-0.15)conseil+=' <span style="color:#4caf75">✓ Suffit (gain +'+ilGagne.toFixed(1)+' IL).</span>';
-        else conseil+=' <span style="color:#f0a04a">Gain +'+ilGagne.toFixed(1)+' IL — il restera <b>'+(manqueIL-ilGagne).toFixed(1)+' IL</b>.</span>';
+        recapPower = disp.txt;
+        badgeHtml=`<div class="src-badge-reglage">
+          <div class="src-badge-reglage-label">Réglage à appliquer</div>
+          <div class="src-badge-reglage-val">${disp.txt}</div>
+          <div class="src-badge-reglage-sub">cible f/${fCible.toFixed(1)} &nbsp;·&nbsp; mesuré f/${fMes.toFixed(1)}</div>
+        </div>`;
       }
-      conseil+='<br><b>Option C —</b> Ajouter un flash de <b>'+wsAjouter+' Ws</b> à 1/1.';
-    } else {
-      // Pas de Ws renseigné
-      const nbFlashAjouter=Math.ceil(Math.pow(2,manqueIL))-1;
-      conseil='<b>Solutions :</b><br>';
-      conseil+='<b>Option A —</b> Ajouter <b>'+nbFlashAjouter+' flash(s) identique(s)</b> tous à 1/1.<br>';
-      conseil+='<b>Option B —</b> Remplacer par un flash '+Math.pow(2,Math.ceil(manqueIL))+'× plus puissant.<br>';
-      conseil+='<i>Renseignez la puissance max (Ws) du flash pour un calcul précis.</i>';
     }
-    document.getElementById('alerte-conseil').innerHTML=conseil;
-    buildGuide({manqueIL,isHSS:vApn<0.005,vApn,isoApn,fTarget,nbSources,distMes,maxWs:mainSource.maxWs||0});
-  }else{
-    card.classList.remove('alerte');flashTxt.classList.remove('alerte-txt');alerteBox.classList.remove('visible');
-    const gn=document.getElementById('guide-nath');if(gn)gn.classList.remove('visible');
+    resBox.innerHTML = badgeHtml;
+
+    recapRows += `<div class="recap-row">
+      <div>
+        <div class="recap-name">Flash ${flashNum} <span class="recap-role">${roleLabel}</span></div>
+        <div class="recap-sub">cible f/${fCible.toFixed(1)} · mesuré f/${fMes.toFixed(1)}</div>
+      </div>
+      <span class="recap-power" style="color:${recapColor}">${recapPower}</span>
+    </div>`;
+  });
+
+  // ── Récap global ──
+  const recapEl = document.getElementById('flash-recap-list');
+  if(recapEl) recapEl.innerHTML = recapRows
+    ? `<div class="recap-list">${recapRows}</div>`
+    : `<div style="padding:12px 0;font-size:11px;color:var(--tp);text-align:center">Aucune source — ajoute un flash</div>`;
+
+  // ── Alertes ──
+  const alertsEl = document.getElementById('flash-alerts');
+  if(alertsEl){
+    let a='';
+    if(isHSS) a+=`<div class="flash-alert-hss">⚡ <b>Mode HSS actif</b> — perte ${stopsV.toFixed(1)} IL · passer à ≤ 1/200s pour les récupérer</div>`;
+    if(nKey>1) a+=`<div class="flash-alert-keys">${nKey} Keys → partage d'effort · chacune vise f/${(fCibleGlobale/Math.sqrt(nKey)).toFixed(1)} · cumul = f/${fCibleGlobale.toFixed(1)}</div>`;
+    alertsEl.innerHTML = a;
   }
 
-  const tropLuzBox=document.getElementById('trop-luz');
-  if(rawDenom>1024){
-    tropLuzBox.classList.add('visible');
-    const excesIL=Math.log2(rawDenom/512);
-    _tropLuzExcesIL=excesIL;_tropLuzVApn=vApn;_tropLuzIso=isoApn;_tropLuzFTarget=fTarget;
-    document.getElementById('tl-exces').innerHTML='Flash à <b>1/512 (min)</b> donne encore <b>'+excesIL.toFixed(1)+' IL de trop</b> pour f/'+fTarget+' ISO'+isoApn+'.';
-    // APN solutions : réglages pour enlever exactement excesIL (rester proche des réglages de base)
-    let apnSol='';
-    // Option 1 : Vitesse — accélérer = diviser le temps d'exposition par 2^excesIL
-    const vCible=vApn/Math.pow(2,excesIL); // plus court = plus sombre
-    const vStds=[1,1/1.5,1/2,1/2.5,1/3,1/4,1/5,1/6,1/8,1/10,1/13,1/15,1/20,1/25,1/30,1/40,1/50,1/60,1/80,1/100,1/125,1/160,1/200,1/250,1/320,1/400,1/500,1/640,1/800,1/1000,1/1250,1/1600,1/2000,1/2500,1/3200,1/4000,1/5000,1/6400,1/8000];
-    // Trouver la vitesse standard la plus proche (sans dépasser vCible = pas trop sombre)
-    let vBest=vStds[vStds.length-1];
-    for(let i=0;i<vStds.length;i++){
-      if(vStds[i]<=vCible+0.00001){vBest=vStds[i];break;}
-    }
-    const vLabel=vBest>=1?Math.round(vBest)+'s':'1/'+Math.round(1/vBest)+'s';
-    const syncNote=vBest<0.005?' <span style="color:#c05545">(HSS requis)</span>':' <span style="color:#7ab3ff">(✔ sync normale)</span>';
-    const ilRestV=Math.log2(vApn/vBest)-excesIL; // écart résiduel après arrondi à vitesse std
-    const noteSup=Math.abs(ilRestV)>0.05?' <span style="font-size:10px;color:rgba(255,255,255,.4)">(~'+ilRestV.toFixed(1)+' IL résiduel)</span>':'';
-    apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Vitesse APN</span><span class="apn-sol-val">'+vLabel+syncNote+noteSup+'</span></div>';
-    // Option 2 : Fermer le diaphragme (augmenter f/ = moins de lumière)
-    const fFermee=fTarget*Math.pow(2,excesIL/2);
-    const fStds=[1,1.1,1.2,1.4,1.6,1.8,2,2.2,2.5,2.8,3.2,3.5,4,4.5,5,5.6,6.3,7.1,8,9,10,11,13,14,16,18,20,22,25,29,32];
-    let fBest=fStds[fStds.length-1];
-    for(let i=0;i<fStds.length;i++){if(fStds[i]>=fFermee-0.05){fBest=fStds[i];break;}}
-    if(fBest<=32)apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Fermer à f/</span><span class="apn-sol-val">f/'+fBest+'</span></div>';
-    // Option 3 : Baisser ISO
-    if(isoApn>100){
-      const isoStds=[12800,6400,3200,1600,1250,1000,800,640,500,400,320,250,200,160,125,100];
-      const iCible=isoApn/Math.pow(2,excesIL);
-      let iBest=isoStds[isoStds.length-1];
-      for(let i=0;i<isoStds.length;i++){if(isoStds[i]>=iCible-5){iBest=isoStds[i];break;}}
-      if(iBest<isoApn)apnSol+='<div class="apn-sol-row"><span class="apn-sol-lbl">Baisser ISO</span><span class="apn-sol-val">ISO '+iBest+'</span></div>';
-    }
-    apnSol+='<div class="apn-sol-row" style="opacity:.5"><span class="apn-sol-lbl">Ou filtre ND</span><span class="apn-sol-val">ND'+Math.round(Math.pow(2,Math.round(excesIL)))+' (−'+Math.round(excesIL)+' IL)</span></div>';
-    document.getElementById('apn-solutions').innerHTML=apnSol;
-    document.getElementById('apn-note').textContent='Choisir UNE option ci-dessus suffit pour corriger les '+excesIL.toFixed(1)+' IL en excès.';
-    ['nd1','nd2','nd3'].forEach(id=>{document.getElementById(id).value='0';});
-    document.getElementById('nd-result').style.display='none';
-    // S'assurer que le label [ND] est retiré
-    const _ttel=document.getElementById('txt_type');if(_ttel)_ttel.innerText=_ttel.innerText.replace(' [ND]','');
-  }else{tropLuzBox.classList.remove('visible');_tropLuzExcesIL=0;}
+  // ── Détail corrections (Flash 1) — titre TOUJOURS mis à jour ──
+  // Récupère roleLabel du Flash 1 même sans mesure
+  const _rl0 = sourcesData.length>0 ? (()=>{
+    const sel=document.getElementById('src_role_0');
+    return sel?sel.options[sel.selectedIndex].text.replace(/[\u{1F300}-\u{1FAFF}]/gu,'').trim():'Key Light';
+  })() : 'Key Light';
+  const _il0 = optiValue>0 ? `Nath Sakura (+${optiValue.toFixed(2)} IL)` : 'Standard (0 IL)';
+  const _titleBase = `Flash 1 · ${_rl0} — ${_il0}`;
+  // Toujours mettre à jour le titre et le bouton toggle
+  const _detTit=document.getElementById('flash-detail-titre');
+  if(_detTit) _detTit.textContent=_titleBase;
+  const _toggleBtn=document.getElementById('flash-detail-toggle');
+  if(_toggleBtn){
+    const _isOpen=document.getElementById('flash-detail-corr').style.display==='block';
+    _toggleBtn.textContent=_isOpen?'▲ Masquer le détail':`▼ Détail corrections — ${_titleBase}`;
+  }
 
-  if(nbSources>1)multiWarn.classList.add('visible');else multiWarn.classList.remove('visible');
+  if(firstDetails){
+    const {fstopCorr:fc,fstopCorrPur:fcp,stopsISO:si,stopsV:sv,skinMod:sk,matiereMod:ma,optiValue:ov,totalCorr:tc,roleLabel:rl}=firstDetails;
 
-  let displayPower;
-  const surexpoBox=document.getElementById('surexpo-box');
-  const surexpoMsg=document.getElementById('surexpo-msg');
-  const surexpoGuide=document.getElementById('surexpo-guide');
-  // Réinitialiser classes spéciales
-  flashTxt.classList.remove('expo-ok-txt','surexpo-txt','alerte-txt');
-  surexpoBox.classList.remove('visible');
+    // ── Formateur IL : seuil large 0.04 pour absorber les erreurs flottantes ──
+    const fd = v=>Math.abs(v)<0.04
+      ?'<span class="v-neu">0 IL</span>'
+      :`<span class="${v>0?'v-pos':'v-neg'}">${v>0?'+':''}${v.toFixed(2)} IL</span>`;
 
-  if(rawDenom<=0.7){
-    displayPower='! MAX DÉPASSÉ';
-  } else if(rawDenom>1024){
-    displayPower='1/512 MIN';
-    // Cas surexposition : flash déjà au minimum, encore trop de lumière
-    const excesAff=_tropLuzExcesIL;
-    flashTxt.classList.add('surexpo-txt');
-    surexpoBox.classList.add('visible');
-    surexpoMsg.innerHTML='Flash au minimum <b>1/512</b> — encore <b>'+excesAff.toFixed(1)+' IL de trop</b>. Éteignez le flash ou réduisez sa contribution.';
-    // Conseil Nath Sakura pour surexposition
-    let conseils='<b>📖 Conseils Nath Sakura :</b><br>';
-    if(vApn>=0.005){
-      const vAcc=vApn/Math.pow(2,excesAff); // accélérer = diviser le temps d'exposition
-      const vFr=Math.round(1/vAcc);
-      const syncOK=vAcc>=0.005;
-      conseils+='• <b>Accélérer la vitesse</b> : passer à <b>1/'+vFr+'s</b>'+(syncOK?' (sync OK)':' (HSS requis)')+'<br>';
-    }
-    if(excesAff<=2){
-      const fFerm=fTarget*Math.pow(2,excesAff/2);
-      conseils+='• <b>Fermer le diaphragme</b> : passer à <b>f/'+fFerm.toFixed(1)+'</b><br>';
-    }
-    if(isoApn>100){
-      const iR=Math.round(isoApn/Math.pow(2,excesAff));
-      if(iR>=50)conseils+='• <b>Baisser l\'ISO</b> : passer à <b>ISO '+iR+'</b><br>';
-    }
-    conseils+='• <b>Éteindre le flash</b> ou utiliser un <b>filtre ND</b> devant la source<br>';
-    conseils+='• Reculer le flash : doubler la distance = <b>−2 IL</b>';
-    surexpoGuide.innerHTML=conseils;
+    // ── Lignes de détail — séparées et pédagogiques ──
+    // fcp (fstopCorrPur) = écart entre f/ mesurée et f/ boîtier brute
+    // ov = optiValue (0 ou 1.33) — affiché tel quel, valeur fixe de la méthode
+    const detRows=document.getElementById('flash-detail-rows');
+    if(detRows) detRows.innerHTML=`
+      <div class="dc-row">
+        <span class="dc-lbl">Écart f/ mesurée → f/ boîtier</span>
+        <span class="dc-val">${fd(fcp)}</span>
+      </div>
+      ${ov>0
+        ?`<div class="dc-row" style="background:rgba(200,164,90,.04)">
+            <span class="dc-lbl" style="color:var(--or);font-weight:600">⭐ Opti Nath Sakura</span>
+            <span class="dc-val"><span class="v-or">+${ov.toFixed(2)} IL</span></span>
+          </div>`
+        :`<div class="dc-row">
+            <span class="dc-lbl" style="color:var(--tp)">Mode Standard</span>
+            <span class="dc-val"><span class="v-neu">+0.00 IL</span></span>
+          </div>`
+      }
+      ${Math.abs(sk)>0.04&&modeMesure==='incident'
+        ?`<div class="dc-row">
+            <span class="dc-lbl">Carnation peau</span>
+            <span class="dc-val">${fd(sk)}</span>
+          </div>`
+        :''
+      }
+      ${Math.abs(ma)>0.04&&modeMesure==='incident'
+        ?`<div class="dc-row">
+            <span class="dc-lbl">Réflectance matière</span>
+            <span class="dc-val">${fd(ma)}</span>
+          </div>`
+        :''
+      }
+      <div class="dc-row">
+        <span class="dc-lbl">Compensation ISO</span>
+        <span class="dc-val">${fd(si)}</span>
+      </div>
+      <div class="dc-row">
+        <span class="dc-lbl">Perte HSS (vitesse &gt; 1/200)</span>
+        <span class="dc-val">${sv>0.04?fd(sv):'<span class="v-neu">— pas HSS</span>'}</span>
+      </div>`;
+    const dtot=document.getElementById('dc_total');
+    if(dtot) dtot.innerHTML=`${tc>=0?'+':''}${tc.toFixed(2)} IL`;
+  }
+}
+
+function toggleFlashDetail(){
+  const d=document.getElementById('flash-detail-corr');
+  const btn=document.getElementById('flash-detail-toggle');
+  if(!d||!btn)return;
+  const nowOpen = d.style.display!=='block';
+  d.style.display = nowOpen ? 'block' : 'none';
+  if(nowOpen){
+    btn.textContent='▲ Masquer le détail';
   } else {
-    const stds=[1,2,4,8,16,32,64,128,256,512];
-    let bd=stds.find(s=>s>=rawDenom)||512;
-    let tenths=Math.round(Math.log2(bd/rawDenom)*10)/10;
-    if(tenths>=0.95){const i2=stds.indexOf(bd);if(i2<stds.length-1){bd=stds[i2+1];tenths=0;}}
-    displayPower='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1):'');
-    // Expo correcte : correction totale ≈ 0 (le flash de test est déjà bon)
-    const corrTotale=Math.abs(totalCorr+optiValue);
-    if(corrTotale<0.15){
-      flashTxt.classList.add('expo-ok-txt');
-      displayPower='✓ EXPO CORRECTE';
-    }
+    // Reconstruire le label depuis le titre courant
+    const titre=document.getElementById('flash-detail-titre');
+    btn.textContent=`▼ Détail corrections — ${titre?titre.textContent:'Flash 1'}`;
   }
-
-  document.getElementById('txt_type').innerText=(optiValue>0?'RÉSULTAT OPTI (+1.33 IL)':'RÉSULTAT STANDARD')+(vApn<0.005?' [HSS]':'')+(nbSources>1?' · '+nbSources+' SOURCES':'');
-  document.getElementById('res_flash').innerText=nbSources>1&&displayPower!=='✓ EXPO CORRECTE'?displayPower+' / flash':displayPower;
-  document.getElementById('res_correction').innerText='Correction totale : '+(totalCorr+optiValue).toFixed(2)+' IL';
-  document.getElementById('res_precise').innerText=nbSources>1?'Valeur théorique : 1/'+rawDenom.toFixed(1)+' — même réglage chaque flash':'Valeur théorique : 1/'+rawDenom.toFixed(1);
-
-  const pfBox=document.getElementById('per-flash-box');
-  if(nbSources>1){
-    const rows2=document.querySelectorAll('.source-row');
-    const ac=rawDenom<=0.7?'#c05545':'#C8A45A';
-    let pfHtml='<div style="background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.25);border-radius:3px;padding:12px 14px;text-align:left"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C8A45A;margin-bottom:10px">Réglage à appliquer sur chaque flash</div>';
-
-    const hasAllWs=sources.every(s=>s.maxWs>0);
-    // Utiliser excessApres11 stocké par calcND (manque réel tenant compte des Ws cumulés)
-    const _lastEx=window._lastCorr&&window._lastCorr.excessApres11!=null?window._lastCorr.excessApres11:null;
-    // Si expo correcte (excessApres11=0) → masquer le bloc réglage
-    if(_lastEx!==null&&_lastEx<=0.05){pfBox.style.display='none';pfBox.innerHTML='';return;}
-    // Ws nécessaires par flash = maxWs du flash principal × 2^manqueIL, réparti entre tous les flashs
-    const exNow=_lastEx!=null?_lastEx:(window._lastCorr&&window._lastCorr.rawDenom>0?Math.log2(1/Math.max(window._lastCorr.rawDenom,0.001)):0);
-    const wsTotalNecessaire=mainSource.maxWs>0?mainSource.maxWs*Math.pow(2,exNow):0;
-    const wsParFlash=wsTotalNecessaire/Math.max(sources.length,1);
-
-    // Pré-calcul : quels flashs sont actifs (denom ≤ 512) ?
-    const flashInfos=[];
-    rows2.forEach((row,i)=>{
-      const rid=row.id.replace('source-','');
-      const mx=document.getElementById('p_max_'+rid);
-      const mxWs=mx?parseFloat(mx.value):0;
-      let denomFlash=hasAllWs&&mxWs>0&&wsParFlash>0?mxWs/wsParFlash:null;
-      const actif=denomFlash!==null&&denomFlash<=512;
-      flashInfos.push({rid,mxWs,denomFlash,actif,idx:i});
-    });
-
-    // Rééquilibrage pour recyclage rapide :
-    // On répartit wsParFlash×nbFlashsActifs entre tous les flashs actifs équitablement
-    // → chaque flash actif fournit totalWsNeeded / nbActifs
-    const flashsActifs=flashInfos.filter(f=>f.actif&&f.mxWs>0);
-    const totalWsNecessaire=wsParFlash*(hasAllWs?rows2.length:1);
-    if(flashsActifs.length>1&&hasAllWs&&wsParFlash>0){
-      const wsEgal=totalWsNecessaire/flashsActifs.length;
-      flashsActifs.forEach(f=>{f.denomOptim=f.mxWs/wsEgal;});
-    }
-
-    rows2.forEach((row,i)=>{
-      const info=flashInfos[i];
-      const ws=info.mxWs>0?' — '+info.mxWs+' Ws':'';
-      let flashDisp=displayPower;
-
-      if(hasAllWs && info.mxWs>0 && wsParFlash>0){
-        if(!info.actif){
-          flashDisp='⬛ ÉTEINDRE';
-        } else if(info.denomOptim!==undefined){
-          // Réglage rééquilibré pour recyclage rapide
-          const dispF=powerToDisplay(info.denomOptim);
-          if(dispF.ok)flashDisp=dispF.txt;
-          else if(info.denomOptim<=0.7)flashDisp='✓ 1/1 suffit';
-          else flashDisp='⬛ ÉTEINDRE';
-        } else {
-          const dispF=powerToDisplay(info.denomFlash);
-          if(dispF.ok)flashDisp=dispF.txt;
-          else if(info.denomFlash<=0.7)flashDisp='✓ 1/1 suffit';
-          else flashDisp='⬛ ÉTEINDRE';
-        }
-      }
-
-      pfHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(200,164,90,.1)"><span style="font-size:11px;color:rgba(255,255,255,.55)">Flash '+(i+1)+ws+'</span><span style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:'+ac+'">'+flashDisp+'</span></div>';
-    });
-
-    const memeReglage=!hasAllWs;
-    pfHtml+='<div style="margin-top:8px;font-size:9.5px;color:rgba(255,255,255,.35);font-style:italic">'+(memeReglage?'Tous les flashs au même réglage — ':'Réglages individuels selon puissance Ws — ')+'Remesurer au posemètre après mise en place</div></div>';
-    pfBox.innerHTML=pfHtml;pfBox.style.display='block';
-  }else{pfBox.style.display='none';pfBox.innerHTML='';}
-
-  document.getElementById('dc_fstop').innerHTML=fmtIL(fstopCorr);
-  document.getElementById('dc_il_corr').innerHTML=fmtIL(-ilCorr);
-  document.getElementById('dc_iso').innerHTML=fmtIL(stopsISO);
-  document.getElementById('dc_hss').innerHTML=stopsV>0.005?fmtIL(stopsV):'<span class="v-neu">— pas HSS</span>';
-  document.getElementById('dc_role').innerHTML=fmtIL(-roleMod);
-  document.getElementById('dc_skin').innerHTML=modeMesure==='incident'?fmtIL(-skinMod):'<span class="v-neu">0 IL (réfléchi)</span>';
-  document.getElementById('dc_mat').innerHTML=modeMesure==='incident'?fmtIL(-matiereMod):'<span class="v-neu">0 IL (réfléchi)</span>';
-  document.getElementById('dc_dist').innerHTML=Math.abs(distMod)<0.005?'<span class="v-neu">— même distance</span>':fmtIL(-distMod);
-  document.getElementById('dc_opti').innerHTML=optiValue>0?'<span class="v-or">+'+optiValue.toFixed(2)+' IL</span>':'<span class="v-neu">— standard</span>';
-  document.getElementById('dc_sources').innerHTML=nbSources>1?'<span class="v-pos">+'+gainIL.toFixed(2)+' IL ('+nbSources+' sources)</span>':'<span class="v-neu">— source unique</span>';
-  document.getElementById('dc_total').innerHTML=(totalCorr+optiValue>0?'+':'')+(totalCorr+optiValue).toFixed(2)+' IL';
-  document.getElementById('result-box').style.display='block';
-  // Stocker les valeurs de correction pour mise à jour par calcND
-  window._lastCorr={fstopCorr,ilCorr,stopsISO,stopsV,roleMod,skinMod,matiereMod,distMod,optiValue,gainIL,nbSources,totalCorr,rawDenom,maxWs:mainSource&&mainSource.maxWs?mainSource.maxWs:0,testBase:mainSource?mainSource.base:1,testTenths:mainSource?mainSource.tenths:0};
 }
 
-function buildGuide(params){
-  const box=document.getElementById('guide-nath'),ctx=document.getElementById('guide-context');
-  const hssWarn=document.getElementById('guide-hss-warn'),etapes=document.getElementById('guide-etapes');
-  if(params.manqueIL<=0){box.classList.remove('visible');return;}
-  box.classList.add('visible');
-  let mil=params.manqueIL;const{isHSS,vApn,isoApn:iso,fTarget:fT,nbSources:nb,distMes:dm,maxWs:mws}=params;
-  ctx.innerHTML='Il manque <b>'+mil.toFixed(2)+' IL</b> — flash au maximum 1/1'+(mws>0?' ('+mws+' Ws)':'')+'.'+(isHSS?' <span class="warn">⚠ Mode HSS actif.</span>':'');
-  if(isHSS){const ilHSS=Math.log2(0.005/vApn);hssWarn.innerHTML='⚡ <b>HSS coûte '+ilHSS.toFixed(1)+' IL</b>. Passer en sync ≤1/200 les récupère immédiatement.';hssWarn.style.display='block';}
-  else hssWarn.style.display='none';
-  const steps=[];let stepNum=1;
-  if(isHSS){
-    const ilRecup=Math.log2(0.005/vApn);const rest=mil-ilRecup;
-    const label=ilRecup>=mil?'<span class="tag tag-ideal">✓ Suffit seul</span>':'<span class="tag tag-alt">Gain +'+ilRecup.toFixed(1)+' IL</span>';
-    let detail='Réglez sur <b class="val">1/200s</b> max. Récupère <b>'+ilRecup.toFixed(1)+' IL</b>.';
-    if(ilRecup>=mil)detail+=' <b>Cela suffit.</b>';else detail+=' Il restera <b>'+rest.toFixed(1)+' IL</b>.';
-    steps.push({num:stepNum++,prioritaire:true,titre:'Sortir du HSS',label,detail});
-    if(ilRecup>=mil){renderGuide(steps,etapes);return;}
-    mil=rest;
-  }
-  if(dm>0){const dN=dm/Math.pow(2,mil/2);steps.push({num:stepNum++,prioritaire:false,titre:'Rapprocher le flash',label:dN>=0.3?'<span class="tag tag-ideal">✓ Faisable</span>':'<span class="tag tag-alt">Distance courte</span>',detail:'Rapprochez à <b class="val">'+dN.toFixed(2).replace('.',',')+' m</b>.'+(dN<0.3?' <span style="color:#f0a04a">⚠ Très court.</span>':'')});}
-  if(nb===1){const rest=mil-1;steps.push({num:stepNum++,prioritaire:false,titre:'Ajouter une 2ème source',label:rest<=0?'<span class="tag tag-ideal">✓ Suffit</span>':'<span class="tag tag-alt">Gain +1 IL</span>',detail:'Ajoutez un <b>second flash identique</b>. Gain : <b>+1 IL</b>.'+(rest<=0?' <b>Suffisant.</b>':' Il restera <b>'+rest.toFixed(1)+' IL</b>.')});}
-  const fOuverte=fT/Math.pow(2,mil/2);
-  if(fOuverte>=1.0)steps.push({num:stepNum++,prioritaire:false,titre:'Ouvrir le diaphragme',label:'<span class="tag tag-alt">'+(mil<=1?'Alternative':'Combinaison')+'</span>',detail:'Ouvrez à <b class="val">f/'+fOuverte.toFixed(1)+'</b>.'+(mil>2?' <span style="color:#f0a04a">⚠ Combinez.</span>':'')});
-  const isosStd=[100,125,160,200,250,320,400,500,640,800,1000,1250,1600,2000,2500,3200,6400,12800,25600];
-  const isoCible=isosStd.find(v=>v>=Math.round(iso*Math.pow(2,mil)))||isosStd[isosStd.length-1];
-  steps.push({num:stepNum,iso:true,titre:'Augmenter l\'ISO (dernier recours)',label:'<span class="tag tag-last">En dernier recours</span>',detail:'Montez à <b class="val-warn">ISO '+isoCible+'</b>.'+(isoCible>=800?' <span style="color:#e08888">⚠ Bruit élevé.</span>':'')});
-  renderGuide(steps,etapes);
+
+
+// ── Modal "Comment mesurer" ──
+function openMesureModal(){
+  document.getElementById('mesure-modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
 }
-function renderGuide(steps,container){
-  container.innerHTML=steps.map(s=>'<div class="guide-etape"><div class="'+(s.prioritaire?'guide-etape-num prioritaire':s.iso?'guide-etape-num iso':'guide-etape-num')+'">'+s.num+'</div><div class="guide-etape-body"><div class="guide-etape-titre">'+s.titre+' '+(s.label||'')+'</div><div class="guide-etape-detail">'+s.detail+'</div></div></div>').join('');
+function closeMesureModal(){
+  document.getElementById('mesure-modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
 }
+function closeMesureModalOutside(e){
+  if(e.target===document.getElementById('mesure-modal-overlay')) closeMesureModal();
+}
+// Fermer avec Escape
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeMesureModal();});
 
 
 // ===== MODULE LUMIÈRE CONTINUE =====
-let contMesureMode='fstop';
-let contSourceIdx=0;
-const CONT_TYPES={
-  led:   {label:'LED Panneau', icon:'💡', unit:'W', luxPw:40},
-  tung:  {label:'Tungstène',   icon:'🔆', unit:'W', luxPw:15},
-  hmi:   {label:'HMI',         icon:'☀️', unit:'W', luxPw:90},
-  nat:   {label:'Naturelle',   icon:'🪟', unit:'lux', luxPw:1}
+let contSourceIdx = 0;
+let contOptiValue = 0; // 0 = Standard, 1.33 = Nath Sakura
+
+/* ── Tables de vitesse ── */
+const VSPEEDS = [30,15,8,4,2,1,0.5,0.25,0.125,0.05,0.033,0.025,0.02,0.0167,0.0125,0.01,0.008,0.005,0.004,0.002,0.001];
+const VLAB_MAP = {'30':'30s','15':'15s','8':'8s','4':'4s','2':'2s','1':'1s','0.5':'1/2','0.25':'1/4','0.125':'1/8','0.05':'1/20','0.033':'1/30','0.025':'1/40','0.02':'1/50','0.0167':'1/60','0.0125':'1/80','0.01':'1/100','0.008':'1/125','0.005':'1/200','0.004':'1/250','0.002':'1/500','0.001':'1/1000'};
+function vLab(v){
+  let best=VSPEEDS[0], bestD=Infinity;
+  VSPEEDS.forEach(s=>{ const d=Math.abs(Math.log2(s/v)); if(d<bestD){bestD=d;best=s;} });
+  return VLAB_MAP[String(best)] || ('1/'+Math.round(1/v));
+}
+function vNearest(v){ return VSPEEDS.reduce((b,s)=>Math.abs(Math.log2(s/v))<Math.abs(Math.log2(b/v))?s:b, VSPEEDS[0]); }
+
+/* ── Rôles (identiques aux flashs) ── */
+// Non-cumul : chaque source est indépendante, son niveau est calculé par rapport à la Key
+// Key=0 IL, Fill=-1 IL, Rim=+1 IL, Fond=0 IL (indépendant)
+const CONT_ROLES = {
+  key:  '💡 Key Light (0 IL)',
+  fill_05: '🌒 Fill −0.5 IL',
+  fill_1:  '🌑 Fill −1 IL',
+  fill_2:  '🌑 Fill −2 IL',
+  rim_05:  '🌟 Rim +0.5 IL',
+  rim_1:   '✨ Rim +1 IL',
+  rim_2:   '🔥 Kicker +2 IL',
+  fond_n:  '🖼 Fond Neutre',
+  fond_p1: '🖼 Fond +1 IL',
+  fond_m1: '🖼 Fond −1 IL'
 };
+const ROLE_IL = {
+  key:0, fill_05:-0.5, fill_1:-1, fill_2:-2,
+  rim_05:0.5, rim_1:1, rim_2:2,
+  fond_n:0, fond_p1:1, fond_m1:-1
+};
+
+/* ── Helpers EV ── */
+// EV = log2(f² / (t × ISO/100))   — 1 IL = 1 stop EV
+function evOf(f,t,iso){ return Math.log2(f*f/(t*(iso/100))); }
+function fOf(ev,t,iso){ return Math.sqrt(Math.pow(2,ev)*t*(iso/100)); }
 
 function setMainTab(tab){
   ['flash','continue','mixte'].forEach(t=>{
     document.getElementById('maintab_'+t).classList.toggle('actif',t===tab);
     document.getElementById('panel_'+t).classList.toggle('actif',t===tab);
   });
-  if(tab==='continue'&&document.getElementById('cont-sources-list').children.length===0) addContSource();
+  if(tab==='continue' && document.getElementById('cont-sources-list').children.length===0) addContSource();
 }
 
-function setContMesure(mode){
-  contMesureMode=mode;
-  ['fstop','lux'].forEach(m=>{
-    document.getElementById('cmtab_'+m).classList.toggle('sel',m===mode);
-    document.getElementById('cmpanel_'+m).style.display=m===mode?'block':'none';
-  });
+function setContIntent(val){
+  contOptiValue = val;
+  const isNath = val > 0;
+  const bs = document.getElementById('cbtn_std');
+  const bn = document.getElementById('cbtn_nath');
+  if(bs){ bs.style.background=isNath?'rgba(200,164,90,.15)':'var(--or)'; bs.style.color=isNath?'var(--or)':'#000'; bs.style.border=isNath?'1.5px solid rgba(200,164,90,.4)':'none'; }
+  if(bn){ bn.style.background=isNath?'var(--or)':'rgba(200,164,90,.15)'; bn.style.color=isNath?'#000':'var(--or)'; bn.style.border=isNath?'none':'1.5px solid rgba(200,164,90,.4)'; }
   calcContinue();
 }
 
+/* ════════════════════════════════════════════════════════
+   addContSource — carte complète avec tous les champs
+   ════════════════════════════════════════════════════════ */
 function addContSource(){
-  const idx=contSourceIdx++;
-  const list=document.getElementById('cont-sources-list');
-  const div=document.createElement('div');
-  div.className='cont-source';
-  div.id='cont-src-'+idx;
-  div.innerHTML=`
-    <div class="cont-source-label">Source ${idx+1}</div>
+  const idx = contSourceIdx++;
+  const list = document.getElementById('cont-sources-list');
+  const div  = document.createElement('div');
+  div.className = 'cont-source';
+  div.id = 'cont-src-'+idx;
+
+  /* Sélecteurs réutilisables */
+  const pctOpts = [100,75,50,25,10,5].map(p=>`<option value="${p/100}"${p===100?' selected':''}>${p}%</option>`).join('');
+  const roleOpts = `
+    <optgroup label="Lumière Principale"><option value="key" selected>💡 Key Light</option></optgroup>
+    <optgroup label="Débouchage">
+      <option value="fill_05">🌒 Fill −0.5 IL</option>
+      <option value="fill_1">🌑 Fill −1 IL</option>
+      <option value="fill_2">🌑 Fill −2 IL</option>
+    </optgroup>
+    <optgroup label="Accents">
+      <option value="rim_05">🌟 Rim +0.5 IL</option>
+      <option value="rim_1">✨ Rim +1 IL</option>
+      <option value="rim_2">🔥 Kicker +2 IL</option>
+    </optgroup>
+    <optgroup label="Fond">
+      <option value="fond_n">🖼 Fond Neutre</option>
+      <option value="fond_p1">🖼 Fond +1 IL</option>
+      <option value="fond_m1">🖼 Fond −1 IL</option>
+    </optgroup>`;
+
+  /* ── Vitesse boîtier actuelle pour affichage verrouillé ── */
+  const vActuelle = parseFloat((document.getElementById('c_vitesse')||{value:'0.0167'}).value)||0.0167;
+  const vActLabel = vLab(vActuelle);
+
+  div.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div class="cont-source-label" id="csrc-label-${idx}">Source ${idx+1}</div>
     ${idx>0?`<button class="cont-remove" onclick="removeContSource(${idx})">✕</button>`:''}
-    <div class="cont-type-btns">
-      <div class="cont-type-btn sel" id="ctype_led_${idx}" onclick="setContType(${idx},'led')">💡 LED</div>
-      <div class="cont-type-btn" id="ctype_tung_${idx}" onclick="setContType(${idx},'tung')">🔆 Tung.</div>
-      <div class="cont-type-btn" id="ctype_hmi_${idx}" onclick="setContType(${idx},'hmi')">☀️ HMI</div>
-      <div class="cont-type-btn" id="ctype_nat_${idx}" onclick="setContType(${idx},'nat')">🪟 Nat.</div>
-    </div>
-    <div class="g2">
-      <div class="ch"><label id="clbl_pw_${idx}">Puissance (W)</label>
-        <input type="number" id="cpw_${idx}" value="100" min="1" max="20000" onchange="calcContinue()"
-          style="width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--or-b);border-radius:2px;color:#fff;font-size:13px">
-      </div>
-      <div class="ch"><label>% puissance</label>
-        <select id="cpct_${idx}" onchange="calcContinue()">
-          <option value="1" selected>100 %</option><option value="0.75">75 %</option>
-          <option value="0.5">50 %</option><option value="0.25">25 %</option><option value="0.1">10 %</option>
-        </select>
-      </div>
-    </div>
-    <div class="ch" style="margin-top:8px"><label>Distance source → sujet</label>
-      <select id="cdist_${idx}" onchange="calcContinue()">
-        <option value="0.5">0.5 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option>
-        <option value="2">2 m</option><option value="3">3 m</option><option value="4">4 m</option><option value="5">5 m</option>
+  </div>
+
+  <!-- Ligne 1 : Type/Puissance + Rôle -->
+  <div class="g2" style="margin-bottom:8px">
+    <div class="ch">
+      <label>Type / Puissance max</label>
+      <select id="ctype_${idx}" onchange="calcContinue()">
+        <option value="led20">💡 Petit panneau LED (20W)</option>
+        <option value="led60" selected>🔦 Torche LED (60W)</option>
+        <option value="proj200">🎬 Projecteur (200W)</option>
+        <option value="fixe">🔆 Source Fixe (non réglable)</option>
       </select>
     </div>
+    <div class="ch">
+      <label>Rôle</label>
+      <select id="crole_${idx}" onchange="calcContinue()">${roleOpts}</select>
+    </div>
+  </div>
+
+  <!-- Ligne 2 : f/ mesurée + dixièmes + % puissance lors mesure -->
+  <div class="g3" style="margin-bottom:8px">
+    <div class="ch">
+      <label>f/ mesurée au posemètre</label>
+      <input type="number" id="cfmes_num_${idx}" value="2.8" min="0.7" max="64" step="0.1"
+        oninput="calcContinue()"
+        style="width:100%;padding:9px 8px;background:var(--s3);border:1px solid var(--or-b);border-radius:2px;color:#fff;font-size:13px;font-family:Georgia,serif;text-align:center">
+    </div>
+    <div class="ch">
+      <label>+ dixièmes IL</label>
+      <select id="cfmes_tenths_${idx}" onchange="calcContinue()">
+        ${[0,.1,.2,.3,.4,.5,.6,.7,.8,.9].map(t=>`<option value="${t}">.${t===0?'0':Math.round(t*10)}</option>`).join('')}
+      </select>
+    </div>
+    <div class="ch">
+      <label>% puissance lors mesure</label>
+      <select id="cpct_${idx}" onchange="calcContinue()">${pctOpts}</select>
+    </div>
+  </div>
+
+  <!-- Ligne 3 : Vitesse (verrouillée) + Distance -->
+  <div class="g2" style="margin-bottom:8px">
+    <div class="ch">
+      <label>⏱ Vitesse (= boîtier)</label>
+      <div id="cvmes_display_${idx}" style="padding:9px 10px;background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.25);border-radius:2px;font-size:12px;font-family:Georgia,serif;color:var(--or);text-align:center;font-weight:700">
+        ${vActLabel}
+      </div>
+    </div>
+    <div class="ch">
+      <label>📏 Distance source→sujet</label>
+      <select id="cdist_${idx}" onchange="calcContinue()">
+        <option value="0.5">0.5 m</option><option value="0.8">0.8 m</option>
+        <option value="1" selected>1 m</option><option value="1.5">1.5 m</option>
+        <option value="2">2 m</option><option value="3">3 m</option>
+        <option value="4">4 m</option><option value="5">5 m</option>
+        <option value="6">6 m</option><option value="8">8 m</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Badge résultat par source -->
+  <div id="csrc-result-${idx}"></div>
   `;
+
   list.appendChild(div);
-  div.dataset.type='led';
   calcContinue();
 }
 
 function removeContSource(idx){
-  const el=document.getElementById('cont-src-'+idx);
-  if(el)el.remove();
+  const el = document.getElementById('cont-src-'+idx);
+  if(el) el.remove();
   calcContinue();
 }
 
-function setContType(idx,type){
-  Object.keys(CONT_TYPES).forEach(t=>{
-    const btn=document.getElementById('ctype_'+t+'_'+idx);
-    if(btn)btn.classList.toggle('sel',t===type);
-  });
-  const src=document.getElementById('cont-src-'+idx);
-  if(src){src.dataset.type=type;}
-  // Mettre à jour le label unité
-  const lbl=document.getElementById('clbl_pw_'+idx);
-  if(lbl)lbl.textContent='Puissance ('+(type==='nat'?'lux':'W')+')';
-  if(type==='nat'){
-    const inp=document.getElementById('cpw_'+idx);
-    if(inp&&parseFloat(inp.value)<100)inp.value=1000;
-  }
-  calcContinue();
-}
-
-// Convertit une source en Lux à 1m
-function sourceLuxA1m(type,watts,pct){
-  if(type==='nat') return watts*pct; // valeur Lux directe
-  const t=CONT_TYPES[type];
-  return t?watts*pct*t.luxPw:watts*pct*40;
-}
-
-// Lux → EV (à ISO 100, basé sur formule EV = log2(Lux/2.5))
-function luxToEV(lux){ return Math.log2(lux/2.5); }
-// EV → f/stop à une vitesse et ISO donnés : EV = log2(f²/(t×ISO/100)) → f = sqrt(2^EV * t * ISO/100)
-function evToFstop(ev,vitesse,iso){ return Math.sqrt(Math.pow(2,ev)*vitesse*(iso/100)); }
-// f/stop → EV
-function fstopToEV(f,vitesse,iso){ return Math.log2(f*f/(vitesse*iso/100)); }
-
+/* ════════════════════════════════════════════════════════
+   calcContinue — moteur principal
+   ════════════════════════════════════════════════════════ */
 function calcContinue(){
-  const fTarget=parseFloat(document.getElementById('c_f_target').value)||5.6;
-  const iso=parseFloat(document.getElementById('c_iso').value)||100;
-  const vitesse=parseFloat(document.getElementById('c_vitesse').value)||0.0167;
-  const distCible=parseFloat(document.getElementById('c_dist_cible')||{value:1}).value||1;
+  const fTarget   = parseFloat((document.getElementById('c_f_target')||{value:'5.6'}).value)||5.6;
+  const vTarget   = parseFloat((document.getElementById('c_vitesse')||{value:'0.0167'}).value)||0.0167;
+  const isoTarget = parseFloat((document.getElementById('c_iso')||{value:'100'}).value)||100;
+  const isNath    = contOptiValue > 0;
 
-  // EV cible
-  const evCible=fstopToEV(fTarget,vitesse,iso);
-
-  // Calcul EV mesuré selon mode
-  let evMesure=null, distMes=1;
-  if(contMesureMode==='fstop'){
-    const fMesBase=parseFloat(document.getElementById('c_fmes_base').value)||5.6;
-    const fMesTenths=parseFloat(document.getElementById('c_fmes_tenths').value)||0;
-    distMes=parseFloat(document.getElementById('c_dist_mes').value)||1;
-    const fMes=fMesBase*Math.pow(Math.sqrt(2),fMesTenths);
-    evMesure=fstopToEV(fMes,vitesse,iso);
-  } else {
-    const lux=parseFloat(document.getElementById('c_lux_val').value)||1000;
-    distMes=parseFloat(document.getElementById('c_lux_dist').value)||1;
-    evMesure=luxToEV(lux);
+  /* Bandeau intention */
+  const banner = document.getElementById('cont-intent-banner');
+  if(banner){
+    const fLedRef = fTarget * Math.pow(Math.sqrt(2), contOptiValue);
+    banner.innerHTML = isNath
+      ? `⭐ <b style="color:var(--or)">Nath Sakura</b> — LED Key à <b style="color:var(--or)">f/${fLedRef.toFixed(1)}</b> (f/${fTarget.toFixed(1)} + 1.33 IL) · LED d'ambiance proportionnelle`
+      : `<b>Standard</b> — LED Key doit égaler <b>f/${fTarget.toFixed(1)}</b> (0 IL, exposition neutre)`;
   }
 
-  // Correction distance : loi inverse du carré
-  const corrDist=evMesure!==null?evMesure+2*Math.log2(distMes/distCible):null;
+  const srcs = document.querySelectorAll('[id^="cont-src-"]');
+  if(srcs.length===0){ document.getElementById('cont-result-box').style.display='none'; return; }
 
-  // Calcul sources continues
-  const srcs=document.querySelectorAll('[id^="cont-src-"]');
-  let luxTotalA1m=0;
-  srcs.forEach(src=>{
-    const idx=src.id.replace('cont-src-','');
-    const type=src.dataset.type||'led';
-    const pw=parseFloat(document.getElementById('cpw_'+idx)?.value)||100;
-    const pct=parseFloat(document.getElementById('cpct_'+idx)?.value)||1;
-    const dist=parseFloat(document.getElementById('cdist_'+idx)?.value)||1;
-    const luxA1m=sourceLuxA1m(type,pw,pct);
-    const luxACible=luxA1m/(dist*dist);
-    luxTotalA1m+=luxACible;
+  const results = [];
+
+  srcs.forEach(srcEl => {
+    const idx = srcEl.id.replace('cont-src-','');
+
+    /* Lecture champs */
+    const fMesNum    = parseFloat((document.getElementById('cfmes_num_'+idx)||{value:'2.8'}).value)||2.8;
+    const fMesTenths = parseFloat((document.getElementById('cfmes_tenths_'+idx)||{value:'0'}).value)||0;
+    const vMes       = vTarget; // ← VERROUILLÉ : même vitesse que le boîtier
+    const pctMes     = parseFloat((document.getElementById('cpct_'+idx)||{value:'1'}).value)||1;
+    const distSrc    = parseFloat((document.getElementById('cdist_'+idx)||{value:'1'}).value)||1;
+    const roleKey    = (document.getElementById('crole_'+idx)||{value:'key'}).value||'key';
+    const typeKey    = (document.getElementById('ctype_'+idx)||{value:'led60'}).value||'led60';
+
+    /* Mettre à jour l'affichage vitesse verrouillée dans la carte */
+    const vDisplay = document.getElementById('cvmes_display_'+idx);
+    if(vDisplay) vDisplay.textContent = vLab(vTarget);
+
+    /* Capacité de la source selon le type */
+    const SRC_CAPS = {led20:'Petit panneau LED 20W', led60:'Torche LED 60W', proj200:'Projecteur 200W', fixe:'Source Fixe'};
+    const srcCap   = SRC_CAPS[typeKey] || 'LED';
+    const isFixe   = typeKey === 'fixe';
+
+    /* f/ réelle mesurée */
+    const fMes = fMesNum * Math.pow(Math.sqrt(2), fMesTenths);
+
+    /* Rôle → décalage IL attendu par rapport au Key */
+    const roleIL = ROLE_IL[roleKey] || 0;
+
+    /* f/ cible pour CETTE source :
+       Key   → fTarget × √2^opti
+       autres → fTarget × √2^(opti + roleIL) */
+    const fSrcCible = fTarget * Math.pow(Math.sqrt(2), contOptiValue + roleIL);
+    const evSrcCible = evOf(fSrcCible, vTarget, isoTarget);
+
+    /* EV de la source telle que mesurée (normalisé boîtier cible ISO/vit) */
+    const evMes = evOf(fMes, vMes, isoTarget);
+
+    /* EV de la source ramenée à la vitesse CIBLE boîtier (même source, autre vitesse) */
+    const evMesAtVTarget = evOf(fMes, vTarget, isoTarget) + Math.log2(vMes/vTarget);
+    // Simplification : evMesAtVTarget = log2(fMes²/(vTarget×ISO/100))
+    // Mais on a mesuré à vMes → la source réelle = evMes (indépendant de la vitesse)
+    // Pour continûe : EV_source_réelle = log2(L) où L est la luminance
+    // fstopToEV(fMes,vMes,iso) = log2(fMes²/(vMes×iso/100)) = EV_source_réelle
+    // C'est ce qu'on utilise comme evSrcRéelle
+    const evSrcReelle = evOf(fMes, vMes, isoTarget); // EV intrinsèque de la source
+
+    /* f/ que cette source donne à l'APN (boîtier cible vTarget, isoTarget) */
+    const fApn = fOf(evSrcReelle, vTarget, isoTarget);
+
+    /* ΔIL = cible − réel */
+    const deltaIL = evSrcCible - evSrcReelle;
+
+    /* ── % puissance conseillé ──
+       Règle : 1 stop de f/ = ×2 en puissance lumineuse
+       deltaIL > 0 → source trop faible → monter la puissance : pctCible = pctMes × 2^deltaIL
+       deltaIL < 0 → source trop forte  → baisser la puissance : pctCible = pctMes × 2^deltaIL (< pctMes)
+       Exemple : mesurée f/2.8 @ 100%, cible f/5.6 → +2 IL → pctCible = 100% × 2^2 = 400% (impossible → alerte)
+       Exemple : mesurée f/8   @ 100%, cible f/5.6 → −1 IL → pctCible = 100% × 2^-1 = 50% ✓
+    */
+    const pctCible      = pctMes * Math.pow(2, deltaIL); // valeur brute, peut dépasser 1
+    const pctCibleClamp = Math.max(0.01, Math.min(1, pctCible));
+    const pctOK         = pctCible <= 1.005; // réalisable à puissance existante (≤100%)
+
+    /* Distance conseillée (loi inverse carré) si puissance insuffisante :
+       EV ∝ 1/d² → d_cible = d_src × 2^(deltaIL/2)  */
+    const distCible = distSrc * Math.pow(2, deltaIL/2); // si deltaIL>0 → rapprocher
+
+    /* Nombre de sources identiques nécessaires */
+    const nbSrcs = Math.ceil(Math.pow(2, deltaIL)); // 2^ΔIL sources en parallèle
+
+    /* Vitesse conseillée (adapter la vitesse boîtier pour corriger)
+       EV_boitier_cible = evSrcCible → vAdj = fTarget²/(2^evSrcCible × iso/100) */
+    const vAdj    = vNearest(fTarget*fTarget / (Math.pow(2,evSrcReelle)*(isoTarget/100)));
+    const isoAdj  = Math.round(isoTarget * Math.pow(2, deltaIL));
+
+    const trop   = deltaIL < 0;
+    results.push({idx,fMes,fMesTenths,fMesNum,vMes,pctMes,distSrc,roleKey,typeKey,
+                  fApn,deltaIL,fSrcCible,pctCible,pctCibleClamp,pctOK,trop,
+                  distCible,nbSrcs,vAdj,isoAdj,evSrcReelle,evSrcCible});
+
+    /* ── Badge par source ── */
+    const resBox = document.getElementById('csrc-result-'+idx);
+    const absD   = Math.abs(deltaIL);
+    const roleLabel = (document.getElementById('crole_'+idx)||{options:[{text:'Key'}]})
+                      .options[(document.getElementById('crole_'+idx)||{selectedIndex:0}).selectedIndex]?.text || 'Key';
+    const srcNum = Array.from(srcs).indexOf(srcEl) + 1;
+
+    /* Titre détail : "Source X (Rôle) — Standard" ou "— Nath Sakura (+1.33 IL)" */
+    const roleLabelClean = roleLabel.replace(/[💡🌒✨🖼🌅🔥]/gu,'').trim();
+    const intentSuffix   = contOptiValue > 0 ? `Nath Sakura (+1.33 IL)` : `Standard (0 IL)`;
+    const detailTitre    = `Source ${srcNum} — ${roleLabelClean} · ${intentSuffix}`;
+    const labelEl = document.getElementById('csrc-label-'+idx);
+    if(labelEl) labelEl.textContent = detailTitre;
+
+    if(resBox){
+      /* ── Calculs pour l'affichage badge ── */
+      const isoAdjCl   = Math.min(6400, Math.max(50, Math.round(isoTarget * Math.pow(2, deltaIL))));
+      const distCm     = Math.round(distSrc * Math.pow(2, deltaIL / 2) * 100);
+      const pctShow    = Math.round(pctCibleClamp * 100);
+      const vAdjForSrc = vNearest(vTarget * Math.pow(2, deltaIL));
+      const vFlou      = vAdjForSrc < 0.033;
+
+      /* ── Alerte ISO > 800 (méthode Sakura) ── */
+      const alerteISO  = isoTarget > 800
+        ? `<div style="margin-top:6px;padding:6px 10px;background:rgba(240,160,48,.08);border-left:3px solid #f0a048;border-radius:0 2px 2px 0;font-size:9.5px;color:#f0c060;line-height:1.5">
+            ⚠ <b>ISO ${isoTarget}</b> — Bruit numérique peut altérer le rendu Sakura.<br>Privilégiez de <b>rapprocher la source</b>.
+           </div>` : '';
+
+      /* ── Badge bleu f/ APN toujours visible ── */
+      const badgeApn = `<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(100,160,255,.12);border:1px solid rgba(100,160,255,.3);border-radius:3px;margin-bottom:7px">
+        <span style="font-size:11px">📷</span>
+        <div style="font-size:10.5px;color:#7ab3ff">
+          f/ réelle sur la photo : <b style="font-size:13px;font-family:Georgia,serif">f/${fApn.toFixed(1)}</b>
+          <span style="color:rgba(120,170,255,.55);font-size:9px"> @ ${vLab(vTarget)} · ISO ${isoTarget}</span>
+        </div>
+      </div>`;
+
+      let cardStyle = '';
+      let detailHtml = '';
+
+      if(absD < 0.1){
+        resBox.innerHTML = `
+          <div style="border-radius:3px;padding:8px;background:rgba(76,175,117,.07)">
+            ${badgeApn}
+            <div style="font-size:10.5px;color:#4caf75">✓ Expo correcte — source bien calibrée</div>
+            ${alerteISO}
+          </div>`;
+      } else {
+
+        const roleGroup = roleKey.split('_')[0];
+        const isSakuraKey = roleGroup === 'key' && contOptiValue > 0;
+
+        if(trop){
+          /* SOURCE TROP FORTE → baisser la puissance */
+          cardStyle = 'background:rgba(224,112,96,.05);';
+          detailHtml = `<div style="font-size:10.5px;color:var(--tm);line-height:1.9">
+            <span style="color:#e07060;font-weight:700">Source trop forte de ${absD.toFixed(2)} IL</span><br>
+            ① Baissez la puissance à <b style="color:var(--or);font-size:13px">${pctShow}%</b>
+              <span style="color:var(--tp);font-size:9.5px"> (actuellement ${Math.round(pctMes*100)}%)</span>
+          </div>`;
+
+        } else if(isSakuraKey && !pctOK){
+          /* ALERTE SAKURA : Key Light sous-exposée en mode Nath Sakura */
+          const srcSugg = typeKey==='led20' ? 'Passez sur une Torche 60W ou un Projecteur'
+                        : typeKey==='led60' ? 'Passez sur un Projecteur 200W'
+                        : 'Rapprochez la source';
+          cardStyle = 'background:rgba(192,60,60,.1);border:1px solid rgba(220,80,80,.3);';
+          detailHtml = `<div style="font-size:10.5px;line-height:1.9">
+            <div style="background:rgba(192,60,60,.2);border:1px solid rgba(220,80,80,.5);border-radius:3px;padding:8px 10px;margin-bottom:8px">
+              <span style="color:#ff7070;font-weight:700">🔴 Sujet sous-exposé — ${absD.toFixed(2)} IL manquants</span><br>
+              <span style="color:#ffaaaa;font-size:9.5px">Montez les ISO ou baissez la vitesse boîtier</span>
+            </div>
+            <span style="color:var(--tm)">
+              ① Ralentissez → <b>${vLab(vAdjForSrc)}</b>${vFlou?' <span style="color:#f0a04a">⚠ risque flou</span>':''}<br>
+              ② Montez les ISO → <b>ISO ${isoAdjCl}</b>
+            </span>
+            <div style="margin-top:7px;padding:7px 10px;background:rgba(200,164,90,.1);border-left:3px solid var(--or);border-radius:0 2px 2px 0;color:var(--or);font-size:9.5px">
+              ⭐ ${srcSugg} → rapprochez à <b>${distCm} cm</b>
+            </div>
+          </div>`;
+
+        } else if(pctOK){
+          /* TROP FAIBLE mais récupérable en montant la puissance */
+          cardStyle = 'background:rgba(232,160,48,.04);';
+          const gainPct = Math.round((1 - pctMes) * 100);
+          detailHtml = `<div style="font-size:10.5px;color:var(--tm);line-height:1.9">
+            <span style="color:#e8a030;font-weight:700">Source trop faible de ${absD.toFixed(2)} IL</span><br>
+            ① Montez à <b style="color:var(--or);font-size:13px">100%</b>
+              <span style="color:var(--tp);font-size:9.5px"> (+${gainPct}% vs actuel)</span><br>
+            ② Ou ralentissez → <b>${vLab(vAdjForSrc)}</b>${vFlou?' <span style="color:#f0a04a">⚠ risque flou</span>':''}<br>
+            ③ Ou montez les ISO → <b>ISO ${isoAdjCl}</b>
+          </div>`;
+
+        } else {
+          /* PUISSANCE INSUFFISANTE — suggérer montée en gamme source */
+          const srcSugg = typeKey==='led20'
+            ? `Passez sur une <b>Torche LED 60W</b> ou un <b>Projecteur 200W</b>`
+            : typeKey==='led60'
+            ? `Passez sur un <b>Projecteur 200W</b>`
+            : `Rapprochez la source`;
+          const nbStr = nbSrcs > 1 ? `${nbSrcs-1} source${nbSrcs>2?'s':''} identique${nbSrcs>2?'s':''}` : 'une source plus puissante';
+          cardStyle = 'background:rgba(192,60,60,.06);';
+          detailHtml = `<div style="font-size:10.5px;color:var(--tm);line-height:1.9">
+            <span style="color:#e07060;font-weight:700">⛔ Puissance insuffisante — ${absD.toFixed(2)} IL manquants</span><br>
+            ① Ralentissez → <b>${vLab(vAdjForSrc)}</b>${vFlou?' <span style="color:#f0a04a">⚠ risque flou</span>':''}<br>
+            ② Montez les ISO → <b>ISO ${Math.min(3200,isoAdjCl)}</b><br>
+            <div style="margin-top:7px;padding:8px 11px;background:rgba(200,164,90,.1);border-left:3px solid var(--or);border-radius:0 3px 3px 0;color:var(--t);line-height:1.7;font-size:9.5px">
+              ⭐ <b>Conseil :</b> ${srcSugg}<br>
+              ou rapprochez à <b>${distCm} cm</b> · ou ajoutez <b>${nbStr}</b>
+            </div>
+          </div>`;
+        }
+
+        resBox.innerHTML = `<div style="border-radius:3px;padding:8px;${cardStyle}">${badgeApn}${detailHtml}${alerteISO}</div>`;
+      }
+    }
+
+        /* ── Conseil de configuration contextuel ── */
+    const conseilBox = document.getElementById('csrc-conseil-'+idx);
+    if(conseilBox){
+      const isNath2   = contOptiValue > 0;
+      const roleGroup = roleKey.split('_')[0];
+      const ilVal     = ROLE_IL[roleKey] || 0;
+      let ctxt = '';
+      if(roleGroup==='key'){
+        ctxt = isNath2
+          ? `⭐ <b>Key Light Nath Sakura :</b> doit être à <b>+1.33 IL</b> au-dessus de l'exposition boîtier. Cible posemètre : <b>f/${fSrcCible.toFixed(1)}</b>.`
+          : `<b>Key Light Standard :</b> doit correspondre à l'ouverture boîtier. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
+      } else if(roleGroup==='fill'){
+        ctxt = `<b>Fill Light (${ilVal} IL) :</b> débouche les ombres sous la Key sans écraser le modelé. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
+      } else if(roleGroup==='rim'){
+        ctxt = `<b>Rim / Accent (+${ilVal} IL) :</b> sépare le sujet du fond, plus forte que la Key. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
+      } else {
+        ctxt = `<b>Fond :</b> éclaire l'arrière-plan indépendamment. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
+      }
+      conseilBox.style.display = 'block';
+      conseilBox.innerHTML = `<div style="font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#7ab3ff;margin-bottom:4px">💬 Conseil</div>${ctxt}`;
+    }
   });
 
-  const evSources=srcs.length>0&&luxTotalA1m>0?luxToEV(luxTotalA1m):null;
+  /* ── Résultat global (source Key principale = résultat résumé) ── */
+  const keyResult = results.find(r=>r.roleKey==='key') || results[0];
+  const box = document.getElementById('cont-result-box');
+  if(!keyResult){ box.style.display='none'; return; }
+  box.style.display = 'block';
 
-  // Combiner mesure + sources : convertir en Lux et additionner
-  let luxTotal=luxTotalA1m;
-  if(corrDist!==null){
-    // Mesure Sekonic → convertir l'EV en Lux équivalent et ajouter aux sources
-    const luxMesure=2.5*Math.pow(2,corrDist);
-    luxTotal+=luxMesure;
-  }
-  const evDisponible=luxTotal>0?luxToEV(luxTotal):null;
-  if(evDisponible===null){document.getElementById('cont-result-box').style.display='none';return;}
+  const resMaj   = document.getElementById('cont-res-main');
+  const resSub   = document.getElementById('cont-res-sub');
+  const ecartBar = document.getElementById('cont-ecart-bar');
+  const conseil  = document.getElementById('cont-conseil');
+  const vitBox   = document.getElementById('cont-vitesses-box');
 
-  const diff=evDisponible-evCible; // positif = trop de lumière, négatif = manque
-  const fActuelle=evToFstop(evDisponible,vitesse,iso);
-  const resMaj=document.getElementById('cont-res-main');
-  const resSub=document.getElementById('cont-res-sub');
-  const conseil=document.getElementById('cont-conseil');
-  const reglage=document.getElementById('cont-reglage-box');
-  document.getElementById('cont-result-box').style.display='block';
+  const absD = Math.abs(keyResult.deltaIL);
+  const trop = keyResult.deltaIL < 0;
 
-  if(Math.abs(diff)<=0.15){
-    resMaj.textContent='✓ EXPO CORRECTE';
-    resMaj.style.color='#4caf75';
-    resSub.textContent='f/ disponible ≈ f/'+fActuelle.toFixed(1)+' — correspond à f/'+fTarget;
-    conseil.style.display='none';
-    reglage.style.display='none';
-  } else if(diff>0){
-    // Trop de lumière → fermer le diaph ou accélerer ou ND
-    resMaj.textContent='+'+diff.toFixed(1)+' IL en excès';
-    resMaj.style.color='#e07060';
-    resSub.textContent='f/ disponible ≈ f/'+fActuelle.toFixed(1)+' — cible f/'+fTarget;
-    conseil.style.display='block';
-    const ndVal=Math.round(Math.pow(2,Math.round(diff)));
-    const isoReduit=Math.round(iso/Math.pow(2,Math.min(diff,3)));
-    const fFerme=(fTarget*Math.pow(Math.sqrt(2),Math.round(diff*2)/2)).toFixed(1);
-    conseil.innerHTML='📐 <b>Conseil Nath Sakura :</b><br>'
-      +'① Ferme le diaphragme : f/'+fFerme+'<br>'
-      +'② Ou accélère la vitesse d\'1 stop<br>'
-      +'③ Ou baisse les ISO → <b>ISO '+isoReduit+'</b><br>'
-      +'④ Ou ajoute un filtre <b>ND'+ndVal+'</b>';
-    reglage.style.display='none';
+  /* En-tête résumé */
+  const keyPctCons = Math.round(keyResult.pctCibleClamp * 100);
+  const keyPctBrut = Math.round(keyResult.pctCible * 100);
+  const keyInsuffisant = keyResult.pctCible > 1.005;
+  document.getElementById('cont-res-type').textContent =
+    `SOURCE KEY — ${contOptiValue>0?'NATH SAKURA +1.33 IL':'STANDARD 0 IL'}`;
+
+  if(absD < 0.1){
+    resMaj.textContent = '✓ EXPO CORRECTE';
+    resMaj.style.color = '#4caf75';
+    resSub.textContent = `Key à f/${keyResult.fApn.toFixed(1)} à l'APN — conforme à l'intention`;
+    ecartBar.style.display = 'none';
+    conseil.style.display  = 'none';
+    vitBox.style.display   = 'none';
+  } else if(!keyResult.trop && keyInsuffisant){
+    /* Puissance insuffisante — alerte rouge principale */
+    resMaj.textContent = '⛔ PUISSANCE INSUFFISANTE';
+    resMaj.style.color = '#e07060';
+    resMaj.style.fontSize = 'clamp(1.1rem,5vw,1.6rem)';
+    resSub.innerHTML = `Key mesurée f/${keyResult.fMes.toFixed(1)} → cible f/${keyResult.fSrcCible.toFixed(1)}<br>
+      <span style="color:#e07060">Nécessite ${keyPctBrut}% de puissance — impossible</span>`;
+    ecartBar.style.display = 'block';
+    ecartBar.style.background = 'rgba(224,112,96,.08)';
+    ecartBar.style.border = '1px solid rgba(224,112,96,.35)';
+    ecartBar.style.borderRadius = '3px';
+    ecartBar.style.color = 'var(--tm)';
+    ecartBar.style.padding = '10px 14px';
+    ecartBar.style.fontSize = '11px';
+    ecartBar.style.lineHeight = '1.8';
+    ecartBar.innerHTML = `<span style="color:#e07060;font-weight:700">Augmentez ISO de +${absD.toFixed(1)} IL</span> → ISO ${Math.min(6400,Math.round(isoTarget*Math.pow(2,absD)))}<br>
+      ou baissez la vitesse → <b>${vLab(vNearest(vTarget*Math.pow(2,keyResult.deltaIL)))}</b><br>
+      ou <b>rapprochez la source</b> (loi du carré inverse)`;
+    conseil.style.display = 'none';
+    vitBox.style.display  = 'none';
   } else {
-    // Manque de lumière → ouvrir ou ajouter source
-    const manque=Math.abs(diff);
-    resMaj.textContent='−'+manque.toFixed(1)+' IL manquants';
-    resMaj.style.color='#e8a030';
-    resSub.textContent='f/ disponible ≈ f/'+fActuelle.toFixed(1)+' — cible f/'+fTarget;
-    const isoNeeded=Math.round(iso*Math.pow(2,Math.min(manque,3)));
-    const fOuvre=(fTarget/Math.pow(Math.sqrt(2),Math.round(manque*2)/2)).toFixed(1);
-    const wsFlashNeeded=Math.round(76*Math.pow(2,manque));
-    conseil.style.display='block';
-    conseil.innerHTML='📐 <b>Conseil Nath Sakura :</b><br>'
-      +'① Ouvre le diaphragme : f/'+fOuvre+'<br>'
-      +'② Ou monte les ISO → <b>ISO '+isoNeeded+'</b><br>'
-      +'③ Ou ajoute une source continue plus puissante<br>'
-      +'④ Ou complète avec un flash : ≈ <b>'+wsFlashNeeded+' Ws</b> nécessaires'
-      +(manque>3?'<br><span style="color:#ff8080">⛔ Manque important — flash recommandé</span>':'');
-    reglage.style.display='block';
-    reglage.innerHTML='💡 <b>Apport flash suggéré :</b> <b>'+wsFlashNeeded+' Ws</b>'
-      +'<br><span style="font-size:10px;color:var(--tp)">Clique sur le bouton ci-dessous pour importer vers l\'onglet Flash</span>';
+    resMaj.style.fontSize = ''; // reset si modifié par le cas précédent
+    resMaj.textContent = `${trop?'−':'+'}${absD.toFixed(2)} IL`;
+    resMaj.style.color = trop ? '#e07060' : '#e8a030';
+    resSub.textContent = `Key mesurée f/${keyResult.fMes.toFixed(1)} → cible f/${keyResult.fSrcCible.toFixed(1)} à l'APN`;
+
+    ecartBar.style.display = 'block';
+    ecartBar.style.background = trop?'rgba(224,112,96,.07)':'rgba(232,160,48,.07)';
+    ecartBar.style.border     = `1px solid ${trop?'rgba(224,112,96,.3)':'rgba(232,160,48,.3)'}`;
+    ecartBar.style.borderRadius = '3px';
+    ecartBar.style.color = 'var(--tm)';
+    ecartBar.style.padding = '10px 14px';
+    ecartBar.style.fontSize = '11px';
+    ecartBar.style.lineHeight = '1.8';
+    ecartBar.innerHTML = (contOptiValue>0
+      ?`⭐ Mode Nath Sakura — Key doit être à <b>f/${keyResult.fSrcCible.toFixed(1)}</b>`
+      :`Mode Standard — Key doit être à <b>f/${keyResult.fSrcCible.toFixed(1)}</b>`)
+      +`<br><span style="color:${trop?'#e07060':'#e8a030'};font-weight:600">${trop?'Key trop forte':'Key trop faible'} de ${absD.toFixed(2)} IL</span>`;
+
+    /* Tableau équivalences vitesse */
+    vitBox.style.display = 'block';
+    const rows = [];
+    [-2,-1,0,1,2].forEach(stop=>{
+      const vV = vTarget * Math.pow(2, stop);
+      if(vV < 0.0009 || vV > 31) return;
+      const fV = fOf(keyResult.evSrcReelle, vV, isoTarget);
+      const near = Math.abs(stop - keyResult.deltaIL) < 0.15;
+      rows.push(`<div style="display:flex;justify-content:space-between;padding:2px 0;${near?'color:var(--or);font-weight:600':''}">
+        <span>${vLab(vV)}</span><span>→ Key équivaut à f/${fV.toFixed(1)}</span>${near?'<span style="color:var(--or)">← cible</span>':''}
+      </div>`);
+    });
+    vitBox.innerHTML = `<div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);margin-bottom:8px">Équivalences vitesse ↔ f/ Key</div>${rows.join('')}`;
+    conseil.style.display = 'none'; // conseils déjà dans chaque carte
   }
 
-  // Stocker pour import mixte
-  window._contResult={evDisponible,fTarget,iso,vitesse,diff,manqueIL:Math.max(-diff,0)};
+  /* Stocker pour import mixte */
+  window._contResult = {
+    evDisponible: keyResult.evSrcReelle,
+    fTarget, iso: isoTarget, vitesse: vTarget,
+    diff: -keyResult.deltaIL
+  };
 }
 
 function importVersMixte(){
-  if(!window._contResult)return;
+  if(!window._contResult) return;
   setMainTab('mixte');
-  window._contResult._imported=true;
+  window._contResult._imported = true;
 }
 
 
@@ -1900,20 +1848,27 @@ function mxCalcAmbiante(){
   const isosStd=[50,64,80,100,125,160,200,250,320,400,500,640,800,1000,1250,1600,2000,2500,3200,4000,5000,6400,12800,25600];
 
   // DIAPHRAGME BOÎTIER = fBase (valeur standard APN, sans les dixièmes)
-  // Les dixièmes IL résiduels (tenths) se compensent sur la VITESSE en priorité
-  // totalIL = dixièmes résiduels + intention fond
-  const totalIL = tenths + fondIntent;
+  // Calcul en deux étapes séparées :
+  // 1. Les dixièmes IL du f/ mesuré (tenths) → compensés sur la vitesse (arrondi au cran)
+  // 2. L'intention fond (fondIntent) → appliquée à la vitesse de référence INDÉPENDAMMENT
+  //    Ainsi +1.33 IL fond depuis 1/200 donne toujours 1/500, quel que soit le f/ mesuré.
 
-  // Trouver la vitesse compensant tous les IL résiduels
-  // +IL vitesse = ralentir (×2^IL), -IL = accélérer (÷2^IL)
-  const vitesseAjustee = vitesse / Math.pow(2, totalIL);
-  const vitesseOk = vitesseAjustee >= 0.000125 && vitesseAjustee <= 30;
+  // Étape 1 : vitesse ajustée pour les dixièmes du f/
+  const vitesseAprestenths = Math.abs(tenths) > 0.05 ? vitesse / Math.pow(2, tenths) : vitesse;
+
+  // Étape 2 : vitesse ajustée pour l'intention fond (sur la vitesse de réf, pas l'ajustée)
+  const vitesseAjustee = vitesse / Math.pow(2, fondIntent);
+  // Pour l'arrondi final on combine les deux corrections
+  const vitesseAjusteeCombinee = vitesse / Math.pow(2, tenths + fondIntent);
+  const vitesseOk = vitesseAjusteeCombinee >= 0.000125 && vitesseAjusteeCombinee <= 30;
+
+  const totalIL = tenths + fondIntent; // conservé pour la note de compensation affichée
 
   let vBest=vitesse, vBestLabel=vLabel;
   if(Math.abs(totalIL) > 0.05){
     let vBestDiff=Infinity;
     vitessesStd.forEach((v,i)=>{
-      const d=Math.abs(Math.log2(v/vitesseAjustee));
+      const d=Math.abs(Math.log2(v/vitesseAjusteeCombinee));
       if(d<vBestDiff){vBestDiff=d;vBest=v;vBestLabel=vitLabels[i];}
     });
   }
@@ -2156,10 +2111,25 @@ function mxOnSrcChange(idx){
   if(!mxData.sources[idx]) mxData.sources[idx]={};
   Object.assign(mxData.sources[idx],{role,base,tenths,maxWs,dist,fMesBase,fMesTenths});
 
-  // f/ cible de cette source = fFlashCibleBase × √2^role
-  const fCibleBase=mxData.fFlashCibleBase||5.6;
-  const fCible=fCibleBase*Math.pow(Math.sqrt(2),role);
-  mxData.sources[idx].cible=fCible;
+  // === RÈGLE MAÎTRE DE L'EXPOSITION ===
+  // fFlashCibleBase = f/ finale cible (fSujet × corrections carn/mat/opti) — C'est LA loi.
+  // Le boîtier est calé dessus. On ne la dépasse jamais.
+  const fCibleBase = mxData.fFlashCibleBase || 5.6;
+
+  // Key Light (role=0) : les N keys se PARTAGENT l'effort pour atteindre fCibleBase ensemble.
+  // Chacune doit produire fCibleBase / √N (car √N × √N = N sources = résultat = fCibleBase).
+  // Sources secondaires (Fill/Rim/Fond, role≠0) : ratio créatif appliqué à fCibleBase,
+  // INDÉPENDANTES — jamais cumulées entre elles ni ajoutées au boîtier.
+  const isKey = Math.abs(role) < 0.01;
+  let fCible;
+  if(isKey){
+    const allSources = mxData.sources || [];
+    const nKey = Math.max(1, allSources.filter(s => s && Math.abs((s.role||0)) < 0.01).length);
+    fCible = fCibleBase / Math.sqrt(nKey);
+  } else {
+    fCible = fCibleBase * Math.pow(Math.sqrt(2), role);
+  }
+  mxData.sources[idx].cible = fCible;
 
   const resBox=document.getElementById('mx_src_result_'+idx);
   if(!resBox) return;
@@ -2314,29 +2284,28 @@ function mxUpdateSourceCount(){/* legacy compat */}
 
 
 function mxCalcSujet(){
-  // f/ sujet = f/ boîtier (automatique)
+  // f/ boîtier = diaphragme APN (base ambiante)
   const fBoitier=mxData.fBoitier||mxData.fAmb||5.6;
-  const fSujet=fBoitier;
   const carn=parseFloat(document.getElementById('mx_carn').value)||0;
   const mat=parseFloat(document.getElementById('mx_matiere').value)||0;
   const opti=parseFloat(document.getElementById('mx_opti').value)||0;
 
-  mxData.fSujet=fSujet; mxData.carn=carn; mxData.mat=mat; mxData.opti=opti;
+  mxData.carn=carn; mxData.mat=mat; mxData.opti=opti;
 
-  // f/ cible KEY = fSujet × √2^(carn+mat+opti)
+  // f/ cible finale = fBoitier × √2^(carn+mat+opti)
+  // C'est LA valeur de référence unique pour tout le module flash.
+  // fSujet ET fFlashCibleBase pointent sur la même valeur.
   const corrBase=carn+mat+opti;
-  mxData.fFlashCibleBase=fSujet*Math.pow(Math.sqrt(2),corrBase);
+  const fCible=fBoitier*Math.pow(Math.sqrt(2),corrBase);
+  mxData.fSujet=fCible;
+  mxData.fFlashCibleBase=fCible;
 
   // Mettre à jour l'affichage de la f/ à obtenir
   const disp=document.getElementById('mx-s2-fcible-display');
-  if(disp) disp.textContent='f/'+mxData.fFlashCibleBase.toFixed(1);
+  if(disp) disp.textContent='f/'+fCible.toFixed(1);
 
-  // Recalculer la cible de chaque source déjà créée
+  // Recalculer toutes les sources
   if(mxData.sources){
-    mxData.sources.forEach((src,i)=>{
-      const role=src.role||0;
-      src.cible=mxData.fFlashCibleBase*Math.pow(Math.sqrt(2),role);
-    });
     document.querySelectorAll('[id^="mx-src-row-"]').forEach((row,i)=>{
       if(mxData.sources[i]) mxOnSrcChange(i);
     });
@@ -2451,18 +2420,18 @@ function mxCalcVerif(){
       <div class="mx-row"><span class="mx-lbl">🌅 Intention</span><span style="font-size:11px;color:var(--tm)">${ambTxt}</span></div>
     </div>`;
 
-  // f/ cible sujet avec opti appliquée
-  const fCibleOpti = opti>0 ? (mxData.fFlashCibleBase||fSujet) : fSujet;
+  // fSujet = cible unifiée (fBoitier × √2^(carn+mat+opti)) — même valeur que fFlashCibleBase
+  const fBoitierNu = mxData.fBoitier||mxData.fAmb||5.6; // f/ boîtier nu pour affichage
   const carnTxt=carn!==0?`<div class="mx-row"><span class="mx-lbl">Carnation</span><span style="font-size:11px;color:var(--tm)">${carn>0?'+':''}${carn} IL</span></div>`:'';
   const matTxt=mat!==0?`<div class="mx-row"><span class="mx-lbl">Matière</span><span style="font-size:11px;color:var(--tm)">${mat>0?'+':''}${mat} IL</span></div>`:'';
-  const optiTxt=opti>0?`
-      <div class="mx-row"><span class="mx-lbl">⭐ Opti Nath Sakura</span><span style="font-size:11px;color:#e8a030">+1.33 IL</span></div>
-      <div class="mx-row"><span class="mx-lbl">→ Nouvelle f/ cible Opti</span><span style="font-family:Georgia,serif;font-size:16px;font-weight:700;color:#e8a030">f/${fCibleOpti.toFixed(1)}</span></div>`:'';
+  const optiTxt=opti>0?`<div class="mx-row"><span class="mx-lbl">⭐ Opti Nath Sakura</span><span style="font-size:11px;color:#e8a030">+1.33 IL</span></div>`:'';
+  const corrActive = (carn!==0||mat!==0||opti>0);
   const blocSujet=`
     <div style="margin-bottom:10px;padding:10px 12px;background:rgba(100,160,255,.05);border-left:3px solid #7ab3ff;border-radius:2px">
       <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7ab3ff;margin-bottom:6px">② Sujet</div>
-      <div class="mx-row"><span class="mx-lbl">f/ cible boîtier</span><span class="mx-val" style="color:var(--or)">f/${fSujet.toFixed(1)}</span></div>
+      ${corrActive?`<div class="mx-row"><span class="mx-lbl">f/ boîtier base</span><span style="font-size:11px;color:var(--tm)">f/${Number.isInteger(fBoitierNu)?fBoitierNu:fBoitierNu.toFixed(1)}</span></div>`:''}
       ${carnTxt}${matTxt}${optiTxt}
+      <div class="mx-row"><span class="mx-lbl">🎯 f/ cible flash</span><span class="mx-val" style="font-family:Georgia,serif;font-size:16px;font-weight:700;color:${opti>0?'#e8a030':'var(--or)'}">f/${fSujet.toFixed(1)}</span></div>
     </div>`;
 
   // Bloc sources flash
@@ -2503,10 +2472,12 @@ function mxCalcVerif(){
   exportTxt+=`  Boîtier : f/${Number.isInteger(fAmb)?fAmb:fAmb.toFixed(1)} · ${vLabel}${(mxData.vitesseBoitier||0.008)<0.005?' [HSS]':''} · ISO ${iso}\n`;
   exportTxt+=`  ${ambTxt}\n\n`;
   exportTxt+=`② SUJET\n`;
-  exportTxt+=`  f/ cible boîtier : f/${fSujet.toFixed(1)}\n`;
+  const fBoitierNuExp = mxData.fBoitier||mxData.fAmb||5.6;
+  if(carn!==0||mat!==0||opti>0) exportTxt+=`  f/ boîtier base : f/${Number.isInteger(fBoitierNuExp)?fBoitierNuExp:fBoitierNuExp.toFixed(1)}\n`;
   if(carn!==0) exportTxt+=`  Carnation : ${carn>0?'+':''}${carn} IL\n`;
   if(mat!==0) exportTxt+=`  Matière : ${mat>0?'+':''}${mat} IL\n`;
-  if(opti>0) exportTxt+=`  Opti Nath Sakura : +1.33 IL\n  → Nouvelle f/ cible Opti : f/${fCibleOpti.toFixed(1)}\n`;
+  if(opti>0) exportTxt+=`  Opti Nath Sakura : +1.33 IL\n`;
+  exportTxt+=`  🎯 f/ cible flash : f/${fSujet.toFixed(1)}\n`;
   exportTxt+=`\n③ FLASH(S)\n`;
   sources.forEach((src,i)=>{
     const roleSel=document.getElementById('mx_src_role_'+i);
@@ -2526,8 +2497,8 @@ function mxCalcVerif(){
     iso: iso,
     ambTxt: ambTxt.replace(/<[^>]+>/g,''),
     fSujet: fSujet.toFixed(1),
+    fBoitierNu: (mxData.fBoitier||mxData.fAmb||5.6),
     carn: carn, mat: mat, opti: opti,
-    fCibleOpti: opti>0?fCibleOpti.toFixed(1):null,
     sources: sources.map((src,i)=>{
       const roleSel=document.getElementById('mx_src_role_'+i);
       const roleLabel=roleSel?roleSel.options[roleSel.selectedIndex].text.replace(/[💡🌒🌑📉✨🌟🔥🖼️☀️🚀]/gu,'').split('(')[0].trim():'Flash '+(i+1);
@@ -2619,13 +2590,14 @@ function mxDownloadPdf(){
 
     // ② Sujet
     section('②','Sujet',[122,179,255]);
-    row('f/ cible boîtier','f/'+d.fSujet,[200,164,90]);
+    if(d.carn||d.mat||d.opti){
+      const fbn=Number.isInteger(d.fBoitierNu)?d.fBoitierNu:d.fBoitierNu.toFixed(1);
+      row('f/ boîtier base','f/'+fbn);
+    }
     if(d.carn) row('Carnation',(d.carn>0?'+':'')+d.carn+' IL');
     if(d.mat)  row('Matière',(d.mat>0?'+':'')+d.mat+' IL');
-    if(d.opti){
-      row('⭐ Opti Nath Sakura','+1.33 IL',[232,160,48]);
-      row('→ Nouvelle f/ cible Opti','f/'+d.fCibleOpti,[232,160,48]);
-    }
+    if(d.opti) row('⭐ Opti Nath Sakura','+1.33 IL',[232,160,48]);
+    row('🎯 f/ cible flash','f/'+d.fSujet,d.opti?[232,160,48]:[200,164,90]);
     y+=2; divider();
 
     // ③ Flash(s)
@@ -2688,14 +2660,53 @@ function mxReset(){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  ['f_target','v_apn','iso_apn','flash_role','skin_tone','matiere','dist_mes','dist_cible','f_mes_tenths','f_mes_il_corr'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el)el.addEventListener('change',()=>{if(document.getElementById('result-box').style.display==='block')calculate(lastOptiValue);});
-  });
+  // Init corrections visuelles
   majCarn();majRefl();majDist();
+  // Init mode Mixte
   mxGoStep(1);
+  // Premier calcul Flash — affiche cible et badges dès l'ouverture
+  _updateIntentBanner();
+  calcFlashPerSource(lastOptiValue);
 });
 
 </script>
+
+<!-- Modal "Comment mesurer — Méthode Nath Sakura" -->
+<div class="mesure-modal-overlay" id="mesure-modal-overlay" onclick="closeMesureModalOutside(event)">
+  <div class="mesure-modal" role="dialog" aria-modal="true">
+    <div class="mesure-modal-head">
+      <span class="mesure-modal-titre">📐 Méthode de Mesure Nath Sakura</span>
+      <button class="mesure-modal-close" onclick="closeMesureModal()" title="Fermer">×</button>
+    </div>
+    <div class="mesure-modal-body">
+      <div class="mesure-step">
+        <div class="mesure-step-num">1</div>
+        <div>
+          <div class="mesure-step-titre">Lumisphère Sortie — Mesure Ambiante</div>
+          <div class="mesure-step-txt">Utilisez ce mode pour une <b>mesure globale de la scène</b> (ambiance). La sphère sort et capte la lumière de toutes les directions. C'est la mesure que vous entrez dans l'onglet <b>Mixte</b> pour l'étape Ambiante.</div>
+        </div>
+      </div>
+      <div class="mesure-step">
+        <div class="mesure-step-num" style="background:rgba(200,164,90,.3);border-color:var(--or)">2</div>
+        <div>
+          <div class="mesure-step-titre">Lumisphère Rentrée (Plat) — Le Secret 🔑</div>
+          <div class="mesure-step-txt">
+            C'est le cœur de la méthode. Mesurez <b>face à chaque source de flash individuellement</b>, lumisphère rentrée (à plat).
+            <span class="secret">
+              <b>Pourquoi ?</b> La lumisphère rentrée mesure la puissance <b>pure et directe</b> de la source, sans pollution lumineuse latérale ni rebonds. Cela vous donne la vraie valeur de chaque flash individuellement, que vous entrez dans le champ <b>"f/ mesurée"</b> de chaque source ci-dessus.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mesure-step">
+        <div class="mesure-step-num">3</div>
+        <div>
+          <div class="mesure-step-titre">Le Rendu Signature +1.33 IL</div>
+          <div class="mesure-step-txt">En mode <b>Nath Sakura</b>, chaque flash est calé à <b>+1.33 IL au-dessus de l'ambiance</b>. C'est cette tension précise entre la lumière naturelle et le flash qui crée le rendu lumineux, doux et maîtrisé de la méthode.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
