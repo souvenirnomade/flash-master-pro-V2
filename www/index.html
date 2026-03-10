@@ -280,6 +280,34 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .mesure-step-txt{font-size:11px;color:var(--tm);line-height:1.7}
 .mesure-step-txt b{color:var(--or)}
 .mesure-step-txt .secret{display:inline-block;margin-top:6px;padding:5px 10px;background:rgba(200,164,90,.12);border-left:3px solid var(--or);border-radius:0 2px 2px 0;font-size:10.5px;color:var(--t);line-height:1.6;width:100%}
+
+/* ══ BOÎTE CONSEILS NATH SAKURA ══ */
+.sakura-tips-box{
+  max-width:700px;margin:28px auto 0;padding:0 15px 32px;position:relative;z-index:1;
+}
+.sakura-tips-card{
+  background:var(--s2);border:1px solid var(--or-b);border-radius:3px;padding:20px 18px;
+  position:relative;overflow:hidden;
+}
+.sakura-tips-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,var(--or),transparent)}
+.sakura-tips-card::after{content:'';position:absolute;width:13px;height:13px;opacity:.38;
+  top:8px;left:8px;border-top:1px solid var(--or);border-left:1px solid var(--or)}
+.sakura-tips-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sakura-tips-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--or);opacity:.85;display:flex;align-items:center;gap:8px}
+.sakura-tips-label::before{content:'';display:block;width:20px;height:1px;background:var(--or);opacity:.4}
+.sakura-tips-category{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:2px 8px;border-radius:1px;background:var(--or-pale);color:var(--or);border:1px solid var(--or-b)}
+.sakura-tips-text{font-size:12px;color:var(--t);line-height:1.8;font-style:italic;
+  font-family:var(--font-serif);padding-left:14px;border-left:2px solid var(--or-b)}
+.sakura-tips-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.sakura-tips-next{font-size:9px;color:var(--tp);cursor:pointer;display:flex;align-items:center;gap:5px;
+  transition:color .2s;user-select:none}
+.sakura-tips-next:hover{color:var(--or)}
+.sakura-tips-dots{display:flex;gap:4px}
+.sakura-dot{width:5px;height:5px;border-radius:50%;background:var(--or-b);transition:background .3s}
+.sakura-dot.actif{background:var(--or)}
 </style>
 </head>
 <body>
@@ -497,30 +525,51 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <div class="g3">
       <div class="ch"><label>f/ cible</label>
         <select id="c_f_target" onchange="calcContinue()">
-          <option value="1.0">f/1.0</option><option value="1.2">f/1.2</option><option value="1.4">f/1.4</option>
-          <option value="1.8">f/1.8</option><option value="2.0">f/2.0</option><option value="2.5">f/2.5</option>
-          <option value="2.8">f/2.8</option><option value="3.5">f/3.5</option><option value="4.0">f/4.0</option>
-          <option value="5.6" selected>f/5.6</option><option value="8.0">f/8.0</option><option value="11">f/11</option>
-          <option value="16">f/16</option><option value="22">f/22</option>
+          <option value="1.0">f/1.0</option><option value="1.1">f/1.1</option><option value="1.2">f/1.2</option>
+          <option value="1.4">f/1.4</option><option value="1.6">f/1.6</option><option value="1.8">f/1.8</option>
+          <option value="2.0">f/2.0</option><option value="2.2">f/2.2</option><option value="2.5">f/2.5</option>
+          <option value="2.8">f/2.8</option><option value="3.2">f/3.2</option><option value="3.5">f/3.5</option>
+          <option value="4.0">f/4.0</option><option value="4.5">f/4.5</option><option value="5.0">f/5.0</option>
+          <option value="5.6" selected>f/5.6</option><option value="6.3">f/6.3</option><option value="7.1">f/7.1</option>
+          <option value="8.0">f/8.0</option><option value="9.0">f/9.0</option><option value="10">f/10</option>
+          <option value="11">f/11</option><option value="13">f/13</option><option value="14">f/14</option>
+          <option value="16">f/16</option><option value="18">f/18</option><option value="20">f/20</option>
+          <option value="22">f/22</option>
         </select>
       </div>
       <div class="ch"><label>Vitesse cible</label>
         <select id="c_vitesse" onchange="calcContinue()">
-          <option value="30">30s</option><option value="15">15s</option><option value="8">8s</option>
-          <option value="4">4s</option><option value="2">2s</option><option value="1">1s</option>
-          <option value="0.5">1/2</option><option value="0.25">1/4</option><option value="0.125">1/8</option>
-          <option value="0.05">1/20</option><option value="0.033">1/30</option><option value="0.025">1/40</option>
-          <option value="0.02">1/50</option><option value="0.0167" selected>1/60</option>
-          <option value="0.0125">1/80</option><option value="0.01">1/100</option><option value="0.008">1/125</option>
-          <option value="0.005">1/200</option><option value="0.004">1/250</option>
-          <option value="0.002">1/500</option><option value="0.001">1/1000</option>
+          <option value="30">30s</option><option value="25">25s</option><option value="20">20s</option>
+          <option value="15">15s</option><option value="13">13s</option><option value="10">10s</option>
+          <option value="8">8s</option><option value="6">6s</option><option value="5">5s</option>
+          <option value="4">4s</option><option value="3">3s</option><option value="2.5">2.5s</option>
+          <option value="2">2s</option><option value="1.6">1.6s</option><option value="1.3">1.3s</option>
+          <option value="1">1s</option><option value="0.8">0.8s</option><option value="0.6">0.6s</option>
+          <option value="0.5">1/2</option><option value="0.4">1/2.5</option><option value="0.3">1/3</option>
+          <option value="0.25">1/4</option><option value="0.2">1/5</option><option value="0.167">1/6</option>
+          <option value="0.125">1/8</option><option value="0.1">1/10</option><option value="0.077">1/13</option>
+          <option value="0.067">1/15</option><option value="0.05">1/20</option><option value="0.04">1/25</option>
+          <option value="0.033">1/30</option><option value="0.025">1/40</option><option value="0.02">1/50</option>
+          <option value="0.0167" selected>1/60</option><option value="0.0125">1/80</option>
+          <option value="0.01">1/100</option><option value="0.008">1/125</option>
+          <option value="0.0063">1/160</option><option value="0.005">1/200</option>
+          <option value="0.004">1/250</option><option value="0.0032">1/320</option>
+          <option value="0.0025">1/400</option><option value="0.002">1/500</option>
+          <option value="0.0016">1/640</option><option value="0.00125">1/800</option>
+          <option value="0.001">1/1000</option>
         </select>
       </div>
       <div class="ch"><label>ISO cible</label>
         <select id="c_iso" onchange="calcContinue()">
-          <option value="50">ISO 50</option><option value="100" selected>ISO 100</option><option value="200">ISO 200</option>
-          <option value="400">ISO 400</option><option value="800">ISO 800</option><option value="1600">ISO 1600</option>
-          <option value="3200">ISO 3200</option><option value="6400">ISO 6400</option>
+          <option value="50">ISO 50</option><option value="64">ISO 64</option><option value="80">ISO 80</option>
+          <option value="100" selected>ISO 100</option><option value="125">ISO 125</option><option value="160">ISO 160</option>
+          <option value="200">ISO 200</option><option value="250">ISO 250</option><option value="320">ISO 320</option>
+          <option value="400">ISO 400</option><option value="500">ISO 500</option><option value="640">ISO 640</option>
+          <option value="800">ISO 800</option><option value="1000">ISO 1000</option><option value="1250">ISO 1250</option>
+          <option value="1600">ISO 1600</option><option value="2000">ISO 2000</option><option value="2500">ISO 2500</option>
+          <option value="3200">ISO 3200</option><option value="4000">ISO 4000</option><option value="5000">ISO 5000</option>
+          <option value="6400">ISO 6400</option><option value="8000">ISO 8000</option><option value="10000">ISO 10000</option>
+          <option value="12800">ISO 12800</option><option value="25600">ISO 25600</option>
         </select>
       </div>
     </div>
@@ -536,6 +585,28 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       </button>
     </div>
     <div id="cont-intent-banner" style="margin-top:8px;padding:8px 11px;border-radius:2px;font-size:10px;color:var(--tm);background:rgba(200,164,90,.05);border:1px solid rgba(200,164,90,.12);line-height:1.5"></div>
+
+    <!-- Mesure posemètre globale -->
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(200,164,90,.06);border:1px solid rgba(200,164,90,.2);border-radius:3px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--or);margin-bottom:10px">📐 Mesure Posemètre — f/ lue</div>
+      <div class="g2">
+        <div class="ch"><label>f/ lue posemètre</label>
+          <input type="number" id="c_fmes_num" value="2.8" min="0.7" max="64" step="0.1"
+            oninput="calcContinue()"
+            style="width:100%;padding:9px 8px;background:var(--s3);border:1px solid var(--or-b);border-radius:2px;color:#fff;font-size:13px;font-family:Georgia,serif;text-align:center">
+        </div>
+        <div class="ch"><label>+ dixièmes IL</label>
+          <select id="c_fmes_tenths" onchange="calcContinue()">
+            <option value="0">.0</option><option value="0.1">.1</option><option value="0.2">.2</option>
+            <option value="0.3">.3</option><option value="0.4">.4</option><option value="0.5">.5</option>
+            <option value="0.6">.6</option><option value="0.7">.7</option><option value="0.8">.8</option>
+            <option value="0.9">.9</option>
+          </select>
+        </div>
+
+      </div>
+      <div style="margin-top:6px;font-size:9.5px;color:var(--tp);font-style:italic">Pointez le posemètre face à la LED principale (lumisphère rentrée)</div>
+    </div>
   </div>
 </div>
 
@@ -544,8 +615,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
   <div class="btit"><div class="bnum">2</div><div class="blab">Mesure Posemètre de la LED</div><div class="bligne"></div></div>
   <div class="carte">
     <p style="font-size:10.5px;color:var(--tm);margin-bottom:12px;line-height:1.6">
-      Pointez le posemètre <b>face à la LED</b> (lumisphère rentrée).<br>
-      Saisissez la valeur lue <b>à la vitesse de mesure</b> que vous avez utilisée.
+      Indiquez le <b>type et rôle</b> de chaque LED. Le nombre de sources identiques est pris en compte dans le calcul.
     </p>
     <!-- Sources de LED — liste -->
     <div id="cont-sources-list"></div>
@@ -798,7 +868,29 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
 </div><!-- fin panel_mixte -->
 
-<div class="pied">Flash Master Pro V3 · <span>Souvenir Nomade</span> · Hage Pierre-Alexandre<br>Méthode Nath Sakura · v3.0.0</div>
+
+
+<!-- ══════════ BOÎTE CONSEILS NATH SAKURA PERMANENTE ══════════ -->
+<div class="sakura-tips-box" id="sakura-tips-box">
+  <div class="btit" style="margin-bottom:11px">
+    <div class="bnum" style="font-size:12px">✦</div>
+    <div class="blab">Conseil Nath Sakura</div>
+    <div class="bligne"></div>
+  </div>
+  <div class="sakura-tips-card">
+    <div class="sakura-tips-head">
+      <div class="sakura-tips-label">⭐ Méthode Nath Sakura</div>
+      <div class="sakura-tips-category" id="sakura-cat">Posemètre</div>
+    </div>
+    <div class="sakura-tips-text" id="sakura-tip-text">Chargement...</div>
+    <div class="sakura-tips-footer">
+      <div class="sakura-tips-dots" id="sakura-dots"></div>
+      <div class="sakura-tips-next" onclick="sakuraNext()">Conseil suivant →</div>
+
+
+<div class="pied">Flash Master Pro V3 · <span>Souvenir Nomade</span> · Hage Pierre-Alexandre<br>Méthode Nath Sakura · v3.0.0</div>    </div>
+  </div>
+</div>
 </div>
 
 
@@ -946,6 +1038,7 @@ function majCarn(){
   document.getElementById('carn_rd').style.background=CARN_COL[sel.value]||'#C68642';
   document.getElementById('carn_nm').textContent=nom;
   document.getElementById('carn_il').textContent=ilM?ilM[0]:'0 IL';
+  calcFlashPerSource(lastOptiValue);
 }
 function majRefl(){
   const il=parseFloat(document.getElementById('matiere').value);
@@ -1291,76 +1384,81 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape') closeMesureModal();
 
 // ===== MODULE LUMIÈRE CONTINUE =====
 let contSourceIdx = 0;
-let contOptiValue = 0; // 0 = Standard, 1.33 = Nath Sakura
+let contOptiValue = 0;
 
-/* ── Tables de vitesse ── */
-const VSPEEDS = [30,15,8,4,2,1,0.5,0.25,0.125,0.05,0.033,0.025,0.02,0.0167,0.0125,0.01,0.008,0.005,0.004,0.002,0.001];
-const VLAB_MAP = {'30':'30s','15':'15s','8':'8s','4':'4s','2':'2s','1':'1s','0.5':'1/2','0.25':'1/4','0.125':'1/8','0.05':'1/20','0.033':'1/30','0.025':'1/40','0.02':'1/50','0.0167':'1/60','0.0125':'1/80','0.01':'1/100','0.008':'1/125','0.005':'1/200','0.004':'1/250','0.002':'1/500','0.001':'1/1000'};
+const VSPEEDS = [30,25,20,15,13,10,8,6,5,4,3,2.5,2,1.6,1.3,1,0.8,0.6,0.5,0.4,0.3,0.25,0.2,0.167,0.125,0.1,0.077,0.067,0.05,0.04,0.033,0.025,0.02,0.0167,0.0125,0.01,0.008,0.0063,0.005,0.004,0.0032,0.0025,0.002,0.0016,0.00125,0.001];
+const VLAB_MAP = {
+  '30':'30s','25':'25s','20':'20s','15':'15s','13':'13s','10':'10s',
+  '8':'8s','6':'6s','5':'5s','4':'4s','3':'3s','2.5':'2.5s','2':'2s',
+  '1.6':'1.6s','1.3':'1.3s','1':'1s','0.8':'0.8s','0.6':'0.6s',
+  '0.5':'1/2','0.4':'1/2.5','0.3':'1/3','0.25':'1/4','0.2':'1/5',
+  '0.167':'1/6','0.125':'1/8','0.1':'1/10','0.077':'1/13','0.067':'1/15',
+  '0.05':'1/20','0.04':'1/25','0.033':'1/30','0.025':'1/40','0.02':'1/50',
+  '0.0167':'1/60','0.0125':'1/80','0.01':'1/100','0.008':'1/125',
+  '0.0063':'1/160','0.005':'1/200','0.004':'1/250','0.0032':'1/320',
+  '0.0025':'1/400','0.002':'1/500','0.0016':'1/640','0.00125':'1/800','0.001':'1/1000'
+};
 function vLab(v){
-  let best=VSPEEDS[0], bestD=Infinity;
-  VSPEEDS.forEach(s=>{ const d=Math.abs(Math.log2(s/v)); if(d<bestD){bestD=d;best=s;} });
-  return VLAB_MAP[String(best)] || ('1/'+Math.round(1/v));
+  let best=VSPEEDS[0],bestD=Infinity;
+  VSPEEDS.forEach(s=>{const d=Math.abs(Math.log2(s/v));if(d<bestD){bestD=d;best=s;}});
+  return VLAB_MAP[String(best)]||('1/'+Math.round(1/v)+'s');
 }
-function vNearest(v){ return VSPEEDS.reduce((b,s)=>Math.abs(Math.log2(s/v))<Math.abs(Math.log2(b/v))?s:b, VSPEEDS[0]); }
+function vNearest(v){ return VSPEEDS.reduce((b,s)=>Math.abs(Math.log2(s/v))<Math.abs(Math.log2(b/v))?s:b,VSPEEDS[0]); }
+function vNextSlower(v){
+  // Retourne la vitesse normalisée la plus lente (valeur en s la plus grande) >= v
+  const candidates = VSPEEDS.filter(s => s >= v - 0.00001);
+  return candidates.length ? Math.min(...candidates) : VSPEEDS[0];
+}
 
-/* ── Rôles (identiques aux flashs) ── */
-// Non-cumul : chaque source est indépendante, son niveau est calculé par rapport à la Key
-// Key=0 IL, Fill=-1 IL, Rim=+1 IL, Fond=0 IL (indépendant)
-const CONT_ROLES = {
-  key:  '💡 Key Light (0 IL)',
-  fill_05: '🌒 Fill −0.5 IL',
-  fill_1:  '🌑 Fill −1 IL',
-  fill_2:  '🌑 Fill −2 IL',
-  rim_05:  '🌟 Rim +0.5 IL',
-  rim_1:   '✨ Rim +1 IL',
-  rim_2:   '🔥 Kicker +2 IL',
-  fond_n:  '🖼 Fond Neutre',
-  fond_p1: '🖼 Fond +1 IL',
-  fond_m1: '🖼 Fond −1 IL'
-};
-const ROLE_IL = {
-  key:0, fill_05:-0.5, fill_1:-1, fill_2:-2,
-  rim_05:0.5, rim_1:1, rim_2:2,
-  fond_n:0, fond_p1:1, fond_m1:-1
+const CONT_ROLES = {key:0,fill_05:-0.5,fill_1:-1,fill_2:-2,rim_05:0.5,rim_1:1,rim_2:2,fond_n:0,fond_p1:1,fond_m1:-1};
+const SRC_WATTS  = {
+  led20:{label:'Panneau LED',w:20}, led40:{label:'Panneau LED',w:40},
+  led60:{label:'Torche LED',w:60},  led100:{label:'LED Panel',w:100},
+  led150:{label:'LED Studio',w:150},led300:{label:'Projecteur',w:300},
+  led600:{label:'Projecteur',w:600},fixe:{label:'Source Fixe',w:null}
 };
 
-/* ── Helpers EV ── */
-// EV = log2(f² / (t × ISO/100))   — 1 IL = 1 stop EV
-function evOf(f,t,iso){ return Math.log2(f*f/(t*(iso/100))); }
-function fOf(ev,t,iso){ return Math.sqrt(Math.pow(2,ev)*t*(iso/100)); }
+function evOf(f,t,iso){return Math.log2(f*f/(t*(iso/100)));}
+function fOf(ev,t,iso){return Math.sqrt(Math.pow(2,ev)*t*(iso/100));}
 
 function setMainTab(tab){
   ['flash','continue','mixte'].forEach(t=>{
     document.getElementById('maintab_'+t).classList.toggle('actif',t===tab);
     document.getElementById('panel_'+t).classList.toggle('actif',t===tab);
   });
-  if(tab==='continue' && document.getElementById('cont-sources-list').children.length===0) addContSource();
+  if(tab==='continue'&&document.getElementById('cont-sources-list').children.length===0) addContSource();
 }
 
 function setContIntent(val){
-  contOptiValue = val;
-  const isNath = val > 0;
-  const bs = document.getElementById('cbtn_std');
-  const bn = document.getElementById('cbtn_nath');
-  if(bs){ bs.style.background=isNath?'rgba(200,164,90,.15)':'var(--or)'; bs.style.color=isNath?'var(--or)':'#000'; bs.style.border=isNath?'1.5px solid rgba(200,164,90,.4)':'none'; }
-  if(bn){ bn.style.background=isNath?'var(--or)':'rgba(200,164,90,.15)'; bn.style.color=isNath?'#000':'var(--or)'; bn.style.border=isNath?'none':'1.5px solid rgba(200,164,90,.4)'; }
+  contOptiValue=val;
+  const isNath=val>0;
+  const bs=document.getElementById('cbtn_std'),bn=document.getElementById('cbtn_nath');
+  if(bs){bs.style.background=isNath?'rgba(200,164,90,.15)':'var(--or)';bs.style.color=isNath?'var(--or)':'#000';bs.style.border=isNath?'1.5px solid rgba(200,164,90,.4)':'none';}
+  if(bn){bn.style.background=isNath?'var(--or)':'rgba(200,164,90,.15)';bn.style.color=isNath?'#000':'var(--or)';bn.style.border=isNath?'none':'1.5px solid rgba(200,164,90,.4)';}
   calcContinue();
 }
 
-/* ════════════════════════════════════════════════════════
-   addContSource — carte complète avec tous les champs
-   ════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   addContSource
+   ═══════════════════════════════════════════════════════════ */
 function addContSource(){
-  const idx = contSourceIdx++;
+  const idx  = contSourceIdx++;
   const list = document.getElementById('cont-sources-list');
   const div  = document.createElement('div');
   div.className = 'cont-source';
   div.id = 'cont-src-'+idx;
 
-  /* Sélecteurs réutilisables */
+  /* ── SNAPSHOT : vitesse boîtier au moment de la création ──
+     Stockée dans data-vmes. Affichée mais non modifiable.
+     C'est la vitesse à laquelle la mesure posemètre a été prise.
+     Quand vTarget change, vMes reste au snapshot → ΔIL évolue. */
+  const vSnapshot = parseFloat((document.getElementById('c_vitesse')||{value:'0.0167'}).value)||0.0167;
+
   const pctOpts = [100,75,50,25,10,5].map(p=>`<option value="${p/100}"${p===100?' selected':''}>${p}%</option>`).join('');
+  const typeOpts = Object.entries(SRC_WATTS).map(([k,v])=>
+    `<option value="${k}"${k==='led60'?' selected':''}>${v.label}${v.w?' '+v.w+'W':''}</option>`).join('');
   const roleOpts = `
-    <optgroup label="Lumière Principale"><option value="key" selected>💡 Key Light</option></optgroup>
+    <optgroup label="Lumière principale"><option value="key" selected>💡 Key Light</option></optgroup>
     <optgroup label="Débouchage">
       <option value="fill_05">🌒 Fill −0.5 IL</option>
       <option value="fill_1">🌑 Fill −1 IL</option>
@@ -1377,9 +1475,7 @@ function addContSource(){
       <option value="fond_m1">🖼 Fond −1 IL</option>
     </optgroup>`;
 
-  /* ── Vitesse boîtier actuelle pour affichage verrouillé ── */
-  const vActuelle = parseFloat((document.getElementById('c_vitesse')||{value:'0.0167'}).value)||0.0167;
-  const vActLabel = vLab(vActuelle);
+  div.setAttribute('data-vmes', vSnapshot);
 
   div.innerHTML = `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
@@ -1387,93 +1483,82 @@ function addContSource(){
     ${idx>0?`<button class="cont-remove" onclick="removeContSource(${idx})">✕</button>`:''}
   </div>
 
-  <!-- Ligne 1 : Type/Puissance + Rôle -->
   <div class="g2" style="margin-bottom:8px">
-    <div class="ch">
-      <label>Type / Puissance max</label>
-      <select id="ctype_${idx}" onchange="calcContinue()">
-        <option value="led20">💡 Petit panneau LED (20W)</option>
-        <option value="led60" selected>🔦 Torche LED (60W)</option>
-        <option value="proj200">🎬 Projecteur (200W)</option>
-        <option value="fixe">🔆 Source Fixe (non réglable)</option>
-      </select>
-    </div>
-    <div class="ch">
-      <label>Rôle</label>
-      <select id="crole_${idx}" onchange="calcContinue()">${roleOpts}</select>
-    </div>
+    <div class="ch"><label>Type / Puissance</label>
+      <select id="ctype_${idx}" onchange="calcContinue()">${typeOpts}</select></div>
+    <div class="ch"><label>Rôle · Mode</label>
+      <select id="crole_${idx}" onchange="calcContinue()">${roleOpts}</select></div>
   </div>
 
-  <!-- Ligne 2 : f/ mesurée + dixièmes + % puissance lors mesure -->
-  <div class="g3" style="margin-bottom:8px">
-    <div class="ch">
-      <label>f/ mesurée au posemètre</label>
-      <input type="number" id="cfmes_num_${idx}" value="2.8" min="0.7" max="64" step="0.1"
+  <div class="ch" style="margin-bottom:8px"><label>% puissance de la source</label>
+    <select id="cpct_${idx}" onchange="calcContinue()">${pctOpts}</select>
+  </div>
+
+  <div class="g2" style="margin-bottom:8px">
+    <div class="ch"><label>Nb sources identiques</label>
+      <input type="number" id="cnb_${idx}" value="1" min="1" max="10" step="1"
         oninput="calcContinue()"
         style="width:100%;padding:9px 8px;background:var(--s3);border:1px solid var(--or-b);border-radius:2px;color:#fff;font-size:13px;font-family:Georgia,serif;text-align:center">
     </div>
-    <div class="ch">
-      <label>+ dixièmes IL</label>
-      <select id="cfmes_tenths_${idx}" onchange="calcContinue()">
-        ${[0,.1,.2,.3,.4,.5,.6,.7,.8,.9].map(t=>`<option value="${t}">.${t===0?'0':Math.round(t*10)}</option>`).join('')}
-      </select>
-    </div>
-    <div class="ch">
-      <label>% puissance lors mesure</label>
-      <select id="cpct_${idx}" onchange="calcContinue()">${pctOpts}</select>
-    </div>
-  </div>
-
-  <!-- Ligne 3 : Vitesse (verrouillée) + Distance -->
-  <div class="g2" style="margin-bottom:8px">
-    <div class="ch">
-      <label>⏱ Vitesse (= boîtier)</label>
-      <div id="cvmes_display_${idx}" style="padding:9px 10px;background:rgba(200,164,90,.07);border:1px solid rgba(200,164,90,.25);border-radius:2px;font-size:12px;font-family:Georgia,serif;color:var(--or);text-align:center;font-weight:700">
-        ${vActLabel}
-      </div>
-    </div>
-    <div class="ch">
-      <label>📏 Distance source→sujet</label>
+    <div class="ch"><label>📏 Distance sujet</label>
       <select id="cdist_${idx}" onchange="calcContinue()">
         <option value="0.5">0.5 m</option><option value="0.8">0.8 m</option>
         <option value="1" selected>1 m</option><option value="1.5">1.5 m</option>
         <option value="2">2 m</option><option value="3">3 m</option>
         <option value="4">4 m</option><option value="5">5 m</option>
         <option value="6">6 m</option><option value="8">8 m</option>
-      </select>
-    </div>
+      </select></div>
   </div>
 
-  <!-- Badge résultat par source -->
-  <div id="csrc-result-${idx}"></div>
-  `;
+
+
+  <div id="csrc-result-${idx}"></div>`;
 
   list.appendChild(div);
   calcContinue();
 }
 
 function removeContSource(idx){
-  const el = document.getElementById('cont-src-'+idx);
+  const el=document.getElementById('cont-src-'+idx);
   if(el) el.remove();
   calcContinue();
 }
 
-/* ════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    calcContinue — moteur principal
-   ════════════════════════════════════════════════════════ */
+
+   ARCHITECTURE SNAPSHOT :
+   ─────────────────────────────────────────────────────────
+   vMes = vitesse boîtier AU MOMENT de la création de la source
+          (stockée dans data-vmes de la carte)
+          → fixe, ne change pas quand vTarget change
+
+   ΔIL = log2(fSrcCible² / fMes²)    ← écart ouverture
+        + log2(vMes / vTarget)         ← écart vitesse  ← CHANGE quand vTarget change
+        + log2(100  / isoTarget)       ← écart ISO
+        − log2(nbSrcsU)                ← bonus sources
+
+   ΔIL > 0 → source insuffisante (🔴 ROUGE)
+   ΔIL ≤ 0 → source suffisante   (🟢 VERT)
+
+   Puissance conseillée = pctMes × 2^ΔIL
+
+   Vitesse conseillée (ΔIL = 0) :
+     log2(vMes/vAdj) = −[log2(fSrcCible²/fMes²) + log2(100/iso) − log2(nb)]
+     → vAdj = vMes × 2^[log2(fSrcCible²/fMes²) + log2(100/iso) − log2(nb)]
+   ═══════════════════════════════════════════════════════════ */
 function calcContinue(){
-  const fTarget   = parseFloat((document.getElementById('c_f_target')||{value:'5.6'}).value)||5.6;
-  const vTarget   = parseFloat((document.getElementById('c_vitesse')||{value:'0.0167'}).value)||0.0167;
-  const isoTarget = parseFloat((document.getElementById('c_iso')||{value:'100'}).value)||100;
-  const isNath    = contOptiValue > 0;
+  const fTarget  = parseFloat((document.getElementById('c_f_target')||{value:'5.6'}).value)||5.6;
+  const vTarget  = parseFloat((document.getElementById('c_vitesse')||{value:'0.0167'}).value)||0.0167;
+  const isoTarget= parseFloat((document.getElementById('c_iso')||{value:'100'}).value)||100;
 
   /* Bandeau intention */
   const banner = document.getElementById('cont-intent-banner');
   if(banner){
-    const fLedRef = fTarget * Math.pow(Math.sqrt(2), contOptiValue);
-    banner.innerHTML = isNath
-      ? `⭐ <b style="color:var(--or)">Nath Sakura</b> — LED Key à <b style="color:var(--or)">f/${fLedRef.toFixed(1)}</b> (f/${fTarget.toFixed(1)} + 1.33 IL) · LED d'ambiance proportionnelle`
-      : `<b>Standard</b> — LED Key doit égaler <b>f/${fTarget.toFixed(1)}</b> (0 IL, exposition neutre)`;
+    const fRef = fTarget * Math.pow(Math.sqrt(2), contOptiValue);
+    banner.innerHTML = contOptiValue > 0
+      ? `⭐ <b style="color:var(--or)">Nath Sakura</b> — Key cible <b style="color:var(--or)">f/${fRef.toFixed(1)}</b> · ${vLab(vTarget)} · ISO ${isoTarget}`
+      : `<b>Standard</b> — Key cible <b>f/${fTarget.toFixed(1)}</b> · ${vLab(vTarget)} · ISO ${isoTarget}`;
   }
 
   const srcs = document.querySelectorAll('[id^="cont-src-"]');
@@ -1484,223 +1569,227 @@ function calcContinue(){
   srcs.forEach(srcEl => {
     const idx = srcEl.id.replace('cont-src-','');
 
-    /* Lecture champs */
-    const fMesNum    = parseFloat((document.getElementById('cfmes_num_'+idx)||{value:'2.8'}).value)||2.8;
-    const fMesTenths = parseFloat((document.getElementById('cfmes_tenths_'+idx)||{value:'0'}).value)||0;
-    const vMes       = vTarget; // ← VERROUILLÉ : même vitesse que le boîtier
+    /* Lecture champs — f/mes global (bloc ①) commun à toutes les sources */
+    const fMesNum    = parseFloat((document.getElementById('c_fmes_num')||{value:'2.8'}).value)||2.8;
+    const fMesTenths = parseFloat((document.getElementById('c_fmes_tenths')||{value:'0'}).value)||0;
     const pctMes     = parseFloat((document.getElementById('cpct_'+idx)||{value:'1'}).value)||1;
+    const nbSrcsU    = Math.max(1, parseInt((document.getElementById('cnb_'+idx)||{value:'1'}).value)||1);
     const distSrc    = parseFloat((document.getElementById('cdist_'+idx)||{value:'1'}).value)||1;
     const roleKey    = (document.getElementById('crole_'+idx)||{value:'key'}).value||'key';
     const typeKey    = (document.getElementById('ctype_'+idx)||{value:'led60'}).value||'led60';
 
-    /* Mettre à jour l'affichage vitesse verrouillée dans la carte */
-    const vDisplay = document.getElementById('cvmes_display_'+idx);
-    if(vDisplay) vDisplay.textContent = vLab(vTarget);
+    /* ═══════════════════════════════════════════════════════════════════
+       FORMULE STRICTE — Lumière Continue
+       ─────────────────────────────────────────────────────────────────
+       Définitions :
+         f_boitier   = fTarget   (ouverture réglée sur le boitier APN)
+         f_mesure    = fMes      (ouverture lue sur le posemètre)
+         V_boitier   = vTarget   (vitesse actuelle, ex : 1/60 = 0.0167 s)
+         V_mesure    = vMes      (vitesse au moment de la mesure posemètre)
+                       → stockée en data-vmes (snapshot), FIXE
+                       → l'affichage de la carte montre vTarget (visible)
+                         mais le calcul utilise vMes (physique correcte)
 
-    /* Capacité de la source selon le type */
-    const SRC_CAPS = {led20:'Petit panneau LED 20W', led60:'Torche LED 60W', proj200:'Projecteur 200W', fixe:'Source Fixe'};
-    const srcCap   = SRC_CAPS[typeKey] || 'LED';
-    const isFixe   = typeKey === 'fixe';
+       Formule puissance requise :
+         P = (f_boitier / f_mesure)² × (V_mesure / V_boitier)
+               × (ISO_mesure=100 / ISO_boitier) / nb_sources × pctMes
 
-    /* f/ réelle mesurée */
+         V_mesure/V_boitier = vMes/vTarget (toutes deux en secondes)
+         Boitier plus lent → vTarget plus grand → ratio < 1 → P ↓ → VERT ✓
+
+       Règles de verdict :
+         P ≤ 1.0  → 🟢 EXPOSITION CORRECTE
+         P > 1.0  → 🔴 SOUS-EXPOSÉ
+
+       Conseil vitesse (formule user) :
+         V_cible = V_boitier_actuel × P    (P > 1 → vCible plus grand = plus lent ✓)
+
+       Conseil ISO :
+         ISO_cible = ISO_actuel × P
+
+       Sources multiples :
+         P ÷ nb_sources  (2 sources → P÷2 → passe VERT 1 stop plus tôt ✓)
+
+       Watts (multiplicateur f_mesure) :
+         Défini dans SRC_WATTS → scaling via fMes_effective
+       ═══════════════════════════════════════════════════════════════════ */
+
+    /* Vitesse de mesure = vitesse boîtier cible (même valeur en lumière continue) */
+    const vMes = vTarget;
+
+    /* f/ mesurée (posemètre) avec dixièmes IL */
     const fMes = fMesNum * Math.pow(Math.sqrt(2), fMesTenths);
 
-    /* Rôle → décalage IL attendu par rapport au Key */
-    const roleIL = ROLE_IL[roleKey] || 0;
-
-    /* f/ cible pour CETTE source :
-       Key   → fTarget × √2^opti
-       autres → fTarget × √2^(opti + roleIL) */
+    /* f/ cible selon rôle + mode Sakura */
+    const roleIL    = CONT_ROLES[roleKey] || 0;
     const fSrcCible = fTarget * Math.pow(Math.sqrt(2), contOptiValue + roleIL);
-    const evSrcCible = evOf(fSrcCible, vTarget, isoTarget);
 
-    /* EV de la source telle que mesurée (normalisé boîtier cible ISO/vit) */
-    const evMes = evOf(fMes, vMes, isoTarget);
+    /* ─── CALCUL P ────────────────────────────────────────────────────
+       P = (f_cible / f_mesure)²  ×  (vMes / vTarget)
+           × (100 / isoTarget)    /  nbSrcsU  ×  pctMes
 
-    /* EV de la source ramenée à la vitesse CIBLE boîtier (même source, autre vitesse) */
-    const evMesAtVTarget = evOf(fMes, vTarget, isoTarget) + Math.log2(vMes/vTarget);
-    // Simplification : evMesAtVTarget = log2(fMes²/(vTarget×ISO/100))
-    // Mais on a mesuré à vMes → la source réelle = evMes (indépendant de la vitesse)
-    // Pour continûe : EV_source_réelle = log2(L) où L est la luminance
-    // fstopToEV(fMes,vMes,iso) = log2(fMes²/(vMes×iso/100)) = EV_source_réelle
-    // C'est ce qu'on utilise comme evSrcRéelle
-    const evSrcReelle = evOf(fMes, vMes, isoTarget); // EV intrinsèque de la source
+       Résultat en décimal : P = 1.0 → 100% (source à fond, juste)
+                              P < 1.0 → source suffisante (ou trop forte)
+                              P > 1.0 → puissance insuffisante
+    ─────────────────────────────────────────────────────────────────── */
+    const pctCible  = Math.pow(fSrcCible / fMes, 2)   // écart ouverture
+                    * (vMes / vTarget)                  // écart vitesse
+                    * (100 / isoTarget)                 // écart ISO
+                    / nbSrcsU                           // cumul sources
+                    * pctMes;                           // puissance lors mesure
 
-    /* f/ que cette source donne à l'APN (boîtier cible vTarget, isoTarget) */
-    const fApn = fOf(evSrcReelle, vTarget, isoTarget);
+    /* ── CRITÈRE VERT/ROUGE : deltaIL avec tolérance 0.1 IL ──────────
+       deltaIL = log2(P)   où P = puissance requise (décimal)
+         P = 1.0  → 0.000 IL → VERT  (parfait)
+         P = 1.07 → 0.097 IL → VERT  (dans la tolérance)
+         P = 1.10 → 0.137 IL → ROUGE (dépasse 0.1 IL)
+         P = 2.0  → 1.000 IL → ROUGE
+         P = 0.5  → -1.00 IL → VERT  (source trop forte)
+       Tolérance 0.1 IL = ~7% de puissance, imperceptible en pratique.
+       Élimine définitivement le bug "100% affiché mais ROUGE" ──────── */
+    // Tolérance 101% = log2(1.01) ≈ 0.0144 IL — conforme règle cahier des charges
+    const TOLER         = Math.log2(1.01);     // ≈ 0.0144 IL (seuil 101%)
+    const deltaIL       = Math.log2(Math.max(pctCible, 0.0001));
+    const isExpoOk      = deltaIL <=  TOLER;   // ≤ 101% de puissance → 🟢
+    const isTropForte   = deltaIL < -TOLER;    // source trop forte → 🟢 aussi
+    // Alias pour le reste du code (distCm, etc.)
+    const expoOK        = isExpoOk;
+    const tropForte     = isTropForte;
+    const pctCibleClamp = Math.min(1, Math.max(0.005, pctCible));
 
-    /* ΔIL = cible − réel */
-    const deltaIL = evSrcCible - evSrcReelle;
+    /* f/ que cette source produit réellement au boitier (affichage) */
+    const evSrcReelle = evOf(fMes, vMes, 100);
+    const fApn        = fOf(evSrcReelle, vTarget, isoTarget);
+    const evSrcCible  = evOf(fSrcCible, vTarget, isoTarget);
 
-    /* ── % puissance conseillé ──
-       Règle : 1 stop de f/ = ×2 en puissance lumineuse
-       deltaIL > 0 → source trop faible → monter la puissance : pctCible = pctMes × 2^deltaIL
-       deltaIL < 0 → source trop forte  → baisser la puissance : pctCible = pctMes × 2^deltaIL (< pctMes)
-       Exemple : mesurée f/2.8 @ 100%, cible f/5.6 → +2 IL → pctCible = 100% × 2^2 = 400% (impossible → alerte)
-       Exemple : mesurée f/8   @ 100%, cible f/5.6 → −1 IL → pctCible = 100% × 2^-1 = 50% ✓
-    */
-    const pctCible      = pctMes * Math.pow(2, deltaIL); // valeur brute, peut dépasser 1
-    const pctCibleClamp = Math.max(0.01, Math.min(1, pctCible));
-    const pctOK         = pctCible <= 1.005; // réalisable à puissance existante (≤100%)
+    /* ─── CORRECTIFS SI ROUGE ─────────────────────────────────────────
+       Vitesse conseillée : V_cible = V_boitier_actuel × P
+         pctCible > 1 → vAdjExact > vTarget → plus lent → plus de lumière ✓
+         Exemple : vTarget=1/30s (0.033), P=200% (2.0) → vCible=0.067=1/15s ✓
 
-    /* Distance conseillée (loi inverse carré) si puissance insuffisante :
-       EV ∝ 1/d² → d_cible = d_src × 2^(deltaIL/2)  */
-    const distCible = distSrc * Math.pow(2, deltaIL/2); // si deltaIL>0 → rapprocher
+       ISO conseillé    : ISO_cible = isoTarget × P  (monter l'ISO compense le manque)
+       Nb sources       : nbNec = ceil(P × nbSrcsU)  (ajouter des sources)
+       Distance         : loi inverse carré d_cible = d_src / √P
+    ─────────────────────────────────────────────────────────────────── */
+    /* ── Vitesse conseillée ──────────────────────────────────────────────
+       Formule : on cherche la vitesse vAdj telle que P_new = 1.0
+         P = (fSrcCible/fMes)² × (vMes/vAdj) × (100/iso) / nb × pct = 1
+         → vAdj = (fSrcCible/fMes)² × vMes × (100/iso) / nb × pct
+       On prend ensuite la valeur PLUS LENTE la plus proche dans la liste officielle
+       (plus lent = plus de lumière reçue = corrige le sous-expo).
+       RÈGLE : jamais conseiller plus lent que 1/30 sans alerte trépied.
+    ─────────────────────────────────────────────────────────────────── */
+    const vAdjExact  = Math.pow(fSrcCible/fMes, 2) * vMes * (100/isoTarget) / nbSrcsU * pctMes;
+    // Vitesse normalisée la plus proche (plus lente) >= vAdjExact
+    const vAdjForSrc = vNextSlower(vAdjExact);
+    const vFlou      = vAdjForSrc < 0.033;
 
-    /* Nombre de sources identiques nécessaires */
-    const nbSrcs = Math.ceil(Math.pow(2, deltaIL)); // 2^ΔIL sources en parallèle
+    /* ── ISO conseillé — snappé sur la liste normalisée ──────────────
+       ISO_cible exact = isoTarget × P
+       On prend le palier ISO normalisé ≥ ISO_exact (le plus proche supérieur)
+    ─────────────────────────────────────────────────────────────────── */
+    const ISO_STEPS = [50,64,80,100,125,160,200,250,320,400,500,640,800,
+                       1000,1250,1600,2000,2500,3200,4000,5000,6400,8000,10000,12800,25600];
+    const isoExact   = isoTarget * pctCible;
+    const isoAdjCl   = ISO_STEPS.find(v => v >= isoExact) || 25600;
+    const distCm     = expoOK ? 0 : Math.round(distSrc / Math.sqrt(pctCible) * 100);
+    const nbNec      = Math.ceil(pctCible * nbSrcsU);
+    // deltaIL déjà déclaré ligne ~1562 : Math.log2(Math.max(pctCible, 0.0001))
 
-    /* Vitesse conseillée (adapter la vitesse boîtier pour corriger)
-       EV_boitier_cible = evSrcCible → vAdj = fTarget²/(2^evSrcCible × iso/100) */
-    const vAdj    = vNearest(fTarget*fTarget / (Math.pow(2,evSrcReelle)*(isoTarget/100)));
-    const isoAdj  = Math.round(isoTarget * Math.pow(2, deltaIL));
+    results.push({idx, fMes, fApn, fSrcCible, pctMes, pctCible,
+                  pctCibleClamp, isExpoOk, isTropForte, deltaIL,
+                  nbSrcsU, roleKey, typeKey,
+                  isoAdjCl, vAdjForSrc, vFlou, distCm, nbNec, evSrcReelle, evSrcCible, vMes});
 
-    const trop   = deltaIL < 0;
-    results.push({idx,fMes,fMesTenths,fMesNum,vMes,pctMes,distSrc,roleKey,typeKey,
-                  fApn,deltaIL,fSrcCible,pctCible,pctCibleClamp,pctOK,trop,
-                  distCible,nbSrcs,vAdj,isoAdj,evSrcReelle,evSrcCible});
-
-    /* ── Badge par source ── */
+    /* ══════════════════════ BADGE PAR SOURCE ══════════════════════
+       Critère unique : deltaIL <= 0.1 IL → VERT
+       isExpoOk / isTropForte déclarés dans le moteur physique ci-dessus
+       ══════════════════════════════════════════════════════════════ */
     const resBox = document.getElementById('csrc-result-'+idx);
-    const absD   = Math.abs(deltaIL);
-    const roleLabel = (document.getElementById('crole_'+idx)||{options:[{text:'Key'}]})
-                      .options[(document.getElementById('crole_'+idx)||{selectedIndex:0}).selectedIndex]?.text || 'Key';
-    const srcNum = Array.from(srcs).indexOf(srcEl) + 1;
+    if(!resBox) return;
 
-    /* Titre détail : "Source X (Rôle) — Standard" ou "— Nath Sakura (+1.33 IL)" */
-    const roleLabelClean = roleLabel.replace(/[💡🌒✨🖼🌅🔥]/gu,'').trim();
-    const intentSuffix   = contOptiValue > 0 ? `Nath Sakura (+1.33 IL)` : `Standard (0 IL)`;
-    const detailTitre    = `Source ${srcNum} — ${roleLabelClean} · ${intentSuffix}`;
-    const labelEl = document.getElementById('csrc-label-'+idx);
-    if(labelEl) labelEl.textContent = detailTitre;
+    // ── Étiquette source ──
+    const srcNum   = Array.from(srcs).indexOf(srcEl) + 1;
+    const roleEl   = document.getElementById('crole_'+idx);
+    const roleLbl  = (roleEl && roleEl.options[roleEl.selectedIndex])
+                     ? roleEl.options[roleEl.selectedIndex].text : 'Key';
+    const roleLblC = roleLbl.replace(/[💡🌒✨🖼🌅🔥🌑🌟]/gu,'').trim();
+    const labelEl  = document.getElementById('csrc-label-'+idx);
+    if(labelEl) labelEl.textContent =
+      `Source ${srcNum} — ${roleLblC} (${contOptiValue>0?'+1.33 IL Sakura':'Standard'})`;
 
-    if(resBox){
-      /* ── Calculs pour l'affichage badge ── */
-      const isoAdjCl   = Math.min(6400, Math.max(50, Math.round(isoTarget * Math.pow(2, deltaIL))));
-      const distCm     = Math.round(distSrc * Math.pow(2, deltaIL / 2) * 100);
-      const pctShow    = Math.round(pctCibleClamp * 100);
-      const vAdjForSrc = vNearest(vTarget * Math.pow(2, deltaIL));
-      const vFlou      = vAdjForSrc < 0.033;
+    // ── Alerte ISO ──
+    const alerteISO = isoTarget > 800
+      ? `<div style="margin-top:5px;padding:5px 8px;background:rgba(240,160,48,.08);border-left:3px solid #f0a048;border-radius:0 2px 2px 0;font-size:9px;color:#f0c060;line-height:1.4">⚠ ISO ${isoTarget} — Bruit possible. Rapprochez la source plutôt que de monter l'ISO.</div>`
+      : '';
 
-      /* ── Alerte ISO > 800 (méthode Sakura) ── */
-      const alerteISO  = isoTarget > 800
-        ? `<div style="margin-top:6px;padding:6px 10px;background:rgba(240,160,48,.08);border-left:3px solid #f0a048;border-radius:0 2px 2px 0;font-size:9.5px;color:#f0c060;line-height:1.5">
-            ⚠ <b>ISO ${isoTarget}</b> — Bruit numérique peut altérer le rendu Sakura.<br>Privilégiez de <b>rapprocher la source</b>.
-           </div>` : '';
+    let html = '';
 
-      /* ── Badge bleu f/ APN toujours visible ── */
-      const badgeApn = `<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(100,160,255,.12);border:1px solid rgba(100,160,255,.3);border-radius:3px;margin-bottom:7px">
-        <span style="font-size:11px">📷</span>
-        <div style="font-size:10.5px;color:#7ab3ff">
-          f/ réelle sur la photo : <b style="font-size:13px;font-family:Georgia,serif">f/${fApn.toFixed(1)}</b>
-          <span style="color:rgba(120,170,255,.55);font-size:9px"> @ ${vLab(vTarget)} · ISO ${isoTarget}</span>
+    if(isExpoOk) {
+      /* ── 🟢 VERT ─────────────────────────────────────────────────
+         Règle absolue : AUCUN texte rouge, AUCUN écart IL, AUCUN conseil.
+         On n'affiche QUE le verdict et le % de puissance.
+      ──────────────────────────────────────────────────────────────── */
+      const pctAff   = Math.min(100, Math.round(pctCible * 100));
+      const nbInfo   = nbSrcsU > 1 ? ` <span style="color:var(--or);font-size:9px">×${nbSrcsU} sources</span>` : '';
+      const sousTitre = isTropForte
+        ? `Source trop forte — baissez à <b style="color:#4caf75;font-size:14px">${pctAff}%</b>${nbInfo}`
+        : `Puissance : <b style="color:#4caf75;font-size:14px">${pctAff}%</b>${nbInfo}`;
+
+      html = `<div style="border-radius:3px;padding:10px;background:rgba(76,175,117,.09);border:1px solid rgba(76,175,117,.32)">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="font-size:32px;line-height:1">🟢</div>
+          <div>
+            <div style="font-size:13px;font-weight:900;color:#4caf75;letter-spacing:.3px">EXPOSITION CORRECTE</div>
+            <div style="font-size:11px;color:var(--tm);margin-top:3px">${sousTitre}</div>
+          </div>
         </div>
+        ${alerteISO}
       </div>`;
 
-      let cardStyle = '';
-      let detailHtml = '';
+    } else {
+      /* ── 🔴 ROUGE ────────────────────────────────────────────────
+         Conseils : VITESSE et ISO uniquement — JAMAIS de f/ (choix artistique).
+         Écart affiché : si < 0.05 IL → "≈ 0 IL", sinon X.X IL (1 décimale).
+      ──────────────────────────────────────────────────────────────── */
+      const manqueIL  = deltaIL;  // log2(pctCible) > 0 car ROUGE
+      const manqueAff = manqueIL < 0.05 ? '≈ 0' : manqueIL.toFixed(1);
+      const pctBrut   = Math.round(pctCible * 100);
 
-      if(absD < 0.1){
-        resBox.innerHTML = `
-          <div style="border-radius:3px;padding:8px;background:rgba(76,175,117,.07)">
-            ${badgeApn}
-            <div style="font-size:10.5px;color:#4caf75">✓ Expo correcte — source bien calibrée</div>
-            ${alerteISO}
-          </div>`;
-      } else {
+      // Suggestion montée en gamme (Watts) — basée sur puissance requise
+      const curW    = SRC_WATTS[typeKey]?.w || 60;
+      const neededW = Math.round(curW * pctCible);
+      const srcSugg = neededW > 600 ? 'Rapprochez ou ajoutez des sources'
+                    : neededW > 300 ? 'Passez sur un <b>Projecteur 600W</b>'
+                    : neededW > 150 ? 'Passez sur un <b>Projecteur 300W</b>'
+                    : neededW > 100 ? 'Passez sur une <b>LED 150W</b>'
+                    : neededW > 60  ? 'Passez sur une <b>LED 100W</b>'
+                    : 'Passez sur une <b>Torche LED 60W</b>';
 
-        const roleGroup = roleKey.split('_')[0];
-        const isSakuraKey = roleGroup === 'key' && contOptiValue > 0;
+      // Alerte flou de bougé — bloc dédié si vitesse conseillée < 1/30s
+      const fluBloc = vFlou
+        ? `<div style="margin-bottom:8px;padding:8px 11px;background:rgba(240,140,30,.1);border:1px solid rgba(240,140,30,.45);border-radius:3px;font-size:10.5px;line-height:1.7;color:#f0c060">
+            <b style="font-size:11px;letter-spacing:.5px">⚠️ RISQUE DE FLOU — TRÉPIED CONSEILLÉ</b><br>
+            La vitesse ${vLab(vAdjForSrc)} est inférieure à 1/30s.<br>
+            Préférez monter l'<b>ISO</b> ou ajouter des sources plutôt que ralentir l'obturateur.
+           </div>` : '';
 
-        if(trop){
-          /* SOURCE TROP FORTE → baisser la puissance */
-          cardStyle = 'background:rgba(224,112,96,.05);';
-          detailHtml = `<div style="font-size:10.5px;color:var(--tm);line-height:1.9">
-            <span style="color:#e07060;font-weight:700">Source trop forte de ${absD.toFixed(2)} IL</span><br>
-            ① Baissez la puissance à <b style="color:var(--or);font-size:13px">${pctShow}%</b>
-              <span style="color:var(--tp);font-size:9.5px"> (actuellement ${Math.round(pctMes*100)}%)</span>
-          </div>`;
+      // Alerte Sakura
+      const sakura = (roleKey.split('_')[0]==='key' && contOptiValue > 0)
+        ? `<div style="background:rgba(192,60,60,.15);border:1px solid rgba(220,80,80,.35);border-radius:3px;padding:5px 8px;margin-bottom:6px;font-size:9.5px">
+            <b style="color:#ff7070">🔴 Sakura — insuffisant</b> — manque ${manqueAff} IL
+           </div>` : '';
 
-        } else if(isSakuraKey && !pctOK){
-          /* ALERTE SAKURA : Key Light sous-exposée en mode Nath Sakura */
-          const srcSugg = typeKey==='led20' ? 'Passez sur une Torche 60W ou un Projecteur'
-                        : typeKey==='led60' ? 'Passez sur un Projecteur 200W'
-                        : 'Rapprochez la source';
-          cardStyle = 'background:rgba(192,60,60,.1);border:1px solid rgba(220,80,80,.3);';
-          detailHtml = `<div style="font-size:10.5px;line-height:1.9">
-            <div style="background:rgba(192,60,60,.2);border:1px solid rgba(220,80,80,.5);border-radius:3px;padding:8px 10px;margin-bottom:8px">
-              <span style="color:#ff7070;font-weight:700">🔴 Sujet sous-exposé — ${absD.toFixed(2)} IL manquants</span><br>
-              <span style="color:#ffaaaa;font-size:9.5px">Montez les ISO ou baissez la vitesse boîtier</span>
-            </div>
-            <span style="color:var(--tm)">
-              ① Ralentissez → <b>${vLab(vAdjForSrc)}</b>${vFlou?' <span style="color:#f0a04a">⚠ risque flou</span>':''}<br>
-              ② Montez les ISO → <b>ISO ${isoAdjCl}</b>
-            </span>
-            <div style="margin-top:7px;padding:7px 10px;background:rgba(200,164,90,.1);border-left:3px solid var(--or);border-radius:0 2px 2px 0;color:var(--or);font-size:9.5px">
-              ⭐ ${srcSugg} → rapprochez à <b>${distCm} cm</b>
-            </div>
-          </div>`;
-
-        } else if(pctOK){
-          /* TROP FAIBLE mais récupérable en montant la puissance */
-          cardStyle = 'background:rgba(232,160,48,.04);';
-          const gainPct = Math.round((1 - pctMes) * 100);
-          detailHtml = `<div style="font-size:10.5px;color:var(--tm);line-height:1.9">
-            <span style="color:#e8a030;font-weight:700">Source trop faible de ${absD.toFixed(2)} IL</span><br>
-            ① Montez à <b style="color:var(--or);font-size:13px">100%</b>
-              <span style="color:var(--tp);font-size:9.5px"> (+${gainPct}% vs actuel)</span><br>
-            ② Ou ralentissez → <b>${vLab(vAdjForSrc)}</b>${vFlou?' <span style="color:#f0a04a">⚠ risque flou</span>':''}<br>
-            ③ Ou montez les ISO → <b>ISO ${isoAdjCl}</b>
-          </div>`;
-
-        } else {
-          /* PUISSANCE INSUFFISANTE — suggérer montée en gamme source */
-          const srcSugg = typeKey==='led20'
-            ? `Passez sur une <b>Torche LED 60W</b> ou un <b>Projecteur 200W</b>`
-            : typeKey==='led60'
-            ? `Passez sur un <b>Projecteur 200W</b>`
-            : `Rapprochez la source`;
-          const nbStr = nbSrcs > 1 ? `${nbSrcs-1} source${nbSrcs>2?'s':''} identique${nbSrcs>2?'s':''}` : 'une source plus puissante';
-          cardStyle = 'background:rgba(192,60,60,.06);';
-          detailHtml = `<div style="font-size:10.5px;color:var(--tm);line-height:1.9">
-            <span style="color:#e07060;font-weight:700">⛔ Puissance insuffisante — ${absD.toFixed(2)} IL manquants</span><br>
-            ① Ralentissez → <b>${vLab(vAdjForSrc)}</b>${vFlou?' <span style="color:#f0a04a">⚠ risque flou</span>':''}<br>
-            ② Montez les ISO → <b>ISO ${Math.min(3200,isoAdjCl)}</b><br>
-            <div style="margin-top:7px;padding:8px 11px;background:rgba(200,164,90,.1);border-left:3px solid var(--or);border-radius:0 3px 3px 0;color:var(--t);line-height:1.7;font-size:9.5px">
-              ⭐ <b>Conseil :</b> ${srcSugg}<br>
-              ou rapprochez à <b>${distCm} cm</b> · ou ajoutez <b>${nbStr}</b>
-            </div>
-          </div>`;
-        }
-
-        resBox.innerHTML = `<div style="border-radius:3px;padding:8px;${cardStyle}">${badgeApn}${detailHtml}${alerteISO}</div>`;
-      }
+      html = `<div style="border-radius:3px;padding:7px 11px;background:rgba(192,60,60,.08);border:1px solid rgba(200,80,80,.28);display:flex;align-items:center;gap:9px">
+        <div style="font-size:20px;line-height:1">🔴</div>
+        <div style="font-size:10px;color:var(--tp)">Requis : <b style="color:#e07060;font-size:12px">${pctBrut}%</b> · −${manqueAff} IL</div>
+      </div>`;
     }
 
-        /* ── Conseil de configuration contextuel ── */
-    const conseilBox = document.getElementById('csrc-conseil-'+idx);
-    if(conseilBox){
-      const isNath2   = contOptiValue > 0;
-      const roleGroup = roleKey.split('_')[0];
-      const ilVal     = ROLE_IL[roleKey] || 0;
-      let ctxt = '';
-      if(roleGroup==='key'){
-        ctxt = isNath2
-          ? `⭐ <b>Key Light Nath Sakura :</b> doit être à <b>+1.33 IL</b> au-dessus de l'exposition boîtier. Cible posemètre : <b>f/${fSrcCible.toFixed(1)}</b>.`
-          : `<b>Key Light Standard :</b> doit correspondre à l'ouverture boîtier. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
-      } else if(roleGroup==='fill'){
-        ctxt = `<b>Fill Light (${ilVal} IL) :</b> débouche les ombres sous la Key sans écraser le modelé. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
-      } else if(roleGroup==='rim'){
-        ctxt = `<b>Rim / Accent (+${ilVal} IL) :</b> sépare le sujet du fond, plus forte que la Key. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
-      } else {
-        ctxt = `<b>Fond :</b> éclaire l'arrière-plan indépendamment. Cible : <b>f/${fSrcCible.toFixed(1)}</b>.`;
-      }
-      conseilBox.style.display = 'block';
-      conseilBox.innerHTML = `<div style="font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#7ab3ff;margin-bottom:4px">💬 Conseil</div>${ctxt}`;
-    }
-  });
+    resBox.innerHTML = html;
+  }); // fin forEach
 
-  /* ── Résultat global (source Key principale = résultat résumé) ── */
+  /* ══════════════════════ RÉSUMÉ GLOBAL KEY ══════════════════════ */
   const keyResult = results.find(r=>r.roleKey==='key') || results[0];
   const box = document.getElementById('cont-result-box');
   if(!keyResult){ box.style.display='none'; return; }
@@ -1711,80 +1800,62 @@ function calcContinue(){
   const ecartBar = document.getElementById('cont-ecart-bar');
   const conseil  = document.getElementById('cont-conseil');
   const vitBox   = document.getElementById('cont-vitesses-box');
+  resMaj.style.fontSize = '';
 
-  const absD = Math.abs(keyResult.deltaIL);
-  const trop = keyResult.deltaIL < 0;
-
-  /* En-tête résumé */
-  const keyPctCons = Math.round(keyResult.pctCibleClamp * 100);
-  const keyPctBrut = Math.round(keyResult.pctCible * 100);
-  const keyInsuffisant = keyResult.pctCible > 1.005;
   document.getElementById('cont-res-type').textContent =
     `SOURCE KEY — ${contOptiValue>0?'NATH SAKURA +1.33 IL':'STANDARD 0 IL'}`;
 
-  if(absD < 0.1){
-    resMaj.textContent = '✓ EXPO CORRECTE';
+  /* ── Verdict KEY : critère deltaIL, tolérance 0.1 IL ── */
+  const kDeltaIL  = Math.log2(Math.max(keyResult.pctCible, 0.0001));
+  const kIsExpoOk = kDeltaIL <=  0.1;   // ≤ +0.1 IL → 🟢
+  const kIsTrop   = kDeltaIL <  -0.1;   // < -0.1 IL → trop forte
+
+  if(kIsExpoOk) {
+    /* ── 🟢 VERT global — purge TOTALE, pas de f/ conseillée ── */
+    const pctAff = Math.min(100, Math.round(keyResult.pctCible * 100));
+    resMaj.innerHTML   = '🟢 EXPOSITION CORRECTE';
     resMaj.style.color = '#4caf75';
-    resSub.textContent = `Key à f/${keyResult.fApn.toFixed(1)} à l'APN — conforme à l'intention`;
-    ecartBar.style.display = 'none';
-    conseil.style.display  = 'none';
-    vitBox.style.display   = 'none';
-  } else if(!keyResult.trop && keyInsuffisant){
-    /* Puissance insuffisante — alerte rouge principale */
-    resMaj.textContent = '⛔ PUISSANCE INSUFFISANTE';
-    resMaj.style.color = '#e07060';
-    resMaj.style.fontSize = 'clamp(1.1rem,5vw,1.6rem)';
-    resSub.innerHTML = `Key mesurée f/${keyResult.fMes.toFixed(1)} → cible f/${keyResult.fSrcCible.toFixed(1)}<br>
-      <span style="color:#e07060">Nécessite ${keyPctBrut}% de puissance — impossible</span>`;
-    ecartBar.style.display = 'block';
-    ecartBar.style.background = 'rgba(224,112,96,.08)';
-    ecartBar.style.border = '1px solid rgba(224,112,96,.35)';
-    ecartBar.style.borderRadius = '3px';
-    ecartBar.style.color = 'var(--tm)';
-    ecartBar.style.padding = '10px 14px';
-    ecartBar.style.fontSize = '11px';
-    ecartBar.style.lineHeight = '1.8';
-    ecartBar.innerHTML = `<span style="color:#e07060;font-weight:700">Augmentez ISO de +${absD.toFixed(1)} IL</span> → ISO ${Math.min(6400,Math.round(isoTarget*Math.pow(2,absD)))}<br>
-      ou baissez la vitesse → <b>${vLab(vNearest(vTarget*Math.pow(2,keyResult.deltaIL)))}</b><br>
-      ou <b>rapprochez la source</b> (loi du carré inverse)`;
-    conseil.style.display = 'none';
-    vitBox.style.display  = 'none';
+    resMaj.style.fontSize = 'clamp(1rem,4vw,1.35rem)';
+    resSub.innerHTML   = kIsTrop
+      ? `Source trop forte — baissez la Key à <b>${pctAff}%</b>`
+      : `Puissance Key : <b>${pctAff}%</b>`;
+    // setAttribute écrase tout style résiduel (évite le bug display:block qui persiste)
+    ecartBar.setAttribute('style', 'display:none');
+    ecartBar.innerHTML = '';
+    conseil.setAttribute('style',  'display:none');
+    conseil.innerHTML  = '';
+    vitBox.setAttribute('style',   'display:none');
+    vitBox.innerHTML   = '';
+
   } else {
-    resMaj.style.fontSize = ''; // reset si modifié par le cas précédent
-    resMaj.textContent = `${trop?'−':'+'}${absD.toFixed(2)} IL`;
-    resMaj.style.color = trop ? '#e07060' : '#e8a030';
-    resSub.textContent = `Key mesurée f/${keyResult.fMes.toFixed(1)} → cible f/${keyResult.fSrcCible.toFixed(1)} à l'APN`;
+    /* ── 🔴 ROUGE global — conseils vitesse/ISO uniquement, pas de f/ ── */
+    const kManqueAff = kDeltaIL < 0.05 ? '≈ 0' : kDeltaIL.toFixed(1);
+    const kPctBrut   = Math.round(keyResult.pctCible * 100);
+    resMaj.innerHTML   = `🔴 SOUS-EXPOSÉ — Manque ${kManqueAff} IL`;
+    resMaj.style.color = '#e07060';
+    resMaj.style.fontSize = 'clamp(.85rem,3.5vw,1.1rem)';
+    resSub.innerHTML   = `Source Key à 100% max — puissance requise : <b style="color:#e07060">${kPctBrut}%</b>`;
 
-    ecartBar.style.display = 'block';
-    ecartBar.style.background = trop?'rgba(224,112,96,.07)':'rgba(232,160,48,.07)';
-    ecartBar.style.border     = `1px solid ${trop?'rgba(224,112,96,.3)':'rgba(232,160,48,.3)'}`;
-    ecartBar.style.borderRadius = '3px';
-    ecartBar.style.color = 'var(--tm)';
-    ecartBar.style.padding = '10px 14px';
-    ecartBar.style.fontSize = '11px';
-    ecartBar.style.lineHeight = '1.8';
-    ecartBar.innerHTML = (contOptiValue>0
-      ?`⭐ Mode Nath Sakura — Key doit être à <b>f/${keyResult.fSrcCible.toFixed(1)}</b>`
-      :`Mode Standard — Key doit être à <b>f/${keyResult.fSrcCible.toFixed(1)}</b>`)
-      +`<br><span style="color:${trop?'#e07060':'#e8a030'};font-weight:600">${trop?'Key trop forte':'Key trop faible'} de ${absD.toFixed(2)} IL</span>`;
+    conseil.setAttribute('style', 'display:none');
 
-    /* Tableau équivalences vitesse */
-    vitBox.style.display = 'block';
-    const rows = [];
-    [-2,-1,0,1,2].forEach(stop=>{
-      const vV = vTarget * Math.pow(2, stop);
-      if(vV < 0.0009 || vV > 31) return;
-      const fV = fOf(keyResult.evSrcReelle, vV, isoTarget);
-      const near = Math.abs(stop - keyResult.deltaIL) < 0.15;
-      rows.push(`<div style="display:flex;justify-content:space-between;padding:2px 0;${near?'color:var(--or);font-weight:600':''}">
-        <span>${vLab(vV)}</span><span>→ Key équivaut à f/${fV.toFixed(1)}</span>${near?'<span style="color:var(--or)">← cible</span>':''}
-      </div>`);
-    });
-    vitBox.innerHTML = `<div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);margin-bottom:8px">Équivalences vitesse ↔ f/ Key</div>${rows.join('')}`;
-    conseil.style.display = 'none'; // conseils déjà dans chaque carte
+    vitBox.setAttribute('style', 'display:none');
+    vitBox.innerHTML = '';
+
+    // Compter le nb total de sources ajoutées par l'utilisateur
+    const totalSrcs = results.reduce((acc, r) => acc + r.nbSrcsU, 0);
+    const nbSrcsSugg = Math.ceil(keyResult.pctCible * keyResult.nbSrcsU);
+    const gainSrcIL  = nbSrcsSugg > keyResult.nbSrcsU
+      ? Math.round(Math.log2(nbSrcsSugg / keyResult.nbSrcsU) * 10) / 10 : 0;
+
+    ecartBar.setAttribute('style',
+      'display:block;margin-top:10px;padding:12px 14px;border-radius:3px;font-size:11px;line-height:2.4;background:rgba(224,112,96,.08);border:1px solid rgba(224,112,96,.28);color:var(--tm)');
+    ecartBar.innerHTML =
+      `<b style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t)">Corrections possibles :</b><br>
+       ⏱ Vitesse → <b style="color:var(--or);font-size:13px">${vLab(keyResult.vAdjForSrc)}</b>${keyResult.vFlou?' <span style="color:#f0a04a;font-size:9px">⚠ trépied conseillé</span>':''}<br>
+       📷 ou ISO → <b style="color:var(--or);font-size:13px">ISO ${keyResult.isoAdjCl}</b>${keyResult.isoAdjCl>800?' <span style="color:#f0a04a;font-size:9px">⚠ bruit possible</span>':''}<br>
+       ${nbSrcsSugg > keyResult.nbSrcsU ? `💡 ou <b style="color:var(--or)">${nbSrcsSugg} sources identiques</b> <span style="font-size:9.5px;color:var(--tp)">(+${gainSrcIL} IL)</span>` : ''}`;
   }
 
-  /* Stocker pour import mixte */
   window._contResult = {
     evDisponible: keyResult.evSrcReelle,
     fTarget, iso: isoTarget, vitesse: vTarget,
@@ -2669,6 +2740,114 @@ document.addEventListener('DOMContentLoaded',()=>{
   calcFlashPerSource(lastOptiValue);
 });
 
+</script>
+
+
+
+
+<script>
+const SAKURA_TIPS = [
+  // ── POSEMÈTRE ──
+  {cat:"Posemètre", txt:"Commence toujours par mesurer la lumière ambiante, lumisphère sortie, face à la source principale. C'est cette valeur qui définit ton exposition de base — tout le reste est ajustement."},
+  {cat:"Posemètre", txt:"Pour mesurer un flash, rentre la lumisphère (position plate). Tu mesures ainsi la lumière directe et pure de la source, sans pollution des autres lumières de la scène."},
+  {cat:"Posemètre", txt:"Ne mesure jamais depuis la position du photographe. Place-toi toujours à l'emplacement du sujet, lumisphère pointée vers la source. C'est la lumière que le sujet reçoit qui compte."},
+  {cat:"Posemètre", txt:"Un posemètre incident mesure la lumière qui arrive sur le sujet. Un posemètre réfléchi mesure ce que renvoie la surface. Pour les portraits, le mode incident est toujours plus fiable."},
+  {cat:"Posemètre", txt:"La méthode Nath Sakura cale chaque flash à +1,33 IL au-dessus de la lumière ambiante. Cette tension précise entre ambiance et flash crée le rendu lumineux, doux et maîtrisé de la méthode."},
+  {cat:"Posemètre", txt:"Quand tu utilises plusieurs flashs, mesure chacun séparément, lumisphère rentrée, les autres flashs éteints. Tu obtiens la valeur pure de chaque source — c'est la base d'un éclairage vraiment maîtrisé."},
+  {cat:"Posemètre", txt:"Le rapport de contraste entre ta Key et ton Fill se calcule en IL : 1 IL = ratio 2:1, 2 IL = ratio 4:1. Pour un portrait classique, 1 à 2 IL de différence Key/Fill est idéal."},
+  {cat:"Posemètre", txt:"Après avoir réglé tes sources, fais une mesure globale lumisphère sortie pour vérifier l'exposition finale de la scène. Ce chiffre doit correspondre à ce que tu as prévu au boîtier."},
+  {cat:"Posemètre", txt:"Si ton posemètre affiche une valeur différente de celle attendue, ne règle pas le boîtier — règle la source. Le boîtier est un paramètre artistique fixe, jamais un outil de correction d'exposition."},
+  {cat:"Posemètre", txt:"La lumisphère sortie capte la lumière de toutes les directions — elle mesure l'ambiance globale. La lumisphère rentrée (plate) capte uniquement la source directe en face. Ces deux modes ont des usages bien distincts."},
+  {cat:"Posemètre", txt:"Quand tu mesures au posemètre, assure-toi que l'ISO et la vitesse sur le posemètre correspondent exactement à ceux réglés sur ton boîtier. Une erreur ici fausse tous tes calculs."},
+  {cat:"Posemètre", txt:"Le posemètre ne connaît pas tes intentions artistiques — il te donne l'expo technique neutre à 18%. C'est toi qui décides d'exposer plus ou moins selon le rendu voulu. Le posemètre est un outil, pas un juge."},
+  // ── RÉGLAGES BOÎTIER ──
+  {cat:"Réglages", txt:"En lumière continue, la vitesse d'obturation contrôle la quantité de lumière reçue. Doubler le temps de pose (ex: 1/60 vers 1/30) donne exactement +1 IL — sans toucher au diaphragme ni à l'ISO."},
+  {cat:"Réglages", txt:"Le diaphragme est un choix artistique, pas un outil de correction. Il définit la profondeur de champ et le bokeh. Une fois choisi selon l'effet voulu, il ne doit jamais être modifié pour corriger l'exposition."},
+  {cat:"Réglages", txt:"Commence toujours avec l'ISO le plus bas possible. Monte l'ISO uniquement en dernier recours — après avoir exploré vitesse, sources et distance. Chaque doublement d'ISO = +1 IL de bruit potentiel."},
+  {cat:"Réglages", txt:"La vitesse de synchronisation flash est la vitesse maximale à laquelle le flash synchronise avec le rideau. Dépasser cette limite sans HSS coupe une partie de l'image — vérifie ton manuel d'utilisation."},
+  {cat:"Réglages", txt:"ISO 100, f/5.6, 1/125s est le triangle de base de la méthode Nath Sakura pour un flash standard. À partir de là, tout se raisonne en écarts d'IL selon le sujet et l'ambiance souhaitée."},
+  {cat:"Réglages", txt:"En extérieur avec du flash, commence par régler l'ambiance sans flash. Choisis ta vitesse pour l'ambiance, ton diaphragme pour la profondeur de champ — le flash vient combler le sujet ensuite."},
+  {cat:"Réglages", txt:"Le mode Manuel (M) est le seul mode qui te donne un contrôle total sur l'exposition. En photographie avec flash, c'est le seul mode recommandé — les modes semi-automatiques peuvent compenser à ta place et fausser le résultat."},
+  {cat:"Réglages", txt:"En mode M, si tu changes la vitesse d'obturation, l'ambiance change mais le flash reste identique. Si tu changes le diaphragme, les deux changent simultanément. Comprendre cela est fondamental pour maîtriser le flash."},
+  {cat:"Réglages", txt:"Le bracketing d'exposition (AEB) est utile en lumière naturelle mais inutile en studio flash : l'expo au flash est calculée, pas devinée. En studio, on calcule — on ne bracket pas."},
+  // ── FLASH ──
+  {cat:"Flash", txt:"Ne jamais régler ton flash à 100% d'entrée de jeu. Commence toujours à 1/4 de puissance, mesure, puis ajuste. Travailler à fond crée une montée en température, une usure prématurée et réduit le recyclage."},
+  {cat:"Flash", txt:"Le temps de recyclage d'un flash augmente quand la puissance augmente. Si tu shootes en rafale, baisse la puissance et rapproche la source — tu maintiens l'intensité tout en raccourcissant le temps de recyclage."},
+  {cat:"Flash", txt:"La durée du flash (flash duration) détermine la capacité à figer le mouvement. À pleine puissance, la durée est plus longue (jusqu'à 1/200s). À faible puissance, elle peut descendre à 1/10000s — bien mieux qu'un obturateur rapide."},
+  {cat:"Flash", txt:"Un flash avec modificateur (parapluie, boîte à lumière, réflecteur) change radicalement le rendu. Le parapluie donne une lumière large et enveloppante. La boîte à lumière donne une lumière plus directionnelle et contrôlée."},
+  {cat:"Flash", txt:"La distance flash-sujet obéit à la loi du carré inverse : doubler la distance divise la lumière par 4 (−2 IL). Rapprocher la source augmente la puissance reçue et adoucit la lumière. Éloigner la durcit."},
+  {cat:"Flash", txt:"En extérieur en plein soleil, le flash doit être réglé plus fort pour dominer la lumière ambiante. Règle d'abord l'ambiance (sous-expo volontaire), puis monte le flash jusqu'à la valeur cible sur le sujet."},
+  {cat:"Flash", txt:"Le HSS (High Speed Sync) permet de flasher au-dessus de la vitesse de synchro — idéal en extérieur pour dominer le soleil avec un grand diaphragme. Mais attention : il réduit la puissance effective du flash d'environ 2 IL."},
+  {cat:"Flash", txt:"En studio, si la photo est trop lumineuse, ne baisse pas l'ISO — baisse la puissance du flash ou recule la source. Garder l'ISO bas préserve la qualité d'image et la latitude de post-traitement."},
+  // ── PORTRAIT ──
+  {cat:"Portrait", txt:"En portrait, place ta Key Light à 45 degrés du visage, légèrement au-dessus des yeux du sujet. Cette position crée des ombres naturelles qui modèlent le visage sans l'écraser ni le platifier."},
+  {cat:"Portrait", txt:"Le fill light ne doit jamais être aussi fort que la key. Un fill à -1 IL conserve des ombres douces et de la dimension. Un fill à -2 IL donne un rendu plus dramatique. Pas de fill = éclairage Rembrandt."},
+  {cat:"Portrait", txt:"Un rim light placé derrière le sujet, légèrement décalé, crée un contour lumineux qui sépare le sujet du fond. Règle-le à +1 à +2 IL au-dessus de la Key pour un effet bien visible."},
+  {cat:"Portrait", txt:"Pour un portrait corps complet, la distance entre le flash et le sujet doit être au minimum égale à la hauteur du sujet. En dessous, la lumière devient inégale du haut en bas du corps."},
+  {cat:"Portrait", txt:"Un grand diffuseur proche du sujet crée une lumière enveloppante et flatteuse. Un réflecteur petit et loin donne une lumière dure avec des ombres tranchées. Choisis selon l'émotion souhaitée."},
+  {cat:"Portrait", txt:"La lumière venant du bas est contre-nature — elle évoque l'horreur ou l'interrogatoire. En portrait, ta source principale doit toujours venir de dessus ou du côté, jamais du dessous."},
+  {cat:"Portrait", txt:"En portrait masculin, un éclairage plus contrasté (fill à -2 IL ou moins) avec des ombres marquées renforce le caractère et la structure du visage. En portrait féminin, un fill plus doux (-1 IL) est souvent plus flatteur."},
+  {cat:"Portrait", txt:"La qualité d'une lumière dépend du rapport taille de la source / distance au sujet. Une grande boîte à lumière proche = lumière douce. La même boîte éloignée devient une source dure. Rapprocher adoucit toujours."},
+  // ── DIRECTION MODÈLE ──
+  {cat:"Direction", txt:"Demande à ton modèle de suivre la lumière avec ses yeux avant de bouger la tête. Le regard dirige l'attention — une lumière dans les yeux crée l'accroche qui donne vie au portrait."},
+  {cat:"Direction", txt:"La règle des catchlights : les points de lumière dans les yeux du sujet révèlent d'où vient ta Key Light. Sans catchlight, le regard perd sa vie. Vérifie toujours leur présence avant de déclencher."},
+  {cat:"Direction", txt:"Pour un portrait féminin, demande au modèle d'allonger le cou légèrement vers la source de lumière. Ce simple mouvement affine les traits et crée un modelé plus flatteur instantanément."},
+  {cat:"Direction", txt:"Le nez du sujet doit toujours pointer vers la source principale. Si la Key est à droite, le nez regarde à droite. Sinon, les ombres vont dans le mauvais sens et le visage perd son modelé naturel."},
+  {cat:"Direction", txt:"Évite de faire regarder ton modèle directement dans le flash. Demande-lui de regarder légèrement au-dessus de l'objectif ou vers un point imaginaire — le résultat sera plus naturel et plus élégant."},
+  {cat:"Direction", txt:"Pour mettre le modèle à l'aise, parle-lui pendant la prise de vue. Une conversation naturelle génère des expressions authentiques que tu ne peux pas obtenir en posant. Shoote pendant qu'il répond."},
+  {cat:"Direction", txt:"La posture ouverte (épaules vers l'appareil) donne une impression de confiance et de présence. La posture fermée (épaules de trois quarts) amincit et crée de la profondeur. Oriente le corps selon l'intention."},
+  {cat:"Direction", txt:"Demande à ton modèle de légèrement incliner la tête vers l'épaule la plus proche de la Key Light. Ce geste subtil crée une ligne directrice vers la lumière et renforce le modelé du visage."},
+  {cat:"Direction", txt:"Si ton modèle est tendu, demande-lui de secouer les mains, de respirer fort et de laisser tomber les épaules. La tension physique se lit toujours sur une photo — détendre le corps avant de déclencher change tout."},
+  // ── CARNATION ET MATIÈRE ──
+  {cat:"Carnation", txt:"Les carnations foncées absorbent plus de lumière. En mode incident Nath Sakura, la correction carnation indique combien d'IL supplémentaires fournir pour révéler la richesse et la profondeur des tons sombres."},
+  {cat:"Carnation", txt:"La réflectance d'une surface détermine combien de lumière elle renvoie. Un tissu noir absorbe environ 95% de la lumière. Une robe blanche en renvoie environ 90%. La correction matière compense ces écarts."},
+  {cat:"Carnation", txt:"La peau humaine a une réflectance naturelle de 18 à 36% selon la carnation. La méthode Nath Sakura utilise cette valeur pour calibrer précisément chaque source selon le vrai sujet devant toi."},
+  {cat:"Carnation", txt:"Ne sous-expose jamais une peau foncée pour compenser la luminosité d'ensemble. Expose correctement la carnation, même si l'arrière-plan semble surexposé — tu protèges les détails qui comptent vraiment."},
+  {cat:"Carnation", txt:"Pour les carnations très claires, la correction peut être négative — il faut légèrement moins de lumière pour ne pas brûler les hautes lumières de la peau. Le posemètre incident te guide précisément."},
+  // ── COMPOSITION ──
+  {cat:"Composition", txt:"La règle des tiers n'est pas une règle — c'est un point de départ. Place les yeux du sujet sur la ligne supérieure du tiers, puis fais confiance à ta lecture de la lumière pour affiner."},
+  {cat:"Composition", txt:"La profondeur de champ raconte l'histoire. Une grande ouverture (f/1.8, f/2.8) isole le sujet du fond et crée une sensation d'intimité. Une petite ouverture (f/8, f/11) place le sujet dans son environnement."},
+  {cat:"Composition", txt:"Avant de déclencher, demande-toi ce qui te dérange dans ce cadre. Souvent c'est un élément parasite en arrière-plan, une ombre non voulue ou une source de lumière non maîtrisée. Élimine d'abord ces parasites."},
+  {cat:"Composition", txt:"L'espace négatif (zones vides du cadre) n'est pas du vide inutile — c'est une respiration visuelle. Laisser de l'espace autour du sujet crée une sensation d'élégance et met en valeur ce qui compte."},
+  {cat:"Composition", txt:"Un fond trop lumineux attire l'attention autant que le sujet. En studio, éclaire le fond séparément et contrôle sa luminosité : fond à -1 ou -2 IL sous le sujet pour que l'oeil aille naturellement sur le visage."},
+  {cat:"Composition", txt:"La ligne des yeux est la ligne la plus importante d'un portrait. En cadrage serré, place-la au tiers supérieur du cadre. En plan américain, elle peut monter plus haut. Elle ne doit jamais être coupée."},
+  // ── WORKFLOW ──
+  {cat:"Workflow", txt:"Établis un ordre de travail systématique : ambiance d'abord, puis Key, puis Fill, puis Rim, puis fond. Ajouter une source à la fois te permet de savoir exactement ce que chacune apporte."},
+  {cat:"Workflow", txt:"Prends toujours une photo test sans flash pour valider ton exposition ambiante avant d'allumer les sources. Si l'ambiance est juste, tu n'auras qu'à régler le flash — sans repartir de zéro."},
+  {cat:"Workflow", txt:"Après chaque modification (puissance, distance, angle), remesure au posemètre avant de déclencher. Une seule modification à la fois te permet de comprendre ce qui change et pourquoi — c'est ainsi qu'on progresse."},
+  {cat:"Workflow", txt:"Nomme tes réglages et note-les pendant la séance. Une puissance de flash, une distance, un angle — noter prend 10 secondes et t'évite de chercher pendant 10 minutes lors d'une prochaine séance similaire."},
+  {cat:"Workflow", txt:"Le vrai test d'un bon éclairage : étouffe le flash et regarde l'image ambiante seule. Elle doit être cohérente, agréable, intentionnellement sous-exposée d'exactement la valeur que tu avais planifiée."},
+];
+
+let sakuraIdx = Math.floor(Math.random() * SAKURA_TIPS.length);
+let sakuraTimer = null;
+
+function sakuraRender(){
+  const tip = SAKURA_TIPS[sakuraIdx];
+  document.getElementById('sakura-tip-text').textContent = tip.txt;
+  document.getElementById('sakura-cat').textContent = tip.cat;
+  // Dots (3 points = position dans groupe de 3)
+  const dotsEl = document.getElementById('sakura-dots');
+  dotsEl.innerHTML = [0,1,2].map(i =>
+    `<div class="sakura-dot${i===(sakuraIdx%3)?' actif':''}"></div>`
+  ).join('');
+}
+
+function sakuraNext(){
+  sakuraIdx = (sakuraIdx + 1) % SAKURA_TIPS.length;
+  sakuraRender();
+  resetSakuraTimer();
+}
+
+function resetSakuraTimer(){
+  if(sakuraTimer) clearInterval(sakuraTimer);
+  sakuraTimer = setInterval(sakuraNext, 18000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  sakuraRender();
+  resetSakuraTimer();
+});
 </script>
 
 <!-- Modal "Comment mesurer — Méthode Nath Sakura" -->
