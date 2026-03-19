@@ -800,15 +800,16 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         </select>
       </div>
 
-      <!-- 3. Opti Nath Sakura -->
-      <div id="mx-s2-opti-rappel" style="display:none;margin-bottom:6px;padding:7px 10px;background:rgba(232,160,48,.1);border-radius:3px;font-size:10px;color:#e8a030">
-        ⭐ Opti Nath Sakura +1.33 IL activée à l'étape 1 — appliquée ici également
-      </div>
-      <div class="ch" style="margin-bottom:12px"><label>Opti Nath Sakura</label>
-        <select id="mx_opti" onchange="mxCalcSujet()">
-          <option value="0" selected>— Standard</option>
-          <option value="1.33">⭐ +1.33 IL (Opti Nath Sakura)</option>
-        </select>
+      <!-- 3. Opti Nath Sakura — info uniquement, non modifiable ici -->
+      <div class="ch" style="margin-bottom:12px">
+        <label>Opti Nath Sakura</label>
+        <div id="mx-s2-opti-info" style="padding:9px 12px;border-radius:2px;font-size:11px;font-weight:600;background:rgba(232,160,48,.07);border:1px solid rgba(232,160,48,.2);color:#e8a030">
+          ⭐ +1.33 IL activée depuis l'étape 1
+        </div>
+        <div id="mx-s2-opti-suggest" style="display:none;padding:9px 12px;border-radius:2px;font-size:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:var(--tp)">
+          — Standard · <span style="color:var(--or);cursor:pointer;text-decoration:underline" onclick="mxGoStep(1)">Revenir à l'étape 1 pour activer l'optimisation Nath Sakura</span>
+        </div>
+        <input type="hidden" id="mx_opti" value="0">
       </div>
 
       <!-- Séparateur -->
@@ -917,12 +918,19 @@ function _updateIntentBanner(){
   const vApn=parseFloat((document.getElementById('v_apn')||{value:'0.008'}).value)||0.008;
   const skin=modeMesure==='incident'?parseFloat((document.getElementById('skin_tone')||{value:'0'}).value)||0:0;
   const mat=modeMesure==='incident'?parseFloat((document.getElementById('matiere')||{value:'0'}).value)||0:0;
-  const fCible=fTarget*Math.pow(Math.sqrt(2),skin+mat+lastOptiValue);
+  const fCible=fTarget*Math.pow(Math.sqrt(2),skin+mat-lastOptiValue);
   const isHSS=vApn<0.005;
   const el=document.getElementById('intent-cible-val');
   const hss=document.getElementById('intent-cible-hss');
   const sub=document.getElementById('intent-cible-sub');
-  if(el) el.textContent='f/'+fCible.toFixed(1);
+  const FSTOPS=[1,1.1,1.2,1.4,1.6,1.8,2,2.2,2.5,2.8,3.2,3.5,4,4.5,5,5.6,6.3,7.1,8,9,10,11,13,14,16,18,20,22];
+  const ilCible=2*Math.log2(fCible);
+  let fBase=FSTOPS[0];
+  for(let i=0;i<FSTOPS.length;i++){if(FSTOPS[i]<=fCible+0.001)fBase=FSTOPS[i];else break;}
+  const ilBase=2*Math.log2(fBase);
+  const dix=Math.round((ilCible-ilBase)*10);
+  const dixLabel=(dix>0&&dix<=9)?' +0.'+dix+' IL':'';
+  if(el) el.textContent='f/'+fBase+dixLabel;
   if(hss) hss.style.display=isHSS?'inline':'none';
   if(sub){
     const parts=[];
@@ -1065,13 +1073,15 @@ function tlTab(tab){
   document.getElementById('tl-panel-apn').classList.toggle('active',tab==='apn');
 }
 function powerToDisplay(rawDenom){
-  // Convertit un dénominateur brut en texte "1/64 +0.3" avec dixièmes
+  // Convertit un dénominateur brut en texte "1/16 +0.3" avec dixièmes
+  // Standard inférieur ou égal + dixièmes positifs vers le haut
   if(rawDenom<=0.7)return{txt:'! MAX DÉPASSÉ',ok:false};
   const stds=[1,2,4,8,16,32,64,128,256,512];
-  let bd=stds.find(s=>s>=rawDenom)||512;
-  let tenths=Math.round(Math.log2(bd/rawDenom)*10)/10;
-  if(tenths>=0.95){const i2=stds.indexOf(bd);if(i2<stds.length-1){bd=stds[i2+1];tenths=0;}}
-  const txt='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1):'');
+  let bd=stds[0];
+  for(let i=0;i<stds.length;i++){if(stds[i]<=rawDenom)bd=stds[i];else break;}
+  if(bd>512)bd=512;
+  const tenths=Math.round(Math.log2(rawDenom/bd)*10)/10;
+  const txt='1/'+bd+(tenths>=0.1?' +'+tenths.toFixed(1)+' IL':'');
   return{txt,ok:true,bd,tenths};
 }
 
@@ -1130,7 +1140,7 @@ function calcFlashPerSource(optiValue){
   const matiereMod = modeMesure==='incident' ? parseFloat((document.getElementById('matiere')||{value:'0'}).value)||0 : 0;
 
   // Cible globale : fTarget × √2^(carn + mat + opti)  — même loi que Mixte
-  const fCibleGlobale = fTarget * Math.pow(Math.sqrt(2), skinMod + matiereMod + optiValue);
+  const fCibleGlobale = fTarget * Math.pow(Math.sqrt(2), skinMod + matiereMod - optiValue);
 
   // Boîtier
   const stopsISO = Math.log2(isoApn/100);
@@ -1555,7 +1565,7 @@ function calcContinue(){
   /* Bandeau intention */
   const banner = document.getElementById('cont-intent-banner');
   if(banner){
-    const fRef = fTarget * Math.pow(Math.sqrt(2), contOptiValue);
+    const fRef = fTarget * Math.pow(Math.sqrt(2), -contOptiValue);
     banner.innerHTML = contOptiValue > 0
       ? `⭐ <b style="color:var(--or)">Nath Sakura</b> — Key cible <b style="color:var(--or)">f/${fRef.toFixed(1)}</b> · ${vLab(vTarget)} · ISO ${isoTarget}`
       : `<b>Standard</b> — Key cible <b>f/${fTarget.toFixed(1)}</b> · ${vLab(vTarget)} · ISO ${isoTarget}`;
@@ -1622,7 +1632,7 @@ function calcContinue(){
 
     /* f/ cible selon rôle + mode Sakura */
     const roleIL    = CONT_ROLES[roleKey] || 0;
-    const fSrcCible = fTarget * Math.pow(Math.sqrt(2), contOptiValue + roleIL);
+    const fSrcCible = fTarget * Math.pow(Math.sqrt(2), -contOptiValue + roleIL);
 
     /* ─── CALCUL P ────────────────────────────────────────────────────
        P = (f_cible / f_mesure)²  ×  (vMes / vTarget)
@@ -1886,6 +1896,27 @@ function mxHssTag(v){
   return v<0.005?' <span style="background:rgba(240,160,74,.18);border:1px solid rgba(240,160,74,.5);color:#f0a04a;font-size:8.5px;font-weight:700;letter-spacing:1px;padding:1px 5px;border-radius:2px;vertical-align:middle">HSS</span>':'';
 }
 
+function mxSelectOptiChoice(idx){
+  const o=mxData._optiChoices&&mxData._optiChoices[idx];
+  if(!o)return;
+  // Reporter les réglages choisis comme base boîtier pour l'onglet Sujet
+  mxData.vitesseBoitier=o.v;
+  mxData.vLabelBoitier=o.vLbl;
+  mxData.isoBoitier=o.iso;
+  mxData.fBoitier=o.f;
+  mxData._optiChosen=idx;
+  // Mettre en valeur le bouton sélectionné
+  const btns=document.querySelectorAll('[onclick^="mxSelectOptiChoice"]');
+  btns.forEach((b,i)=>{
+    b.style.background=i===idx?'var(--or)':'rgba(200,164,90,.12)';
+    b.style.color=i===idx?'#000':'var(--or)';
+  });
+  // Activer le bouton "Étape suivante"
+  const btn=document.getElementById('mx-btn-1-2');
+  if(btn){btn.disabled=false;btn.style.opacity='1';}
+}
+
+
 function mxGoStep(n){
   if(n<1||n>4)return;
   mxStep=n;
@@ -1954,12 +1985,12 @@ function mxCalcAmbiante(){
     vBest=vitesse; vBestLabel=vLabel;
   }
 
-  // Stocker : diaphragme = fBase (standard APN), vitesse/ISO ajustés
+  // Stocker : diaphragme, vitesse et ISO BRUTS du photographe — jamais modifiés
   mxData.fBoitier=fBase;
   mxData.evAmb=Math.log2(fAmb*fAmb/(vitesse*iso/100));
-  mxData.vitesseBoitier=vBest;
-  mxData.isoBoitier=isoAffiche;
-  mxData.vLabelBoitier=vBestLabel;
+  mxData.vitesseBoitier=vitesse;
+  mxData.isoBoitier=iso;
+  mxData.vLabelBoitier=vLabel;
 
 
   const box=document.getElementById('mx-amb-result');
@@ -1972,21 +2003,57 @@ function mxCalcAmbiante(){
   else if(fondIntent>0) intentTxt=`<span style="color:#7ab3ff">Fond surexposé +${fondIntent} IL</span>`;
   else intentTxt='<span style="color:#4caf75">✓ Fond exposé correctement</span>';
 
-  // Note compensation
-  if(Math.abs(totalIL)>0.05){
-    const compTxt=vitesseOk
-      ?`f/${fBase} fixe. Compensation → <b>vitesse ${vBestLabel}</b> (ISO inchangé : ${iso})`
-      :`Vitesse hors plage → <b>ISO ${isoAffiche}</b> en dernier recours`;
-    optiBlock=`<div style="margin-top:8px;padding:8px 10px;background:rgba(200,164,90,.08);border-radius:3px;font-size:10px;color:${vitesseOk?'var(--tm)':'#e07060'};line-height:1.7">📐 ${compTxt}.</div>`;
+  // Note intention fond / opti
+  if(Math.abs(fondIntent)>0.05){
+    let compTxt='';
+    if(fondIntent===1.33){
+      // Générer toutes les combinaisons possibles pour baisser l'EV de 1.33 IL
+      const FSTOPS_AMB=[1,1.4,1.8,2,2.8,3.5,4,5,5.6,7.1,8,10,11,14,16,20,22];
+      const fLabels_AMB=['1','1.4','1.8','2','2.8','3.5','4','5','5.6','7.1','8','10','11','14','16','20','22'];
+      let opts=[];
+      // Option 1 : ouvrir le diaph de 1.33 IL (vitesse+ISO fixes)
+      const fOpti=fBase/Math.pow(Math.sqrt(2),1.33);
+      let fBest=FSTOPS_AMB[0],fBestDiff=Infinity;
+      FSTOPS_AMB.forEach((f,i)=>{const d=Math.abs(Math.log2(f/fOpti));if(d<fBestDiff){fBestDiff=d;fBest=f;}});
+      if(fBest!==fBase) opts.push({f:fBest,v:vitesse,vLbl:vLabel,iso:iso,label:`Ouvrir → f/${fBest}`});
+      // Option 2 : ralentir la vitesse de 1.33 IL (diaph+ISO fixes)
+      const vOpti=vitesse*Math.pow(2,1.33);
+      let vBst=vitessesStd[0],vBstLbl=vitLabels[0],vBstDiff=Infinity;
+      vitessesStd.forEach((v,i)=>{const d=Math.abs(Math.log2(v/vOpti));if(d<vBstDiff){vBstDiff=d;vBst=v;vBstLbl=vitLabels[i];}});
+      if(vBst!==vitesse&&vBst<=30) opts.push({f:fBase,v:vBst,vLbl:vBstLbl,iso:iso,label:`Ralentir → ${vBstLbl}`});
+      // Option 3 : monter l'ISO de 1.33 IL (diaph+vitesse fixes)
+      const isoOpti=iso*Math.pow(2,1.33);
+      let isoBst=isosStd[0],isoBstDiff=Infinity;
+      isosStd.forEach(s=>{const d=Math.abs(Math.log2(s/isoOpti));if(d<isoBstDiff){isoBstDiff=d;isoBst=s;}});
+      if(isoBst!==iso) opts.push({f:fBase,v:vitesse,vLbl:vLabel,iso:isoBst,label:`Monter ISO → ${isoBst}`});
+      // Option 4 : combo diaph + vitesse (1 cran chacun ≈ 0.66 IL each)
+      const fCombo=fBase/Math.pow(Math.sqrt(2),0.67);
+      const vCombo=vitesse*Math.pow(2,0.67);
+      let fC=FSTOPS_AMB[0],fCDiff=Infinity,vC=vitessesStd[0],vCLbl=vitLabels[0],vCDiff=Infinity;
+      FSTOPS_AMB.forEach(f=>{const d=Math.abs(Math.log2(f/fCombo));if(d<fCDiff){fCDiff=d;fC=f;}});
+      vitessesStd.forEach((v,i)=>{const d=Math.abs(Math.log2(v/vCombo));if(d<vCDiff){vCDiff=d;vC=v;vCLbl=vitLabels[i];}});
+      if(fC!==fBase&&vC!==vitesse&&vC<=30) opts.push({f:fC,v:vC,vLbl:vCLbl,iso:iso,label:`Combo → f/${fC} + ${vCLbl}`});
+
+      const btnsCss='display:flex;flex-wrap:wrap;gap:7px;margin-top:8px';
+      const btnCss='padding:8px 13px;border-radius:3px;cursor:pointer;font-size:11px;font-weight:700;background:rgba(200,164,90,.12);border:1px solid rgba(200,164,90,.4);color:var(--or);font-family:inherit';
+      const btns=opts.map((o,i)=>`<button style="${btnCss}" onclick="mxSelectOptiChoice(${i})">${o.label}</button>`).join('');
+      // Stocker les options dans mxData pour y accéder au clic
+      mxData._optiChoices=opts;
+      compTxt=`⭐ <b>Opti Nath Sakura +1.33 IL</b> — choisis comment adapter ton ambiance :<div style="${btnsCss}">${btns}</div><div style="margin-top:6px;font-size:9.5px;color:var(--tp)">Le flash compensera +1.33 IL au-dessus des réglages choisis.</div>`;
+    } else if(fondIntent<0)
+      compTxt=`🌑 Fond sous-exposé de <b>${Math.abs(fondIntent)} IL</b> — le flash compensera sur le sujet. Les réglages boîtier restent inchangés.`;
+    else
+      compTxt=`☀️ Fond surexposé de <b>+${fondIntent} IL</b> — le flash compensera sur le sujet. Les réglages boîtier restent inchangés.`;
+    optiBlock=`<div style="margin-top:8px;padding:8px 10px;background:rgba(200,164,90,.08);border-radius:3px;font-size:10px;color:var(--tm);line-height:1.7">📐 ${compTxt}</div>`;
   }
 
   box.innerHTML=`<div class="mx-res-ok">
     <div style="font-size:9px;letter-spacing:2px;color:var(--tp);text-transform:uppercase;margin-bottom:6px">Réglages boîtier pour l'ambiante</div>
     <div class="mx-row"><span class="mx-lbl">Diaphragme</span><span class="mx-val">f/${fBase}</span></div>
-    <div class="mx-row"><span class="mx-lbl">Vitesse</span><span class="mx-val" style="${vBestLabel!==vLabel?'color:#e8a030':''}">${vBestLabel}${mxHssTag(vBest)}</span></div>
-    <div class="mx-row"><span class="mx-lbl">ISO</span><span class="mx-val" style="${isoAffiche!==iso?'color:#e8a030':''}">${isoAffiche}</span></div>
+    <div class="mx-row"><span class="mx-lbl">Vitesse</span><span class="mx-val">${vLabel}${mxHssTag(vitesse)}</span></div>
+    <div class="mx-row"><span class="mx-lbl">ISO</span><span class="mx-val">${iso}</span></div>
     <div class="mx-row"><span class="mx-lbl">Intention fond</span><span style="font-size:11px">${intentTxt}</span></div>
-    ${vBest<0.005?`<div style="margin-top:8px;padding:8px 10px;background:rgba(240,160,74,.1);border:1px solid rgba(240,160,74,.35);border-radius:3px;font-size:10px;color:#f0a04a;line-height:1.6">⚡ <b>Mode HSS activé</b> — vitesse ${vBestLabel} &gt; 1/200. Perte de puissance flash : <b>−${Math.log2(0.005/vBest).toFixed(1)} IL</b>. Le calcul en tient compte automatiquement.</div>`:''}
+    ${vitesse<0.005?`<div style="margin-top:8px;padding:8px 10px;background:rgba(240,160,74,.1);border:1px solid rgba(240,160,74,.35);border-radius:3px;font-size:10px;color:#f0a04a;line-height:1.6">⚡ <b>Mode HSS activé</b> — vitesse ${vLabel} &gt; 1/200. Perte de puissance flash : <b>−${Math.log2(0.005/vitesse).toFixed(1)} IL</b>. Le calcul en tient compte automatiquement.</div>`:''}
     ${optiBlock}
     <div class="mx-conseil" style="margin-top:8px">📷 <b>Règle ces valeurs sur ton boîtier maintenant.</b><br>Le flash n'est pas encore déclenché — on travaille uniquement sur l'ambiante.</div>
   </div>`;
@@ -2016,16 +2083,18 @@ function mxUpdateS2Recap(){
   const hft=document.getElementById('mx_sujet_f_t');
   if(hft) hft.value=0;
 
-  // Rappel opti Nath Sakura si activée étape 1
-  const rappel=document.getElementById('mx-s2-opti-rappel');
-  if(rappel){
-    if(mxData.fondIntent===1.33){
-      rappel.style.display='block';
-      const optiSel=document.getElementById('mx_opti');
-      if(optiSel)optiSel.value='1.33';
-    } else {
-      rappel.style.display='none';
-    }
+  // Opti Nath Sakura — info uniquement
+  const optiInfo=document.getElementById('mx-s2-opti-info');
+  const optiSuggest=document.getElementById('mx-s2-opti-suggest');
+  const optiHidden=document.getElementById('mx_opti');
+  if(mxData.fondIntent===1.33){
+    if(optiInfo) optiInfo.style.display='block';
+    if(optiSuggest) optiSuggest.style.display='none';
+    if(optiHidden) optiHidden.value='1.33';
+  } else {
+    if(optiInfo) optiInfo.style.display='none';
+    if(optiSuggest) optiSuggest.style.display='block';
+    if(optiHidden) optiHidden.value='0';
   }
   // Initialiser la première source si le container est vide
   const ctr=document.getElementById('mx-sources-container');
@@ -2244,16 +2313,17 @@ function mxOnSrcChange(idx){
     return;
   }
 
-  // Mesure entrée — calcul de la correction nécessaire (même logique que calculate())
-  const stopsMeasured = 2*Math.log2(fMesBase)+fMesTenths;
+  // --- Mesure entrée — calcul de la correction nécessaire ---
+  const stopsMeasured = 2 * Math.log2(fMesBase) + fMesTenths;
   const fstopCorr     = stopsTarget - stopsMeasured;
-  // totalCorr = fstopCorr + stopsISO + stopsV (pas de distMod ici — distance déjà prise en compte lors du placement)
+  // totalCorr = fstopCorr + stopsISO + stopsV
   const totalCorr = fstopCorr + stopsISO + stopsV;
+  // Correction identique onglet Flash : currentPowerStops - totalCorr
   const targetPowerStops = currentPowerStops - totalCorr;
   const rawDenom = Math.pow(2, targetPowerStops);
 
-  const fMes=fMesBase*Math.pow(Math.sqrt(2),fMesTenths);
-  mxData.sources[idx].mesure=fMes;
+  const fMes = fMesBase * Math.pow(Math.sqrt(2), fMesTenths);
+  mxData.sources[idx].mesure = fMes;
 
   // Rendu résultat — copie fidèle onglet Flash
   if(rawDenom<=0.7){
@@ -2322,14 +2392,13 @@ function mxOnSrcChange(idx){
   } else {
     const disp=powerToDisplay(rawDenom);
     const corrTotale=Math.abs(totalCorr);
-    const expoOk=corrTotale<0.15;
+    const expoOk=Math.abs(fstopCorr)<0.15;
     mxData.sources[idx].ok=expoOk;
     mxData.sources[idx].reglage=disp.txt;
     if(expoOk){
       resBox.innerHTML=`<div style="padding:8px 10px;background:rgba(76,175,117,.08);border:1px solid rgba(76,175,117,.3);border-radius:3px">
-        <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#4caf75;margin-bottom:4px">✓ EXPO CORRECTE</div>
-        <div style="font-family:Georgia,serif;font-size:26px;color:#4caf75;font-weight:700">${disp.txt}</div>
-        <div style="font-size:9.5px;color:var(--tp)">f/ mesurée ${fMes.toFixed(1)} → cible f/${fCible.toFixed(1)}${maxWs>0?' · '+maxWs+' Ws':''}</div>
+        <div style="font-size:12px;font-weight:700;color:#4caf75">✓ EXPOSITION CORRECTE</div>
+        <div style="font-size:10px;color:var(--tp);margin-top:4px">f/ cible : <b style="color:#4caf75">f/${fCible.toFixed(1)}</b> &nbsp;·&nbsp; f/ mesurée : <b style="color:#4caf75">f/${fMes.toFixed(1)}</b></div>
       </div>`;
     } else {
       // adjustIL > 0 : rawDenom > base → réglage cible MOINS puissant → baisser la puissance sur le flash
@@ -2366,14 +2435,21 @@ function mxCalcSujet(){
   // f/ cible finale = fBoitier × √2^(carn+mat+opti)
   // C'est LA valeur de référence unique pour tout le module flash.
   // fSujet ET fFlashCibleBase pointent sur la même valeur.
-  const corrBase=carn+mat+opti;
+  const corrBase=carn+mat-opti;
   const fCible=fBoitier*Math.pow(Math.sqrt(2),corrBase);
   mxData.fSujet=fCible;
   mxData.fFlashCibleBase=fCible;
 
   // Mettre à jour l'affichage de la f/ à obtenir
   const disp=document.getElementById('mx-s2-fcible-display');
-  if(disp) disp.textContent='f/'+fCible.toFixed(1);
+  if(disp){
+    const FSTOPS2=[1,1.1,1.2,1.4,1.6,1.8,2,2.2,2.5,2.8,3.2,3.5,4,4.5,5,5.6,6.3,7.1,8,9,10,11,13,14,16,18,20,22];
+    const ilC2=2*Math.log2(fCible);
+    let fB2=FSTOPS2[0];
+    for(let i=0;i<FSTOPS2.length;i++){if(FSTOPS2[i]<=fCible+0.001)fB2=FSTOPS2[i];else break;}
+    const dix2=Math.round((ilC2-2*Math.log2(fB2))*10);
+    disp.textContent='f/'+fB2+(dix2>0&&dix2<=9?' +0.'+dix2+' IL':'');
+  }
 
   // Recalculer toutes les sources
   if(mxData.sources){
@@ -2733,7 +2809,8 @@ function mxReset(){
 document.addEventListener('DOMContentLoaded',()=>{
   // Init corrections visuelles
   majCarn();majRefl();majDist();
-  // Init mode Mixte
+  // Init mode Mixte — initialise mxData avec les valeurs par défaut des selects
+  mxCalcAmbiante();
   mxGoStep(1);
   // Premier calcul Flash — affiche cible et badges dès l'ouverture
   _updateIntentBanner();
