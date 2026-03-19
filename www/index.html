@@ -1072,6 +1072,13 @@ function tlTab(tab){
   document.getElementById('tl-panel-nd').classList.toggle('active',tab==='nd');
   document.getElementById('tl-panel-apn').classList.toggle('active',tab==='apn');
 }
+function fmtF(f){
+  const FSTOPS=[1,1.1,1.2,1.4,1.6,1.8,2,2.2,2.5,2.8,3.2,3.5,4,4.5,5,5.6,6.3,7.1,8,9,10,11,13,14,16,18,20,22];
+  let base=FSTOPS[0];
+  for(let i=0;i<FSTOPS.length;i++){if(FSTOPS[i]<=f)base=FSTOPS[i];else break;}
+  const dix=Math.round((2*Math.log2(f)-2*Math.log2(base))*10);
+  return 'f/'+base+(dix>0&&dix<=9?' +0.'+dix+' IL':'');
+}
 function powerToDisplay(rawDenom){
   // Convertit un dénominateur brut en texte "1/16 +0.3" avec dixièmes
   // Standard inférieur ou égal + dixièmes positifs vers le haut
@@ -2398,7 +2405,7 @@ function mxOnSrcChange(idx){
     if(expoOk){
       resBox.innerHTML=`<div style="padding:8px 10px;background:rgba(76,175,117,.08);border:1px solid rgba(76,175,117,.3);border-radius:3px">
         <div style="font-size:12px;font-weight:700;color:#4caf75">✓ EXPOSITION CORRECTE</div>
-        <div style="font-size:10px;color:var(--tp);margin-top:4px">f/ cible : <b style="color:#4caf75">f/${fCible.toFixed(1)}</b> &nbsp;·&nbsp; f/ mesurée : <b style="color:#4caf75">f/${fMes.toFixed(1)}</b></div>
+        <div style="font-size:10px;color:var(--tp);margin-top:4px">f/ cible : <b style="color:#4caf75">${fmtF(fCible)}</b> &nbsp;·&nbsp; f/ mesurée : <b style="color:#4caf75">${fmtF(fMes)}</b></div>
       </div>`;
     } else {
       // adjustIL > 0 : rawDenom > base → réglage cible MOINS puissant → baisser la puissance sur le flash
