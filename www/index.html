@@ -1886,6 +1886,20 @@ function mxHssTag(v){
   return v<0.005?' <span style="background:rgba(240,160,74,.18);border:1px solid rgba(240,160,74,.5);color:#f0a04a;font-size:8.5px;font-weight:700;letter-spacing:1px;padding:1px 5px;border-radius:2px;vertical-align:middle">HSS</span>':'';
 }
 
+function mxSelectOptiChoice(idx){
+  const o=mxData._optiChoices&&mxData._optiChoices[idx];
+  if(!o)return;
+  mxData.vitesseBoitier=o.v;
+  mxData.vLabelBoitier=o.vLbl;
+  mxData.isoBoitier=o.iso;
+  mxData.fBoitier=o.f;
+  const btns=document.querySelectorAll('[onclick^="mxSelectOptiChoice"]');
+  btns.forEach((b,i)=>{
+    b.style.background=i===idx?'var(--or)':'rgba(200,164,90,.12)';
+    b.style.color=i===idx?'#000':'var(--or)';
+  });
+}
+
 function mxGoStep(n){
   if(n<1||n>4)return;
   mxStep=n;
@@ -1954,12 +1968,12 @@ function mxCalcAmbiante(){
     vBest=vitesse; vBestLabel=vLabel;
   }
 
-  // Stocker : diaphragme = fBase (standard APN), vitesse/ISO ajustés
+  // Stocker : diaphragme = fBase (standard APN), vitesse/ISO BRUTS du photographe
   mxData.fBoitier=fBase;
   mxData.evAmb=Math.log2(fAmb*fAmb/(vitesse*iso/100));
-  mxData.vitesseBoitier=vBest;
-  mxData.isoBoitier=isoAffiche;
-  mxData.vLabelBoitier=vBestLabel;
+  mxData.vitesseBoitier=vitesse;
+  mxData.isoBoitier=iso;
+  mxData.vLabelBoitier=vLabel;
 
 
   const box=document.getElementById('mx-amb-result');
@@ -1983,11 +1997,45 @@ function mxCalcAmbiante(){
   box.innerHTML=`<div class="mx-res-ok">
     <div style="font-size:9px;letter-spacing:2px;color:var(--tp);text-transform:uppercase;margin-bottom:6px">Réglages boîtier pour l'ambiante</div>
     <div class="mx-row"><span class="mx-lbl">Diaphragme</span><span class="mx-val">f/${fBase}</span></div>
-    <div class="mx-row"><span class="mx-lbl">Vitesse</span><span class="mx-val" style="${vBestLabel!==vLabel?'color:#e8a030':''}">${vBestLabel}${mxHssTag(vBest)}</span></div>
-    <div class="mx-row"><span class="mx-lbl">ISO</span><span class="mx-val" style="${isoAffiche!==iso?'color:#e8a030':''}">${isoAffiche}</span></div>
+    <div class="mx-row"><span class="mx-lbl">Vitesse</span><span class="mx-val">${vLabel}${mxHssTag(vitesse)}</span></div>
+    <div class="mx-row"><span class="mx-lbl">ISO</span><span class="mx-val">${iso}</span></div>
     <div class="mx-row"><span class="mx-lbl">Intention fond</span><span style="font-size:11px">${intentTxt}</span></div>
-    ${vBest<0.005?`<div style="margin-top:8px;padding:8px 10px;background:rgba(240,160,74,.1);border:1px solid rgba(240,160,74,.35);border-radius:3px;font-size:10px;color:#f0a04a;line-height:1.6">⚡ <b>Mode HSS activé</b> — vitesse ${vBestLabel} &gt; 1/200. Perte de puissance flash : <b>−${Math.log2(0.005/vBest).toFixed(1)} IL</b>. Le calcul en tient compte automatiquement.</div>`:''}
-    ${optiBlock}
+    ${vitesse<0.005?`<div style="margin-top:8px;padding:8px 10px;background:rgba(240,160,74,.1);border:1px solid rgba(240,160,74,.35);border-radius:3px;font-size:10px;color:#f0a04a;line-height:1.6">⚡ <b>Mode HSS activé</b> — vitesse ${vLabel} &gt; 1/200. Perte de puissance flash : <b>−${Math.log2(0.005/vitesse).toFixed(1)} IL</b>. Le calcul en tient compte automatiquement.</div>`:''}
+    ${(()=>{
+      if(fondIntent===0) return '';
+      const FSTOPS_A=[1,1.4,1.8,2,2.8,3.5,4,5,5.6,7.1,8,10,11,14,16,20,22];
+      const opts=[];
+      const il=fondIntent; // positif = surexpo fond = boîtier doit ouvrir/ralentir/monter ISO
+                           // négatif = sous-expo fond = boîtier doit fermer/accélérer/baisser ISO
+      // Option : ajuster le diaph de |il| IL
+      const fOpti=fBase/Math.pow(Math.sqrt(2),il);
+      let fB=FSTOPS_A[0],fBd=Infinity;
+      FSTOPS_A.forEach(f=>{const d=Math.abs(Math.log2(f/fOpti));if(d<fBd){fBd=d;fB=f;}});
+      if(fB!==fBase) opts.push({f:fB,v:vitesse,vLbl:vLabel,iso:iso,label:il>0?`Ouvrir → f/${fB}`:`Fermer → f/${fB}`});
+      // Option : ajuster la vitesse de |il| IL
+      const vOpti=vitesse*Math.pow(2,il);
+      let vB=vitessesStd[0],vBL=vitLabels[0],vBd=Infinity;
+      vitessesStd.forEach((v,i)=>{const d=Math.abs(Math.log2(v/vOpti));if(d<vBd){vBd=d;vB=v;vBL=vitLabels[i];}});
+      if(vB!==vitesse&&vB>=0.000125&&vB<=30) opts.push({f:fBase,v:vB,vLbl:vBL,iso:iso,label:il>0?`Ralentir → ${vBL}`:`Accélérer → ${vBL}`});
+      // Option : ajuster l'ISO de |il| IL
+      const iOpti=iso*Math.pow(2,il);
+      let iB=isosStd[0],iBd=Infinity;
+      isosStd.forEach(s=>{const d=Math.abs(Math.log2(s/iOpti));if(d<iBd){iBd=d;iB=s;}});
+      if(iB!==iso) opts.push({f:fBase,v:vitesse,vLbl:vLabel,iso:iB,label:il>0?`Monter ISO → ${iB}`:`Baisser ISO → ${iB}`});
+      // Option combo diaph + vitesse (moitié chacun)
+      const fC=fBase/Math.pow(Math.sqrt(2),il/2),vC=vitesse*Math.pow(2,il/2);
+      let fCb=FSTOPS_A[0],fCd=Infinity,vCb=vitessesStd[0],vCbL=vitLabels[0],vCd=Infinity;
+      FSTOPS_A.forEach(f=>{const d=Math.abs(Math.log2(f/fC));if(d<fCd){fCd=d;fCb=f;}});
+      vitessesStd.forEach((v,i)=>{const d=Math.abs(Math.log2(v/vC));if(d<vCd){vCd=d;vCb=v;vCbL=vitLabels[i];}});
+      if(fCb!==fBase&&vCb!==vitesse&&vCb>=0.000125&&vCb<=30) opts.push({f:fCb,v:vCb,vLbl:vCbL,iso:iso,label:`Combo → f/${fCb} + ${vCbL}`});
+      mxData._optiChoices=opts;
+      const btnCss='padding:8px 13px;border-radius:3px;cursor:pointer;font-size:11px;font-weight:700;background:rgba(200,164,90,.12);border:1px solid rgba(200,164,90,.4);color:var(--or);font-family:inherit';
+      const btns=opts.map((o,i)=>`<button style="${btnCss}" onclick="mxSelectOptiChoice(${i})">${o.label}</button>`).join('');
+      return `<div style="margin-top:10px;padding:9px 11px;background:rgba(200,164,90,.06);border:1px solid rgba(200,164,90,.2);border-radius:3px;font-size:10px;color:var(--tm);line-height:1.7">
+        📐 <b>Optimisation boîtier optionnelle</b> — choisis comment adapter l'ambiance :<div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px">${btns}</div>
+        <div style="margin-top:6px;font-size:9px;color:var(--tp)">Facultatif — le flash compensera automatiquement sans sélection.</div>
+      </div>`;
+    })()}
     <div class="mx-conseil" style="margin-top:8px">📷 <b>Règle ces valeurs sur ton boîtier maintenant.</b><br>Le flash n'est pas encore déclenché — on travaille uniquement sur l'ambiante.</div>
   </div>`;
 
@@ -2328,9 +2376,8 @@ function mxOnSrcChange(idx){
     mxData.sources[idx].reglage=disp.txt;
     if(expoOk){
       resBox.innerHTML=`<div style="padding:8px 10px;background:rgba(76,175,117,.08);border:1px solid rgba(76,175,117,.3);border-radius:3px">
-        <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#4caf75;margin-bottom:4px">✓ EXPO CORRECTE</div>
-        <div style="font-family:Georgia,serif;font-size:26px;color:#4caf75;font-weight:700">${disp.txt}</div>
-        <div style="font-size:9.5px;color:var(--tp)">f/ mesurée ${fMes.toFixed(1)} → cible f/${fCible.toFixed(1)}${maxWs>0?' · '+maxWs+' Ws':''}</div>
+        <div style="font-size:12px;font-weight:700;color:#4caf75">✓ EXPOSITION CORRECTE</div>
+        <div style="font-size:9.5px;color:var(--tp);margin-top:4px">f/ mesurée <b style="color:#4caf75">${fMes.toFixed(1)}</b> → cible <b style="color:#4caf75">f/${fCible.toFixed(1)}</b></div>
       </div>`;
     } else {
       // adjustIL > 0 : rawDenom > base → réglage cible MOINS puissant → baisser la puissance sur le flash
@@ -2734,7 +2781,8 @@ function mxReset(){
 document.addEventListener('DOMContentLoaded',()=>{
   // Init corrections visuelles
   majCarn();majRefl();majDist();
-  // Init mode Mixte
+  // Init mode Mixte — initialise mxData avec les valeurs par défaut des selects
+  mxCalcAmbiante();
   mxGoStep(1);
   // Premier calcul Flash — affiche cible et badges dès l'ouverture
   _updateIntentBanner();
